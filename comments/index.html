@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="给我留言吧, Robin">
+    <meta name="keywords" content="留言板, Robin">
     <meta name="description" content="Welcome">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>给我留言吧 | Robin</title>
+    <title>留言板 | Robin</title>
     <link rel="icon" type="image/png" href="../favicon.png">
     
     <style>
@@ -59,7 +59,7 @@
 
     <script src="../libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
@@ -137,9 +137,9 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../guestbook" class="waves-effect waves-light">
+    <a href="../comments" class="waves-effect waves-light">
       
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      <i class="fas fa-envelope" style="zoom: 0.6;"></i>
       
       <span>留言板</span>
     </a>
@@ -148,9 +148,9 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../friends" class="waves-effect waves-light">
+    <a href="../link" class="waves-effect waves-light">
       
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      <i class="fas fa-link" style="zoom: 0.6;"></i>
       
       <span>友情链接</span>
     </a>
@@ -243,9 +243,9 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../guestbook" class="waves-effect waves-light">
+		<a href="../comments" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-comments"></i>
+			    <i class="fa-fw fas fa-envelope"></i>
 			
 			留言板
 		</a>
@@ -254,9 +254,9 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../friends" class="waves-effect waves-light">
+		<a href="../link" class="waves-effect waves-light">
 			
-			    <i class="fa-fw fas fa-address-book"></i>
+			    <i class="fa-fw fas fa-link"></i>
 			
 			友情链接
 		</a>
@@ -342,12 +342,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">给我留言吧</h1>
+                    <h1 class="description center-align post-title">留言板</h1>
                 </div>
             </div>
         </div>
@@ -395,7 +395,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    15
+                    224
                 </div>
                 
 
@@ -422,8 +422,86 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这个留言板好像只能我写捏~<br>哈哈，尬。。。</p>
+                <style>@media screen and (max-width: 600px) {
+  #beforeimg,
+  #afterimg{
+    display: none !important;
+  }
+}
+@media screen and (min-width: 600px) {
+  #article-container img {
+    margin: 0 auto 0rem;
+  }
+  #form-wrap {
+    overflow: hidden;
+    height: 447px;
+    position: relative;
+    top: 0px;
+    transition: all 1s ease-in-out .3s;
+    z-index: 0;
+  }
+  #form-wrap:hover {
+    height: 1050px;
+    top: -200px;
+  }
+  #beforeimg {
+    position: absolute;
+    bottom: 126px;
+    left: 0px;
+    background-repeat: no-repeat;
+    width: 530px;
+    height: 317px;
+    z-index: -100;
+    pointer-events: none;
+  }
 
+  #afterimg {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    background-repeat: no-repeat;
+    width: 530px;
+    height: 259px;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  #envelope {
+    position: relative;
+    overflow: visible;
+    width: 500px;
+    margin: 0px auto;
+    transition: all 1s ease-in-out .3s;
+    padding-top: 200px;
+  }
+
+  #maincontent {
+    width: 530px;
+    margin: 20px auto 0;
+  }
+
+  .formmain {
+    background: white;
+    width: 95%;
+    max-width: 800px;
+    margin: auto auto;
+    border-radius: 5px;
+    border: 1px solid;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 0px 20px 0px #000000;
+    box-shadow: 0px 0px 20px 0px #000000;
+  }
+}
+
+/* 夜间模式 */
+[data-theme='dark']
+.formmain {
+  background: #323232;
+}
+[data-theme='dark']
+.comments {
+  background: #5a5a5a !important;
+}</style><div id="maincontent"><div id="form-wrap"><img class="no-lightbox" id="beforeimg" src="https://cdn.cbd.int/hexo-butterfly-envelope/lib/before.png"/><div id="envelope"><form><div class="formmain" style="pointer-events: none;"><img class="headerimg no-lightbox" src="https://cdn.cbd.int//hexo-butterfly-envelope/lib/violet.jpg" style="width: 100%;overflow: hidden;pointer-events: none;"/><div class="comments-main"><h3 class="title3" style="text-decoration: none;color: $theme-color;text-align: center;">来自liuGuobin的留言:</h3><div class="comments" style="text-align: center;border-bottom: #ddd 1px solid;border-left: #ddd 1px solid;padding-bottom: 20px;background-color: #eee;margin: 15px 0px;padding-left: 20px;padding-right: 20px;border-top: #ddd 1px solid;border-right: #ddd 1px solid;padding-top: 20px;"><div>有什么想问的？</div><div>有什么想说的？</div><div>有什么想吐槽的？</div><div>哪怕是有什么想吃的，都可以告诉我哦~</div></div><div class="bottomcontent" style="text-align: center;margin-top: 40px;"><img class="bottomimg no-lightbox" src="https://cdn.cbd.int/hexo-butterfly-envelope/lib/line.png" style="width: 100%;margin: 5px auto 5px auto;display: block;pointer-events: none;"/></div><p class="bottomhr" style="font-size: 12px;text-align: center;color: #999;">自动书记人偶竭诚为您服务！</p></div></div></form></div><img class="no-lightbox" id="afterimg" src="https://cdn.cbd.int/hexo-butterfly-envelope/lib/after.png"/></div></div>
                 
             </div>
             <hr/>
@@ -591,9 +669,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="../medias/featureimages/0.jpg" class="responsive-img" alt="给我留言吧">
+                        <img src="../medias/featureimages/16.jpg" class="responsive-img" alt="留言板">
                         
-                        <span class="card-title">给我留言吧</span>
+                        <span class="card-title">留言板</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -629,9 +707,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="../medias/featureimages/0.jpg" class="responsive-img" alt="给我留言吧">
+                        <img src="../medias/featureimages/16.jpg" class="responsive-img" alt="留言板">
                         
-                        <span class="card-title">给我留言吧</span>
+                        <span class="card-title">留言板</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1048,6 +1126,93 @@ $(function () {
     <script src="../libs/instantpage/instantpage.js" type="module"></script>
     
 
-</body>
+<!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = 'e28d4b8440374a41a529232aa4e19b92';
+  var gaud_map_key = 'e2b04289e870b005374ee030148d64fd&s=rsv3';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.37433863798906,23.0400264680772';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
