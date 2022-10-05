@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title></title>
+      <link href="/2022/10/05/b-1/"/>
+      <url>/2022/10/05/b-1/</url>
+      
+        <content type="html"><![CDATA[<h5 id="深入了解Hexo搭建博客的底层原理"><a href="#深入了解Hexo搭建博客的底层原理" class="headerlink" title="深入了解Hexo搭建博客的底层原理"></a>深入了解Hexo搭建博客的底层原理</h5><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在趟过无数个坑，解决了无数个报错后，终于把这个博客整出来了。<br>现在回过头来，开始对hexo原理好奇起来。</p><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点很明显啊，主题多，文件多(利于解决各种各样天花乱坠的报错)，通过修改yaml配置文件来修改样式比较简单。<br>但是缺点一样很明显，bug是真的多(一步错步步错)，每次发布文章都需要重新部署，没有一个后台管理系统(加上GitHub的海外服务器，简直让人欲仙欲死)。</p><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>博客hexo生成的是静态页面，而Github pages 又支持静态页面的解析。因此二者一拍即合能够用来生成 html 拼合成博客。</p><h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>1.Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。<br>2.文件<br>  ├── node_modules：             #依赖包-安装插件及所需nodejs模块。<br>  ├── public                     #最终网页信息。即存放被解析markdown、html文件。<br>  ├── scaffolds                  #模板文件夹。即当您新建文章时，根据 scaffold生成文件。<br>  ├── source                     #资源文件夹。即存放用户资源。<br>  └── _posts                     #博客文章目录。<br>  └── themes                     #存放主题。Hexo根据主题生成静态页面。<br>  ├── _config.yml                #网站的配置信息。标题、网站名称等。<br>  ├── db.json：                  #source解析所得到的缓存文件。<br>  ├── package.json               # 应用程序信息。即配置Hexo运行需要js包。<br>3.source就是数据库，以.md（markdown）格式存储文章，theme文件夹是主题文件（决定页面模板）。<br>4.部署流程:<br>hexo g：生成静态文件。将我们的数据和界面模板相结合生成静态文件的过程。Hexo（node.js程序）遍历主题文件中你的source目录（js、css、img等静态资源），建立索引，再根据索引生成由html、js、css、img建立的纯静态文件并放在public文件夹里。public就是你的博客了，而这些恰好能被gitpages识别。<br>hexo d：部署文件。主要是根据在_config.yml中配置的git仓库或者coding的地址，将public文件通过git方式push到上传到github或coding的指定分支，然后在根据pages服务呈现出页面。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 学术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>试验</title>
+      <link href="/2022/10/04/a/"/>
+      <url>/2022/10/04/a/</url>
+      
+        <content type="html"><![CDATA[<p><a href="http://t.csdn.cn/FwpOt">写作教程总结</a></p><h1 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h1><p>hexo server</p><h1 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h1><p>hexo new a</p><h1 id="新建草稿"><a href="#新建草稿" class="headerlink" title="新建草稿"></a>新建草稿</h1><p>hexo new draft b</p><h1 id="发布草稿成为文章"><a href="#发布草稿成为文章" class="headerlink" title="发布草稿成为文章"></a>发布草稿成为文章</h1><p>hexo publish b</p><h1 id="发布关于"><a href="#发布关于" class="headerlink" title="发布关于"></a>发布关于</h1><p>hexo new page c</p><h1 id="生成静态文章"><a href="#生成静态文章" class="headerlink" title="生成静态文章"></a>生成静态文章</h1><p>hexo generate 或者是 hexo g</p><h1 id="部署文章"><a href="#部署文章" class="headerlink" title="部署文章"></a>部署文章</h1><p>hexo deploy 或者是 hexo d</p><p>Markdowm语法:<a href="http://t.csdn.cn/BJSXy">教程</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 学术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20221004</title>
+      <link href="/2021/09/25/b/"/>
+      <url>/2021/09/25/b/</url>
+      
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a><strong>每日一记</strong></h3><p>如何使用hexo编写blog文章<br>1.在blog本地文件夹内git bash<br>2.hexo s                                     <em>本地查看，似乎没什么用？</em><br>3.hexo new draft b                           <em>建立草稿</em><br>4.hexo publish b                             <em>发表草稿</em><br>5.hexo new page c                            <em>发布关于</em><br>6.hexo g                                     <em>生成静态文件————也就是能读</em><br>7.hexo d                                     <em>上传部署至GitHub</em><br>8.打开GitHub的个人库查看有没有绿               <em>不是我说，是真的慢！！！！！</em><br>9.打开blog刷新</p><p>如何快速上传<br>————使用DevSidecar边车辅助工具</p><h3 id="每日一悟"><a href="#每日一悟" class="headerlink" title="每日一悟"></a><strong>每日一悟</strong></h3><p>1.每次上传都是对比本地的，不要想着在GitHub里改就能偷懒！<br>2.每次写新文章都可以用上面的，但是最好在b和c后面加上日期<br>3.上传了之后发现有问题可以在本地用VSC改了再发一次<br>4.上面说的修改是指在删除D:\BLOG\hexoblog\source\。。。的同时修改D:\BLOG\hexoblog\source\的对应文件<br>5.如果出现界面信息错误就在D:\BLOG\hexoblog\themes\hexo-theme-matery\的_config这里修改<br>6.猜测要加入其他模块也是在上面那个文件里<br>7.已经尝试了两种方法仍然不能显示图片，应该只能使用图床才能解决(一年9r)<br>8.为了更好地写博客，希望大家赏一个钢镚儿</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a><strong>每日一句</strong></h3><p>知识使人自由，至少渴望自由。————特雷弗-诺亚</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
