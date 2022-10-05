@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2022-10-04T17:29:30.905Z</updated>
+  <updated>2022-10-05T13:50:06.496Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20221005</title>
+    <link href="https://liu1272.github.io/2022/10/05/b-2/"/>
+    <id>https://liu1272.github.io/2022/10/05/b-2/</id>
+    <published>2022-10-05T13:41:04.000Z</published>
+    <updated>2022-10-05T13:50:06.496Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>1.今天给blog整了个大装修<br>2.除此之外好像啥也没干</p><h3 id="每日一悟"><a href="#每日一悟" class="headerlink" title="每日一悟"></a>每日一悟</h3><p>在装修过程中发现了修改和添加模块基本上就是更改source和themes两个文件夹<br>原因在上一篇文章中已经给出了详细说明。</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>无论在何种困顿中，唯有内心的自由馈赠我们真正的未来。</p><h3 id="今天就这样吧"><a href="#今天就这样吧" class="headerlink" title="今天就这样吧"></a>今天就这样吧</h3>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;p&gt;1.今天给blog整了个大装修&lt;br&gt;2.除此之外好像啥也没干&lt;/p&gt;
+&lt;h3 id=&quot;每日一悟&quot;&gt;&lt;a href=&quot;#每日</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title></title>
