@@ -96,8 +96,8 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -624,6 +624,44 @@
 <script src="/libs/aplayer/Meting.min.js"></script>
 
                         
+
+                    
+                        <link rel="stylesheet" href="/libs/dplayer/DPlayer.min.css">
+<div class="video-player">
+    
+    <div class="title center-align">
+        <i class="fas fa-video-camera"></i>&nbsp;&nbsp;好康的哦
+    </div>
+    
+    <div class="row">
+		
+        <div class="col l8 offset-l2 m10 offset-m1 s12">
+            <div id="dplayer" class="dplayer-video"
+                     style="height: 400px;"></div>
+        </div>
+		
+    </div>
+</div>
+
+<script src="/libs/dplayer/DPlayer.min.js"></script>
+<script>
+    $(function () {
+        new DPlayer({
+            container: document.getElementById('dplayer'),
+            autoplay: 'false' === 'true',
+            theme: '#42b983',
+            loop: 'false' === 'true',
+            lang: 'zh-CN' === 'zh-CN' ? 'zh-cn' : 'en',
+            preload: 'auto',
+            volume: Number('1'),
+            video: {
+                url: '%E3%80%90%E2%80%9C%E6%97%85%E8%A1%8C%E8%80%85%EF%BC%8C35%E4%BD%8D%E5%A5%B3%E5%AD%A9%E5%AD%90%E7%9A%84%E8%A1%A8%E7%99%BD%EF%BC%8C%E8%BF%98%E4%B8%8D%E8%83%BD%E7%95%99%E4%B8%8B%E4%BD%A0%E5%90%97%EF%BC%9F%EF%BC%81%E2%80%9D%E5%88%86%E4%BA%AB%E7%BB%99%E4%BD%A0%E7%88%B1%E7%8E%A9%E5%8E%9F%E7%A5%9E%E7%9A%84%E6%9C%8B%E5%8F%8B~%E3%80%91https:/www.bilibili.com/video/BV1NG411379M?vd_source=c68566b47a261e87fb6d46acbe27055c',
+                pic: '',
+                thumbnails: ''
+            }
+        });
+    });
+</script>
 
                     
 
