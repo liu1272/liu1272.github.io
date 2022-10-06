@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Robin</title>
+  
+  <subtitle>LiuGuobin&#39;s blog</subtitle>
+  <link href="https://liu1272.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://liu1272.github.io/"/>
+  <updated>2022-10-06T16:08:25.322Z</updated>
+  <id>https://liu1272.github.io/</id>
+  
+  <author>
+    <name>liuGuobin</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20221006</title>
+    <link href="https://liu1272.github.io/2022/10/06/b-3/"/>
+    <id>https://liu1272.github.io/2022/10/06/b-3/</id>
+    <published>2022-10-06T15:32:04.000Z</published>
+    <updated>2022-10-06T16:08:25.322Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="1-什么是HTML"><a href="#1-什么是HTML" class="headerlink" title="1.什么是HTML"></a>1.什么是HTML</h3><p>  是扩展名，超文本标记语言(Hyper Text Markup Language)<br>  不是编程语言而是由标签组成的标记语言</p><h3 id="2-兼容性"><a href="#2-兼容性" class="headerlink" title="2.兼容性"></a>2.兼容性</h3><p>  <a href="https://caniuse.com/">查询网站</a><br>  不同浏览器兼容性不一样，因此需要Web标准的制定<br>  W3C万维网联盟</p><h3 id="3-WEB组成部分"><a href="#3-WEB组成部分" class="headerlink" title="3.WEB组成部分"></a>3.WEB组成部分</h3><p>  HTML:结构，由W3C制定标准和语法<br>  CSS:样式布局<br>  JS:触发行为</p><h3 id="4-HTML基本语法"><a href="#4-HTML基本语法" class="headerlink" title="4.HTML基本语法"></a>4.HTML基本语法</h3><p>  (1)常规标记/双标记<br>     &lt;标记 属性=”属性值”&gt;<br>     &lt;/。。。&gt;<br>  (2)空标记/单标记<br>     &lt;标记 属性=”属性值”/&gt;</p><h3 id="5-基本结构"><a href="#5-基本结构" class="headerlink" title="5.基本结构"></a>5.基本结构</h3><pre><code>&lt;!DOCTYPE html 5&gt;                     #文档说明标签（格式说明使用html5）&lt;html lang=&quot;en&quot;&gt;                      #语言zh-CN/ja-jp/en（对网址翻译）&lt;head&gt;  &lt;meta charset=&quot;UTF-8&quot;&gt;              #编码ASCII/ISO-8859-1/GB2312/UTF-8  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;  &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;  &lt;/body&gt;&lt;/html&gt;</code></pre><h3 id="6-开发工具"><a href="#6-开发工具" class="headerlink" title="6.开发工具"></a>6.开发工具</h3><p>  Sublime Text，webstorm,HBuilderX,VScode<br>  快捷键:选中文本alt+w添加&lt; p &gt;<br>         ctrl+/注释<br>         ul&gt;li{内容}*n + 回车            建立n个无序列表并加上内容<br>         dl&gt;dt{内容}+dd{内容} + 回车     建立自定义列表并加上内容</p><h3 id="7-基本标签"><a href="#7-基本标签" class="headerlink" title="7.基本标签"></a>7.基本标签</h3><pre><code>(1)标题标签    &lt;h1&gt;一级标题最大&lt;/h1&gt;    &lt;h6&gt;最小六级标题&lt;/h6&gt;(2)段落文本标签    &lt;p&gt;段落文本内容&lt;/p&gt;    段与段间有间隔(3)水平线标签(同时更改颜色，长度，位置，关闭阴影)                       #注意一对标签的格式加/    &lt;hr color=&quot;green&quot; width=&quot;600&quot; align=&quot;left/right&quot; noshade&gt;(4)文本修饰标签————加粗   &lt;b&gt;普通加粗&lt;strong&gt;便于爬虫(5)文本修饰标签————倾斜   &lt;em&gt;或&lt;i&gt;(6)文本修饰标签————删除   &lt;s&gt;或&lt;del&gt;(7)文本修饰标签————下划线   &lt;u&gt;(8)文本修饰标签————上下标   &lt;sub&gt;/&lt;sup&gt;(9)划分区域，占一行（破坏结构）   &lt;div&gt;内容&lt;/div&gt;(10)独立修饰文本（不破坏结构）   &lt;span&gt;内容&lt;/span&gt;</code></pre><h3 id="8-特殊符号"><a href="#8-特殊符号" class="headerlink" title="8.特殊符号"></a>8.特殊符号</h3><pre><code>尖角号      &amp;lt;左    &amp;gt;右空格        &amp;nbsp;受字体影响    &amp;emsp;一个中文宽度版权        &amp;copy;©商标        &amp;trade; TM标签      &amp;reg; R标签</code></pre><h3 id="9-列表"><a href="#9-列表" class="headerlink" title="9.列表"></a>9.列表</h3><pre><code>(1)有序&lt;!-- li里可以随意放标签，ol里只能放li，数字1.2.3.是自动生成的 --&gt;&lt;ol type=&quot;A&quot; start=&quot;&quot;4&gt;    &lt;li&gt;                             #type只能是1，a，A，i，I    &lt;/li&gt;                     start只能取一个数字1，2，3...&lt;/ol&gt;(2)无序&lt;!-- ul里只能放li，li里随便放 --&gt;&lt;ul type=&quot;none&quot;&gt;    &lt;li&gt;                             #默认是黑色实心圆    &lt;/li&gt;                     type只能填disc，circle，square，none（取消）&lt;/ul&gt;(3)自定义&lt;dl&gt;    &lt;dt&gt;文字或图&lt;/dt&gt;         #只复制&lt;dd&gt;&lt;dt&gt;是贴在一起的    &lt;dd&gt;相关文字&lt;/dd&gt;          复制&lt;dl&gt;则间隔一行&lt;/dl&gt;</code></pre><h3 id="10-图片"><a href="#10-图片" class="headerlink" title="10.图片"></a>10.图片</h3><pre><code># 标签&lt;img src=&quot;XXX&quot;&gt;(1)绝对路径（本地有此文件）    直接填地址(2)相对路径    与html文件在同级目录下写             名字.gif  或者  ./名字.gif    图片在下级则直接写地址    图片在上级则先../返回上一级再接着写地址(每一个../都是一次返回上级)#此处要注意：不同操作系统使用的斜杠不同（Linux系统是/  window系统都可以）# 属性&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;(1)alt=（你告诉它要显示的）图片加载失败时的提示信息&quot;(2)title=标题（指针放上去后显示的）(3)width=&quot;200px&quot; height=&quot;200px&quot;更改宽高         #px是像数值，只设置一个时会自动缩放(4)</code></pre><h3 id="11-超链接-a链接"><a href="#11-超链接-a链接" class="headerlink" title="11.超链接(a链接)"></a>11.超链接(a链接)</h3><pre><code>&lt;a herf=&quot;链接&quot; title=&quot;鼠标悬停显示的信息&quot; target=&quot;在何处打开文档&quot;&gt;超链接放置的内容&lt;/a&gt;  (1)target=&quot;_self&quot;      在默认值(2)target=&quot;_blank&quot;     在新窗口打开(3)超链接赋予图片:&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;    &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;    &lt;a herf=&quot;https://www.baidu.com&quot; title=&quot;百度查询&quot;&gt;        &lt;img src=&quot;图片地址&quot; alt=&quot;&quot;&gt;                          #将图片包在超链接中    &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</code></pre><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>只要你仍然担忧别人对你的看法，你就会受制于他们。唯有当你无须外界的认可时，你才能拥有你自己。————尼尔-唐纳德-沃尔什</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h5&gt;&lt;h3 id=&quot;1-什么是HTML&quot;&gt;&lt;a href=&quot;#1-什么是HTML&quot; class=&quot;headerlink&quot; title=</summary>
+      
+    
+    
+    
+    <category term="hexo" scheme="https://liu1272.github.io/categories/hexo/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>20221005</title>
+    <link href="https://liu1272.github.io/2022/10/05/b-2/"/>
+    <id>https://liu1272.github.io/2022/10/05/b-2/</id>
+    <published>2022-10-05T13:41:04.000Z</published>
+    <updated>2022-10-05T13:50:06.496Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>1.今天给blog整了个大装修<br>2.除此之外好像啥也没干</p><h3 id="每日一悟"><a href="#每日一悟" class="headerlink" title="每日一悟"></a>每日一悟</h3><p>在装修过程中发现了修改和添加模块基本上就是更改source和themes两个文件夹<br>原因在上一篇文章中已经给出了详细说明。</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>无论在何种困顿中，唯有内心的自由馈赠我们真正的未来。</p><h3 id="今天就这样吧"><a href="#今天就这样吧" class="headerlink" title="今天就这样吧"></a>今天就这样吧</h3>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;p&gt;1.今天给blog整了个大装修&lt;br&gt;2.除此之外好像啥也没干&lt;/p&gt;
+&lt;h3 id=&quot;每日一悟&quot;&gt;&lt;a href=&quot;#每日</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://liu1272.github.io/2022/10/05/b-1/"/>
+    <id>https://liu1272.github.io/2022/10/05/b-1/</id>
+    <published>2022-10-04T16:57:04.000Z</published>
+    <updated>2022-10-04T17:29:30.905Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="深入了解Hexo搭建博客的底层原理"><a href="#深入了解Hexo搭建博客的底层原理" class="headerlink" title="深入了解Hexo搭建博客的底层原理"></a>深入了解Hexo搭建博客的底层原理</h5><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在趟过无数个坑，解决了无数个报错后，终于把这个博客整出来了。<br>现在回过头来，开始对hexo原理好奇起来。</p><h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点很明显啊，主题多，文件多(利于解决各种各样天花乱坠的报错)，通过修改yaml配置文件来修改样式比较简单。<br>但是缺点一样很明显，bug是真的多(一步错步步错)，每次发布文章都需要重新部署，没有一个后台管理系统(加上GitHub的海外服务器，简直让人欲仙欲死)。</p><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>博客hexo生成的是静态页面，而Github pages 又支持静态页面的解析。因此二者一拍即合能够用来生成 html 拼合成博客。</p><h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>1.Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。<br>2.文件<br>  ├── node_modules：             #依赖包-安装插件及所需nodejs模块。<br>  ├── public                     #最终网页信息。即存放被解析markdown、html文件。<br>  ├── scaffolds                  #模板文件夹。即当您新建文章时，根据 scaffold生成文件。<br>  ├── source                     #资源文件夹。即存放用户资源。<br>  └── _posts                     #博客文章目录。<br>  └── themes                     #存放主题。Hexo根据主题生成静态页面。<br>  ├── _config.yml                #网站的配置信息。标题、网站名称等。<br>  ├── db.json：                  #source解析所得到的缓存文件。<br>  ├── package.json               # 应用程序信息。即配置Hexo运行需要js包。<br>3.source就是数据库，以.md（markdown）格式存储文章，theme文件夹是主题文件（决定页面模板）。<br>4.部署流程:<br>hexo g：生成静态文件。将我们的数据和界面模板相结合生成静态文件的过程。Hexo（node.js程序）遍历主题文件中你的source目录（js、css、img等静态资源），建立索引，再根据索引生成由html、js、css、img建立的纯静态文件并放在public文件夹里。public就是你的博客了，而这些恰好能被gitpages识别。<br>hexo d：部署文件。主要是根据在_config.yml中配置的git仓库或者coding的地址，将public文件通过git方式push到上传到github或coding的指定分支，然后在根据pages服务呈现出页面。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;深入了解Hexo搭建博客的底层原理&quot;&gt;&lt;a href=&quot;#深入了解Hexo搭建博客的底层原理&quot; class=&quot;headerlink&quot; title=&quot;深入了解Hexo搭建博客的底层原理&quot;&gt;&lt;/a&gt;深入了解Hexo搭建博客的底层原理&lt;/h5&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="学术" scheme="https://liu1272.github.io/tags/%E5%AD%A6%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>试验</title>
+    <link href="https://liu1272.github.io/2022/10/04/a/"/>
+    <id>https://liu1272.github.io/2022/10/04/a/</id>
+    <published>2022-10-04T08:07:13.000Z</published>
+    <updated>2022-10-04T08:43:36.240Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://t.csdn.cn/FwpOt">写作教程总结</a></p><h1 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h1><p>hexo server</p><h1 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h1><p>hexo new a</p><h1 id="新建草稿"><a href="#新建草稿" class="headerlink" title="新建草稿"></a>新建草稿</h1><p>hexo new draft b</p><h1 id="发布草稿成为文章"><a href="#发布草稿成为文章" class="headerlink" title="发布草稿成为文章"></a>发布草稿成为文章</h1><p>hexo publish b</p><h1 id="发布关于"><a href="#发布关于" class="headerlink" title="发布关于"></a>发布关于</h1><p>hexo new page c</p><h1 id="生成静态文章"><a href="#生成静态文章" class="headerlink" title="生成静态文章"></a>生成静态文章</h1><p>hexo generate 或者是 hexo g</p><h1 id="部署文章"><a href="#部署文章" class="headerlink" title="部署文章"></a>部署文章</h1><p>hexo deploy 或者是 hexo d</p><p>Markdowm语法:<a href="http://t.csdn.cn/BJSXy">教程</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;http://t.csdn.cn/FwpOt&quot;&gt;写作教程总结&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;开启服务&quot;&gt;&lt;a href=&quot;#开启服务&quot; class=&quot;headerlink&quot; title=&quot;开启服务&quot;&gt;&lt;/a&gt;开启服务&lt;/h1&gt;&lt;p&gt;hexo server</summary>
+      
+    
+    
+    
+    
+    <category term="学术" scheme="https://liu1272.github.io/tags/%E5%AD%A6%E6%9C%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>代码块试验</title>
+    <link href="https://liu1272.github.io/2021/09/25/b/"/>
+    <id>https://liu1272.github.io/2021/09/25/b/</id>
+    <published>2021-09-25T15:32:04.000Z</published>
+    <updated>2022-10-06T17:20:29.160Z</updated>
+    
+    <content type="html"><![CDATA[<pre><code>能不能看到的</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;pre&gt;&lt;code&gt;能不能看到的
+&lt;/code&gt;&lt;/pre&gt;
+</summary>
+      
+    
+    
+    
+    <category term="hexo" scheme="https://liu1272.github.io/categories/hexo/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>20221004</title>
+    <link href="https://liu1272.github.io/2021/09/25/b/"/>
+    <id>https://liu1272.github.io/2021/09/25/b/</id>
+    <published>2021-09-25T15:32:04.000Z</published>
+    <updated>2022-10-04T14:03:41.172Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a><strong>每日一记</strong></h3><p>如何使用hexo编写blog文章<br>1.在blog本地文件夹内git bash<br>2.hexo s                                     <em>本地查看，似乎没什么用？</em><br>3.hexo new draft b                           <em>建立草稿</em><br>4.hexo publish b                             <em>发表草稿</em><br>5.hexo new page c                            <em>发布关于</em><br>6.hexo g                                     <em>生成静态文件————也就是能读</em><br>7.hexo d                                     <em>上传部署至GitHub</em><br>8.打开GitHub的个人库查看有没有绿               <em>不是我说，是真的慢！！！！！</em><br>9.打开blog刷新</p><p>如何快速上传<br>————使用DevSidecar边车辅助工具</p><h3 id="每日一悟"><a href="#每日一悟" class="headerlink" title="每日一悟"></a><strong>每日一悟</strong></h3><p>1.每次上传都是对比本地的，不要想着在GitHub里改就能偷懒！<br>2.每次写新文章都可以用上面的，但是最好在b和c后面加上日期<br>3.上传了之后发现有问题可以在本地用VSC改了再发一次<br>4.上面说的修改是指在删除D:\BLOG\hexoblog\source\。。。的同时修改D:\BLOG\hexoblog\source\的对应文件<br>5.如果出现界面信息错误就在D:\BLOG\hexoblog\themes\hexo-theme-matery\的_config这里修改<br>6.猜测要加入其他模块也是在上面那个文件里<br>7.已经尝试了两种方法仍然不能显示图片，应该只能使用图床才能解决(一年9r)<br>8.为了更好地写博客，希望大家赏一个钢镚儿</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a><strong>每日一句</strong></h3><p>知识使人自由，至少渴望自由。————特雷弗-诺亚</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;&lt;strong&gt;每日一记&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;如何使用hexo编写blog文章&lt;br&gt;1.在blog本地文件夹内git bash&lt;br&gt;</summary>
+      
+    
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
+  
+</feed>
