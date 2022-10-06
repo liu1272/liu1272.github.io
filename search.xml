@@ -54,6 +54,31 @@
     
     
     <entry>
+      <title>20221006</title>
+      <link href="/2022/10/06/d/"/>
+      <url>/2022/10/06/d/</url>
+      
+        <content type="html"><![CDATA[<h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="1-什么是HTML"><a href="#1-什么是HTML" class="headerlink" title="1.什么是HTML"></a>1.什么是HTML</h3><p>是扩展名，超文本标记语言(Hyper Text Markup Language)<br>不是编程语言而是由标签组成的标记语言</p><h3 id="2-兼容性"><a href="#2-兼容性" class="headerlink" title="2.兼容性"></a>2.兼容性</h3><p>查询网站<br>不同浏览器兼容性不一样，因此需要Web标准的制定<br>W3C万维网联盟</p><h3 id="3-WEB组成部分"><a href="#3-WEB组成部分" class="headerlink" title="3.WEB组成部分"></a>3.WEB组成部分</h3><p>HTML:结构，由W3C制定标准和语法<br>CSS:样式布局<br>JS:触发行为</p><h3 id="4-HTML基本语法"><a href="#4-HTML基本语法" class="headerlink" title="4.HTML基本语法"></a>4.HTML基本语法</h3><p>(1)常规标记/双标记<br>&lt;标记 属性=”属性值”&gt;<br>&lt;/。。。&gt;<br>(2)空标记/单标记<br>&lt;标记 属性=”属性值”/&gt;</p><h3 id="5-基本结构"><a href="#5-基本结构" class="headerlink" title="5.基本结构"></a>5.基本结构</h3><pre><code>&lt;!DOCTYPE html 5&gt;                     #文档说明标签（格式说明使用html5）&lt;html lang=&quot;en&quot;&gt;                      #语言zh-CN/ja-jp/en（对网址翻译）&lt;head&gt;  &lt;meta charset=&quot;UTF-8&quot;&gt;              #编码ASCII/ISO-8859-1/GB2312/UTF-8  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;  &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;  &lt;/body&gt;&lt;/html&gt;</code></pre><h3 id="6-开发工具"><a href="#6-开发工具" class="headerlink" title="6.开发工具"></a>6.开发工具</h3><p>Sublime Text，webstorm,HBuilderX,VScode<br>快捷键:选中文本alt+w添加&lt; p &gt;<br>ctrl+/注释<br>ul&gt;li{内容}*n + 回车 建立n个无序列表并加上内容<br>dl&gt;dt{内容}+dd{内容} + 回车 建立自定义列表并加上内容</p><h3 id="7-基本标签"><a href="#7-基本标签" class="headerlink" title="7.基本标签"></a>7.基本标签</h3><pre><code>(1)标题标签    &lt;h1&gt;一级标题最大&lt;/h1&gt;    &lt;h6&gt;最小六级标题&lt;/h6&gt;(2)段落文本标签    &lt;p&gt;段落文本内容&lt;/p&gt;    段与段间有间隔(3)水平线标签(同时更改颜色，长度，位置，关闭阴影)                       #注意一对标签的格式加/    &lt;hr color=&quot;green&quot; width=&quot;600&quot; align=&quot;left/right&quot; noshade&gt;(4)文本修饰标签————加粗   &lt;b&gt;普通加粗&lt;strong&gt;便于爬虫(5)文本修饰标签————倾斜   &lt;em&gt;或&lt;i&gt;(6)文本修饰标签————删除   &lt;s&gt;或&lt;del&gt;(7)文本修饰标签————下划线   &lt;u&gt;(8)文本修饰标签————上下标   &lt;sub&gt;/&lt;sup&gt;(9)划分区域，占一行（破坏结构）   &lt;div&gt;内容&lt;/div&gt;(10)独立修饰文本（不破坏结构）   &lt;span&gt;内容&lt;/span&gt;</code></pre><h3 id="8-特殊符号"><a href="#8-特殊符号" class="headerlink" title="8.特殊符号"></a>8.特殊符号</h3><pre><code>尖角号      &amp;lt;左    &amp;gt;右空格        &amp;nbsp;受字体影响    &amp;emsp;一个中文宽度版权        &amp;copy;©商标        &amp;trade; TM标签      &amp;reg; R标签</code></pre><h3 id="9-列表"><a href="#9-列表" class="headerlink" title="9.列表"></a>9.列表</h3><pre><code>(1)有序&lt;!-- li里可以随意放标签，ol里只能放li，数字1.2.3.是自动生成的 --&gt;&lt;ol type=&quot;A&quot; start=&quot;&quot;4&gt;    &lt;li&gt;                             #type只能是1，a，A，i，I    &lt;/li&gt;                     start只能取一个数字1，2，3...&lt;/ol&gt;(2)无序&lt;!-- ul里只能放li，li里随便放 --&gt;&lt;ul type=&quot;none&quot;&gt;    &lt;li&gt;                             #默认是黑色实心圆    &lt;/li&gt;                     type只能填disc，circle，square，none（取消）&lt;/ul&gt;(3)自定义&lt;dl&gt;    &lt;dt&gt;文字或图&lt;/dt&gt;         #只复制&lt;dd&gt;&lt;dt&gt;是贴在一起的    &lt;dd&gt;相关文字&lt;/dd&gt;          复制&lt;dl&gt;则间隔一行&lt;/dl&gt;</code></pre><h3 id="10-图片"><a href="#10-图片" class="headerlink" title="10.图片"></a>10.图片</h3><h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><img src="XXX">(1)绝对路径（本地有此文件）    直接填地址(2)相对路径    与html文件在同级目录下写             名字.gif  或者  ./名字.gif    图片在下级则直接写地址    图片在上级则先../返回上一级再接着写地址(每一个../都是一次返回上级)<p>#此处要注意：不同操作系统使用的斜杠不同（Linux系统是/  window系统都可以）</p><h1 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h1><img src="" alt="">(1)alt=（你告诉它要显示的）图片加载失败时的提示信息"(2)title=标题（指针放上去后显示的）(3)width="200px" height="200px"更改宽高         #px是像数值，只设置一个时会自动缩放(4)11.超链接(a链接)<a herf="链接" title="鼠标悬停显示的信息" target="在何处打开文档">超链接放置的内容</a>  (1)target="_self"      在默认值(2)target="_blank"     在新窗口打开(3)超链接赋予图片:<pre><code>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;    &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;    &lt;a herf=&quot;https://www.baidu.com&quot; title=&quot;百度查询&quot;&gt;        &lt;img src=&quot;图片地址&quot; alt=&quot;&quot;&gt;                          #将图片包在超链接中    &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;</code></pre><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>只要你仍然担忧别人对你的看法，你就会受制于他们。唯有当你无须外界的认可时，你才能拥有你自己。————尼尔-唐纳德-沃尔什</p><h3 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h3><p>这个代码块快把我整疯了（哭）</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>20221005</title>
       <link href="/2022/10/05/b-2/"/>
       <url>/2022/10/05/b-2/</url>
