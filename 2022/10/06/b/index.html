@@ -62,7 +62,8 @@
     <script src="../../../../libs/jquery/jquery-3.6.0.min.js"></script>
 
 <!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -410,14 +411,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.1k
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    5 分
                 </div>
                 
 
@@ -505,7 +506,7 @@
     &lt;dd&gt;相关文字&lt;/dd&gt;          复制&lt;dl&gt;则间隔一行
 &lt;/dl&gt;
 </code></pre>
-<h3 id="10-图片"><a href="#10-图片" class="headerlink" title="10.图片"></a>10.图片</h3><h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><img src="XXX">
+<h3 id="10-图片"><a href="#10-图片" class="headerlink" title="10.图片"></a>10.图片</h3><h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><pre><code>&lt;img src=&quot;XXX&quot;&gt;
 (1)绝对路径（本地有此文件）
     直接填地址
 (2)相对路径
@@ -513,90 +514,33 @@
     图片在下级则直接写地址
     图片在上级则先../返回上一级再接着写地址(每一个../都是一次返回上级)
 
-<p>#此处要注意：不同操作系统使用的斜杠不同（Linux系统是/  window系统都可以）</p>
-<h1 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h1><img src="" alt="">
-(1)alt=（你告诉它要显示的）图片加载失败时的提示信息"
-(2)title=标题（指针放上去后显示的）
-(3)width="200px" height="200px"更改宽高         #px是像数值，只设置一个时会自动缩放
-(4)
-11.超链接(a链接)
-<a herf="链接" title="鼠标悬停显示的信息" target="在何处打开文档">超链接放置的内容</a>  
-(1)target="_self"      在默认值
-(2)target="_blank"     在新窗口打开
-(3)超链接赋予图片:
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <a herf="https://www.baidu.com" title="百度查询">
-        <img src="图片地址" alt="">                          #将图片包在超链接中
-    </a>
-<!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__zoomIn');
-    arr[i].setAttribute('data-wow-duration', '1.5s');
-    arr[i].setAttribute('data-wow-delay', '200ms');
-    arr[i].setAttribute('data-wow-offset', '30');
-    arr[i].setAttribute('data-wow-iteration', '1');
-  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__zoomIn');
-    arr[i].setAttribute('data-wow-duration', '');
-    arr[i].setAttribute('data-wow-delay', '200ms');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__flipInY');
-    arr[i].setAttribute('data-wow-duration', '3s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__animated');
-    arr[i].setAttribute('data-wow-duration', '3s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__slideInRight');
-    arr[i].setAttribute('data-wow-duration', '1.5s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__flipInY');
-    arr[i].setAttribute('data-wow-duration', '3s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__animated');
-    arr[i].setAttribute('data-wow-duration', '3s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body>
-</html>
-```
+#此处要注意：不同操作系统使用的斜杠不同（Linux系统是/  window系统都可以）
 
+# 属性
+&lt;img src=&quot;&quot; alt=&quot;&quot;&gt;
+(1)alt=（你告诉它要显示的）图片加载失败时的提示信息&quot;
+(2)title=标题（指针放上去后显示的）
+(3)width=&quot;200px&quot; height=&quot;200px&quot;更改宽高         #px是像数值，只设置一个时会自动缩放
+</code></pre>
+<h3 id="11-超链接-a链接"><a href="#11-超链接-a链接" class="headerlink" title="11.超链接(a链接)"></a>11.超链接(a链接)</h3><pre><code>&lt;a herf=&quot;链接&quot; title=&quot;鼠标悬停显示的信息&quot; target=&quot;在何处打开文档&quot;&gt;超链接放置的内容&lt;/a&gt;  
+(1)target=&quot;_self&quot;      在默认值
+(2)target=&quot;_blank&quot;     在新窗口打开
+(3)超链接赋予图片:
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a herf=&quot;https://www.baidu.com&quot; title=&quot;百度查询&quot;&gt;
+        &lt;img src=&quot;图片地址&quot; alt=&quot;&quot;&gt;                          将图片包在超链接中
+    &lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 <h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>只要你仍然担忧别人对你的看法，你就会受制于他们。唯有当你无须外界的认可时，你才能拥有你自己。————尼尔-唐纳德-沃尔什</p>
 
                 
@@ -886,7 +830,7 @@ for(var i = 0;i<arr.length;i++){
 
         // we need a <pre> tag workaround.
         // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
             newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
         }
 
@@ -924,6 +868,31 @@ for(var i = 0;i<arr.length;i++){
 
 
 
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="../../../../libs/codeBlock/codeBlockFunction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
     
 
 </main>
@@ -947,7 +916,7 @@ for(var i = 0;i<arr.length;i++){
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">2.2k</span>
+                        class="white-color">2.3k</span>
             
             
             
@@ -1237,7 +1206,63 @@ $(function () {
     <script src="../../../../libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
 
