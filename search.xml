@@ -29,31 +29,6 @@
     
     
     <entry>
-      <title>2021007</title>
-      <link href="/2022/10/07/d/"/>
-      <url>/2022/10/07/d/</url>
-      
-        <content type="html"><![CDATA[<h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><pre><code>&lt;table border=&quot;1&quot; width=&quot;50%&quot; height=&quot;500px&quot;  align=&quot;center&quot;bordercolor=&quot;red&quot;cellspacing=&quot;0&quot;&gt;                                                         &lt;!-- 创建表格 --&gt;    &lt;tr bgcolor=&quot;&quot; height=&quot;&quot; align=&quot;&quot; valign=&quot;&quot;&gt;                         &lt;!-- tr表示行 --&gt;        &lt;td width=&quot;&quot; bgcolor=&quot;&quot;&gt;                                         &lt;!-- td表示单元格 --&gt;         内容        &lt;/td height=&quot;&quot; align=&quot;&quot; valign=&quot;&quot;&gt;    &lt;/tr&gt;&lt;/table&gt;表格table属性 1. 宽度 width 2. 高度 height 3 边框 border 4. 边框颜色 bordercolor 5 背景颜色 bgcolor 6 水平对齐align=&quot;left或right或center 7. cellspacing=&quot;单元格与单元格之间的间距 8. cellpadding=&quot;单元格与内容之间的空隙9.width可以写百分比（相对于父级元素的）和px，height只能写百分比10.注意&gt;的位置行tr属性 1. 高度 height 2. 背景颜色 bgcolor 3. 文字水平对齐 align=“left或right或center” 4. 文字垂直对齐 valign=“top或middle或bottom&quot;单元格td属性 1. 宽度 width 2. 高度 height 3. 背景颜色 bgcolor 4. 文字水平对齐 falign=“left或right或center” 5. 文字垂直对齐valign=“top或middle或bottom表格合并colspan=&quot;列数&quot;rowspan=&quot;行数&quot;合并掉的元素要注释掉</code></pre><h3 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h3><pre><code>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;    &lt;title&gt;Document&lt;/title&gt;&lt;/head&gt;&lt;body&gt;    &lt;form action=&quot;地址&quot; method=&quot;POST&quot;&gt;                                                     &lt;!-- POST是不显示在url的，GET会暴露 --&gt;        内容：&lt;input type=&quot;text&quot; placeholder=&quot;提示信息，输入内容后会消失&quot; name=&quot;内容&quot;&gt;        &lt;!-- 输入的完全显示 --&gt;        内容：&lt;input type=&quot;password&quot; placeholder=&quot;提示信息，输入内容后会消失&quot; name=&quot;内容&quot;&gt;    &lt;!-- password形式输入的显示为一个点 --&gt;        &lt;input type=&quot;submit&quot; value=&quot;按钮上内容&quot; &gt;                                           &lt;!-- 提交信息到action指定的地址 --&gt;        &lt;button type=&quot;submit&quot;&gt;内容&lt;/button&gt;                                                &lt;!-- 相当于input submit标签 --&gt;        &lt;button type=&quot;reset&quot;&gt;内容&lt;/button&gt;                                                 &lt;!-- 清空表单信息 --&gt;        &lt;input type=&quot;button&quot; value=&quot;按钮上内容&quot; &gt;                                           &lt;!-- 自定义按钮 --&gt;    &lt;/form&gt;&lt;/body&gt;&lt;/html&gt;1.不加name就不能提交内容2.</code></pre><p>附:<br>Form当中method的post和get的区别？<br>1.get是从服务器上获取数据，post是向服务器传送数据。<br>2.get是把参数数据队列加到提交表单的ACTION属性所指的URL中，值和表单内各个字段——对应，在URL中可以看到。post 是通过HTTPpost机制，将表单内各个字段与其内容放置在HTMLHEADER内一起传送到ACTION属性所指的URL地址。用户看不到这个过程。<br>3.对于get方式，服务器端用Request.QueryString获取变量的值，对于post方式，服务器端用Request.Form获取提交的数据。<br>4.get传送的数据量较小。post传送的数据量较大。</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>生活，在喜怒哀乐间走走停停 不知道会遇见什么，只知道阳光这么好，别辜负了今天，早安！</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 日报 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 日报 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>20221005</title>
       <link href="/2022/10/05/b-2/"/>
       <url>/2022/10/05/b-2/</url>
