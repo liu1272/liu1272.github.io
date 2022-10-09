@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Robin">
-    <meta name="description" content="深入了解Hexo搭建博客的底层原理前言在趟过无数个坑，解决了无数个报错后，终于把这个博客整出来了。现在回过头来，开始对hexo原理好奇起来。
-优缺点优点很明显啊，主题多，文件多(利于解决各种各样天花乱坠的报错)，通过修改yaml配置文件来修">
+    <meta name="keywords" content="20221008和09, Robin">
+    <meta name="description" content="每日一记CSS1.含义:如何修饰网页信息的显示样式2.语法 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。 2）属性必须放在花括号中，属性与属性值用冒号连接。 3）每条声明用分号结束。 4）当一个属性有多个属性值的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Robin</title>
+    <title>20221008和09 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -349,7 +348,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">20221008和09</h1>
                 </div>
             </div>
         </div>
@@ -371,14 +370,23 @@
                     
                     <div class="article-tag">
                         
-                            <a href="../../../../tags/%E5%AD%A6%E6%9C%AF/">
-                                <span class="chip bg-color">学术</span>
+                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                <span class="chip bg-color">日报</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                日报
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -387,28 +395,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-10-05
+                    2022-10-09
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-10-05
+                    2022-10-10
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    584
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    6 分
                 </div>
                 
 
@@ -428,10 +436,183 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h5 id="深入了解Hexo搭建博客的底层原理"><a href="#深入了解Hexo搭建博客的底层原理" class="headerlink" title="深入了解Hexo搭建博客的底层原理"></a>深入了解Hexo搭建博客的底层原理</h5><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在趟过无数个坑，解决了无数个报错后，终于把这个博客整出来了。<br>现在回过头来，开始对hexo原理好奇起来。</p>
-<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>优点很明显啊，主题多，文件多(利于解决各种各样天花乱坠的报错)，通过修改yaml配置文件来修改样式比较简单。<br>但是缺点一样很明显，bug是真的多(一步错步步错)，每次发布文章都需要重新部署，没有一个后台管理系统(加上GitHub的海外服务器，简直让人欲仙欲死)。</p>
-<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>博客hexo生成的是静态页面，而Github pages 又支持静态页面的解析。因此二者一拍即合能够用来生成 html 拼合成博客。</p>
-<h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>1.Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。<br>2.文件<br>  ├── node_modules：             #依赖包-安装插件及所需nodejs模块。<br>  ├── public                     #最终网页信息。即存放被解析markdown、html文件。<br>  ├── scaffolds                  #模板文件夹。即当您新建文章时，根据 scaffold生成文件。<br>  ├── source                     #资源文件夹。即存放用户资源。<br>  └── _posts                     #博客文章目录。<br>  └── themes                     #存放主题。Hexo根据主题生成静态页面。<br>  ├── _config.yml                #网站的配置信息。标题、网站名称等。<br>  ├── db.json：                  #source解析所得到的缓存文件。<br>  ├── package.json               # 应用程序信息。即配置Hexo运行需要js包。<br>3.source就是数据库，以.md（markdown）格式存储文章，theme文件夹是主题文件（决定页面模板）。<br>4.部署流程:<br>hexo g：生成静态文件。将我们的数据和界面模板相结合生成静态文件的过程。Hexo（node.js程序）遍历主题文件中你的source目录（js、css、img等静态资源），建立索引，再根据索引生成由html、js、css、img建立的纯静态文件并放在public文件夹里。public就是你的博客了，而这些恰好能被gitpages识别。<br>hexo d：部署文件。主要是根据在_config.yml中配置的git仓库或者coding的地址，将public文件通过git方式push到上传到github或coding的指定分支，然后在根据pages服务呈现出页面。</p>
+                <h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>1.含义:如何修饰网页信息的显示样式<br>2.语法<br> 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。<br> 2）属性必须放在花括号中，属性与属性值用冒号连接。<br> 3）每条声明用分号结束。<br> 4）当一个属性有多个属性值的时候，属性值与属性值不分先后顺序，用空格隔开。<br> 5）在书写样式过程中，空格、换行等</p>
+<h2 id="内部样式表"><a href="#内部样式表" class="headerlink" title="内部样式表"></a>内部样式表</h2><pre><code>第一
+&lt;style&gt;
+    h1&#123;color:red;&#125;
+&lt;/style&gt;
+放head和body都可以
+
+第二
+&lt;body&gt;
+    &lt;h1 style=&quot;color:red;&quot; &gt;内容&lt;/h1&gt;
+&lt;/body&gt;
+</code></pre>
+<h2 id="外部样式表"><a href="#外部样式表" class="headerlink" title="外部样式表"></a>外部样式表</h2><pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; herf=&quot;css文件所在的地址&quot;&gt;       #注意是rel
+&lt;style&gt;
+    @import url(css文件所在的地址);                                    #注意分号
+&lt;style&gt;
+两种，最好放head标签里
+</code></pre>
+<h2 id="扩展知识点"><a href="#扩展知识点" class="headerlink" title="扩展知识点"></a>扩展知识点</h2><p>link和import之间的区别？<br>①差别1：本质的差别：link属于XHTML标签，而@import完全是CSS提供的一种方式。<br>②差别2：加载顺序的差别：link引用的CSS会同时被加载，而@import引用的CSS会等到页面全部被下载完再被加载。所以有时候浏览@import加载 CSS的页面时开始会没有样式（就是闪烁），网速慢的时候还挺明显。<br>③差别3：兼容性的差别：@import老的浏览器不支持，而link标签无此问题。<br>样式表优先级<br>原则:就近原则————!important（放在属性值后）&gt;行内&gt;内部&gt;外部           #注意感叹号</p>
+<h3 id="标签选择器"><a href="#标签选择器" class="headerlink" title="标签选择器"></a>标签选择器</h3><p>1.class类选择器</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+        .类名1&#123;background-color:blue;&#125;                              #就近原则，离开头最近的style为准
+        .类名2&#123;background-color:red;&#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;类名1 类名2&quot;&gt;222&lt;/div&gt;                              #空格可以放置多个类名
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>2.id选择器</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+        #box1&#123;background-color:yellow;&#125;
+        #box3&#123;background-color:blue;&#125;
+        #box2&#123;background-color:red;&#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;1111111111&lt;/div&gt;
+    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;
+    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+语法：#id名&#123;属性：属性值;&#125; 
+A）使用id选择符时，应该为每个元素定义一个id属性 如：&lt;divid=&quot;box&quot;&gt;&lt;/div&gt; 
+B）id选择符的语法格式是“#”加上自定义的id名 如：#box&#123;width:300px;height:300px;&#125; 
+C）起名时要取英文名，不能用关键字：（所有的标记和属性都是关键字） 如：head标记 
+D）一个id名称只能对应文档中一个具体的元素对象,多个时就不显示样式。（唯一性）
+</code></pre>
+<p>3.通配符选择器</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;style&gt;
+        *&#123;
+            margin:0;      #外边距为0
+            padding:0;     #内边距为0
+        &#125;
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;1111111111&lt;/div&gt;
+    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;
+    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+语法：*&#123;属性:属性值;&#125; 
+说明：通配选择符的写法是“*”，其含义就是所有元素。 
+*&#123;margin:0;padding:0;&#125;代表清除所有元素的默认边距值和填充值
+</code></pre>
+<p>4.群组与后代选择器</p>
+<pre><code>    &lt;style&gt;
+        标签们或者class内的类名们&#123;background-color:yellow&#125;      #标签们之间要加逗号，而且类名前要加.
+    &lt;/style&gt;
+
+若之间不加逗号则是后代选择器，仅更改空格代表的后代
+#从右到左地选择
+</code></pre>
+<p>5.伪类选择器<br>···<br><!DOCTYPE html></p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a:link{color:yellow;}
+        a:visited{color:red;}
+        a:hover{color:orange;}
+        a:active{color:blue;}
+    </style>
+</head>
+<body>
+    <a herf="超链接">
+        内容
+    </a>
+<!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '30');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__slideInRight');
+    arr[i].setAttribute('data-wow-duration', '1.5s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__flipInY');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__animated');
+    arr[i].setAttribute('data-wow-duration', '3s');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body>
+</html>
+
+<p>语法：<br>a：link{属性：属性值;}超链接的初始状态<br>a.visited(属性：属性值;}超链接被访问后的状态<br>a:hovert{属性：属性值;}鼠标悬停的状态<br>a:active{属性：属性值;}超链接被激活时的状态<br>说明：<br>A）顺序为： a:link,a:visited,a:hover,a:active,错误的顺序有时会使超链接的样式失效<br>B）为了简化代码，可以把伪类选择符中相同的声明提出来放在a选择符中； 例如：a{color:red;}a:hover{color:green;}表示超链接的初始和访问过后的状态一样，鼠标划过的状态和点击时的状态一样。<br>···</p>
+<p>6.选择器的权重<br>!important&gt;内联样式&gt;包含选择符&gt;id选择器&gt;class选择器&gt;类型（元素）选择器<br>有冲突时高权重覆盖低权重<br>相同权重就近原则（哪个先被定义）</p>
+<h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>渔夫出海前，并不知道鱼在哪里。可他们还是选择了出发，因为他们相信，自己一定会满载而归。人生很多时候，是因为选择了才有机会，相信了才有可能。————稻盛和夫</p>
 
                 
             </div>
@@ -496,8 +677,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="../../../../tags/%E5%AD%A6%E6%9C%AF/">
-                                    <span class="chip bg-color">学术</span>
+                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                    <span class="chip bg-color">日报</span>
                                 </a>
                             
                         </div>
@@ -595,17 +776,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../b-2/">
+                <a href="">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/22.jpg" class="responsive-img" alt="20221005">
+                        <img src="../../../../medias/featureimages/0.jpg" class="responsive-img" alt="20221008和09">
                         
-                        <span class="card-title">20221005</span>
+                        <span class="card-title">20221008和09</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -615,9 +797,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -630,6 +812,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -648,13 +831,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../04/a/">
+                <a href="../../07/b-3/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/7.jpg" class="responsive-img" alt="试验">
+                        <img src="../../../../medias/featureimages/20.jpg" class="responsive-img" alt="20221007">
                         
-                        <span class="card-title">试验</span>
+                        <span class="card-title">20221007</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -665,12 +848,16 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-07
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            liuGuobin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -678,8 +865,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E5%AD%A6%E6%9C%AF/">
-                        <span class="chip bg-color">学术</span>
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
                     </a>
                     
                 </div>
@@ -1090,63 +1277,7 @@ $(function () {
     <script src="../../../../libs/instantpage/instantpage.js" type="module"></script>
     
 
-<!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__zoomIn');
-    arr[i].setAttribute('data-wow-duration', '1.5s');
-    arr[i].setAttribute('data-wow-delay', '200ms');
-    arr[i].setAttribute('data-wow-offset', '30');
-    arr[i].setAttribute('data-wow-iteration', '1');
-  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__zoomIn');
-    arr[i].setAttribute('data-wow-duration', '');
-    arr[i].setAttribute('data-wow-delay', '200ms');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__flipInY');
-    arr[i].setAttribute('data-wow-duration', '3s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('flink-list-card');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__animated');
-    arr[i].setAttribute('data-wow-duration', '3s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('article-sort-item');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__slideInRight');
-    arr[i].setAttribute('data-wow-duration', '1.5s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__flipInY');
-    arr[i].setAttribute('data-wow-duration', '3s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script><script async="async">var arr = document.getElementsByClassName('site-card');
-for(var i = 0;i<arr.length;i++){
-    arr[i].classList.add('wow');
-    arr[i].classList.add('animate__animated');
-    arr[i].setAttribute('data-wow-duration', '3s');
-    arr[i].setAttribute('data-wow-delay', '');
-    arr[i].setAttribute('data-wow-offset', '');
-    arr[i].setAttribute('data-wow-iteration', '');
-  }</script></div><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 
 </html>
 
