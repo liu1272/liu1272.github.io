@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>20221008和09</title>
-      <link href="/2022/10/09/b-6/"/>
-      <url>/2022/10/09/b-6/</url>
-      
-        <content type="html"><![CDATA[<h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>1.含义:如何修饰网页信息的显示样式<br>2.语法<br> 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。<br> 2）属性必须放在花括号中，属性与属性值用冒号连接。<br> 3）每条声明用分号结束。<br> 4）当一个属性有多个属性值的时候，属性值与属性值不分先后顺序，用空格隔开。<br> 5）在书写样式过程中，空格、换行等</p><h2 id="内部样式表"><a href="#内部样式表" class="headerlink" title="内部样式表"></a>内部样式表</h2><pre><code>第一&lt;style&gt;    h1&#123;color:red;&#125;&lt;/style&gt;放head和body都可以第二&lt;body&gt;    &lt;h1 style=&quot;color:red;&quot; &gt;内容&lt;/h1&gt;&lt;/body&gt;</code></pre><h2 id="外部样式表"><a href="#外部样式表" class="headerlink" title="外部样式表"></a>外部样式表</h2><pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; herf=&quot;css文件所在的地址&quot;&gt;       #注意是rel&lt;style&gt;    @import url(css文件所在的地址);                                    #注意分号&lt;style&gt;两种，最好放head标签里</code></pre><h2 id="扩展知识点"><a href="#扩展知识点" class="headerlink" title="扩展知识点"></a>扩展知识点</h2><p>link和import之间的区别？<br>①差别1：本质的差别：link属于XHTML标签，而@import完全是CSS提供的一种方式。<br>②差别2：加载顺序的差别：link引用的CSS会同时被加载，而@import引用的CSS会等到页面全部被下载完再被加载。所以有时候浏览@import加载 CSS的页面时开始会没有样式（就是闪烁），网速慢的时候还挺明显。<br>③差别3：兼容性的差别：@import老的浏览器不支持，而link标签无此问题。<br>样式表优先级<br>原则:就近原则————!important（放在属性值后）&gt;行内&gt;内部&gt;外部           #注意感叹号</p><h3 id="标签选择器"><a href="#标签选择器" class="headerlink" title="标签选择器"></a>标签选择器</h3><p>1.class类选择器</p><pre><code>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;    &lt;title&gt;Document&lt;/title&gt;    &lt;style&gt;        .类名1&#123;background-color:blue;&#125;                              #就近原则，离开头最近的style为准        .类名2&#123;background-color:red;&#125;    &lt;/style&gt;&lt;/head&gt;&lt;body&gt;    &lt;div class=&quot;类名1 类名2&quot;&gt;222&lt;/div&gt;                              #空格可以放置多个类名&lt;/body&gt;&lt;/html&gt;</code></pre><p>2.id选择器</p><pre><code>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;    &lt;title&gt;Document&lt;/title&gt;    &lt;style&gt;        #box1&#123;background-color:yellow;&#125;        #box3&#123;background-color:blue;&#125;        #box2&#123;background-color:red;&#125;    &lt;/style&gt;&lt;/head&gt;&lt;body&gt;    &lt;div&gt;1111111111&lt;/div&gt;    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;语法：#id名&#123;属性：属性值;&#125; A）使用id选择符时，应该为每个元素定义一个id属性 如：&lt;divid=&quot;box&quot;&gt;&lt;/div&gt; B）id选择符的语法格式是“#”加上自定义的id名 如：#box&#123;width:300px;height:300px;&#125; C）起名时要取英文名，不能用关键字：（所有的标记和属性都是关键字） 如：head标记 D）一个id名称只能对应文档中一个具体的元素对象,多个时就不显示样式。（唯一性）</code></pre><p>3.通配符选择器</p><pre><code>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;    &lt;title&gt;Document&lt;/title&gt;    &lt;style&gt;        *&#123;            margin:0;      #外边距为0            padding:0;     #内边距为0        &#125;    &lt;/style&gt;&lt;/head&gt;&lt;body&gt;    &lt;div&gt;1111111111&lt;/div&gt;    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;语法：*&#123;属性:属性值;&#125; 说明：通配选择符的写法是“*”，其含义就是所有元素。 *&#123;margin:0;padding:0;&#125;代表清除所有元素的默认边距值和填充值</code></pre><p>4.群组与后代选择器</p><pre><code>    &lt;style&gt;        标签们或者class内的类名们&#123;background-color:yellow&#125;      #标签们之间要加逗号，而且类名前要加.    &lt;/style&gt;若之间不加逗号则是后代选择器，仅更改空格代表的后代#从右到左地选择</code></pre><p>5.伪类选择器<br>···<br><!DOCTYPE html></p><html lang="en"><head>    <meta charset="UTF-8">    <meta http-equiv="X-UA-Compatible" content="IE=edge">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Document</title>    <style>        a:link{color:yellow;}        a:visited{color:red;}        a:hover{color:orange;}        a:active{color:blue;}    </style></head><body>    <a herf="超链接">        内容    </a></body></html><p>语法：<br>a：link{属性：属性值;}超链接的初始状态<br>a.visited(属性：属性值;}超链接被访问后的状态<br>a:hovert{属性：属性值;}鼠标悬停的状态<br>a:active{属性：属性值;}超链接被激活时的状态<br>说明：<br>A）顺序为： a:link,a:visited,a:hover,a:active,错误的顺序有时会使超链接的样式失效<br>B）为了简化代码，可以把伪类选择符中相同的声明提出来放在a选择符中； 例如：a{color:red;}a:hover{color:green;}表示超链接的初始和访问过后的状态一样，鼠标划过的状态和点击时的状态一样。<br>···</p><p>6.选择器的权重<br>!important&gt;内联样式&gt;包含选择符&gt;id选择器&gt;class选择器&gt;类型（元素）选择器<br>有冲突时高权重覆盖低权重<br>相同权重就近原则（哪个先被定义）</p><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>渔夫出海前，并不知道鱼在哪里。可他们还是选择了出发，因为他们相信，自己一定会满载而归。人生很多时候，是因为选择了才有机会，相信了才有可能。————稻盛和夫</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 日报 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 日报 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>20221007</title>
       <link href="/2022/10/07/b-3/"/>
       <url>/2022/10/07/b-3/</url>
