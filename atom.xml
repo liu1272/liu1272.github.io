@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2022-10-14T11:30:31.259Z</updated>
+  <updated>2022-10-17T04:55:27.276Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20221014</title>
+    <link href="https://liu1272.github.io/2022/10/14/b-8/"/>
+    <id>https://liu1272.github.io/2022/10/14/b-8/</id>
+    <published>2022-10-14T15:32:04.000Z</published>
+    <updated>2022-10-17T04:55:27.276Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h6><h3 id="列表属性-在列表前加元素"><a href="#列表属性-在列表前加元素" class="headerlink" title="列表属性(在列表前加元素)"></a>列表属性(在列表前加元素)</h3><pre><code>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;    &lt;title&gt;Document&lt;/title&gt;    &lt;style&gt;ul&#123;        list-style-type:none;                    /* disc实心圆 circle空心圆 square实心正方形 none无 */        list-style-image:url(地址);              /* 这样子是全部都使用这种style的，否则要在li前加class */        list-style-position: outside;            /* outside把上面的元素放在盒子外面，inside放在里面 */        &#125;        .p1&#123;            list-style:none url(地址) inside;    /* 复合属性写法 */        &#125;    &lt;/style&gt;&lt;/head&gt;&lt;body&gt;    &lt;ul&gt;        &lt;li class=&quot;p1&quot;&gt;            内容        &lt;/li&gt;    &lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</code></pre><h3 id="背景属性"><a href="#背景属性" class="headerlink" title="背景属性"></a>背景属性</h3><p>用法和字体颜色一样</p><pre><code>在style下对标签定义width,height,background-color:rgba(255,0,0,0.5)    #rgba是透明对于插入的图片:background-image: url(地址);                                     #默认平铺，图片太大裁剪，太小复制background-repeat: repeat;                                       #repeat默认，repeat-x是x轴平铺，repeat-y是y轴平铺，no-repeat不平铺background-position:10px 10%;                                    #图片放置的位置，左边是横向右边是纵向，%是相对于盒子的background-position:right center;                                #左边是横向右边是纵向background-size:400px 100%;                                      #左边是横向右边是纵向(会失真)，cover(完全覆盖但是可能无法全部显示)，contain(图片全部展示但是会留白)background-attachment: fixed;                                    #fixed固定在浏览器视窗内，scroll滚动，如果没有div会不显示复合写法background:   ;不看顺序注意:background-size要单独放</code></pre><h3 id="浮动属性"><a href="#浮动属性" class="headerlink" title="浮动属性"></a>浮动属性</h3><pre><code>float:left;         #并排靠左排列，太多换行float:right;        #和左对称浮动的会覆盖未浮动的(因为float的没有高度)文字不能被挡住，放在上层防止高度塌陷(防止覆盖)1.div内固定高度，令其有高度2.清浮动clear:left/right/both/none3.当前浮动元素后补一个盒子，不设置宽高，clear:both4.overflow:hidden;(使浮动元素计算高度)</code></pre><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>人，归根结底，是一个物质存在，很容易受损伤，却不容易修复。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h6 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h6&gt;&lt;h3 id=&quot;列表属性-在列表前加元素&quot;&gt;&lt;a href=&quot;#列表属性-在列表前加元素&quot; class=&quot;headerlink&quot; </summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>20221012</title>
