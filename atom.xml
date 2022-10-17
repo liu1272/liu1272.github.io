@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2022-10-17T04:55:27.276Z</updated>
+  <updated>2022-10-17T09:45:51.739Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20221016</title>
+    <link href="https://liu1272.github.io/2022/10/16/b-9/"/>
+    <id>https://liu1272.github.io/2022/10/16/b-9/</id>
+    <published>2022-10-16T15:32:04.000Z</published>
+    <updated>2022-10-17T09:45:51.739Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h6><h3 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h3><pre><code>1.外边距    &lt;style&gt;        div&#123;            padding:30px;               /* 一个值4个方向一样，两个值上下和左右，三个值上和左右和下，四个值上右下左 */            padding-left:0px;           /* 对单一方向更改 */        &#125;    &lt;/style&gt;&lt;/head&gt;&lt;body&gt;    &lt;div&gt;        111111111111111111    &lt;/div&gt;&lt;/body&gt;注意:1.上下两个box时外边距取大值2.左右两个box加和3.有父子两个box时，子盒子加外边距会整体移动解决:1.加浮动  2.overflow:hidden.2.边框&lt;style&gt;    .box1&#123;        border-top:10px dotted red;             #solid实线double双实线dashed虚线dotted点状线，可以选择单一方向更改        margin:10px auto;                       #用法同上，左边是纵向，右边是横向，auto是居中    &#125;&lt;/style&gt;注意:实际上的编写会有3px的误差，来源于图片标签的图片和文字间类型不同，需要转换:img&#123;    display:block;&#125;</code></pre><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>迷路，并无小路大路短路长路之区别。不能说在大路长路上迷路就不是迷路了。走在达不到目的的路上，就是迷路。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h6 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h6&gt;&lt;h3 id=&quot;盒子模型&quot;&gt;&lt;a href=&quot;#盒子模型&quot; class=&quot;headerlink&quot; title=&quot;盒子模型&quot;&gt;&lt;/a</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>20221014</title>
