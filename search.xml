@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>20221019</title>
+      <link href="/2022/10/19/b-11/"/>
+      <url>/2022/10/19/b-11/</url>
+      
+        <content type="html"><![CDATA[<h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><pre><code>1.默认值position:static;2.绝对定位position:absolute;top:100px;left:-20px;脱离原始位置,但是原始位置占位，参照物是父元素或浏览器第一屏(没有父元素时)注:通常与相对定位相结合使用3.相对定位position:relative;top:100px;left:-20px;不脱离原始位置，但是原始位置不占位(类似于浮动),相对于原始位置4.固定定位position:fixed;top:100px;left:-20px;脱离原始位置，固定在浏览器窗口5.粘性定位position:sticky;top:0px;吸顶效果，需要定义距离边框的距离，css3.0新增附加:透明度&lt;style&gt;    p&#123;        opacity:0;        #0是完全透明，1是不透明    &#125;&lt;/style&gt;</code></pre><h3 id="三角形模型"><a href="#三角形模型" class="headerlink" title="三角形模型"></a>三角形模型</h3><pre><code>.box&#123;                                          #标准style    width:0px;                                 #定义盒子模型基本属性    height:0px;    border:20px solid transparent;             #四周全部透明    border-bottom:20px solid red;              #单边不透明，重合部分五五分显示颜色，这样子可以显示为三角形    position:relative;                         #相对盒子模型定位    bottom:2.5px;                              #移动至中间(美观)&#125;.box:hover span&#123;                               #悬浮时的style    width:0px;    height:0px;    border:20px solid transparent;    border-top:20px solid red;    position:relative;    top:2.5px;&#125;</code></pre><h3 id="定位的层级"><a href="#定位的层级" class="headerlink" title="定位的层级"></a>定位的层级</h3><p>父子关系时<br>z-index越大越靠上显示</p><h3 id="绝对定位深入探索"><a href="#绝对定位深入探索" class="headerlink" title="绝对定位深入探索"></a>绝对定位深入探索</h3><p>1.<br>兄弟关系时，后来者居上，后面的再上层<br>2.<br>行内元素转化为块元素<br>绝对定位法:定义absolute</p><pre><code>    &lt;style&gt;        span&#123;            width:            ...            poosition:absolute;        &#125;    &lt;/style&gt;&lt;body&gt;    &lt;span&gt;        内容    &lt;/span&gt;&lt;/body&gt;直接转化法:display:block;浮动法:float:left;</code></pre><h3 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h3><p>1.先定义absolute<br>2.设定宽高位置50%<br>3.移动-px至中间<br>4.注意是相对于哪个盒子</p><h3 id="定位与浮动的区别"><a href="#定位与浮动的区别" class="headerlink" title="定位与浮动的区别"></a>定位与浮动的区别</h3><p>有文字时:<br>浮动半脱离(文字环绕效果)<br>abslote全脱离(无环绕效果)</p><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>想结果的花， 都早早低头。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>20221018</title>
       <link href="/2022/10/18/b-10/"/>
       <url>/2022/10/18/b-10/</url>
