@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>20221020</title>
+      <link href="/2022/10/20/b-12/"/>
+      <url>/2022/10/20/b-12/</url>
+      
+        <content type="html"><![CDATA[<h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="锚点"><a href="#锚点" class="headerlink" title="锚点"></a>锚点</h3><p>用a链接跳转到不同区域</p><pre><code>&lt;a href=&quot;#lianjie&quot;&gt;内容&lt;/a&gt;&lt;div id=&quot;a&quot;&gt;    内容&lt;/div&gt;点击a链接时跳到div中去</code></pre><h3 id="精灵图-图片整合技术"><a href="#精灵图-图片整合技术" class="headerlink" title="精灵图(图片整合技术)"></a>精灵图(图片整合技术)</h3><p>1.先将所有图片和为一个图<br>2.使用background-position来移动位置显示出</p><h3 id="宽高自适应"><a href="#宽高自适应" class="headerlink" title="宽高自适应"></a>宽高自适应</h3><p>定义:元素自动调整大小<br>1.定义宽高时为auto，元素的量决定宽高<br>2.min-height:10px;最小10px，多于10px就变大<br>问题:父元素不写高度时，子元素写了浮动，父元素会高度塌陷<br>1.声明<br>overflow:hidden;<br>2.浮动元素下加块元素并声明<br>clear:both; height:0; overflow:hidden;<br>3.清除浮动<br>after{content:””,clear:both; display:block; height:0; visibility:hidden;/overflow:hidden;}</p><h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><pre><code>div::first-letter&#123;          #定义第一个字符的样式    font-size:30px;    color:red;&#125;div::first-line&#123;&#125;           #定义第一行的样式div::after&#123;content:内容&#125;    #放在对象后的内容div::before&#123;content:内容&#125;   #放在对象前的内容</code></pre><h3 id="注意-隐藏的区别"><a href="#注意-隐藏的区别" class="headerlink" title="注意(隐藏的区别)"></a>注意(隐藏的区别)</h3><p>display:none(不占位)<br>visibility:hidden(占位)</p><h3 id="窗口自适应"><a href="#窗口自适应" class="headerlink" title="窗口自适应"></a>窗口自适应</h3><pre><code>1.单一栏目html,body&#123;    height:100%;             #所有盒子根据窗口的大小变化&#125;2.两栏布局(A)使用盒子的外边距&lt;style&gt;    .box1&#123;        height:100%;        ...        margin-left:200px;     #使一个盒子空出空间(外边距)    &#125;    .box2&#123;        height:100%;        ...        float:left;            #另一个盒子往另一边靠    &#125;&lt;/style&gt;(B)使用clac()函数计算长度值注意:可以使用加减乘除，而且运算符号前后都要加一个空格&lt;style&gt;    .box1&#123;        height:100%;        width:clac(100% - 200px);     #根据屏幕窗口的变化而改变        float:left;     &#125;    .box2&#123;        height:100%;        width:100px;         float:left;     &#125;&lt;/style&gt;3.三栏布局(A)1.先html,body&#123;&#125;全部统一变化2.left和right浮动3.center设置左右外边距4.先让左右浮动再插入center(B)同上，要在center加入clac函数</code></pre><h5 id="表单进阶"><a href="#表单进阶" class="headerlink" title="表单进阶"></a>表单进阶</h5><h3 id="单选框"><a href="#单选框" class="headerlink" title="单选框"></a>单选框</h3><pre><code>&lt;body&gt;    &lt;div&gt;性别&lt;/div&gt;                                        #定义标题    &lt;div&gt;        &lt;input type=&quot;radio&quot; name=&quot;1&quot; id=&quot;man&quot;&gt;            #radio是选框样式，name是一个组，id表示标记        &lt;label for=&quot;man&quot;&gt;男&lt;/label&gt;                       #label是说明标签，for是定位到上面的id    &lt;/div&gt;    &lt;div&gt;        &lt;input type=&quot;radio&quot; name=&quot;1&quot; id=&quot;woman&quot;&gt;        &lt;label for=&quot;woman&quot;&gt;女&lt;/label&gt;    &lt;/div&gt;&lt;/body&gt;注意:1.如果没有定义name(组)会变成多选2.如果要默认选中，在input中加上checked=&quot;checked&quot;，也可以直接写checked</code></pre><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>人不该惧怕孤独，因为出生前，造物主就用孤独考验过每个人，哪里还能比在胚胎中更孤独呢？</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>20221019</title>
       <link href="/2022/10/19/b-11/"/>
       <url>/2022/10/19/b-11/</url>
