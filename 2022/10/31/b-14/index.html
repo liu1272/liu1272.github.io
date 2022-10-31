@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="20221008和09, Robin">
-    <meta name="description" content="每日一记CSS1.含义:如何修饰网页信息的显示样式2.语法 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。 2）属性必须放在花括号中，属性与属性值用冒号连接。 3）每条声明用分号结束。 4）当一个属性有多个属性值的">
+    <meta name="keywords" content="Robin">
+    <meta name="description" content="每日一记复选框&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;1&amp;quot; id=&amp;quot;man&amp;quot;&amp;gt;
+&amp;lt;label for=&amp;quot;man&amp;quot;&amp;gt;男&amp;lt;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>20221008和09 | Robin</title>
+    <title>Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -348,7 +349,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">20221008和09</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -395,28 +396,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-10-09
+                    2022-10-31
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-10-10
+                    2022-10-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    9 分
                 </div>
                 
 
@@ -436,136 +437,198 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>1.含义:如何修饰网页信息的显示样式<br>2.语法<br> 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。<br> 2）属性必须放在花括号中，属性与属性值用冒号连接。<br> 3）每条声明用分号结束。<br> 4）当一个属性有多个属性值的时候，属性值与属性值不分先后顺序，用空格隔开。<br> 5）在书写样式过程中，空格、换行等</p>
-<h2 id="内部样式表"><a href="#内部样式表" class="headerlink" title="内部样式表"></a>内部样式表</h2><pre><code>第一
+                <h1 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h1><h3 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h3><pre><code>&lt;input type=&quot;radio&quot; name=&quot;1&quot; id=&quot;man&quot;&gt;
+&lt;label for=&quot;man&quot;&gt;男&lt;/label&gt;
+这里做一个补充:id是为了点击文字也可以选中，不然就只能点击那个圈来选了
+
+回归正轨
+1.
+type=&quot;checkbox&quot;可以多选
+2.
+type=&quot;checkbox&quot; checked=&quot;checked&quot;就能变成默认选中
+3.
+disabled=&quot;disabled&quot;或者disabled可以禁用该模块
+4.
+readonly是只读不能改
+</code></pre>
+<h3 id="下拉菜单"><a href="#下拉菜单" class="headerlink" title="下拉菜单"></a>下拉菜单</h3><pre><code>&lt;body&gt;
+    &lt;select size=&quot;3&quot; multiple&gt;                              #size是一面可显示的选项  multiple是可多选
+        &lt;option value=&quot;a&quot;&gt;&lt;/option&gt;
+        &lt;option value=&quot;b&quot;&gt;&lt;/option&gt;                         #value是提供给后端使用的value值
+        &lt;option value=&quot;c&quot;&gt;&lt;/option&gt;
+        &lt;option value=&quot;d&quot; selected&gt;&lt;/option&gt;                #selected默认选中
+    &lt;/select&gt;
+&lt;/body&gt;
+</code></pre>
+<h3 id="文本域-多行文本输入框"><a href="#文本域-多行文本输入框" class="headerlink" title="文本域(多行文本输入框)"></a>文本域(多行文本输入框)</h3><pre><code>&lt;div&gt;
+    &lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;10&quot; placeholder=&quot;&quot;&gt;内容&lt;/textarea&gt;
+&lt;/div&gt;
+cols是列   
+rows是行
+placeholder是预置文本，输入就会消失
 &lt;style&gt;
-    h1&#123;color:red;&#125;
+    textarea&#123;
+        width:100px;
+        height:100px;
+        resize:vertical;
+    &#125;
 &lt;/style&gt;
-放head和body都可以
+horizontal水平可调节both都可以none不能更改
 
-第二
-&lt;body&gt;
-    &lt;h1 style=&quot;color:red;&quot; &gt;内容&lt;/h1&gt;
-&lt;/body&gt;
+注意:placeholder的默认value是两个标识符之间的，换行也会跟着换行
 </code></pre>
-<h2 id="外部样式表"><a href="#外部样式表" class="headerlink" title="外部样式表"></a>外部样式表</h2><pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; herf=&quot;css文件所在的地址&quot;&gt;       #注意是rel
+<h3 id="字段集"><a href="#字段集" class="headerlink" title="字段集"></a>字段集</h3><pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;内容1&lt;/legend&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;aaa&quot;&gt;选项1
+    &lt;input type=&quot;radio&quot; name=&quot;aaa&quot;&gt;选项2
+    &lt;legend&gt;内容2&lt;/legend&gt;
+&lt;/fieldset&gt;
+</code></pre>
+<h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><p>1.指定UTF-8<br>2.增加语义化标签(便于爬虫)<br>&nbsp;&nbsp; section,article,aside,header,footer,nav,figure,main<br>3.可以省略结束标签(最好不要)<br>4.在标签中可以使用单引号<br>5.音视频标签</p>
+<pre><code>&lt;body&gt;
+    &lt;audio src=&quot;路径&quot; cintrols&gt;&lt;/audio&gt;
+    &lt;video src=&quot;路径&quot; poster=&quot;路径&quot;&gt;&lt;/video&gt;
+&lt;/body&gt;
+
+controls 可控制
+loop 循环
+autoplay 自动播放
+muted 静音播放
+poster 海报
+注意:设置宽高要适应视频画面大小
+</code></pre>
+<h3 id="表单增强-以上传后端为例"><a href="#表单增强-以上传后端为例" class="headerlink" title="表单增强(以上传后端为例)"></a>表单增强(以上传后端为例)</h3><pre><code>一，颜色选择
+&lt;form action=&quot;action&quot;&gt;
+    &lt;input type=&quot;color&quot; name=&quot;aaa&quot; autofocus&gt;            #选择颜色，autofocus光标默认在这里
+    &lt;input type=&quot;email&quot; name=&quot;mymail&quot; required&gt;          #选择邮箱，required必填项
+    &lt;input type=&quot;url&quot; name=&quot;bbb&quot; multiple&gt;               #选择地址，multiple可选择多个地址，用逗号隔开
+    &lt;input type=&quot;tel&quot; name=&quot;ccc&quot;&gt;                        #tel只在手机端有用，显示输入页面
+    &lt;input type=&quot;range&quot; name=&quot;ddd&quot; min=&quot;100&quot; max=&quot;1000&quot; value=&quot;100&quot; step=&quot;10&quot;&gt;    #range滑块效果
+    &lt;input type=&quot;number&quot; name=&quot;eee&quot; min=&quot;0&quot; max=&quot;10&quot; value=&quot;4&quot; step=&quot;2&quot;&gt;          #选择数字，value是初始数据
+    &lt;input type=&quot;search&quot; name=&quot;fff&quot;&gt;                     #搜索框
+    &lt;input type=&quot;date&quot; name=&quot;ggg&quot;&gt;                       #选择日期，type改成month是精确到月份
+    &lt;input type=&quot;datetime-local&quot; name=&quot;hhh&quot;&gt;             #精确到秒
+&lt;/form&gt;
+注意！！！
+没有name就不能传到后端，提交了会在url上显示
+
+二，数据列表
+&lt;body&gt;
+    &lt;input type=&quot;text&quot; list=&quot;mylist&quot;&gt;              这里的list
+    &lt;datalist id=&quot;mylist&quot;&gt;                         和这里的id关联
+        &lt;option value=&quot;111111&quot;&gt;&lt;/option&gt;
+        &lt;option value=&quot;2433445&quot;&gt;&lt;/option&gt;
+        &lt;option value=&quot;333436653&quot;&gt;&lt;/option&gt;        上面输入就可以在下面显示有关的内容
+        &lt;option value=&quot;4、3、78&quot;&gt;&lt;/option&gt;
+    &lt;/datalist&gt;
+&lt;/body&gt;
+
+三，正则表达式
+在input中加入 pattern=&quot;[0-9][A-Z]&#123;3&#125;&quot;
+代表第一个要是0-9的，后面接着三个要是A-Z的
+</code></pre>
+<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><h4 id="选择器回顾-更新"><a href="#选择器回顾-更新" class="headerlink" title="选择器回顾+更新"></a>选择器回顾+更新</h4><pre><code>一，层级选择器+属性选择器
 &lt;style&gt;
-    @import url(css文件所在的地址);                                    #注意分号
+    .child+li&#123;                       #这个child后面的第一个同级的li标签改变
+        background:red;        
+    &#125;
+    .child~li&#123;                       #这个后面所有同级的li标签都改变
+        background:red;
+    &#125;
+    div[class]&#123;                      #所有div而且有class的都改变
+        background:red;
+    &#125;
+    div [class]&#123;                     #加了空格，div后代有class的都改变
+        background:red;
+    &#125;
+    div[class=box1]&#123;                 #是div而且属性是box1的才改变
+        background:red;
+    &#125;
+&lt;/style&gt;
+拓展————模糊匹配:
+class^&quot;b&quot;   以b开头的
+class$&quot;b&quot;   以b结尾的
+class*&quot;b&quot;   包含b的
+
+二，结构伪类选择器
 &lt;style&gt;
-两种，最好放head标签里
-</code></pre>
-<h2 id="扩展知识点"><a href="#扩展知识点" class="headerlink" title="扩展知识点"></a>扩展知识点</h2><p>link和import之间的区别？<br>①差别1：本质的差别：link属于XHTML标签，而@import完全是CSS提供的一种方式。<br>②差别2：加载顺序的差别：link引用的CSS会同时被加载，而@import引用的CSS会等到页面全部被下载完再被加载。所以有时候浏览@import加载 CSS的页面时开始会没有样式（就是闪烁），网速慢的时候还挺明显。<br>③差别3：兼容性的差别：@import老的浏览器不支持，而link标签无此问题。<br>样式表优先级<br>原则:就近原则————!important（放在属性值后）&gt;行内&gt;内部&gt;外部           #注意感叹号</p>
-<h3 id="标签选择器"><a href="#标签选择器" class="headerlink" title="标签选择器"></a>标签选择器</h3><p>1.class类选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        .类名1&#123;background-color:blue;&#125;                              #就近原则，离开头最近的style为准
-        .类名2&#123;background-color:red;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class=&quot;类名1 类名2&quot;&gt;222&lt;/div&gt;                              #空格可以放置多个类名
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>2.id选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        #box1&#123;background-color:yellow;&#125;
-        #box3&#123;background-color:blue;&#125;
-        #box2&#123;background-color:red;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div&gt;1111111111&lt;/div&gt;
-    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;
-    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+    ul li:first-child&#123;       #选择第一个
+        color:red;
+    &#125;
+    ul li:last-child&#123;        #最后一个
+        color:red;
+    &#125;
+    li:nth-child(odd)&#123;       #选定第几个，odd/2n+1/2n-1是奇数，2n/even是偶数
+        color:red;
+    &#125;
+    li:nth-onlychild&#123;        #匹配div下而且只有一个p的
+        color:red;
+    &#125;
+    div:empty&#123;               #匹配根元素(HTML)
+        color:red;
+    &#125;
+    :root,body&#123;              #匹配没有任何元素的，包括空格
+        color:red;
+    &#125;
+&lt;/style&gt;
 
-语法：#id名&#123;属性：属性值;&#125; 
-A）使用id选择符时，应该为每个元素定义一个id属性 如：&lt;divid=&quot;box&quot;&gt;&lt;/div&gt; 
-B）id选择符的语法格式是“#”加上自定义的id名 如：#box&#123;width:300px;height:300px;&#125; 
-C）起名时要取英文名，不能用关键字：（所有的标记和属性都是关键字） 如：head标记 
-D）一个id名称只能对应文档中一个具体的元素对象,多个时就不显示样式。（唯一性）
-</code></pre>
-<p>3.通配符选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        *&#123;
-            margin:0;      #外边距为0
-            padding:0;     #内边距为0
-        &#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div&gt;1111111111&lt;/div&gt;
-    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;
-    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-语法：*&#123;属性:属性值;&#125; 
-说明：通配选择符的写法是“*”，其含义就是所有元素。 
-*&#123;margin:0;padding:0;&#125;代表清除所有元素的默认边距值和填充值
-</code></pre>
-<p>4.群组与后代选择器</p>
-<pre><code>    &lt;style&gt;
-        标签们或者class内的类名们&#123;background-color:yellow&#125;      #标签们之间要加逗号，而且类名前要加.
-    &lt;/style&gt;
+三，目标伪类选择器
+div.&#123;                        #先让全部使用一个style
+    display:none;
+&#125;
+div.:target&#123;                 #再让点到的目标换成指定的style
+    display:block;
+&#125;
 
-若之间不加逗号则是后代选择器，仅更改空格代表的后代
-#从右到左地选择
-</code></pre>
-<p>5.伪类选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        a:link&#123;color:yellow;&#125;
-        a:visited&#123;color:red;&#125;
-        a:hover&#123;color:orange;&#125;
-        a:active&#123;color:blue;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;a herf=&quot;超链接&quot;&gt;
-        内容
-    &lt;/a&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+四，UI状态伪类选择器
+input:checked&#123;               #匹配选择的
+    background:red;  
+&#125;
+        input:focus&#123;         #匹配手动focus的
+    background:red;
+&#125;
 
-语法： 
-a：link&#123;属性：属性值;&#125;超链接的初始状态 
-a.visited(属性：属性值;&#125;超链接被访问后的状态 
-a:hovert&#123;属性：属性值;&#125;鼠标悬停的状态 
-a:active&#123;属性：属性值;&#125;超链接被激活时的状态
-说明： 
-A）顺序为： a:link,a:visited,a:hover,a:active,错误的顺序有时会使超链接的样式失效 
-B）为了简化代码，可以把伪类选择符中相同的声明提出来放在a选择符中； 例如：a&#123;color:red;&#125;a:hover&#123;color:green;&#125;表示超链接的初始和访问过后的状态一样，鼠标划过的状态和点击时的状态一样。
+四，否定伪类选择器
+li:not(:nth-child(2n+1))&#123;    #匹配所有不匹配的
+    color:red;
+&#125;
+其它:
+X:link  链接伪类选择器，超链接未被访问过的
+X:visited  链接伪类选择器，超链接被访问过的
+X:active  用户行为选择器，被激活的(常用于链接)
+X:hover  用户行为选择器，停留在上方的
 </code></pre>
-<p>6.选择器的权重<br>!important&gt;内联样式&gt;包含选择符&gt;id选择器&gt;class选择器&gt;类型（元素）选择器<br>有冲突时高权重覆盖低权重<br>相同权重就近原则（哪个先被定义）</p>
-<h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>渔夫出海前，并不知道鱼在哪里。可他们还是选择了出发，因为他们相信，自己一定会满载而归。人生很多时候，是因为选择了才有机会，相信了才有可能。————稻盛和夫</p>
+<h3 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h3><pre><code>文本阴影
+div&#123;
+    text-shadow:10px -10px 1px red;     #水平方向，垂直方向，模糊程度，阴影颜色
+&#125;
+如果要多个阴影，在颜色后面加逗号之后再加上另一个的参数，分号不要漏!!!
+
+盒子阴影
+div&#123;
+    width:100px;
+    ...
+    box-shadow: 10px(水平) 10px(垂直) 1px(模糊程度) 10px(阴影大小) red inside(内阴影);
+&#125;
+</code></pre>
+<h3 id="圆角边框-放在style里"><a href="#圆角边框-放在style里" class="headerlink" title="圆角边框(放在style里)"></a>圆角边框(放在style里)</h3><p>同时设置四个角:<br>border-radius:10px;<br>1.从四个角往内截10px(可以使用百分比)<br>2.设置一个值，四个角一样<br>3.设置两个值，左上右下——&gt;左下右上<br>4.设置三个值，左上——&gt;左下右上——&gt;右下<br>5.设置四个值，左上开始顺时针</p>
+<p>设置单个角:<br>boder-top-left-radius:10px;<br>boder-top-right-radius:10px;<br>boder-bottom-left-radius:10px;<br>boder-bottom-right-radius:10px;</p>
+<p>border-radius:10px/20px;<br>水平/垂直切割，只支持boder-radius</p>
+<h3 id="字体引入"><a href="#字体引入" class="headerlink" title="字体引入"></a>字体引入</h3><pre><code>&lt;style&gt;
+    @font-family:kerwin;                   #字体名字
+    src:url(font/STHUPO.TTF);              #字体文件路径
+    div&#123;
+        font-family:kerwin;                #字体名字
+        font-size:50px;       
+        color:red;
+        text-shadow:5px 0px 0px green;
+    &#125;
+&lt;/style&gt;
+</code></pre>
+<h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><h4 id="怪异盒模型"><a href="#怪异盒模型" class="headerlink" title="怪异盒模型"></a>怪异盒模型</h4><p>box-sizing: content-box;      #普通盒模型，增加padding时会扩张box<br>box-sizing: border-box;       #怪异盒模型，增加时不会撑大</p>
+<h4 id="弹性盒模型-能够适应页面"><a href="#弹性盒模型-能够适应页面" class="headerlink" title="弹性盒模型(能够适应页面)"></a>弹性盒模型(能够适应页面)</h4><p>display:flex;<br>1.默认横向排列，不是浮动。<br>2.行内元素变为块级元素。<br>3.margin:auto;自动居中<br>4.flex-direction: column;<br>5.column主轴列向排列，row纵向排列;column-reverse；纵向倒序排列，row-reverse横向倒序排列<br>6.justify-content:flex-end;主轴位置<br>align-items:center;侧轴位置<br>7.flex-start靠左对齐;flex-end靠右对齐;center靠中对齐;space-around环绕;space-between两端对齐</p>
+<h4 id="折行与行间距"><a href="#折行与行间距" class="headerlink" title="折行与行间距"></a>折行与行间距</h4><p>flex-wrap:wrap;                #打开折行<br>align-content:flex-start;      #折行之后的行间距<br>flex-start,flex-end,center,space-around,space-between同上</p>
+<h2 id="至此，HTML与CSS结束！"><a href="#至此，HTML与CSS结束！" class="headerlink" title="至此，HTML与CSS结束！"></a>至此，HTML与CSS结束！</h2><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句:"></a>每日一句:</h5><p>&nbsp;&nbsp;每一个问题都想给出回答，也有一些想说的，想劝的，想帮的，但想到自己的生活也是一地鸡毛。<br>「我们每个人都把自己活得一团糟，却总以为可以指导别人过得更好。」<br>&nbsp;&nbsp;但说回来还是一句用烦了的话，提升自己是解决一切问题的方式，亲情爱情友情都是，在现在这个世界里，经济独立财富自由能解决百分之九十的烦恼，很现实也很真实，我文化不高总觉得词不达意，慢慢来捱过去总会越来越好的，到达谷底的人怎么走都是向上的</p>
 
                 
             </div>
@@ -733,13 +796,13 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="../../12/b-7/">
+                <a href="../b-13/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/18.jpg" class="responsive-img" alt="20221012">
+                        <img src="../../../../medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">20221012</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -750,14 +813,14 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-12
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-31
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
+                            <a href="../../../../categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
                                 </a>
                             
                             
@@ -767,8 +830,8 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                        <span class="chip bg-color">日报</span>
+                    <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
+                        <span class="chip bg-color">随笔</span>
                     </a>
                     
                 </div>
@@ -782,13 +845,13 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../07/b-3/">
+                <a href="../../20/b-12/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/20.jpg" class="responsive-img" alt="20221007">
+                        <img src="../../../../medias/featureimages/13.jpg" class="responsive-img" alt="20221020">
                         
-                        <span class="card-title">20221007</span>
+                        <span class="card-title">20221020</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -799,7 +862,7 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-20
                             </span>
                         <span class="publish-author">
                             
