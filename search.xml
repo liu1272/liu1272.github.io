@@ -5,6 +5,31 @@
     
     <entry>
       <title></title>
+      <link href="/2022/11/02/b-16/"/>
+      <url>/2022/11/02/b-16/</url>
+      
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="条件分支"><a href="#条件分支" class="headerlink" title="条件分支"></a>条件分支</h4><h5 id="一，if"><a href="#一，if" class="headerlink" title="一，if"></a>一，if</h5><p>括号里的条件表达式计算结果是 true，就会执行对应的代码块<br>如果有多个语句要执行，我们必须将要执行的代码块封装在大括号内</p><h5 id="二，布尔转换"><a href="#二，布尔转换" class="headerlink" title="二，布尔转换"></a>二，布尔转换</h5><p>if语句会计算圆括号内的表达式，并将计算结果转换为布尔型<br>数字0、空字符串””、null、undefined和NaN都会被转换成false。因为它们被称为“假值（falsy）”。<br>其他值被转换为 true，所以它们被称为“真值（truthy）”。</p><h5 id="三，else"><a href="#三，else" class="headerlink" title="三，else"></a>三，else</h5><p>if 语句判断条件不成立，就会执行它内部的代码</p><h5 id="四，多个条件"><a href="#四，多个条件" class="headerlink" title="四，多个条件"></a>四，多个条件</h5><pre><code>let year = prompt(&#39;提示语&#39;, &#39;&#39;);            #设置变量并赋值                                            #prompt相当于inputif (year &lt; 2015) &#123;                          #判断条件  alert( &#39;Too early...&#39; );                  #成立就执行alert，相当于print&#125; else if (year &gt; 2015) &#123;                   #另一个条件判断  alert( &#39;Too late&#39; );&#125; else &#123;                                    #若上面的条件都不满足  alert( &#39;Exactly!&#39; );&#125;                                           #大括号要把整个if语句的执行部分都包含起来</code></pre><h5 id="五，条件运算符"><a href="#五，条件运算符" class="headerlink" title="五，条件运算符?"></a>五，条件运算符?</h5><p>(有时被称为三元运算符,因为该运算符中有三个操作数,它是 JavaScript 中唯一一个有这么多操作数的运算符)<br>根据一个条件去赋值一个变量</p><pre><code>let result = condition ? value1 : value2;计算条件结果，如果结果为真，则返回 value1，否则返回 value2。condition(条件判断)尽量用括号包起来注意空格</code></pre><h5 id="六，多个"><a href="#六，多个" class="headerlink" title="六，多个?"></a>六，多个?</h5><pre><code>let age = prompt(&#39;age?&#39;, 18);let message = (age &lt; 3) ? &#39;Hi, baby!&#39; :  (age &lt; 18) ? &#39;Hello!&#39; :  (age &lt; 100) ? &#39;Greetings!&#39; :  &#39;What an unusual age!&#39;;alert( message );相当于if (age &lt; 3) &#123;  message = &#39;Hi, baby!&#39;;&#125; else if (age &lt; 18) &#123;  message = &#39;Hello!&#39;;&#125; else if (age &lt; 100) &#123;  message = &#39;Greetings!&#39;;&#125; else &#123;  message = &#39;What an unusual age!&#39;;&#125;</code></pre><h5 id="七，-的非常规使用"><a href="#七，-的非常规使用" class="headerlink" title="七，?的非常规使用"></a>七，?的非常规使用</h5><pre><code>有时可以使用问号 ? 来代替 if 语句：let company = prompt(&#39;Which company created JavaScript?&#39;, &#39;&#39;);(company == &#39;Netscape&#39;) ?   alert(&#39;Right!&#39;) : alert(&#39;Wrong.&#39;);注意缩进</code></pre><h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><h5 id="（或）"><a href="#（或）" class="headerlink" title="||（或）"></a>||（或）</h5><p>任意一个参数为 true，返回的结果就为 true，否则返回 false<br>如果操作数不是布尔值，那么它将会被转化为布尔值来参与运算<br>例如 1 被作为 true 处理， 0 则被作为 false</p><h5 id="amp-amp-（与）"><a href="#amp-amp-（与）" class="headerlink" title="&amp;&amp;（与）"></a>&amp;&amp;（与）</h5><p>两个操作数都是真值时，与运算返回 true，否则返回 false<br>函数 alert 返回了 undefined,所以会运算并输出alert然后停止</p><h5 id="（非）"><a href="#（非）" class="headerlink" title="!（非）"></a>!（非）</h5><p>将操作数转化为布尔类型：true/false<br>返回相反的值<br>!! 有时候用来将某个值转化为布尔类型<br>(第一个非运算将该值转化为布尔类型并取反，第二个非运算再次取反。就得到了布尔值的转化)</p><h5 id="（空值合并运算符）"><a href="#（空值合并运算符）" class="headerlink" title="??（空值合并运算符）"></a>??（空值合并运算符）</h5><p>a ?? b 的结果是：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个参数不是 null/undefined，则返回第一个参数，否则返回第二个参数</p><h5 id="拓展用法"><a href="#拓展用法" class="headerlink" title="拓展用法:"></a>拓展用法:</h5><p>||寻找第一个真值,&amp;&amp;寻找第一个假值</p><p>原理:一个或运算 || 的链，将返回第一个真值，如果不存在真值，就返回该链的最后一个值<br>运用:(a)获取变量列表或者表达式中的第一个真值<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(b)短路求值<br>注意:  &amp;&amp; 的优先级比或 || 要高<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不要用 || 或 &amp;&amp; 来取代 if<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;非运算符 ! 的优先级在所有逻辑运算符里面最高<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?? 运算符的优先级与 || 相同<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||返回第一个真值<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;??返回第一个已定义的值</p><h4 id="请加上括号！！！"><a href="#请加上括号！！！" class="headerlink" title="请加上括号！！！"></a>请加上括号！！！</h4><h3 id="训练-登录校验"><a href="#训练-登录校验" class="headerlink" title="训练(登录校验)"></a>训练(登录校验)</h3><pre><code>let firstName = null;let lastName = null;let nickName = &quot;Supercoder&quot;;// 显示第一个已定义的值：alert(firstName ?? lastName ?? nickName ?? &quot;匿名&quot;);let userName = prompt(&quot;Who&#39;s there?&quot;, &#39;&#39;);if (userName === &#39;Admin&#39;) &#123;  let pass = prompt(&#39;Password?&#39;, &#39;&#39;);  if (pass === &#39;TheMaster&#39;) &#123;    alert( &#39;Welcome!&#39; );  &#125; else if (pass === &#39;&#39; || pass === null) &#123;    alert( &#39;Canceled&#39; );  &#125; else &#123;    alert( &#39;Wrong password&#39; );  &#125;&#125; else if (userName === &#39;&#39; || userName === null) &#123;  alert( &#39;Canceled&#39; );&#125; else &#123;  alert( &quot;I don&#39;t know you&quot; );&#125;</code></pre><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。"><a href="#人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。" class="headerlink" title="人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。"></a>人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。</h5>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
       <link href="/2022/11/01/b-15/"/>
       <url>/2022/11/01/b-15/</url>
       
