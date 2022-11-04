@@ -385,6 +385,15 @@ while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔�
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                日报
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -406,7 +415,7 @@ while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔�
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.5k
                 </div>
                 
 
@@ -455,8 +464,8 @@ condition判断条件
 body条件为真时，重复运行
 step每次循环体迭代后执行
 </code></pre>
-<p>内联变量声明:<br><br/>&emsp;&emsp;函数在执行时，会先在自己的函数体里查询变量，如果没有，才会一级一级往上查找。函数show()在执行时，输出第一个变量a是undefined是因为它现在自己的执行环境里查询到变量a已声明，即变量提升（即变量可以提前声明但是赋值是不可以的），此时就输出了undefined。<br><br/>&emsp;&emsp;因此会出现变量污染现象<br><br/>省略语句段:<br><br/>&emsp;&emsp;不需要做任何事的部分，就可以省略 begin 语句段<br><br/>&emsp;&emsp;注意for的两个;必须存在</p>
-<h5 id="break与continue"><a href="#break与continue" class="headerlink" title="break与continue"></a>break与continue</h5><p><br/>一，普通<br><br/>用法与python一样<br><br/>但是，禁止break/continue在‘?’的右边<br><br/>所以，不建议使用?代替if语句<br><br/>二，进阶</p>
+<p>内联变量声明:<br>&emsp;&emsp;函数在执行时，会先在自己的函数体里查询变量，如果没有，才会一级一级往上查找。函数show()在执行时，输出第一个变量a是undefined是因为它现在自己的执行环境里查询到变量a已声明，即变量提升（即变量可以提前声明但是赋值是不可以的），此时就输出了undefined。<br>&emsp;&emsp;因此会出现变量污染现象<br>省略语句段:<br>&emsp;&emsp;不需要做任何事的部分，就可以省略 begin 语句段<br>&emsp;&emsp;注意for的两个;必须存在</p>
+<h5 id="break与continue"><a href="#break与continue" class="headerlink" title="break与continue"></a>break与continue</h5><p>一，普通<br>用法与python一样<br>但是，禁止break/continue在‘?’的右边<br>所以，不建议使用?代替if语句<br>二，进阶</p>
 <pre><code>标签(在循环之前带有冒号的标识符)
 break &lt;labelName&gt; 语句跳出循环至标签labelName:处
 continue &lt;labelName&gt; 语句执行跳转到标记循环的下一次迭代
@@ -488,7 +497,8 @@ case 5:
   alert(&quot;Why don&#39;t you take a math class?&quot;);
   break;
 </code></pre>
-<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><pre><code>function name(parameter1, parameter2, ... parameterN) &#123;
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>在 JavaScript 中，函数不是“神奇的语言结构”，而是一种特殊的值<br>创建函数的三种方法:函数声明，函数表达式，箭头函数</p>
+<pre><code>function name(parameter1, parameter2, ... parameterN) &#123;
   ...body...
 &#125;
 name();
@@ -546,8 +556,8 @@ alert( doNothing());
 空值的 return 和 return undefined 等效
 如果想要将返回的表达式写成跨多行的形式，那么应该在return的同一行开始写此表达式(比如先写个括号)
 </code></pre>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><br/>作为参数传递给函数的值，会被复制到函数的局部变量。<br><br/>函数可以访问外部变量。但它只能从内到外起作用。函数外部的代码看不到函数内的局部变量。<br><br/>函数可以返回值。如果没有返回值，则其返回的结果是 undefined。<br><br/>为了使代码简洁易懂，建议在函数中主要使用局部变量和参数，而不是外部变量<br><br/>获取参数、使用参数并返回结果的函数更容易理解。<br><br/>一个好的函数名能够让我们马上知道这个函数的功能是什么，会返回什么。<br><br/>一个单独的函数不仅更容易测试和调试 —— 它的存在本身就是一个很好的注释！</p>
-<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>一月添香<br><br/>二月夜未央<br><br/>三月情诗慌张<br><br/>四月对镜补红妆<br><br/>五月相携游马十方<br><br/>六月日日笙歌抛流光<br><br/>七月为卿斟唱曲水流觞<br><br/>八月年华辗转处陌上成双<br><br/>九月田中百花争艳怜意满腔<br><br/>十月眠里光阴归去思念倾满江<br><br/>十一月冬雷阵阵我笑悲歌不恸上苍<br><br/>十二月天寒地冻凭楼伫等把痴梦熬荒<br><br/>可叹，人间再无双</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>作为参数传递给函数的值，会被复制到函数的局部变量。<br>函数可以访问外部变量。但它只能从内到外起作用。函数外部的代码看不到函数内的局部变量。<br>函数可以返回值。如果没有返回值，则其返回的结果是 undefined。<br>为了使代码简洁易懂，建议在函数中主要使用局部变量和参数，而不是外部变量<br>获取参数、使用参数并返回结果的函数更容易理解。<br>一个好的函数名能够让我们马上知道这个函数的功能是什么，会返回什么。<br>一个单独的函数不仅更容易测试和调试 —— 它的存在本身就是一个很好的注释！</p>
+<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>一月添香<br>二月夜未央<br>三月情诗慌张<br>四月对镜补红妆<br>五月相携游马十方<br>六月日日笙歌抛流光<br>七月为卿斟唱曲水流觞<br>八月年华辗转处陌上成双<br>九月田中百花争艳怜意满腔<br>十月眠里光阴归去思念倾满江<br>十一月冬雷阵阵我笑悲歌不恸上苍<br>十二月天寒地冻凭楼伫等把痴梦熬荒<br>可叹，人间再无双</p>
 
                 
             </div>
@@ -711,18 +721,17 @@ alert( doNothing());
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="">
+                <a href="../../04/20221104/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/23.jpg" class="responsive-img" alt="20221103">
+                        <img src="../../../../medias/featureimages/22.jpg" class="responsive-img" alt="20221104">
                         
-                        <span class="card-title">20221103</span>
+                        <span class="card-title">20221104</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -732,18 +741,21 @@ alert( doNothing());
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-03
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-04
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            liuGuobin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -918,7 +930,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">17.3k</span>
+                        class="white-color">18.7k</span>
             
             
             
