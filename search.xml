@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>20221108</title>
+      <link href="/2022/11/08/20221108/"/>
+      <url>/2022/11/08/20221108/</url>
+      
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>数组（Array）能存储有序的集合</p><p>声明:</p><pre><code>let arr = new Array();let fruits = [&quot;Apple&quot;, &quot;Orange&quot;, &quot;Plum&quot;];重新定义就能更改value增加array只需要定义新位置fruits.length是元素的个数以逗号结尾</code></pre><p>查找:<br>fruits[fruits.length - 1]&lt;因为方括号中的索引是被按照其字面意思处理的&gt;<br>fruits.at(-1)<br>不能用fruits[-1]查找元素,结果是 undefined</p><p>更改:<br>push 在末端添加一个元素<br>pop 从末端取出并删除一个元素<br>unshift 在数组的首端添加元素<br>shift 取出队列首端的一个元素，整个队列往前移，这样原先排第二的元素现在排在了第一个<br>(push 和 unshift 方法都可以一次添加多个元素)<br>push/pop 方法运行的比较快，而 shift/unshift 比较慢</p><p>slice:<br>arr.slice([start], [end])<br>返回一个新数组，将所有从索引 start 到 end（不包括 end）的数组项复制到一个新的数组。start 和 end 都可以是负数，在这种情况下，从末尾计算索引</p><p>splice:<br>arr.splice(start[, deleteCount, elem1, …, elemN])<br>从索引 start 开始修改 arr：删除 deleteCount 个元素并在当前位置插入 elem1, …, elemN。最后返回被删除的元素所组成的数组</p><p>concat:<br>arr.concat(arg1, arg2…)<br>创建一个包含来自于 arr，然后是 arg1，arg2 的元素的新数组。<br>如果参数 argN 是一个数组，那么其中的所有元素都会被复制。否则，将复制参数本身。<br>如果类数组对象具有 Symbol.isConcatSpreadable 属性，那么它的元素就会被添加</p><p>遍历:<br>for..of 不能获取当前元素的索引，只是获取元素值<br>for..in 会遍历所有属性，不仅仅是数字属性，而且不适用于数组，因此速度要慢<br>forEach 允许为数组的每个元素都运行一个函数</p><p>关于 “length”:<br>不是数组里元素的个数，而是最大的数字索引值加一<br>通过减少length来截断数组，但length恢复后数组不会恢复<br>清空数组最简单的方法就是：arr.length = 0;</p><p>new Array():<br>创建一个指定了长度，却没有任何项的数组</p><p>多维数组:<br>matrix[1][1]最中间的那个数</p><p>toString:<br>返回以逗号隔开的元素列表</p><p>使用 == 比较数组:<br>1.仅当两个对象引用的是同一个对象时，它们才相等 ==<br>2.如果 == 左右两个参数之中有一个参数是对象，另一个参数是原始类型，那么该对象将会被转换为原始类型<br>3.……null 和 undefined 相等 ==，且各自不等于任何其他的值</p><p>在数组中搜索:<br>arr.indexOf(item, from);<br>从索引 from 开始搜索 item，如果找到则返回索引，否则返回 -1。<br>arr.includes(item, from);<br>从索引 from 开始搜索 item，如果找到则返回 true（没找到则返回 false）。<br>alert( fruits.lastIndexOf(‘Apple’) );<br>与 indexOf 相同，但从右向左查找<br>arr.find(function(item, index, array);<br>item 是元素。index 是它的索引。array 是数组本身。<br>如果返回 true，则返回 item 并停止迭代;对于假值，则返回 undefined<br>arr.filter(function(item, index, array);<br>如果 true item 被 push 到 results，迭代继续;如果什么都没找到，则返回空数组<br>indexOf 和 includes 使用严格相等 === 进行比较。所以，搜索 false时会准确找到 false 而不是数字 0<br>includes可以正确处理 NaN</p><p>转换数组:<br>arr.map(function(item, index, array)<br>对数组的每个元素都调用函数，并返回结果数组<br>arr.sort();<br>默认情况下被按字符串进行排序<br>arr.sort(compareNumeric);<br>按数字进行排序<br>arr.reverse();<br>倒序</p><p>分割粘合数组:<br>let arr = names.split(‘, ‘,2);<br>将字符串分割成一个个数组,限制数组长度为2,额外的元素会被忽略<br>str.split(‘’);<br>将字符串拆分为字母数组<br>arr.join(‘;’);<br>根据;粘合数组</p><p>从数组中区分出普通对象:<br>Array.isArray({})<br>如果 value 是一个数组，则返回 true；否则返回 false。</p><h4 id="Iterable-object（可迭代对象）"><a href="#Iterable-object（可迭代对象）" class="headerlink" title="Iterable object（可迭代对象）"></a>Iterable object（可迭代对象）</h4><p>可以应用 for..of 的对象被称为 可迭代的。<br>技术上来说，可迭代对象必须实现 Symbol.iterator 方法。<br>obj[Symbol.iterator].() 的结果被称为迭代器（iterator）。由它处理进一步的迭代过程。<br>一个迭代器必须有 next() 方法，它返回一个 {done: Boolean, value: any} 对象，这里 done:true 表明迭代结束，否则 value 就是下一个值。<br>Symbol.iterator 方法会被 for..of 自动调用，但我们也可以直接调用它。<br>内建的可迭代对象例如字符串和数组，都实现了 Symbol.iterator。<br>字符串迭代器能够识别代理对。<br>有索引属性和 length 属性的对象被称为 类数组对象。这种对象可能还具有其他属性和方法，但是没有数组的内建方法。<br>如果我们仔细研究一下规范 —— 就会发现大多数内建方法都假设它们需要处理的是可迭代对象或者类数组对象，而不是“真正的”数组，因为这样抽象度更高。<br>Array.from(obj[, mapFn, thisArg]) 将可迭代对象或类数组对象 obj 转化为真正的数组 Array，然后我们就可以对它应用数组的方法。可选参数 mapFn 和 thisArg 允许我们将函数应用到每个元素。</p><h4 id="Map-and-Set（映射和集合）"><a href="#Map-and-Set（映射和集合）" class="headerlink" title="Map and Set（映射和集合）"></a>Map and Set（映射和集合）</h4><p>Map 是一个带键的数据项的集合，就像一个 Object 一样。 但是它们最大的差别是 Map 允许任何类型的键（key）。</p><pre><code>Mapnew Map() —— 创建 map。map.set(key, value) —— 根据键存储值。map.get(key) —— 根据键来返回值，如果 map 中不存在对应的 key，则返回 undefined。map.has(key) —— 如果 key 存在则返回 true，否则返回 false。map.delete(key) —— 删除指定键的值。map.clear() —— 清空 map。map.size —— 返回当前元素个数。Map 迭代map.keys() —— 遍历并返回一个包含所有键的可迭代对象，map.values() —— 遍历并返回一个包含所有值的可迭代对象，map.entries() —— 遍历并返回一个包含所有实体 [key, value] 的可迭代对象，for..of 在默认情况下使用的就是这个。</code></pre><p>Object.entries：从对象创建 Map<br>let map = new Map(Object.entries(obj));<br>Object.fromEntries：从 Map 创建对象<br>let obj = Object.fromEntries(map.entries()); // 创建一个普通对象（plain object）(*)</p><pre><code>Setnew Set(iterable) —— 创建一个 set，如果提供了一个 iterable 对象（通常是数组），将会从数组里面复制值到 set 中。set.add(value) —— 添加一个值，返回 set 本身set.delete(value) —— 删除值，如果 value 在这个方法调用的时候存在则返回 true ，否则返回 false。set.has(value) —— 如果 value 在 set 中，返回 true，否则返回 false。set.clear() —— 清空 set。set.size —— 返回元素个数。Set 迭代（iteration）set.keys() —— 遍历并返回一个包含所有值的可迭代对象，set.values() —— 与 set.keys() 作用相同，这是为了兼容 Map，set.entries() —— 遍历并返回一个包含所有的实体 [value, value] 的可迭代对象，它的存在也是为了兼容 Map。</code></pre><h4 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h4><p>WeakMap 是类似于 Map 的集合，它仅允许对象作为键，并且一旦通过其他方式无法访问这些对象，垃圾回收便会将这些对象与其关联值一同删除。</p><p>WeakSet 是类似于 Set 的集合，它仅存储对象，并且一旦通过其他方式无法访问这些对象，垃圾回收便会将这些对象删除。</p><p>它们的主要优点是它们对对象是弱引用，所以被它们引用的对象很容易地被垃圾收集器移除。</p><p>这是以不支持 clear、size、keys、values 等作为代价换来的……</p><p>WeakMap 和 WeakSet 被用作“主要”对象存储之外的“辅助”数据结构。一旦将对象从主存储器中删除，如果该对象仅被用作 WeakMap 或 WeakSet 的键，那么该对象将被自动清除。</p><h4 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h4><p>JSON 是一种数据格式，具有自己的独立标准和大多数编程语言的库。<br>JSON 支持 object，array，string，number，boolean 和 null。<br>JavaScript 提供序列化（serialize）成 JSON 的方法 JSON.stringify 和解析 JSON 的方法 JSON.parse。<br>这两种方法都支持用于智能读/写的转换函数。<br>如果一个对象具有 toJSON，那么它会被 JSON.stringify 调用。</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="今天就想说一句-我这是学js上头了嘛，为啥学这么细……"><a href="#今天就想说一句-我这是学js上头了嘛，为啥学这么细……" class="headerlink" title="今天就想说一句:我这是学js上头了嘛，为啥学这么细……"></a>今天就想说一句:我这是学js上头了嘛，为啥学这么细……</h5>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>20221107</title>
       <link href="/2022/11/07/20221107/"/>
       <url>/2022/11/07/20221107/</url>
