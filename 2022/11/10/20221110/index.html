@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="20221008和09, Robin">
-    <meta name="description" content="每日一记CSS1.含义:如何修饰网页信息的显示样式2.语法 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。 2）属性必须放在花括号中，属性与属性值用冒号连接。 3）每条声明用分号结束。 4）当一个属性有多个属性值的">
+    <meta name="keywords" content="20221110, Robin">
+    <meta name="description" content="每日一记开始学习PHP基本概念PHP是超文本预处理器运行在服务器端，内嵌在html脚本语言由wampserver等集成环境，有mysql数据库和apache服务使用localhost或127.0.0.1访问写入的php文件一定要放在www目">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>20221008和09 | Robin</title>
+    <title>20221110 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -343,12 +343,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">20221008和09</h1>
+                    <h1 class="description center-align post-title">20221110</h1>
                 </div>
             </div>
         </div>
@@ -379,15 +379,6 @@
                 </div>
                 <div class="col s5 right-align">
                     
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                日报
-                            </a>
-                        
-                    </div>
-                    
                 </div>
             </div>
 
@@ -395,28 +386,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-10-09
+                    2022-11-10
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-10-10
+                    2022-11-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    4 分
                 </div>
                 
 
@@ -436,136 +427,167 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>1.含义:如何修饰网页信息的显示样式<br>2.语法<br> 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。<br> 2）属性必须放在花括号中，属性与属性值用冒号连接。<br> 3）每条声明用分号结束。<br> 4）当一个属性有多个属性值的时候，属性值与属性值不分先后顺序，用空格隔开。<br> 5）在书写样式过程中，空格、换行等</p>
-<h2 id="内部样式表"><a href="#内部样式表" class="headerlink" title="内部样式表"></a>内部样式表</h2><pre><code>第一
-&lt;style&gt;
-    h1&#123;color:red;&#125;
-&lt;/style&gt;
-放head和body都可以
+                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h5 id="开始学习PHP"><a href="#开始学习PHP" class="headerlink" title="开始学习PHP"></a>开始学习PHP</h5><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>PHP是超文本预处理器<br>运行在服务器端，内嵌在html脚本语言<br>由wampserver等集成环境，有mysql数据库和apache服务<br>使用localhost或127.0.0.1访问<br>写入的php文件一定要放在www目录下</p>
+<h4 id="php信息"><a href="#php信息" class="headerlink" title="php信息"></a>php信息</h4><p>phpinfo();显示所有php的信息<br>php.ini配置文件</p>
+<h4 id="PHP文件格式"><a href="#PHP文件格式" class="headerlink" title="PHP文件格式"></a>PHP文件格式</h4><pre><code>&lt;?php              //大小写都可以
+代码部分
+除最后一行以外每行结尾都要以;结尾
+?&gt;
 
-第二
-&lt;body&gt;
-    &lt;h1 style=&quot;color:red;&quot; &gt;内容&lt;/h1&gt;
-&lt;/body&gt;
+可以不写php但是要改ini配置文件的short_open_tag=On,要重启
 </code></pre>
-<h2 id="外部样式表"><a href="#外部样式表" class="headerlink" title="外部样式表"></a>外部样式表</h2><pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; herf=&quot;css文件所在的地址&quot;&gt;       #注意是rel
-&lt;style&gt;
-    @import url(css文件所在的地址);                                    #注意分号
-&lt;style&gt;
-两种，最好放head标签里
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>$变量名(不能是数字或特殊符号开头，可以是中文，建议驼峰命名法)=’value’;<br>echo “$变量名”;        //输出上面传入的值</p>
+<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><pre><code>单引号:不解析变量
+双引号:解释变量
+尽量使用单引号————效率高
+//单行注释
+/* */多行注释
+&quot;\n&quot;换行(双引号解释转义字符，单引号不解释)
+\r和\t同上
+&#39;\\&#39;时输出\
+&#39;\&#39;&#39;时输出&#39;
+因为\将后面的转义成没意义的字符
+变量和字符串之间用.连接，而且要&#39;将字符串包起来
+双引号中插入单引号，单引号再插入变量时，变量会解析成&#39;value&#39;
+双引号中插入变量时在变量后面加空格或,
+echo __FILE__;输出文件地址
+echo __LINE__;输出行号
+echo __DIR__;输出当前文件的文件夹的路径
+echo PHP_VERSION;获取php版本号
+echo __FUNCTION__;输出函数名
+false的情况:空字符串，0，空数组，null
 </code></pre>
-<h2 id="扩展知识点"><a href="#扩展知识点" class="headerlink" title="扩展知识点"></a>扩展知识点</h2><p>link和import之间的区别？<br>①差别1：本质的差别：link属于XHTML标签，而@import完全是CSS提供的一种方式。<br>②差别2：加载顺序的差别：link引用的CSS会同时被加载，而@import引用的CSS会等到页面全部被下载完再被加载。所以有时候浏览@import加载 CSS的页面时开始会没有样式（就是闪烁），网速慢的时候还挺明显。<br>③差别3：兼容性的差别：@import老的浏览器不支持，而link标签无此问题。<br>样式表优先级<br>原则:就近原则————!important（放在属性值后）&gt;行内&gt;内部&gt;外部           #注意感叹号</p>
-<h3 id="标签选择器"><a href="#标签选择器" class="headerlink" title="标签选择器"></a>标签选择器</h3><p>1.class类选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        .类名1&#123;background-color:blue;&#125;                              #就近原则，离开头最近的style为准
-        .类名2&#123;background-color:red;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class=&quot;类名1 类名2&quot;&gt;222&lt;/div&gt;                              #空格可以放置多个类名
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>2.id选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        #box1&#123;background-color:yellow;&#125;
-        #box3&#123;background-color:blue;&#125;
-        #box2&#123;background-color:red;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div&gt;1111111111&lt;/div&gt;
-    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;
-    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><pre><code>&lt;分类&gt;
+标量
+    浮点类型:float
+    整数型:int
+    布尔型:boolean
+    字符串:string(只要是引号包起来的)
+混合类型
+    数组:array
+    对象:object
+特殊类型
+    空:null 
+    资源:resourse
+    
+&lt;转换&gt;
+intval()转整形
+floatval()转浮点型
+strval()转字符串
+boolval()转布尔型
 
-语法：#id名&#123;属性：属性值;&#125; 
-A）使用id选择符时，应该为每个元素定义一个id属性 如：&lt;divid=&quot;box&quot;&gt;&lt;/div&gt; 
-B）id选择符的语法格式是“#”加上自定义的id名 如：#box&#123;width:300px;height:300px;&#125; 
-C）起名时要取英文名，不能用关键字：（所有的标记和属性都是关键字） 如：head标记 
-D）一个id名称只能对应文档中一个具体的元素对象,多个时就不显示样式。（唯一性）
-</code></pre>
-<p>3.通配符选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        *&#123;
-            margin:0;      #外边距为0
-            padding:0;     #内边距为0
-        &#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div&gt;1111111111&lt;/div&gt;
-    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;
-    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-语法：*&#123;属性:属性值;&#125; 
-说明：通配选择符的写法是“*”，其含义就是所有元素。 
-*&#123;margin:0;padding:0;&#125;代表清除所有元素的默认边距值和填充值
-</code></pre>
-<p>4.群组与后代选择器</p>
-<pre><code>    &lt;style&gt;
-        标签们或者class内的类名们&#123;background-color:yellow&#125;      #标签们之间要加逗号，而且类名前要加.
-    &lt;/style&gt;
+&lt;注&gt;
+空转整形为0
+空转浮点型变成浮点型的0
+空转字符串变成空字符串
+整形后面有字符串会清除字符串保留前面的数字
+浮点型后面有字符串会清除字符串保留前面的全部数字
 
-若之间不加逗号则是后代选择器，仅更改空格代表的后代
-#从右到左地选择
+&lt;判断&gt;
+is_array();
+is_string()
+is_bool();
+is_float();
+is_int();
+is_object();
+is_numeric();
+is_resource();
+is_null();
+is_scalar();判断标量
+gettype();只获取类型
+var_dump();输出值和类型
 </code></pre>
-<p>5.伪类选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        a:link&#123;color:yellow;&#125;
-        a:visited&#123;color:red;&#125;
-        a:hover&#123;color:orange;&#125;
-        a:active&#123;color:blue;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;a herf=&quot;超链接&quot;&gt;
-        内容
-    &lt;/a&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<h4 id="系统常量"><a href="#系统常量" class="headerlink" title="系统常量"></a>系统常量</h4><p>定义:<br>define(‘常量名字’,’常量值————必须是常量’);<br>变量可重新定义，使用的变量必须在上面定义<br>defind(A);判断A是否已经被定义了</p>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><pre><code>算术运算符:+   -   *   /   %
+赋值运算符:=   +=   -=   /+   %=   .=
+自增自减运算符:++   --   
+比较运算符:&lt;   &gt;   &gt;=   &lt;=   ==   ===   !=(仅看值)   !==(看值和数据类型)
+逻辑运算符:&amp;&amp;   ||   !(真假反转)
+静态变量:static 放在函数体内，只会初始化一次变量，以后运行会记录上一次的值
+</code></pre>
+<h4 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h4><pre><code>&lt;单分支&gt;
+if (条件) &#123;
+         //真区间;
+&#125; else &#123;
+         //假区间;
+&#125;
+后续代码;
 
-语法： 
-a：link&#123;属性：属性值;&#125;超链接的初始状态 
-a.visited(属性：属性值;&#125;超链接被访问后的状态 
-a:hovert&#123;属性：属性值;&#125;鼠标悬停的状态 
-a:active&#123;属性：属性值;&#125;超链接被激活时的状态
-说明： 
-A）顺序为： a:link,a:visited,a:hover,a:active,错误的顺序有时会使超链接的样式失效 
-B）为了简化代码，可以把伪类选择符中相同的声明提出来放在a选择符中； 例如：a&#123;color:red;&#125;a:hover&#123;color:green;&#125;表示超链接的初始和访问过后的状态一样，鼠标划过的状态和点击时的状态一样。
+&lt;多分支&gt;
+switch (条件) &#123;
+    case 判断条件1 :
+    case 判断条件2 :
+    case 判断条件3 :
+        echo 执行1 ;
+        break;
+    case 判断条件4 :
+        echo 执行2 ;
+        break;
+    default:
+        echo 执行3 ;      //否则
+        break;
+&#125;
+
+if (条件判断1) &#123;
+    echo 执行1 ;
+&#125; else if (条件判断2) &#123;
+    echo 执行2 ;
+&#125; else if (条件判断3) &#123;
+    echo 执行3 ;
+&#125; else &#123;
+    echo 执行4 ;
+&#125;
 </code></pre>
-<p>6.选择器的权重<br>!important&gt;内联样式&gt;包含选择符&gt;id选择器&gt;class选择器&gt;类型（元素）选择器<br>有冲突时高权重覆盖低权重<br>相同权重就近原则（哪个先被定义）</p>
-<h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>渔夫出海前，并不知道鱼在哪里。可他们还是选择了出发，因为他们相信，自己一定会满载而归。人生很多时候，是因为选择了才有机会，相信了才有可能。————稻盛和夫</p>
+<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><pre><code>for (初始条件;条件判断;执行A) &#123;       //程序进行从初始条件开始逆时针
+    echo 执行B ;
+&#125;
+——————————————————————————————————————————————————————————————————————————————
+while (条件判断) &#123;
+    echo 执行 ;
+&#125;
+——————————————————————————————————————————————————————————————————————————————
+do &#123;
+    echo 执行 ;
+&#125; while (条件判断);     //成立才接着循环
+——————————————————————————————————————————————————————————————————————————————
+continue从下一次循环语句开始
+break终止循环语句
+</code></pre>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><pre><code>function 函数名 (设置参数$...=...) &#123;
+    echo 执行;
+    return 1;       //只返回不输出
+&#125;
+函数名 ();
+上面这样return的1是不会输出的，要输出就要在调用函数前echo
+函数可以在任何位置调用，但是变量不能在上面调用
+函数可以调用多次
+
+函数体内声明的变量是局部变量，否则是全局变量
+两者互不污染，同时局部变量与垃圾回收机制有关
+$_GET $_POST $_COOKIE $_SESSION $GLOBALS  超全局变量(统一内外变量)
+
+约束形参:
+function sum (int $num1 , int $num2)
+&#123;
+    return $num1 + $num2;
+&#125;
+(sum(&#39;2.3&#39;,3));
+
+约束返回值:
+function sum (int $num1 , int $num2):string
+&#123;
+    return $num1 + $num2;
+&#125;
+(sum(4,5));
+
+php7.0新特性:
+使用  ...$函数名  来将数组里的值一一给形参赋值
+
+匿名函数:
+将一个没有函数名的函数赋值给一个变量并调用
+</code></pre>
+<h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><p>查手册</p>
+<h4 id="书写建议"><a href="#书写建议" class="headerlink" title="书写建议"></a>书写建议</h4><p>能加空格就加</p>
 
                 
             </div>
@@ -733,13 +755,13 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="../../12/b-7/">
+                <a href="../../11/20221111/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/18.jpg" class="responsive-img" alt="20221012">
+                        <img src="../../../../medias/featureimages/18.jpg" class="responsive-img" alt="20221111">
                         
-                        <span class="card-title">20221012</span>
+                        <span class="card-title">20221111</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -750,27 +772,15 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-12
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-11
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            liuGuobin
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                        <span class="chip bg-color">日报</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -782,13 +792,13 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../07/b-3/">
+                <a href="../../09/20221109/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/20.jpg" class="responsive-img" alt="20221007">
+                        <img src="../../../../medias/featureimages/17.jpg" class="responsive-img" alt="20221109">
                         
-                        <span class="card-title">20221007</span>
+                        <span class="card-title">20221109</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -799,7 +809,7 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-09
                             </span>
                         <span class="publish-author">
                             

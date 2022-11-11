@@ -4,8 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="20221008和09, Robin">
-    <meta name="description" content="每日一记CSS1.含义:如何修饰网页信息的显示样式2.语法 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。 2）属性必须放在花括号中，属性与属性值用冒号连接。 3）每条声明用分号结束。 4）当一个属性有多个属性值的">
+    <meta name="keywords" content="20221111, Robin">
+    <meta name="description" content="每日一记文件包含文件1
+function add()
+&amp;#123;
+    echo &amp;#39;执行&amp;#39;;
+&amp;#125;
+add增加，del删除，update更改，select查询
+文件2
+include (&amp;#39;文件1.php&amp;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +24,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>20221008和09 | Robin</title>
+    <title>20221111 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -343,12 +350,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">20221008和09</h1>
+                    <h1 class="description center-align post-title">20221111</h1>
                 </div>
             </div>
         </div>
@@ -368,25 +375,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                                <span class="chip bg-color">日报</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                日报
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -395,28 +389,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-10-09
+                    2022-11-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-10-10
+                    2022-11-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    5 分
                 </div>
                 
 
@@ -436,137 +430,155 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h5 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h5><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>1.含义:如何修饰网页信息的显示样式<br>2.语法<br> 1）每个CSS样式由两部分组成，即选择符和声明，声明又分为属性和属性值。<br> 2）属性必须放在花括号中，属性与属性值用冒号连接。<br> 3）每条声明用分号结束。<br> 4）当一个属性有多个属性值的时候，属性值与属性值不分先后顺序，用空格隔开。<br> 5）在书写样式过程中，空格、换行等</p>
-<h2 id="内部样式表"><a href="#内部样式表" class="headerlink" title="内部样式表"></a>内部样式表</h2><pre><code>第一
-&lt;style&gt;
-    h1&#123;color:red;&#125;
-&lt;/style&gt;
-放head和body都可以
+                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h4><pre><code>文件1
+function add()
+&#123;
+    echo &#39;执行&#39;;
+&#125;
+add增加，del删除，update更改，select查询
+文件2
+include (&#39;文件1.php&#39;);          //调用文件
+add();                         //调用函数
 
-第二
-&lt;body&gt;
-    &lt;h1 style=&quot;color:red;&quot; &gt;内容&lt;/h1&gt;
-&lt;/body&gt;
+include与require区别
+include在没有这个文件时报错并执行，但是require报错但是不执行
+include_once与require_once区别
+可以重复调用文件，区别同上
 </code></pre>
-<h2 id="外部样式表"><a href="#外部样式表" class="headerlink" title="外部样式表"></a>外部样式表</h2><pre><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; herf=&quot;css文件所在的地址&quot;&gt;       #注意是rel
-&lt;style&gt;
-    @import url(css文件所在的地址);                                    #注意分号
-&lt;style&gt;
-两种，最好放head标签里
-</code></pre>
-<h2 id="扩展知识点"><a href="#扩展知识点" class="headerlink" title="扩展知识点"></a>扩展知识点</h2><p>link和import之间的区别？<br>①差别1：本质的差别：link属于XHTML标签，而@import完全是CSS提供的一种方式。<br>②差别2：加载顺序的差别：link引用的CSS会同时被加载，而@import引用的CSS会等到页面全部被下载完再被加载。所以有时候浏览@import加载 CSS的页面时开始会没有样式（就是闪烁），网速慢的时候还挺明显。<br>③差别3：兼容性的差别：@import老的浏览器不支持，而link标签无此问题。<br>样式表优先级<br>原则:就近原则————!important（放在属性值后）&gt;行内&gt;内部&gt;外部           #注意感叹号</p>
-<h3 id="标签选择器"><a href="#标签选择器" class="headerlink" title="标签选择器"></a>标签选择器</h3><p>1.class类选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        .类名1&#123;background-color:blue;&#125;                              #就近原则，离开头最近的style为准
-        .类名2&#123;background-color:red;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class=&quot;类名1 类名2&quot;&gt;222&lt;/div&gt;                              #空格可以放置多个类名
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>2.id选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        #box1&#123;background-color:yellow;&#125;
-        #box3&#123;background-color:blue;&#125;
-        #box2&#123;background-color:red;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div&gt;1111111111&lt;/div&gt;
-    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;
-    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><pre><code>索引数组:
+$arr=[1,2,3,4,5];
+var_dump($arr);
+或
+$arr=array(1,2,3,4,5);
+var_dump($arr);
 
-语法：#id名&#123;属性：属性值;&#125; 
-A）使用id选择符时，应该为每个元素定义一个id属性 如：&lt;divid=&quot;box&quot;&gt;&lt;/div&gt; 
-B）id选择符的语法格式是“#”加上自定义的id名 如：#box&#123;width:300px;height:300px;&#125; 
-C）起名时要取英文名，不能用关键字：（所有的标记和属性都是关键字） 如：head标记 
-D）一个id名称只能对应文档中一个具体的元素对象,多个时就不显示样式。（唯一性）
-</code></pre>
-<p>3.通配符选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        *&#123;
-            margin:0;      #外边距为0
-            padding:0;     #内边距为0
-        &#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div&gt;1111111111&lt;/div&gt;
-    &lt;div id=&quot;box1&quot;&gt;2222222222&lt;/div&gt;
-    &lt;div id=&quot;box2&quot;&gt;3333333333&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-语法：*&#123;属性:属性值;&#125; 
-说明：通配选择符的写法是“*”，其含义就是所有元素。 
-*&#123;margin:0;padding:0;&#125;代表清除所有元素的默认边距值和填充值
-</code></pre>
-<p>4.群组与后代选择器</p>
-<pre><code>    &lt;style&gt;
-        标签们或者class内的类名们&#123;background-color:yellow&#125;      #标签们之间要加逗号，而且类名前要加.
-    &lt;/style&gt;
+关联数组:
+$arr=[
+    &#39;A&#39;=&gt;&#39;a&#39;,
+    &#39;B&#39;=&gt;&#39;b&#39;;
+];
+var_dump($arr);
 
-若之间不加逗号则是后代选择器，仅更改空格代表的后代
-#从右到左地选择
+二维(多维)数组:
+$arr=[
+    &#39;A&#39;=&gt;[
+        &#39;a&#39;,
+        &#39;b&#39;,
+        &#39;c&#39;,
+    ]
+];
+var_dump($arr);
 </code></pre>
-<p>5.伪类选择器</p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Document&lt;/title&gt;
-    &lt;style&gt;
-        a:link&#123;color:yellow;&#125;
-        a:visited&#123;color:red;&#125;
-        a:hover&#123;color:orange;&#125;
-        a:active&#123;color:blue;&#125;
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;a herf=&quot;超链接&quot;&gt;
-        内容
-    &lt;/a&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<h5 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h5><p>增加:直接声明$arr[位置]=’内容’;<br>删除:unset($arr[位置]);<br>修改:重新定义<br>对于多维数组要var_dump($arr[第一层位置][第二层位置]…….);<br>获取循环次数:echo count($arr);</p>
+<pre><code>遍历:
+foreach ($arr as $key =&gt; $value) &#123;
+    echo $key.&#39;&lt;br/&gt;&#39;;
+&#125;
 
-语法： 
-a：link&#123;属性：属性值;&#125;超链接的初始状态 
-a.visited(属性：属性值;&#125;超链接被访问后的状态 
-a:hovert&#123;属性：属性值;&#125;鼠标悬停的状态 
-a:active&#123;属性：属性值;&#125;超链接被激活时的状态
-说明： 
-A）顺序为： a:link,a:visited,a:hover,a:active,错误的顺序有时会使超链接的样式失效 
-B）为了简化代码，可以把伪类选择符中相同的声明提出来放在a选择符中； 例如：a&#123;color:red;&#125;a:hover&#123;color:green;&#125;表示超链接的初始和访问过后的状态一样，鼠标划过的状态和点击时的状态一样。
+list($a , $b , $c , $d , $e) = $arr;
+echo $a,$b,$c,$d;
+一一赋值，多出来的跳过，只对有索引的有效
+
+while (list($key , $val) = each($arr)) &#123;
+    echo $key.&#39;--&#39;.$val.&#39;&lt;br/&gt;&#39;;
+&#125;
 </code></pre>
-<p>6.选择器的权重<br>!important&gt;内联样式&gt;包含选择符&gt;id选择器&gt;class选择器&gt;类型（元素）选择器<br>有冲突时高权重覆盖低权重<br>相同权重就近原则（哪个先被定义）</p>
-<h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h5><p>渔夫出海前，并不知道鱼在哪里。可他们还是选择了出发，因为他们相信，自己一定会满载而归。人生很多时候，是因为选择了才有机会，相信了才有可能。————稻盛和夫</p>
+<h4 id="超全局数组"><a href="#超全局数组" class="headerlink" title="超全局数组"></a>超全局数组</h4><p>配合html前端页面method=’get/post’<br>var_dump($_GET);获取GET的参(显示内容在URL)<br>var_dump($_POST);获取POST的参(不显示)<br>var_dump($_REQUEST);都可以获取<br>前端name所设置的会把参数传到后端<br>name=’username’<br>$username=$_GET[‘username’];</p>
+<h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><pre><code>notice注意                   //后续代码会继续执行
+warning警告                  //后续代码会继续执行
+fatal error致命错误          //后续代码不会继续执行
+@可以消除警报(除了fatal error)
+在ini配置文件里display_errors:On可以取消报错(所有)
+在ini配置文件里error_log找错误日志
+</code></pre>
+<h4 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h4><p>时间戳:时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数，不考虑闰秒。<br>配置文件可改时区，不详细讲</p>
+<h4 id="数据库简介-dos操作"><a href="#数据库简介-dos操作" class="headerlink" title="数据库简介(dos操作)"></a>数据库简介(dos操作)</h4><pre><code>&lt;不是内部命令就更改环境变量&gt;
+连接数据库:
+mysql -uroot -p
+查库:
+show databases;
+建库
+creat database 库名;
+删库
+drop database 库名;
 
+进库:
+use 库名;
+建表:
+creat table 表名(id int,字段名 数据类型(长度) , 字段名 数据类型(位数));
+建表命令:
+show creat table 表名;
+查表:
+show tables;
+删表:
+drop table 表名;
+
+查表结构:
+desc 表名;
+建表字段:
+alter table 表名 add 字段名 (字段类型)
+改表字段:
+alter table 表名 change 原来的字段名 现在的字段名 数据类型(位数);
+改表字段值:
+alter table 表名 modify 字段名 修改后的值
+改表名:
+alter table 原表名 rename 新名字
+删表字段:
+alter table 表名 drop 字段名
+
+插入顺序:
+first
+    alter table 表名 add 字段(字段类型) first
+after
+    alter table 表名 add 字段名(字段类型) after (在谁后面)
+</code></pre>
+<h4 id="mysql数据类型"><a href="#mysql数据类型" class="headerlink" title="mysql数据类型"></a>mysql数据类型</h4><p>整形:<br>int4字节，bigint8字节<br>浮点型:<br>float(m,d)<br>double(m,d)<br>decimal(m,d)<br>字符型:<br>char定长字符串(常用于32位md5密码)<br>varchar变长字符串(常用于用户名)<br>时间型:<br>4字节，年月日格式<br>auto_increment:<br>自动增加，只用于整形，priimary&emsp;key设置起始值(默认为1)</p>
+<h5 id="以上内容皆可使用phpMyAdmin和NavicatPremium更改"><a href="#以上内容皆可使用phpMyAdmin和NavicatPremium更改" class="headerlink" title="以上内容皆可使用phpMyAdmin和NavicatPremium更改"></a>以上内容皆可使用phpMyAdmin和NavicatPremium更改</h5><h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><pre><code>普通索引:
+alter table 表名 add index(字段);
+唯一索引:
+alter table 表名 add unique(字段);
+主键索引:
+alter table 表名 add primary key(字段);
+全文索引:
+alter table 表名 add fulltext(字段);
+显示索引:
+show index from 字段名
+</code></pre>
+<p><a href="https://blog.csdn.net/qq_35190492/article/details/109257302?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166808686716782428672275%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=166808686716782428672275&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-109257302-null-null.142%5Ev63%5Ejs_top,201%5Ev3%5Econtrol,213%5Ev2%5Et3_esquery_v2&utm_term=mysql%E7%B4%A2%E5%BC%95&spm=1018.2226.3001.4187">使用及区别</a></p>
+<h4 id="存入-删除数据"><a href="#存入-删除数据" class="headerlink" title="存入/删除数据"></a>存入/删除数据</h4><pre><code>插入值:
+insert into 字段名 values(值,值);
+值与上面的字段内的列名相对应
+insert into 字段名(列名,列名)  values(值,值);
+直接建列名并写入值，注意两个空格
+insert into 字段名(列名,列名) value(值,值);
+
+注:上面那种一定要全部字段都插入列名，但下面的不用
+select * from 表名                               //查看全部列名和值使用
+delect from 表名 where 列名 = 值;                //删除值
+update 表名 set 列名 = 值;                       //更改值
+select distinct 列名 from 表名;                  //不重复地输出该列的值
+
+select选择时如果要限制条件就在后面加上where和条件
+where age&lt;&gt;50; == where age!50                     //取非
+age in(18,16,17);                                  //固定查询的值
+address like &#39;Ax&#39;;                                 //模糊查询A开头的
+address like &#39;xAx&#39;;                                //模糊查询含A的
+select * from 表名 order by 列名 desc;             //降序显示，默认为升序(asc)
+select * from 表名 limit 5,5;                      //从第五个值开始往下取5个值
+select * from 表名 group by 列名;                  //分组(只保留一个，去重)
+select count(*) from 表名;                         //显示该列有几个数据
+select 列名 as 别名 from 表名;                     //给该列起别名
+</code></pre>
+<h4 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h4><pre><code>内联查询:
+select 列名1 from 表名1 inner join 表名2 on 条件;
+左连接查询(以左边为基准):
+select 列名1 from 表名1 left join 表名2 on 条件;
+右链接查询(左边没有的不会显示):
+select 列名1 from 表名1 right join 表名2 on 条件;
+嵌套查询:
+不建议，太慢
+</code></pre>
+<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="双十一被学校关在宿舍饲养-不用走到哪都吃狗粮真是太开心了-dog"><a href="#双十一被学校关在宿舍饲养-不用走到哪都吃狗粮真是太开心了-dog" class="headerlink" title="双十一被学校关在宿舍饲养,不用走到哪都吃狗粮真是太开心了(dog)"></a>双十一被学校关在宿舍饲养,不用走到哪都吃狗粮真是太开心了(dog)</h5>
                 
             </div>
             <hr/>
@@ -629,11 +641,7 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                                    <span class="chip bg-color">日报</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -729,66 +737,18 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../12/b-7/">
+                <a href="">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/18.jpg" class="responsive-img" alt="20221012">
+                        <img src="../../../../medias/featureimages/18.jpg" class="responsive-img" alt="20221111">
                         
-                        <span class="card-title">20221012</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-10-12
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                        <span class="chip bg-color">日报</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="../../07/b-3/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="../../../../medias/featureimages/20.jpg" class="responsive-img" alt="20221007">
-                        
-                        <span class="card-title">20221007</span>
+                        <span class="card-title">20221111</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -799,16 +759,50 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-11
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            <i class="fas fa-user fa-fw"></i>
+                            liuGuobin
                             
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
-                                </a>
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="../../10/20221110/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="../../../../medias/featureimages/19.jpg" class="responsive-img" alt="20221110">
+                        
+                        <span class="card-title">20221110</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
                             
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-10
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            liuGuobin
                             
                         </span>
                     </div>
