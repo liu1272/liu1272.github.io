@@ -379,6 +379,15 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                日报
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -393,21 +402,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-11
+                    2022-11-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    7 分
                 </div>
                 
 
@@ -437,9 +446,10 @@
 可以不写php但是要改ini配置文件的short_open_tag=On,要重启
 </code></pre>
 <h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>$变量名(不能是数字或特殊符号开头，可以是中文，建议驼峰命名法)=’value’;<br>echo “$变量名”;        //输出上面传入的值</p>
-<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><pre><code>单引号:不解析变量
-双引号:解释变量
+<h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><pre><code>单引号:如果里面有变量都作为一个字符串处理
+双引号:里面有变量会输出变量的值
 尽量使用单引号————效率高
+
 //单行注释
 /* */多行注释
 &quot;\n&quot;换行(双引号解释转义字符，单引号不解释)
@@ -496,14 +506,70 @@ is_null();
 is_scalar();判断标量
 gettype();只获取类型
 var_dump();输出值和类型
+
+PHP中提供四种整形的定义方式，十进制定义，二进制定义，八进制定义和十六进制定义
+$a = 120 //十进制
+$a = 0b110 //二进制
+$a = 0120     //八进制
+$a = 0x120    //十六进制
+
+// 使用echo输出时。默认输出为十进制
+decbin() // 十进制转二进制
+decoct() // 十进制转八进制
+dechex() // 十进制转十六进制
+bindec() // 二进制转十进制
+bin2hex() //二进制转十六进制    
+
+字符串：字符串变量用于存储并处理文本。
 </code></pre>
 <h4 id="系统常量"><a href="#系统常量" class="headerlink" title="系统常量"></a>系统常量</h4><p>定义:<br>define(‘常量名字’,’常量值————必须是常量’);<br>变量可重新定义，使用的变量必须在上面定义<br>defind(A);判断A是否已经被定义了</p>
+<pre><code>使用 define() 函数设置常量:
+bool define ( string $name , mixed $value [, bool $case_insensitive = false ] )
+　　该函数有三个参数:
+name：必选参数，常量名称，即标志符。
+value：必选参数，常量的值。
+case_insensitive ：可选参数，如果设置为 TRUE，该常量则大小写不敏感。默认是大小写敏感的。
+&lt;?php 
+// 常量
+define(&quot;CL&quot;, &quot;这是一个全局常量&quot;, true);
+echo CL; // 默认false，变量名区分大小写
+echo cl; // true不区分大小写
+?&gt;
+
+预定义常量
+PHP预定义了许多常量，这些常量无需使用define()函数定义，可直接在程序中使用。下面列举了一些常用的PHP预定义常量。
+
+（1）__FILE__(FILE前后分别是两个下画线)：当前正在处理的脚本文件名，若使用在一个被引用的文件中（include或require），那么　　它的值就是被引用的文件，而不是引用它的那个文件。
+
+（2）__LINE__(LINE前后分别是两个下画线)：正在处理的脚本文件的当前行数。
+
+（3）PHP_VERSION：当前PHP预处理器的版本，如5.4.16。
+
+（4）PHP_OS: PHP所在的操作系统的类型。如Linux。
+
+（5）TRUE：表示逻辑真。FALSE：表示逻辑假。NULL：表示没有值或值不确定。
+
+（6）DIRECTORY_SEPARATOR: 表示目录分隔符，UNIX或Linux操作系统环境时的值为“ / ”, Window操作系统环境时的值为 “ \ ”。
+</code></pre>
 <h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><pre><code>算术运算符:+   -   *   /   %
 赋值运算符:=   +=   -=   /+   %=   .=
 自增自减运算符:++   --   
-比较运算符:&lt;   &gt;   &gt;=   &lt;=   ==   ===   !=(仅看值)   !==(看值和数据类型)
+比较运算符:&lt;   &gt;   &gt;=   &lt;=   ==   ===   !=(仅看值)   !==(看值和数据类型)   &lt;&gt;(相当于!=)
 逻辑运算符:&amp;&amp;   ||   !(真假反转)
 静态变量:static 放在函数体内，只会初始化一次变量，以后运行会记录上一次的值
+
+预递增++x         //先加再返回
+预递减--x         //先减再返回
+后递增x++         //先返回再加
+后递减x--         //先返回再减
+
+非!               //不是true就返回true
+或or/||           //一个true就true
+与and/&amp;&amp;          //都true才true
+异或xor           //有且仅有一个true才是true
+
+三元运算符:
+(expr1) ? (expr2) : (expr3)
 </code></pre>
 <h4 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h4><pre><code>&lt;单分支&gt;
 if (条件) &#123;
@@ -584,8 +650,21 @@ php7.0新特性:
 使用  ...$函数名  来将数组里的值一一给形参赋值
 
 匿名函数:
-将一个没有函数名的函数赋值给一个变量并调用
+将一个没有函数名的函数赋值给一个变量并调用(就是没有名字的函数)
+
+static的关键字的使用:
+ * 当一个函数完成时，它的所有变量通常都会被删除。
+ * 然而，有时候您希望某个局部变量不要被删除。
+ * 要做到这一点，请在您第一次声明变量时使用 static 关键字：
+function test()&#123;
+    static $n=0;
+    $n++;
+    echo &quot;调用了一次&quot;.$n.&quot;\n&quot;;
+&#125;
+test();test();test();
+?&gt;
 </code></pre>
+<h4 id="PHP变量作用域"><a href="#PHP变量作用域" class="headerlink" title="PHP变量作用域"></a>PHP变量作用域</h4><p>PHP 有三种不同的变量作用域：<br>local（局部）:函数内部声明的变量只能在函数内部进行访问<br>global（全局）:函数之外声明的变量只能在函数以外进行访问<br>static（静态）:静态变量仅在局部函数域中存在，当函数执行离开此作用域时，其值不会消失(例如拿来判断循环退出的变量)<br>内部函数想要引用外部变量可以引入global关键字global $outer;<br>注释：static变量仍然是函数的局部变量</p>
 <h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><p>查手册</p>
 <h4 id="书写建议"><a href="#书写建议" class="headerlink" title="书写建议"></a>书写建议</h4><p>能加空格就加</p>
 
@@ -783,6 +862,14 @@ php7.0新特性:
                     </div>
                 </div>
                 
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
+                    </a>
+                    
+                </div>
+                
             </div>
         </div>
         
@@ -948,7 +1035,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">30.2k</span>
+                        class="white-color">34.1k</span>
             
             
             

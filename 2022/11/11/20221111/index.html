@@ -375,9 +375,13 @@ include (&amp;#39;文件1.php&amp;">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                <span class="chip bg-color">日报</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -396,14 +400,14 @@ include (&amp;#39;文件1.php&amp;">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-12
+                    2022-11-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.4k
                 </div>
                 
 
@@ -470,7 +474,7 @@ $arr=[
 var_dump($arr);
 </code></pre>
 <h5 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h5><p>增加:直接声明$arr[位置]=’内容’;<br>删除:unset($arr[位置]);<br>修改:重新定义<br>对于多维数组要var_dump($arr[第一层位置][第二层位置]…….);<br>获取循环次数:echo count($arr);</p>
-<pre><code>遍历:
+<pre><code>遍历
 foreach ($arr as $key =&gt; $value) &#123;
     echo $key.&#39;&lt;br/&gt;&#39;;
 &#125;
@@ -482,6 +486,22 @@ echo $a,$b,$c,$d;
 while (list($key , $val) = each($arr)) &#123;
     echo $key.&#39;--&#39;.$val.&#39;&lt;br/&gt;&#39;;
 &#125;
+
+排序
+sort() - 对数组进行升序排列
+rsort() - 对数组进行降序排列
+asort() - 根据关联数组的值，对数组进行升序排列
+ksort() - 根据关联数组的键，对数组进行升序排列
+arsort() - 根据关联数组的值，对数组进行降序排列
+krsort() - 根据关联数组的键，对数组进行降序排列
+
+数组的合拼
+$array1 =array(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;);
+$array2 = array(&#39;a1&#39;=&gt;&#39;php&#39;,&#39;a2&#39;=&gt;&#39;python&#39;,&#39;a3&#39;=&gt;&#39;java&#39;);
+$array3 = array_merge($array1,$array2);
+
+添加到指定位置
+array_splice(数组，位置，删除几个，增加元素）
 </code></pre>
 <h4 id="超全局数组"><a href="#超全局数组" class="headerlink" title="超全局数组"></a>超全局数组</h4><p>配合html前端页面method=’get/post’<br>var_dump($_GET);获取GET的参(显示内容在URL)<br>var_dump($_POST);获取POST的参(不显示)<br>var_dump($_REQUEST);都可以获取<br>前端name所设置的会把参数传到后端<br>name=’username’<br>$username=$_GET[‘username’];</p>
 <h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><pre><code>notice注意                   //后续代码会继续执行
@@ -641,7 +661,11 @@ select 列名1 from 表名1 right join 表名2 on 条件;
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                    <span class="chip bg-color">日报</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -737,18 +761,17 @@ select 列名1 from 表名1 right join 表名2 on 条件;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="">
+                <a href="../../12/20221112/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/18.jpg" class="responsive-img" alt="20221111">
+                        <img src="../../../../medias/featureimages/17.jpg" class="responsive-img" alt="20221112">
                         
-                        <span class="card-title">20221111</span>
+                        <span class="card-title">20221112</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -758,18 +781,29 @@ select 列名1 from 表名1 right join 表名2 on 条件;
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-11
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-12
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            liuGuobin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -801,8 +835,12 @@ select 列名1 from 表名1 right join 表名2 on 条件;
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            liuGuobin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -932,7 +970,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">30.2k</span>
+                        class="white-color">34.1k</span>
             
             
             
