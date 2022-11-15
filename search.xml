@@ -4,12 +4,43 @@
   
     
     <entry>
+      <title>20221115</title>
+      <link href="/2022/11/15/20221115/"/>
+      <url>/2022/11/15/20221115/</url>
+      
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h4>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>20221114</title>
       <link href="/2022/11/14/20221114/"/>
       <url>/2022/11/14/20221114/</url>
       
-        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h4><p>类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。<br>对象 − 是类的实例。<br>对象的主要三个特性：<br>1.对象的行为：可以对对象施加那些操作，开灯，关灯就是行为。<br>2.对象的形态：当施加那些方法是对象如何响应，颜色，尺寸，外型。<br>3.对象的表示：对象的表示就相当于身份证，具体区分在相同的行为与状态下有什么不同。</p><h4 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>成员变量 − 定义在类内部的变量。该变量的值对外是不可见的，但是可以通过成员函数访问，在类被实例化为对象后，该变量即可称为对象的属性。</p><p>成员函数 − 定义在类的内部，可用于访问对象的数据。</p><p>继承 − 继承性是子类自动共享父类数据结构和方法的机制，这是类之间的一种关系。在定义和实现一个类的时候，可以在一个已经存在的类的基础之上来进行，把这个已经存在的类所定义的内容作为自己的内容，并加入若干新的内容。</p><p>父类 − 一个类被其他类继承，可将该类称为父类，或基类，或超类。</p><p>子类 − 一个类继承其他类称为子类，也可称为派生类。</p><p>多态 − 多态性是指相同的操作或函数、过程可作用于多种类型的对象上并获得不同的结果。不同的对象，收到同一消息可以产生不同的结果，这种现象称为多态性。</p><p>重载 − 简单说，就是函数或者方法有同样的名称，但是参数列表不相同的情形，这样的同名不同参数的函数或者方法之间，互相称之为重载函数或者方法。</p><p>抽象性 − 抽象性是指将具有一致的数据结构（属性）和行为（操作）的对象抽象成类。一个类就是这样一种抽象，它反映了与应用有关的重要性质，而忽略其他一些无关内容。任何类的划分都是主观的，但必须与具体的应用有关。</p><p>封装 − 封装是指将现实世界中存在的某个客体的属性与行为绑定在一起，并放置在一个逻辑单元内。</p><p>构造函数 − 主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。</p><p>析构函数 − 析构函数(destructor) 与构造函数相反，当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。析构函数往往用来做”清理善后” 的工作（例如在建立对象时用new开辟了一片内存空间，应在退出前在析构函数中用delete释放）。</p><h5 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h5><pre><code>定义类&lt;?phpclass 类名 &#123;  var $var1;  var $var2 = &quot;constant string&quot;;   function 函数名 ($arg1, $arg2) &#123;     [..]  &#125;  [..]&#125;?&gt;大括号&#123;&#125;内可以定义变量和方法变量使用 var 来声明, 变量也可以初始化值函数定义类似 PHP 函数的定义，但函数只能通过该类及其实例化的对象访问。</code></pre><h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><pre><code>&lt;?phpclass Site &#123;  /* 成员变量 */  var $url;  var $title;    /* 成员函数 */  function setUrl($par)&#123;     $this-&gt;url = $par;  &#125;    function getUrl()&#123;     echo $this-&gt;url . PHP_EOL;  &#125;    function setTitle($par)&#123;     $this-&gt;title = $par;  &#125;    function getTitle()&#123;     echo $this-&gt;title . PHP_EOL;  &#125;&#125;?&gt;变量 $this 代表自身的对象</code></pre>]]></content>
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h4><p>类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。<br>对象 − 是类的实例。<br>对象的主要三个特性：<br>1.对象的行为：可以对对象施加那些操作，开灯，关灯就是行为。<br>2.对象的形态：当施加那些方法是对象如何响应，颜色，尺寸，外型。<br>3.对象的表示：对象的表示就相当于身份证，具体区分在相同的行为与状态下有什么不同。</p><h4 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>成员变量 − 定义在类内部的变量。该变量的值对外是不可见的，但是可以通过成员函数访问，在类被实例化为对象后，该变量即可称为对象的属性。</p><p>成员函数 − 定义在类的内部，可用于访问对象的数据。</p><p>继承 − 继承性是子类自动共享父类数据结构和方法的机制，这是类之间的一种关系。在定义和实现一个类的时候，可以在一个已经存在的类的基础之上来进行，把这个已经存在的类所定义的内容作为自己的内容，并加入若干新的内容。</p><p>父类 − 一个类被其他类继承，可将该类称为父类，或基类，或超类。</p><p>子类 − 一个类继承其他类称为子类，也可称为派生类。</p><p>多态 − 多态性是指相同的操作或函数、过程可作用于多种类型的对象上并获得不同的结果。不同的对象，收到同一消息可以产生不同的结果，这种现象称为多态性。</p><p>重载 − 简单说，就是函数或者方法有同样的名称，但是参数列表不相同的情形，这样的同名不同参数的函数或者方法之间，互相称之为重载函数或者方法。</p><p>抽象性 − 抽象性是指将具有一致的数据结构（属性）和行为（操作）的对象抽象成类。一个类就是这样一种抽象，它反映了与应用有关的重要性质，而忽略其他一些无关内容。任何类的划分都是主观的，但必须与具体的应用有关。</p><p>封装 − 封装是指将现实世界中存在的某个客体的属性与行为绑定在一起，并放置在一个逻辑单元内。</p><p>构造函数 − 主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。</p><p>析构函数 − 析构函数(destructor) 与构造函数相反，当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。析构函数往往用来做”清理善后” 的工作（例如在建立对象时用new开辟了一片内存空间，应在退出前在析构函数中用delete释放）。</p><h5 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h5><pre><code>1.定义类&lt;?phpclass 类名 &#123;  /* 成员变量 */  var $var1;  var $var2 = &quot;constant string&quot;;  /* 成员函数 */  function 成员函数的函数名 ($arg1, $arg2) &#123;     [..]  &#125;  [..]&#125;?&gt;大括号&#123;&#125;内可以定义变量和方法变量使用 var 来声明, 变量也可以初始化值函数定义类似 PHP 函数的定义，但函数只能通过该类及其实例化的对象访问。变量 $this 代表自身的对象2.创建对象$对象名 = new 类名;3.调用成员方法实例化对象后，我们可以使用该对象调用成员方法，该对象的成员方法只能操作该对象的成员变量:$成员对象-&gt;成员函数(&quot;内容&quot;);3.PHP构造函数在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。</code></pre><h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><h3 id="暂停ing……"><a href="#暂停ing……" class="headerlink" title="暂停ing……"></a>暂停ing……</h3>]]></content>
       
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
       
       
         <tags>
@@ -52,7 +83,7 @@
       <link href="/2022/11/12/20221112/"/>
       <url>/2022/11/12/20221112/</url>
       
-        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="PHP连接数据库"><a href="#PHP连接数据库" class="headerlink" title="PHP连接数据库"></a>PHP连接数据库</h4><p>php7之前是mysql链接(硬链接)<br>php7之后是mysqli链接(i链接)</p><pre><code>链接步骤(天龙八步):1.连接数据库$link = mysqli_connect(&#39;主机名&#39;,&#39;用户&#39;,&#39;密码&#39;);2.判断是否连接成功if (!$link) &#123;    exit(&#39;连接失败&#39;);&#125;3.设置字符集mysqli_set_charset($link,&#39;utf8&#39;);4.选择数据库mysqli_select_db($link,&#39;数据库名&#39;);5.准备sql语句$sql = &quot;select * from 数据库名_表名&quot;;6.发送sql语句$res = mysqli_query($link,$sql);7.处理结果集$result = mysqlii_fetch_assoc($res);            //此处多复制几行可以输出多个对象的信息while ($rows = mysqli_fetch_assoc($res)) &#123;    var_dump($rows);                            //相同功能&#125;8.关闭数据库(释放资源)mysqli_close($link);</code></pre><h4 id="重要函数"><a href="#重要函数" class="headerlink" title="重要函数"></a>重要函数</h4><pre><code>mysqli_fetch_assco($   );         //返回关联的数组mysqli_fetch_row($   );           //返回索引数组mysqli_fetch_aray($   );          //返回索引和关联的数组mysqli_fetch_rows($   );          //返回数组行数mysqli_affected_rows($   );       //返回数组行数mysql_insert_id($   );            //返回插入函数的自增的id</code></pre><h4 id=""><a href="#" class="headerlink" title=""></a></h4>]]></content>
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="PHP超级全局变量"><a href="#PHP超级全局变量" class="headerlink" title="PHP超级全局变量"></a>PHP超级全局变量</h4><p>PHP超级全局变量列表：<br>$GLOBALS　　一个包含了全部变量的全局组合数组。变量的名字就是数组的键。<br>$_SERVER　　一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的数组<br>$_REQUEST　　用于收集HTML表单提交的数据。<br>它可以获取 cookie  get  post<br>$_POST　　应用于收集表单数据，在HTML form标签的指定该属性：”method=”post”。<br>$_GET　　应用于收集表单数据，在HTML form标签的指定该属性：”method=”get”。<br>Array []<br>$_FILES　　<br>$_ENV　　<br>$_COOKIE　　<br>$_SESSION</p><h4 id="PHP-Include-文件"><a href="#PHP-Include-文件" class="headerlink" title="PHP Include 文件"></a>PHP Include 文件</h4><p>服务器端包含用于创建可在多个页面重复使用的函数、页眉、页脚或元素。</p><pre><code>将 PHP 文件的内容插入另一个 PHP 文件:include &#39;filename&#39;;require &#39;filename&#39;;错误处理方面:require 会生成致命错误（E_COMPILE_ERROR）并停止脚本include 只生成警告（E_WARNING），但脚本会继续</code></pre><h4 id="PHP-文件处理"><a href="#PHP-文件处理" class="headerlink" title="PHP 文件处理"></a>PHP 文件处理</h4><p>操作文件:<br>readfile() 函数读取文件，并把它写入输出缓冲。<br>文件打开/读取/关闭:<br>fopen(“AAA.txt”,”/r”)函数的第一个参数包含被打开的文件名，第二个参数规定打开文件的模式。</p><p>打开模式详解:<br>r:打开只读文件，指针在文件开头<br>w:只写文件，如果不存在就删除或创建，指针在文件开头<br>a:只写文件，保留数据，指针在结尾，如果文件不存在就创建新文件<br>x:创建新文件为只写，如果文件存在就返回false和错误<br>r+:打开文件为读/写，指针在开头<br>w+:打开文件为读/写，如果不存在就创建或删除，指针在开头<br>a+:打开文件为读/写，保留数据，指针在结尾，如果不存在就创建新文件<br>x+:创建文件为读/写，如果文件已存在就返回false和错误</p><p>fread($文件名,filesize(“AAA.txt”));<br>第一个参数包含待读取文件的文件名，第二个参数规定待读取的最大字节数</p><p>fclose($文件名);<br>关闭打开的文件，节约服务器资源</p><p>fgets($文件名);<br>从文件读取单行，调用后，文件指针会移动到下一行。</p><p>feof($myfile);<br>检查是否已到达文件末尾(EOF)，常用于遍历未知长度的数据</p><p>fgetc($myfile);<br>从文件中读取单个字符，调用后，文件指针会移动到下一个字符。</p><p>fopen(“文件名”, “w”)；<br>如果用来打开不存在的文件，此函数会创建文件，假定文件被打开为写入（w）或增加（a）。</p><p>fwrite($文件名,要发送的字符串);<br>写入文件,会发生覆盖原数据</p><h4 id="文件的-复制-删除-重名"><a href="#文件的-复制-删除-重名" class="headerlink" title="文件的 复制 删除 重名"></a>文件的 复制 删除 重名</h4><p>php文件重命名：函数rename()。<br>php文件复制：函数copy();<br>php文件删除：函数unlink();</p><h4 id="获取文件属性"><a href="#获取文件属性" class="headerlink" title="获取文件属性"></a>获取文件属性</h4><pre><code>file_exists(string $filename)是否存在,返回false或trueis_file() 是否为文件,返回false或truefilesize() 文件大小,返回false或trueis_readable() 文件名是否可读,返回false或trueis_writable() 文件名是否可改,返回false或trueis_executable() 文件名是否可执行,返回false或truefilectime() 文件创建时间，返回UNX时间戳filemtime() 文件修改时间，返回UNX时间戳fileatime() 上次访问时间，返回UNX时间戳stat() 获取大部分属性值，返回包含文件信息的数组</code></pre><h4 id="PHP目录操作"><a href="#PHP目录操作" class="headerlink" title="PHP目录操作"></a>PHP目录操作</h4><p>新建目录：mkdir(路径，权限，递归创建)<br>删除目录：rmdir()<br>移动（改名）：rename()<br>获取目录内容：<br>//打开目录<br>目录句柄 = opendir()<br>//读取目录<br>文件名 = readdir(目录句柄)<br>依次读取文件名，同时向下移动文件句柄指针，读取不到则返回false<br>//关闭目录<br>closedir()</p><p>注:前目录. 上级目录用..</p><h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4><p>定义：人为的将内存进行分隔<br>作用：让不同内存区域的同名结构共存<br>目的：解决重名结构问题<br>空间元素：函数，常量，类，不包括变量！！!<br>语法:<br>namespace 空间名<br>namespace 空间名\子空间</p><p>命名空间访问(url)<br>1.定名称访问：直接访问空间元素的名字（只访问自己命名空间的元素）<br>2.名称访问：使用自己当前的子空间名字+ \ + 元素名字<br>3.访问：\ + 全局空间 + \  +  元素名字<br>注：任何空间元素访问，只针对函数，类，常量，不包括变量！！!</p><p>全局空间(C盘)<br>如果定义了命名空间，非限定名称的寻找系统常量的方式：<br>首先,自己的空间内找<br>然后,果找不到元素<br>系统常量–&gt;进入全局空间寻找<br>系统类–&gt;不会自动进入全局空间寻找，而是会报错</p><pre><code>命名空间的引入1.空间引入方式：use关键字    (1)类：use 空间名\类名    (2)数：use function 空间名\函数名    (3)量：use const 空间名\常量名2.当引入元素时重名，通过 as 来起别名    use 空间名\类名 as 别名3.引入多个元素    use 空间名\&#123;        类名，        function 函数名，        const 常量    &#125;       4. 引入空间    use 空间名</code></pre>]]></content>
       
       
       <categories>
