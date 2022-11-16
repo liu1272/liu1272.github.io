@@ -409,14 +409,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    6 分
                 </div>
                 
 
@@ -448,35 +448,109 @@
 <p>封装 − 封装是指将现实世界中存在的某个客体的属性与行为绑定在一起，并放置在一个逻辑单元内。</p>
 <p>构造函数 − 主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。</p>
 <p>析构函数 − 析构函数(destructor) 与构造函数相反，当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。析构函数往往用来做”清理善后” 的工作（例如在建立对象时用new开辟了一片内存空间，应在退出前在析构函数中用delete释放）。</p>
-<h5 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h5><pre><code>1.定义类
-&lt;?php
+<h5 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h5><pre><code>【定义函数】
+&lt;?php                                      //1.定义类
 class 类名 &#123;
   /* 成员变量 */
   var $var1;
   var $var2 = &quot;constant string&quot;;
   /* 成员函数 */
-  function 成员函数的函数名 ($arg1, $arg2) &#123;
-     [..]
+  function 成员函数的函数名 ($arg1, $arg2) 
+  &#123;
+      return $this-&gt;函数 = 变量             //赋值并调用函数
   &#125;
-  [..]
 &#125;
 ?&gt;
+$对象名 = new 类名;                         //2.创建对象
+echo $对象名-&gt;成员函数(&quot;传入的参数&quot;);        //3.调用成员方法
+
 大括号&#123;&#125;内可以定义变量和方法
 变量使用 var 来声明, 变量也可以初始化值
 函数定义类似 PHP 函数的定义，但函数只能通过该类及其实例化的对象访问。
 变量 $this 代表自身的对象
 
-2.创建对象
-$对象名 = new 类名;
 
-3.调用成员方法
-实例化对象后，我们可以使用该对象调用成员方法，该对象的成员方法只能操作该对象的成员变量:
-$成员对象-&gt;成员函数(&quot;内容&quot;);
+【构造函数】
+在创建对象时， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。
+&lt;?php
+class 类名 &#123;
+   function __construct() &#123;
+       print &quot;构造函数&quot;;
+       $this-&gt;name = &quot;&quot;;
+   &#125;
+   function __destruct() &#123;
+       print &quot;销毁&quot; . $this-&gt;name . &quot;\n&quot;;
+   &#125;
+&#125;
+$obj = new 类名();
+?&gt;
 
-3.PHP构造函数
-在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。
+【继承】
+子类继承父类的特征和行为，使得子类对象具有父类的属性和方法，或子类从父类继承方法，使得子类具有父类相同的行为(父类=基类)
+&lt;?php 
+// 子类扩展站点类别
+class 类名 &#123;           //extends继承一个类
+   var $category;
+    function setCate($par)&#123;
+        $this-&gt;category = $par;
+    &#125;
+    function getCate()&#123;
+        echo $this-&gt;category . PHP_EOL;
+    &#125;
+&#125;
+注意:PHP 不支持多继承
+
+【方法重写】
+顾名思义重新定义function
+
+【访问控制】
+PHP 对属性或方法的访问控制，是通过在前面添加关键字 public（公有）
+protected(受保护的)只能被自身子父类访问
+private(私有的)只能被定义的类访问
+publice(公有的)可以在任何地方访问
+类属性必须被定义，var视为publice
+
+【接口】
+概念:指定某个类必须实现哪些方法，但不需要定义这些方法的具体内容。
+特性:通过interface定义，但是其中定义的所有方法都必须是公有而且要是空的。
+类可以实现多个接口，用逗号来分隔多个接口的名称。
+
+【常量】
+在类中始终保持不变的值定义为常量。在定义和使用常量的时候不需要使用 $ 符号。
+常量的值必须是一个定值
+
+【接口与抽象类】
+1. 接口
+（1）对接口的使用是通过关键字implements
+（2）接口不能定义成员变量（包括类静态变量），能定义常量
+（3）子类必须实现接口定义的所有方法
+（4）接口只能定义不能实现该方法
+（5）接口没有构造函数
+（6）接口中的方法和实现它的类默认都是public类型的
+2. 抽象类
+（1）对抽象类的使用是通过关键字extends
+（2）不能被实例化，可以定义子类必须实现的方法
+（3）子类必须定义父类中的所有抽象方法，这些方法的访问控制必须和父类中一样（或者更为宽松）
+（4）如一个类中有一个抽象方法，则该类必须定义为抽象类
+（5）抽象类可以有构造函数
+（6）抽象类中的方法可以使用private,protected,public来修饰。
+（7）一个类可以同时实现多个接口，但一个类只能继承于一个抽象类。
+
+【关键字】
+1.Static
+(1)声明类属性或方法为 static(静态)，就可以不实例化类而直接访问
+(2)静态属性不能通过一个类已实例化的对象来访问（但静态方法可以）。
+(3)由于静态方法不需要通过对象即可调用，所以伪变量 $this 在静态方法中不可用。
+(4)静态属性不可以由对象通过 -&gt; 操作符来访问。
+2.Final
+(1)如果父类中的方法被声明为 final，则子类无法覆盖该方法。
+(2)如果一个类被声明为 final，则不能被继承。
+
+【调用父类构造方法】
+PHP 不会在子类的构造方法中自动的调用父类的构造方法。
+要执行父类的构造方法，需要在子类的构造方法中调用 parent::__construct() 
 </code></pre>
-<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><h3 id="暂停ing……"><a href="#暂停ing……" class="headerlink" title="暂停ing……"></a>暂停ing……</h3>
+<h4 id="面向对象暂时先写到这里，后面有新的认识再回来更改。"><a href="#面向对象暂时先写到这里，后面有新的认识再回来更改。" class="headerlink" title="面向对象暂时先写到这里，后面有新的认识再回来更改。"></a>面向对象暂时先写到这里，后面有新的认识再回来更改。</h4>
                 
             </div>
             <hr/>
@@ -643,13 +717,13 @@ $成员对象-&gt;成员函数(&quot;内容&quot;);
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="../../15/20221115/">
+                <a href="../../15/%E5%85%83%E5%AD%97%E7%AC%A6%E8%A1%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/14.jpg" class="responsive-img" alt="20221115">
+                        <img src="../../../../medias/featureimages/22.jpg" class="responsive-img" alt="元字符表">
                         
-                        <span class="card-title">20221115</span>
+                        <span class="card-title">元字符表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -666,8 +740,8 @@ $成员对象-&gt;成员函数(&quot;内容&quot;);
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
+                            <a href="../../../../categories/%E9%99%84%E5%BD%95/" class="post-category">
+                                    附录
                                 </a>
                             
                             
@@ -677,8 +751,8 @@ $成员对象-&gt;成员函数(&quot;内容&quot;);
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                        <span class="chip bg-color">日报</span>
+                    <a href="../../../../tags/%E9%99%84%E5%BD%95/">
+                        <span class="chip bg-color">附录</span>
                     </a>
                     
                 </div>
@@ -848,7 +922,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">35.3k</span>
+                        class="white-color">41.3k</span>
             
             
             
