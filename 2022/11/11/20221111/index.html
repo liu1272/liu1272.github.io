@@ -66,9 +66,9 @@ include (&amp;#39;文件1.php&amp;">
 
     <script src="../../../../libs/jquery/jquery-3.6.0.min.js"></script>
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -400,21 +400,21 @@ include (&amp;#39;文件1.php&amp;">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-14
+                    2022-11-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    6 分
                 </div>
                 
 
@@ -512,7 +512,13 @@ fatal error致命错误          //后续代码不会继续执行
 在ini配置文件里error_log找错误日志
 </code></pre>
 <h4 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h4><p>时间戳:时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数，不考虑闰秒。<br>配置文件可改时区，不详细讲</p>
-<h4 id="数据库简介-dos操作"><a href="#数据库简介-dos操作" class="headerlink" title="数据库简介(dos操作)"></a>数据库简介(dos操作)</h4><pre><code>&lt;不是内部命令就更改环境变量&gt;
+<h4 id="数据库简介-dos操作"><a href="#数据库简介-dos操作" class="headerlink" title="数据库简介(dos操作)"></a>数据库简介(dos操作)</h4><pre><code>对数据库的解释:
+数据库相当于文件夹，表相当于文件，字段就是内容。
+注释符:
+#    &quot;--  &quot;    /* */
+&lt;不是内部命令就更改环境变量&gt;
+
+【库操作】
 连接数据库:
 mysql -uroot -p
 查库:
@@ -521,38 +527,55 @@ show databases;
 creat database 库名;
 删库
 drop database 库名;
+退出
+mysql &gt; exit;
+mysql &gt; quit;
+mysql &gt; \q;
+重命名数据库
+RENAME database olddbname TO newdbname
 
+【表操作】
 进库:
 use 库名;
 建表:
 creat table 表名(id int,字段名 数据类型(长度) , 字段名 数据类型(位数));
 建表命令:
 show creat table 表名;
+改表名:
+alter table 原表名 rename 新名字
 查表:
 show tables;
+select * from table_name
 删表:
 drop table 表名;
-
 查表结构:
-desc 表名;
+desc 表名;                      //字段类型，主键，是否为空等属性，但不显示外键
+
+【字段操作】
 建表字段:
 alter table 表名 add 字段名 (字段类型)
 改表字段:
 alter table 表名 change 原来的字段名 现在的字段名 数据类型(位数);
 改表字段值:
 alter table 表名 modify 字段名 修改后的值
-改表名:
-alter table 原表名 rename 新名字
 删表字段:
 alter table 表名 drop 字段名
+更改表的存储引擎:
+alter table 表名 engine=存储引擎名;
+给所有字段增加数据:
+insert into users (字段名1,字段名2,字段名3)values(值1,值2,值3);
 
-插入顺序:
+【插入顺序】
 first
     alter table 表名 add 字段(字段类型) first
 after
     alter table 表名 add 字段名(字段类型) after (在谁后面)
+
+【其它命令】
+显示系统特定资源的信息
+show status;                   //例如，正在运行的线程数量。
 </code></pre>
-<h4 id="mysql数据类型"><a href="#mysql数据类型" class="headerlink" title="mysql数据类型"></a>mysql数据类型</h4><p>整形:<br>int4字节，bigint8字节<br>浮点型:<br>float(m,d)<br>double(m,d)<br>decimal(m,d)<br>字符型:<br>char定长字符串(常用于32位md5密码)<br>varchar变长字符串(常用于用户名)<br>时间型:<br>4字节，年月日格式<br>auto_increment:<br>自动增加，只用于整形，priimary&emsp;key设置起始值(默认为1)</p>
+<h4 id="mysql数据类型"><a href="#mysql数据类型" class="headerlink" title="mysql数据类型"></a>mysql数据类型</h4><p>整形:<br>int4字节，bigint8字节<br>浮点型:<br>float(m,d)<br>double(m,d)<br>decimal(m,d)<br>字符型:<br>char定长字符串(常用于32位md5密码)<br>varchar变长字符串(常用于用户名)<br>时间型:<br>4字节，年月日格式<br>auto_increment:<br>自动增加，只用于整形，priimary&emsp;key设置起始值(默认为1)<br><a href="https://www.cnblogs.com/-xlp/p/8617760.html">总结内容</a></p>
 <h5 id="以上内容皆可使用phpMyAdmin和NavicatPremium更改"><a href="#以上内容皆可使用phpMyAdmin和NavicatPremium更改" class="headerlink" title="以上内容皆可使用phpMyAdmin和NavicatPremium更改"></a>以上内容皆可使用phpMyAdmin和NavicatPremium更改</h5><h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><pre><code>普通索引:
 alter table 表名 add index(字段);
 唯一索引:
@@ -565,20 +588,7 @@ alter table 表名 add fulltext(字段);
 show index from 字段名
 </code></pre>
 <p><a href="https://blog.csdn.net/qq_35190492/article/details/109257302?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166808686716782428672275%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=166808686716782428672275&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-109257302-null-null.142%5Ev63%5Ejs_top,201%5Ev3%5Econtrol,213%5Ev2%5Et3_esquery_v2&utm_term=mysql%E7%B4%A2%E5%BC%95&spm=1018.2226.3001.4187">使用及区别</a></p>
-<h4 id="存入-删除数据"><a href="#存入-删除数据" class="headerlink" title="存入/删除数据"></a>存入/删除数据</h4><pre><code>插入值:
-insert into 字段名 values(值,值);
-值与上面的字段内的列名相对应
-insert into 字段名(列名,列名)  values(值,值);
-直接建列名并写入值，注意两个空格
-insert into 字段名(列名,列名) value(值,值);
-
-注:上面那种一定要全部字段都插入列名，但下面的不用
-select * from 表名                               //查看全部列名和值使用
-delect from 表名 where 列名 = 值;                //删除值
-update 表名 set 列名 = 值;                       //更改值
-select distinct 列名 from 表名;                  //不重复地输出该列的值
-
-select选择时如果要限制条件就在后面加上where和条件
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><pre><code>select选择时如果要限制条件就在后面加上where和条件
 where age&lt;&gt;50; == where age!50                     //取非
 age in(18,16,17);                                  //固定查询的值
 address like &#39;Ax&#39;;                                 //模糊查询A开头的
@@ -588,6 +598,30 @@ select * from 表名 limit 5,5;                      //从第五个值开始往�
 select * from 表名 group by 列名;                  //分组(只保留一个，去重)
 select count(*) from 表名;                         //显示该列有几个数据
 select 列名 as 别名 from 表名;                     //给该列起别名
+
+注意:
+and优先级高于or，因此先计算and表达式再运算or表达式
+
+聚合查询:
+count()返回行数
+sum()返回某列值的和
+avg()返回某列平均值
+max()返回某列最大值
+min()返回某列最小值
+
+分组查询:
+select * from 表名 group by 字段名;
+select * from 表名 limit 开始行数,结束行数;
+select * from 表名 as 重命名;
+
+mysql子查询:
+类似于嵌套循环，将内层的结果传递到外层进行下一步操作
+大致有:where,from,exists三个
+
+联合查询(两个表的查询):
+原理——————取得两个结果集的并集
+union默认选取不同的值。如果允许重复的值，请使用union all(不会去掉结果中的重复行)
+union all 查询全部而且不会消除重复的行
 </code></pre>
 <h4 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h4><pre><code>内联查询:
 select 列名1 from 表名1 inner join 表名2 on 条件;
@@ -970,7 +1004,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">41.3k</span>
+                        class="white-color">45.4k</span>
             
             
             
