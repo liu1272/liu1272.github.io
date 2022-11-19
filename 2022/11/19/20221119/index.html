@@ -5,7 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="20221119, Robin">
-    <meta name="description" content="每日一记基于面向对象的Python爬虫">
+    <meta name="description" content="每日一记基于面向对象的Python爬虫import urllib.request
+import re
+
+class GetHtml(object):
+    def __init__(self,URL,HEAD):      //初始化
+ ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -400,7 +405,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    14
+                    166
                 </div>
                 
 
@@ -427,7 +432,38 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="基于面向对象的Python爬虫"><a href="#基于面向对象的Python爬虫" class="headerlink" title="基于面向对象的Python爬虫"></a>基于面向对象的Python爬虫</h4>
+                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="基于面向对象的Python爬虫"><a href="#基于面向对象的Python爬虫" class="headerlink" title="基于面向对象的Python爬虫"></a>基于面向对象的Python爬虫</h4><pre><code>import urllib.request
+import re
+
+class GetHtml(object):
+    def __init__(self,URL,HEAD):      //初始化
+        self.url=URL
+        self.head=HEAD
+    
+    def get_index(self):              //获取主页信息
+        self.request=urllib.request.Request(self.url)
+        self.request.add_header(&#39;user-agent&#39;,self.request)
+        self.response=urllib.request.urlopen(self.request)
+        return self.response.read()
+    
+    def get_list(self):               //获取符合条件的列表
+        self.strimglist=[]
+        self.imglist=re.findall(b&#39;匹配条件&#39;,self.get_index())
+        for i in self.imglist:
+            self.strimglist.append(self.url+str(i,encoding=&#39;utf8&#39;))
+        return self.strimglist
+    
+    def get_image(self):              //下载资源
+        num=0
+        for self.url in self.get_list():
+            num+=1
+            with open(str(num)+&#39;后缀&#39;,&#39;wb&#39;) as file:
+                file.write(self.get_index())
+
+html=GetHtml(&#39;目标地址&#39;,&#39;请求头&#39;)
+html.get_list()
+</code></pre>
+
                 
             </div>
             <hr/>
@@ -783,7 +819,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">45.4k</span>
+                        class="white-color">45.6k</span>
             
             
             

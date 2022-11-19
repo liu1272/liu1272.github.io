@@ -21,7 +21,7 @@
       <link href="/2022/11/19/20221119/"/>
       <url>/2022/11/19/20221119/</url>
       
-        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="基于面向对象的Python爬虫"><a href="#基于面向对象的Python爬虫" class="headerlink" title="基于面向对象的Python爬虫"></a>基于面向对象的Python爬虫</h4>]]></content>
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="基于面向对象的Python爬虫"><a href="#基于面向对象的Python爬虫" class="headerlink" title="基于面向对象的Python爬虫"></a>基于面向对象的Python爬虫</h4><pre><code>import urllib.requestimport reclass GetHtml(object):    def __init__(self,URL,HEAD):      //初始化        self.url=URL        self.head=HEAD        def get_index(self):              //获取主页信息        self.request=urllib.request.Request(self.url)        self.request.add_header(&#39;user-agent&#39;,self.request)        self.response=urllib.request.urlopen(self.request)        return self.response.read()        def get_list(self):               //获取符合条件的列表        self.strimglist=[]        self.imglist=re.findall(b&#39;匹配条件&#39;,self.get_index())        for i in self.imglist:            self.strimglist.append(self.url+str(i,encoding=&#39;utf8&#39;))        return self.strimglist        def get_image(self):              //下载资源        num=0        for self.url in self.get_list():            num+=1            with open(str(num)+&#39;后缀&#39;,&#39;wb&#39;) as file:                file.write(self.get_index())html=GetHtml(&#39;目标地址&#39;,&#39;请求头&#39;)html.get_list()</code></pre>]]></content>
       
       
       
@@ -40,7 +40,7 @@
       <link href="/2022/11/18/20221118/"/>
       <url>/2022/11/18/20221118/</url>
       
-        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h4>]]></content>
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h4><p>类:设计<br>对象:实例</p><h4 id="类的命名"><a href="#类的命名" class="headerlink" title="类的命名"></a>类的命名</h4><p>驼峰命名法</p><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><pre><code>class 类名:    属性(变量) = 值    def 函数名(self):         //方法(函数),一定要写self        执行代码对象名=类名()                 //创建对象对象名.函数()                 //调用对象</code></pre><h4 id="魔法方法"><a href="#魔法方法" class="headerlink" title="魔法方法"></a>魔法方法</h4><p>通常格式为__方法名__</p><pre><code>def __init__(self,值):    self.属性=值如果值也是一个变量就能随时传参进行更改</code></pre><h4 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h4><p>1.定义类class<br>2.创建内存空间,定义属性和方法<br>3.实例化类,创建对象<br>4.调用类的方法</p>]]></content>
       
       
       
