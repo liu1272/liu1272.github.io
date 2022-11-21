@@ -68,9 +68,9 @@ apt-get update 更新软件列表
 
     <script src="../../../../libs/jquery/jquery-3.6.0.min.js"></script>
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
-</head>
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
 <body>
@@ -418,14 +418,14 @@ apt-get update 更新软件列表
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4k
+                    4.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    15 分
+                    17 分
                 </div>
                 
 
@@ -693,6 +693,40 @@ find . -type f -mtime +1  查找当前目录下，最近1天前修改过的常�
 -type d 代表文件夹
 
 find / -name *.rpm -exec chmod 755 ‘&#123;&#125;’ ; 搜索以 ‘.rpm’ 结尾的文件并定义其权限
+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--
+文件中r w x -的含义:
+r是只读权限，w是写的权限，x是可执行权限,-是没有任何权限。
+目录中r w x的含义:
+r具有ls权限，w是在目录上可以增加、删除、创建权限，x是具有ls –l权限。
+
+权限     读    写   执行        读    写   执行      读   写   执行
+字符     r     w     x           r     w    x         r    w    x
+数字     4     2     1           4     2    1         4    2    1
+分配     对象文件所有者          文件所属组用户         其他用户
+
+chmod 777 +文件名 给单独文件赋所有权限
+chmod -R 777 /home/user  表示将整个/home/user目录与其中的文件和子目录的权限都设置为rwxrwxrwx
+
+常用权限
+-rw------- (600) 只有所有者才有读和写的权限
+-rw-r--r-- (644) 只有所有者才有读和写的权限，组群和其他人只有读的权限
+-rwx------ (700) 只有所有者才有读，写，执行的权限
+-rwxr-xr-x (755) 只有所有者才有读，写，执行的权限，组群和其他人只有读和执行的权限
+-rwx--x--x (711) 只有所有者才有读，写，执行的权限，组群和其他人只有执行的权限
+-rw-rw-rw- (666) 每个人都有读写的权限
+-rwxrwxrwx (777) 每个人都有读写和执行的权限
+
+也可以使用字母模式
+chmod +x 和chmod a+x 是一样的，一般没有明确要求，可以就用chmod +x
+u代表用户   g代表用户组   o代表其它   a代表所有
+
+创建一个文件只有用户具有完全控制的权限
+touch 文件名
+chmod u+rwx 文件名 当前用户加全部的权限
+chmod g-r 文件名   群组把读取权限去掉
+chmod o-r 文件名   其他用户读取权限去掉
+
+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--
 
 find / -xdev -name *.rpm 搜索以 ‘.rpm’ 结尾的文件，忽略光驱、捷盘等可移动设备
 
@@ -1268,7 +1302,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">49.8k</span>
+                        class="white-color">50.3k</span>
             
             
             
