@@ -41,11 +41,35 @@
   </entry>
   
   <entry>
+    <title>Windows常用命令</title>
+    <link href="https://liu1272.github.io/2022/11/20/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>https://liu1272.github.io/2022/11/20/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
+    <published>2022-11-20T11:37:00.000Z</published>
+    <updated>2022-11-21T11:38:20.217Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Windows常用命令"><a href="#Windows常用命令" class="headerlink" title="Windows常用命令"></a>Windows常用命令</h3><pre><code>ifconfig /all 获取获取域名、IP地址、DHCP服务器、网关、MAC地址、主机名net time /domain 查看域名、时间net view /domain 查看域内所有共享net view ip 查看对方局域网内开启了哪些共享net config workstation 查看域名、机器名等net user 用户名 密码 /add 建立用户net user 用户名 /del #删除用户net user guest /active:yes 激活guest账户net user 查看账户net user 账户名 查看指定账户信息net user /domain 查看域内有哪些用户，Windows NT Workstation 计算机上可用，由此可以此判断用户是否是域成员。net user 用户名 /domain 查看账户信息net group /domain 查看域中的组net group &quot;domain admins&quot; /domain 查看当前域的管理用户query user 查看当前在线的用户net localgroup 查看所有的本地组net localgroup administrators 查看administrators组中有哪些用户net localgroup administrators 用户名 /add 把用户添加到管理员组中net start 查看开启服务net start 服务名 开启某服务net stop 服务名 停止某服务net share 查看本地开启的共享net share ipc$ 开启ipc$共享net share ipc$ /del 删除ipc$共享net share c$ /del 删除C：共享\\192.168.0.108\c 访问默认共享c盘dsquery server 查看所有域控制器dsquery subnet 查看域内内子网dsquery group 查看域内工作组dsquery site 查看域内站点netstat -a 查看开启了哪些端口,常用netstat -annetstat -n 查看端口的网络连接情况，常用netstat -annetstat -v 查看正在进行的工作netstat -p 协议名 例：netstat -p tcq/ip 查看某协议使用情况（查看tcp/ip协议使用情况）netstat -s 查看正在使用的所有协议使用情况nbtstat -A ip 对方136到139其中一个端口开了的话，就可查看对方最近登陆的用户名（03前的为用户名）-注意：参数-A要大写reg save hklm\sam sam.hive 导出用户组信息、权限配置reg save hklm\system system.hive 导出SYSKEYnet use \\目标IP\ipc$ 密码 /u:用户名 连接目标机器at \\目标IP 21:31 c:\server.exe 在某个时间启动某个应用wmic /node:&quot;目标IP&quot; /password:&quot;123456&quot; /user:&quot;admin&quot; 连接目标机器psexec.exe \\目标IP -u username -p password -s cmd 在目标机器上执行cmdfinger username @host 查看最近有哪些用户登陆route print 显示出IP路由，将主要显示网络地址Network addres，子网掩码Netmask，网关地址Gateway addres，接口地址Interfacearp 查看和处理ARP缓存，ARP是名字解析的意思，负责把一个IP解析成一个物理性的MAC地址。arp -a 将显示出全部信息nslookup IP地址侦测器tasklist 查看当前进程taskkill /pid PID数 终止指定PID进程whoami 查看当前用户及权限systeminfo 查看计算机信息（版本，位数，补丁情况）ver 查看计算机操作系统版本tasklist /svc 查看当前计算机进程情况netstat -ano 查看当前计算机进程情况wmic product &gt; ins.txt 查看安装软件以及版本路径等信息，重定向到ins.txt</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;Windows常用命令&quot;&gt;&lt;a href=&quot;#Windows常用命令&quot; class=&quot;headerlink&quot; title=&quot;Windows常用命令&quot;&gt;&lt;/a&gt;Windows常用命令&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;ifconfig /all 获取获取域名、IP地址、</summary>
+      
+    
+    
+    
+    <category term="附录" scheme="https://liu1272.github.io/categories/%E9%99%84%E5%BD%95/"/>
+    
+    
+    <category term="附录" scheme="https://liu1272.github.io/tags/%E9%99%84%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ODBC数据库</title>
     <link href="https://liu1272.github.io/2022/11/19/ODBC%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     <id>https://liu1272.github.io/2022/11/19/ODBC%E6%95%B0%E6%8D%AE%E5%BA%93/</id>
-    <published>2022-11-18T18:49:30.000Z</published>
-    <updated>2022-11-18T18:49:35.607Z</updated>
+    <published>2022-11-18T18:49:00.000Z</published>
+    <updated>2022-11-21T06:03:24.436Z</updated>
     
     <content type="html"><![CDATA[<h5 id="此章节是拓展阅读，选择性食用"><a href="#此章节是拓展阅读，选择性食用" class="headerlink" title="此章节是拓展阅读，选择性食用"></a>此章节是拓展阅读，选择性食用</h5><p>概念:ODBC 是一种应用程序编程接口(API)，使我们有能力连接到某个数据源。</p><h4 id="创建-ODBC-连接"><a href="#创建-ODBC-连接" class="headerlink" title="创建 ODBC 连接"></a>创建 ODBC 连接</h4><p>通过一个 ODBC 连接，可以连接到网络中的任何计算机上的任何数据库。<br>创建到达 MS Access 数据库的 ODBC 连接的方法:<br>1.在控制面板中打开管理工具图标。<br>2.双击其中的数据源(ODBC)图标。<br>3.选择系统 DSN 选项卡。<br>4.点击系统 DSN 选项卡中的添加。<br>5.选择Microsoft Access Driver。点击完成。<br>6.在下一个界面，点击选择来定位数据库。<br>7.为数据库起一个数据源名(DSN)。<br>8.点击确定。</p><p>注意:必须在您的网站所在的计算机上完成这个配置。<br>如果您的计算机上正在运行 Internet 信息服务(IIS)，上面的指令将会生效。<br>但是如果您的网站位于远程服务器，您必须拥有对该服务器的物理访问权限，或者请您的主机提供商为您建立 DSN。</p><h4 id="连接-ODBC"><a href="#连接-ODBC" class="headerlink" title="连接 ODBC"></a>连接 ODBC</h4><pre><code>实例下面的实例创建了到达名为 link 的 DSN 的连接，没有用户名和密码。然后创建并执行一条 SQL 语句：$conn=odbc_connect(&#39;link&#39;,&#39;&#39;,&#39;&#39;);           //数据源名、用户名、密码以及可选的指针类型$sql=&quot;SELECT * FROM customers&quot;;$rs=odbc_exec($conn,$sql);                  //执行 SQL 语句</code></pre><h4 id="取回记录"><a href="#取回记录" class="headerlink" title="取回记录"></a>取回记录</h4><p>从结果集中返回记录。如果能够返回行，则函数返回 true，否则返回 false。</p><pre><code>该函数有两个参数：ODBC 结果标识符和可选的行号:odbc_fetch_row ( resource $result_id [, int $row_number = 1 ] )</code></pre><h4 id="从记录中取回字段"><a href="#从记录中取回字段" class="headerlink" title="从记录中取回字段"></a>从记录中取回字段</h4><p>从记录中读取字段。该函数有两个参数:ODBC 结果标识符和字段编号或名称。</p><pre><code>$compname=odbc_result($rs,1);                             //从记录中返回第一个字段的值$compname=odbc_result($rs,&quot;CompanyName&quot;);                 //返回名为 &quot;CompanyName&quot; 的字段的值</code></pre><h4 id="关闭-ODBC-连接"><a href="#关闭-ODBC-连接" class="headerlink" title="关闭 ODBC 连接"></a>关闭 ODBC 连接</h4><p> odbc_close($conn); </p><h4 id="全过程示例"><a href="#全过程示例" class="headerlink" title="全过程示例"></a>全过程示例</h4><pre><code> &lt;?php $conn=odbc_connect(&#39;northwind&#39;,&#39;&#39;,&#39;&#39;);            //连接 ODBC if (!$conn)                                       //验证链接 &#123;exit(&quot;Connection Failed: &quot; . $conn);&#125;            //失败的回显 $sql=&quot;SELECT * FROM customers&quot;;                   //创建链接 $rs=odbc_exec($conn,$sql);                        //执行 SQL 语句 if (!$rs) &#123;exit(&quot;Error in SQL&quot;);&#125;                           //判断是否连接正常 echo &quot;&lt;table&gt;&lt;tr&gt;&quot;; echo &quot;&lt;th&gt;Companyname&lt;/th&gt;&quot;;                      //回显 echo &quot;&lt;th&gt;Contactname&lt;/th&gt;&lt;/tr&gt;&quot;; while (odbc_fetch_row($rs))                       //取回记录 &#123; $compname=odbc_result($rs,&quot;CompanyName&quot;);         //从记录中取回字段compname $conname=odbc_result($rs,&quot;ContactName&quot;);          //从记录中取回字段compname echo &quot;&lt;tr&gt;&lt;td&gt;$compname&lt;/td&gt;&quot;;  echo &quot;&lt;td&gt;$conname&lt;/td&gt;&lt;/tr&gt;&quot;; &#125; odbc_close($conn);                                //关闭 ODBC 连接 echo &quot;&lt;/table&gt;&quot;; ?&gt;</code></pre>]]></content>
     
@@ -57,6 +81,10 @@
     
     
     
+    <category term="附录" scheme="https://liu1272.github.io/categories/%E9%99%84%E5%BD%95/"/>
+    
+    
+    <category term="附录" scheme="https://liu1272.github.io/tags/%E9%99%84%E5%BD%95/"/>
     
   </entry>
   
@@ -451,30 +479,6 @@
       
       
     <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;函数表达式&quot;&gt;&lt;a href=&quot;#函数表达式&quot; class=&quot;headerlink&quot; title=&quot;函数表达式&quot;&gt;</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221103</title>
-    <link href="https://liu1272.github.io/2022/11/03/20221103/"/>
-    <id>https://liu1272.github.io/2022/11/03/20221103/</id>
-    <published>2022-11-02T16:32:00.000Z</published>
-    <updated>2022-11-11T18:31:25.886Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><h5 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h5><pre><code>let i = 0;while (i &lt; 3) &#123;           #条件的结果会被转化为布尔值  alert( i );  i++;&#125;</code></pre><p>如果循环体只有一条语句(单循环体)，则可以省略大括号</p><h5 id="do…while循环"><a href="#do…while循环" class="headerlink" title="do…while循环"></a>do…while循环</h5><pre><code>let i = 0;do &#123;  alert( i );  i++;&#125; while (i &lt; 3);</code></pre><p>将条件检查移至循环体下面<br>先执行循环体，然后检查条件，当条件为真时，重复执行循环体</p><h5 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h5><pre><code>for (begin; condition; step) &#123;  循环体&#125;begin进入循环时执行一次condition判断条件body条件为真时，重复运行step每次循环体迭代后执行</code></pre><p>内联变量声明:<br>&emsp;&emsp;函数在执行时，会先在自己的函数体里查询变量，如果没有，才会一级一级往上查找。函数show()在执行时，输出第一个变量a是undefined是因为它现在自己的执行环境里查询到变量a已声明，即变量提升（即变量可以提前声明但是赋值是不可以的），此时就输出了undefined。<br>&emsp;&emsp;因此会出现变量污染现象<br>省略语句段:<br>&emsp;&emsp;不需要做任何事的部分，就可以省略 begin 语句段<br>&emsp;&emsp;注意for的两个;必须存在</p><h5 id="break与continue"><a href="#break与continue" class="headerlink" title="break与continue"></a>break与continue</h5><p>一，普通<br>用法与python一样<br>但是，禁止break/continue在‘?’的右边<br>所以，不建议使用?代替if语句<br>二，进阶</p><pre><code>标签(在循环之前带有冒号的标识符)break &lt;labelName&gt; 语句跳出循环至标签labelName:处continue &lt;labelName&gt; 语句执行跳转到标记循环的下一次迭代可以将标签移至单独一行break 指令必须在代码块内continue 只有在循环内部才可行</code></pre><h5 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h5><pre><code>至少一个 case 代码块和一个可选的 default 代码块switch(x) &#123;  case &#39;value1&#39;:  // if (x === &#39;value1&#39;)    ...    [break]  case &#39;value2&#39;:  // if (x === &#39;value2&#39;)    ...    [break]  default:    ...    [break]&#125;流程:判断条件从成立的开始往下执行直到break，若无break则走到尾(包括default)分组:case 3: // (*) 下面这两个 case 被分在一组，满足一个条件就执行，原理是没有breakcase 5:  alert(&#39;Wrong!&#39;);  alert(&quot;Why don&#39;t you take a math class?&quot;);  break;</code></pre><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>在 JavaScript 中，函数不是“神奇的语言结构”，而是一种特殊的值<br>创建函数的三种方法:函数声明，函数表达式，箭头函数</p><pre><code>function name(parameter1, parameter2, ... parameterN) &#123;  ...body...&#125;name();首先是关键字，然后是函数名，然后是括号之间的参数列表(用逗号分隔)，最后是花括号之间的代码(函数体)parameter是函数参数，下面引用函数时可以使用它作为参数(argument)未提供parameter时，那么相应的值就会变成undefined(默认参数)可以text = &quot;内容&quot;这样子来传参返回值return执行时，函数停止，并将值返回给调用代码，没有返回值会导致函数立即退出并为undefined</code></pre><p>局部变量:<br>在函数中声明的变量只在该函数内部可见</p><p>外部变量:<br>函数也可以访问外部变量<br>函数对外部变量拥有全部的访问权限。函数也可以修改外部变量。<br>函数内部声明了同名变量，那么函数会遮蔽外部变量</p><pre><code>默认参数的计算:在JS中，函数在没带个别参数的情况下被调用，默认参数会被计算出来。如果传递了参数text，那么anotherFunction()就不会被调用。如果没传递参数text，那么anotherFunction()就会被调用。function showMessage(from, text = anotherFunction()) &#123;  // anotherFunction() 仅在没有给定 text 时执行  // 其运行结果将成为 text 的值&#125;也可以这样function showCount(count) &#123;  // 如果 count 为 undefined 或 null，则提示 &quot;unknown&quot;  alert(count ?? &quot;unknown&quot;);&#125;showCount(0); // 0showCount(null); // unknownshowCount();                        // unknown或者这样function showMessage(text) &#123;  // ...  if (text === undefined) &#123;         // 如果参数未被传递进来    text = &#39;empty message&#39;;  &#125;  alert(text);&#125;showMessage();                      // empty message还可以这样function showMessage(text) &#123;  // 如果 text 为 undefined 或者为假值，那么将其赋值为 &#39;empty&#39;  text = text || &#39;empty&#39;;  alert(text);&#125;showMessage();                     // empty</code></pre><p>返回值</p><pre><code>function doNothing() &#123; /* 没有代码 */ &#125;alert( doNothing());函数无返回值，它就会像返回 undefined 一样空值的 return 和 return undefined 等效如果想要将返回的表达式写成跨多行的形式，那么应该在return的同一行开始写此表达式(比如先写个括号)</code></pre><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>作为参数传递给函数的值，会被复制到函数的局部变量。<br>函数可以访问外部变量。但它只能从内到外起作用。函数外部的代码看不到函数内的局部变量。<br>函数可以返回值。如果没有返回值，则其返回的结果是 undefined。<br>为了使代码简洁易懂，建议在函数中主要使用局部变量和参数，而不是外部变量<br>获取参数、使用参数并返回结果的函数更容易理解。<br>一个好的函数名能够让我们马上知道这个函数的功能是什么，会返回什么。<br>一个单独的函数不仅更容易测试和调试 —— 它的存在本身就是一个很好的注释！</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>一月添香<br>二月夜未央<br>三月情诗慌张<br>四月对镜补红妆<br>五月相携游马十方<br>六月日日笙歌抛流光<br>七月为卿斟唱曲水流觞<br>八月年华辗转处陌上成双<br>九月田中百花争艳怜意满腔<br>十月眠里光阴归去思念倾满江<br>十一月冬雷阵阵我笑悲歌不恸上苍<br>十二月天寒地冻凭楼伫等把痴梦熬荒<br>可叹，人间再无双</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;循环&quot;&gt;&lt;a href=&quot;#循环&quot; class=&quot;headerlink&quot; title=&quot;循环&quot;&gt;&lt;/a&gt;循环&lt;/h</summary>
       
     
     

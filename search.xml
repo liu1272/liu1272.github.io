@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>Windows常用命令</title>
+      <link href="/2022/11/20/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2022/11/20/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Windows常用命令"><a href="#Windows常用命令" class="headerlink" title="Windows常用命令"></a>Windows常用命令</h3><pre><code>ifconfig /all 获取获取域名、IP地址、DHCP服务器、网关、MAC地址、主机名net time /domain 查看域名、时间net view /domain 查看域内所有共享net view ip 查看对方局域网内开启了哪些共享net config workstation 查看域名、机器名等net user 用户名 密码 /add 建立用户net user 用户名 /del #删除用户net user guest /active:yes 激活guest账户net user 查看账户net user 账户名 查看指定账户信息net user /domain 查看域内有哪些用户，Windows NT Workstation 计算机上可用，由此可以此判断用户是否是域成员。net user 用户名 /domain 查看账户信息net group /domain 查看域中的组net group &quot;domain admins&quot; /domain 查看当前域的管理用户query user 查看当前在线的用户net localgroup 查看所有的本地组net localgroup administrators 查看administrators组中有哪些用户net localgroup administrators 用户名 /add 把用户添加到管理员组中net start 查看开启服务net start 服务名 开启某服务net stop 服务名 停止某服务net share 查看本地开启的共享net share ipc$ 开启ipc$共享net share ipc$ /del 删除ipc$共享net share c$ /del 删除C：共享\\192.168.0.108\c 访问默认共享c盘dsquery server 查看所有域控制器dsquery subnet 查看域内内子网dsquery group 查看域内工作组dsquery site 查看域内站点netstat -a 查看开启了哪些端口,常用netstat -annetstat -n 查看端口的网络连接情况，常用netstat -annetstat -v 查看正在进行的工作netstat -p 协议名 例：netstat -p tcq/ip 查看某协议使用情况（查看tcp/ip协议使用情况）netstat -s 查看正在使用的所有协议使用情况nbtstat -A ip 对方136到139其中一个端口开了的话，就可查看对方最近登陆的用户名（03前的为用户名）-注意：参数-A要大写reg save hklm\sam sam.hive 导出用户组信息、权限配置reg save hklm\system system.hive 导出SYSKEYnet use \\目标IP\ipc$ 密码 /u:用户名 连接目标机器at \\目标IP 21:31 c:\server.exe 在某个时间启动某个应用wmic /node:&quot;目标IP&quot; /password:&quot;123456&quot; /user:&quot;admin&quot; 连接目标机器psexec.exe \\目标IP -u username -p password -s cmd 在目标机器上执行cmdfinger username @host 查看最近有哪些用户登陆route print 显示出IP路由，将主要显示网络地址Network addres，子网掩码Netmask，网关地址Gateway addres，接口地址Interfacearp 查看和处理ARP缓存，ARP是名字解析的意思，负责把一个IP解析成一个物理性的MAC地址。arp -a 将显示出全部信息nslookup IP地址侦测器tasklist 查看当前进程taskkill /pid PID数 终止指定PID进程whoami 查看当前用户及权限systeminfo 查看计算机信息（版本，位数，补丁情况）ver 查看计算机操作系统版本tasklist /svc 查看当前计算机进程情况netstat -ano 查看当前计算机进程情况wmic product &gt; ins.txt 查看安装软件以及版本路径等信息，重定向到ins.txt</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 附录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 附录 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ODBC数据库</title>
       <link href="/2022/11/19/ODBC%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
       <url>/2022/11/19/ODBC%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
@@ -36,6 +61,18 @@
         <content type="html"><![CDATA[<h5 id="此章节是拓展阅读，选择性食用"><a href="#此章节是拓展阅读，选择性食用" class="headerlink" title="此章节是拓展阅读，选择性食用"></a>此章节是拓展阅读，选择性食用</h5><p>概念:ODBC 是一种应用程序编程接口(API)，使我们有能力连接到某个数据源。</p><h4 id="创建-ODBC-连接"><a href="#创建-ODBC-连接" class="headerlink" title="创建 ODBC 连接"></a>创建 ODBC 连接</h4><p>通过一个 ODBC 连接，可以连接到网络中的任何计算机上的任何数据库。<br>创建到达 MS Access 数据库的 ODBC 连接的方法:<br>1.在控制面板中打开管理工具图标。<br>2.双击其中的数据源(ODBC)图标。<br>3.选择系统 DSN 选项卡。<br>4.点击系统 DSN 选项卡中的添加。<br>5.选择Microsoft Access Driver。点击完成。<br>6.在下一个界面，点击选择来定位数据库。<br>7.为数据库起一个数据源名(DSN)。<br>8.点击确定。</p><p>注意:必须在您的网站所在的计算机上完成这个配置。<br>如果您的计算机上正在运行 Internet 信息服务(IIS)，上面的指令将会生效。<br>但是如果您的网站位于远程服务器，您必须拥有对该服务器的物理访问权限，或者请您的主机提供商为您建立 DSN。</p><h4 id="连接-ODBC"><a href="#连接-ODBC" class="headerlink" title="连接 ODBC"></a>连接 ODBC</h4><pre><code>实例下面的实例创建了到达名为 link 的 DSN 的连接，没有用户名和密码。然后创建并执行一条 SQL 语句：$conn=odbc_connect(&#39;link&#39;,&#39;&#39;,&#39;&#39;);           //数据源名、用户名、密码以及可选的指针类型$sql=&quot;SELECT * FROM customers&quot;;$rs=odbc_exec($conn,$sql);                  //执行 SQL 语句</code></pre><h4 id="取回记录"><a href="#取回记录" class="headerlink" title="取回记录"></a>取回记录</h4><p>从结果集中返回记录。如果能够返回行，则函数返回 true，否则返回 false。</p><pre><code>该函数有两个参数：ODBC 结果标识符和可选的行号:odbc_fetch_row ( resource $result_id [, int $row_number = 1 ] )</code></pre><h4 id="从记录中取回字段"><a href="#从记录中取回字段" class="headerlink" title="从记录中取回字段"></a>从记录中取回字段</h4><p>从记录中读取字段。该函数有两个参数:ODBC 结果标识符和字段编号或名称。</p><pre><code>$compname=odbc_result($rs,1);                             //从记录中返回第一个字段的值$compname=odbc_result($rs,&quot;CompanyName&quot;);                 //返回名为 &quot;CompanyName&quot; 的字段的值</code></pre><h4 id="关闭-ODBC-连接"><a href="#关闭-ODBC-连接" class="headerlink" title="关闭 ODBC 连接"></a>关闭 ODBC 连接</h4><p> odbc_close($conn); </p><h4 id="全过程示例"><a href="#全过程示例" class="headerlink" title="全过程示例"></a>全过程示例</h4><pre><code> &lt;?php $conn=odbc_connect(&#39;northwind&#39;,&#39;&#39;,&#39;&#39;);            //连接 ODBC if (!$conn)                                       //验证链接 &#123;exit(&quot;Connection Failed: &quot; . $conn);&#125;            //失败的回显 $sql=&quot;SELECT * FROM customers&quot;;                   //创建链接 $rs=odbc_exec($conn,$sql);                        //执行 SQL 语句 if (!$rs) &#123;exit(&quot;Error in SQL&quot;);&#125;                           //判断是否连接正常 echo &quot;&lt;table&gt;&lt;tr&gt;&quot;; echo &quot;&lt;th&gt;Companyname&lt;/th&gt;&quot;;                      //回显 echo &quot;&lt;th&gt;Contactname&lt;/th&gt;&lt;/tr&gt;&quot;; while (odbc_fetch_row($rs))                       //取回记录 &#123; $compname=odbc_result($rs,&quot;CompanyName&quot;);         //从记录中取回字段compname $conname=odbc_result($rs,&quot;ContactName&quot;);          //从记录中取回字段compname echo &quot;&lt;tr&gt;&lt;td&gt;$compname&lt;/td&gt;&quot;;  echo &quot;&lt;td&gt;$conname&lt;/td&gt;&lt;/tr&gt;&quot;; &#125; odbc_close($conn);                                //关闭 ODBC 连接 echo &quot;&lt;/table&gt;&quot;; ?&gt;</code></pre>]]></content>
       
       
+      <categories>
+          
+          <category> 附录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 附录 </tag>
+            
+        </tags>
       
     </entry>
     

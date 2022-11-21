@@ -4,10 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="20221031, Robin">
-    <meta name="description" content="好久没更新了不是不想写，而是真的没时间写。因为大学牲……
-——————————卑微的分割线——————————
-首先简述一下过去一个月的收获1.当然是搭建了这个HexoBlog啦！！！虽然有人吐槽简陋而且没有服务器，但是这终归是我自己搭建的">
+    <meta name="keywords" content="Windows常用命令, Robin">
+    <meta name="description" content="Windows常用命令ifconfig /all 获取获取域名、IP地址、DHCP服务器、网关、MAC地址、主机名
+net time /domain 查看域名、时间
+net view /domain 查看域内所有共享
+net view ip">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>20221031 | Robin</title>
+    <title>Windows常用命令 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -345,12 +346,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">20221031</h1>
+                    <h1 class="description center-align post-title">Windows常用命令</h1>
                 </div>
             </div>
         </div>
@@ -372,8 +373,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
-                                <span class="chip bg-color">随笔</span>
+                            <a href="../../../../tags/%E9%99%84%E5%BD%95/">
+                                <span class="chip bg-color">附录</span>
                             </a>
                         
                     </div>
@@ -384,8 +385,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="../../../../categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                随笔
+                            <a href="../../../../categories/%E9%99%84%E5%BD%95/" class="post-category">
+                                附录
                             </a>
                         
                     </div>
@@ -397,28 +398,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-10-31
+                    2022-11-20
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-02
+                    2022-11-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    388
+                    816
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -438,13 +439,62 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>好久没更新了<br>不是不想写，而是真的没时间写。<br>因为大学牲……</p>
-<p>——————————卑微的分割线——————————</p>
-<p>首先简述一下过去一个月的收获<br>1.当然是搭建了这个HexoBlog啦！！！虽然有人吐槽简陋而且没有服务器，但是这终归是我自己搭建的我所喜欢的博客。<br>  所以，请不要随意评论我的Blog哦~~<br>2.简简单单地学习了HTML和CSS，大概能够手搓一个非常非常简单的前端页面了<br>3.入门了CTF，这也是我这一个月所有忙活的目标。<br>  在这一个月里，经过无数次的磕磕碰碰，付出了无数的精力后，从一个完完全全的小白蜕变成了能够自己觅食寻找出路的初学者<br>4.参加了各种各样的社团面试和活动，每天都安排得满满的真的很累</p>
-<p>然后再说一下未来的目标<br>1.肯定是继续学习前端JS还有后端PHP<br>2.写题啥的先放一下，因为靠写题来学习知识效率太低了<br>3.努力学好高数和线代……(希望)<br>4希望能够加入方班预备班？？？不是，咋我刚写下来就发通知通过了？？？</p>
-<p>最后唠嗑两句<br>想结果的花，都早早低头;时人不识凌云木，直待凌云始道高。</p>
-<p>—————————还是卑微的分割线—————————</p>
-<p>附:<br>欢迎来看看我的<a href="https://gitmind.cn/app/doc/48spll2fph">笔记</a> ————&gt; 问题很多所以看看就好，保质期一个月</p>
+                <h3 id="Windows常用命令"><a href="#Windows常用命令" class="headerlink" title="Windows常用命令"></a>Windows常用命令</h3><pre><code>ifconfig /all 获取获取域名、IP地址、DHCP服务器、网关、MAC地址、主机名
+net time /domain 查看域名、时间
+net view /domain 查看域内所有共享
+net view ip 查看对方局域网内开启了哪些共享
+net config workstation 查看域名、机器名等
+net user 用户名 密码 /add 建立用户
+net user 用户名 /del #删除用户
+net user guest /active:yes 激活guest账户
+net user 查看账户
+net user 账户名 查看指定账户信息
+net user /domain 查看域内有哪些用户，Windows NT Workstation 计算机上可用，由此可以此判断用户是否是域成员。
+net user 用户名 /domain 查看账户信息
+net group /domain 查看域中的组
+net group &quot;domain admins&quot; /domain 查看当前域的管理用户
+query user 查看当前在线的用户
+net localgroup 查看所有的本地组
+net localgroup administrators 查看administrators组中有哪些用户
+net localgroup administrators 用户名 /add 把用户添加到管理员组中
+net start 查看开启服务
+net start 服务名 开启某服务
+net stop 服务名 停止某服务
+net share 查看本地开启的共享
+net share ipc$ 开启ipc$共享
+net share ipc$ /del 删除ipc$共享
+net share c$ /del 删除C：共享
+\\192.168.0.108\c 访问默认共享c盘
+dsquery server 查看所有域控制器
+dsquery subnet 查看域内内子网
+dsquery group 查看域内工作组
+dsquery site 查看域内站点
+netstat -a 查看开启了哪些端口,常用netstat -an
+netstat -n 查看端口的网络连接情况，常用netstat -an
+netstat -v 查看正在进行的工作
+netstat -p 协议名 例：netstat -p tcq/ip 查看某协议使用情况（查看tcp/ip协议使用情况）
+netstat -s 查看正在使用的所有协议使用情况
+nbtstat -A ip 对方136到139其中一个端口开了的话，就可查看对方最近登陆的用户名（03前的为用户名）-注意：参数-A要大写
+reg save hklm\sam sam.hive 导出用户组信息、权限配置
+reg save hklm\system system.hive 导出SYSKEY
+net use \\目标IP\ipc$ 密码 /u:用户名 连接目标机器
+at \\目标IP 21:31 c:\server.exe 在某个时间启动某个应用
+wmic /node:&quot;目标IP&quot; /password:&quot;123456&quot; /user:&quot;admin&quot; 连接目标机器
+psexec.exe \\目标IP -u username -p password -s cmd 在目标机器上执行cmd
+finger username @host 查看最近有哪些用户登陆
+route print 显示出IP路由，将主要显示网络地址Network addres，子网掩码Netmask，网关地址Gateway addres，接口地址Interface
+arp 查看和处理ARP缓存，ARP是名字解析的意思，负责把一个IP解析成一个物理性的MAC地址。
+arp -a 将显示出全部信息
+nslookup IP地址侦测器
+tasklist 查看当前进程
+taskkill /pid PID数 终止指定PID进程
+whoami 查看当前用户及权限
+systeminfo 查看计算机信息（版本，位数，补丁情况）
+ver 查看计算机操作系统版本
+tasklist /svc 查看当前计算机进程情况
+netstat -ano 查看当前计算机进程情况
+wmic product &gt; ins.txt 查看安装软件以及版本路径等信息，重定向到ins.txt
+</code></pre>
 
                 
             </div>
@@ -509,8 +559,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
-                                    <span class="chip bg-color">随笔</span>
+                                <a href="../../../../tags/%E9%99%84%E5%BD%95/">
+                                    <span class="chip bg-color">附录</span>
                                 </a>
                             
                         </div>
@@ -612,13 +662,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="../../../11/01/b-15/">
+                <a href="../../21/Kali%E5%91%BD%E4%BB%A4/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/1.jpg" class="responsive-img" alt="20221101">
+                        <img src="../../../../medias/featureimages/22.jpg" class="responsive-img" alt="Kali命令">
                         
-                        <span class="card-title">20221101</span>
+                        <span class="card-title">Kali命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -629,14 +679,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-01
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-21
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
+                            <a href="../../../../categories/%E9%99%84%E5%BD%95/" class="post-category">
+                                    附录
                                 </a>
                             
                             
@@ -646,8 +696,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                        <span class="chip bg-color">日报</span>
+                    <a href="../../../../tags/%E9%99%84%E5%BD%95/">
+                        <span class="chip bg-color">附录</span>
                     </a>
                     
                 </div>
@@ -661,13 +711,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../b-14/">
+                <a href="../../19/ODBC%E6%95%B0%E6%8D%AE%E5%BA%93/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/5.jpg" class="responsive-img" alt="20221031">
+                        <img src="../../../../medias/featureimages/1.jpg" class="responsive-img" alt="ODBC数据库">
                         
-                        <span class="card-title">20221031</span>
+                        <span class="card-title">ODBC数据库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -678,14 +728,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-19
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
+                            <a href="../../../../categories/%E9%99%84%E5%BD%95/" class="post-category">
+                                    附录
                                 </a>
                             
                             
@@ -695,8 +745,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                        <span class="chip bg-color">日报</span>
+                    <a href="../../../../tags/%E9%99%84%E5%BD%95/">
+                        <span class="chip bg-color">附录</span>
                     </a>
                     
                 </div>
