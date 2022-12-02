@@ -656,7 +656,7 @@
             preload: 'auto',
             volume: Number('1'),
             video: {
-                url: 'https://upos-sz-mirrorcos.bilivideo.com/upgcxcode/34/04/875780434/875780434-1-208.mp4?e=ig8euxZM2rNcNbhM7bdVhwdlhzKjhwdVhoNvNC8BqJIzNbfq9rVEuxTEnE8L5F6VnEsSTx0vkX8fqJeYTj_lta53NCM=&uipk=5&nbs=1&deadline=1668526402&gen=playurlv2&os=bcache&oi=1363604970&trid=0000d16a79af0d3445219a696c00daf0d340T&mid=0&platform=html5&upsig=de1df88e315c0a045e93cbaa93e7c14e&uparams=e,uipk,nbs,deadline,gen,os,oi,trid,mid,platform&cdnid=69801&bvc=vod&nettype=0&bw=346141&orderid=0,1&logo=80000000',
+                url: 'https://www.bilibili.com/video/BV1we4y147D7?vd_source=c68566b47a261e87fb6d46acbe27055c',
                 pic: '',
                 thumbnails: ''
             }
@@ -685,6 +685,43 @@
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="2022/12/02/20221202/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="20221202">
+                            
+                            <span class="card-title">20221202</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                每日一记Git
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-02
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-user fa-fw"></i>
+                                liuGuobin
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
             
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
@@ -1246,58 +1283,6 @@ $servername = &quot;localhost&quo
             </div>
               <!-- 隐藏某个文章 -->
             
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="2022/11/13/20221113/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="20221113">
-                            
-                            <span class="card-title">20221113</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                每日一记仔细收集php的常见字符操作函数addcslashes — 以 C 语言风格使用反斜线转义字符串中的字符
-addslashes — 使用反斜线引用字符串
-bin2hex — 函数把包含数据的二进制字符串转换为十六进制值
-chop —
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-13
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="tags/%E6%97%A5%E6%8A%A5/">
-                            <span class="chip bg-color">日报</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
         </div>
     </article>
 
@@ -1560,7 +1545,7 @@ $(function () {
             // 只在桌面版网页启用特效
             var windowWidth = $(window).width();
             if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+                document.write('<script type="text/javascript" src="/libs/others/sakura-small.js"><\/script>');
             }
         </script>
     

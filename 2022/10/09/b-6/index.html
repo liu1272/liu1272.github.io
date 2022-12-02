@@ -838,7 +838,7 @@ B）为了简化代码，可以把伪类选择符中相同的声明提出来放�
 
         var selection = window.getSelection();
         // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('60')) {
+        if (('' + selection).length < Number.parseInt('50')) {
             return;
         }
 
@@ -1152,7 +1152,7 @@ $(function () {
             // 只在桌面版网页启用特效
             var windowWidth = $(window).width();
             if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="../../../../libs/others/sakura.js"><\/script>');
+                document.write('<script type="text/javascript" src="../../../../libs/others/sakura-small.js"><\/script>');
             }
         </script>
     

@@ -822,7 +822,7 @@ PHP 不会在子类的构造方法中自动的调用父类的构造方法。
 
         var selection = window.getSelection();
         // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('60')) {
+        if (('' + selection).length < Number.parseInt('50')) {
             return;
         }
 
@@ -1136,7 +1136,7 @@ $(function () {
             // 只在桌面版网页启用特效
             var windowWidth = $(window).width();
             if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="../../../../libs/others/sakura.js"><\/script>');
+                document.write('<script type="text/javascript" src="../../../../libs/others/sakura-small.js"><\/script>');
             }
         </script>
     
