@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2022-11-21T05:58:42.953Z</updated>
+  <updated>2022-12-02T16:00:39.936Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>202211月总结</title>
+    <link href="https://liu1272.github.io/2022/12/01/20221201%E6%9C%88%E7%BB%93/"/>
+    <id>https://liu1272.github.io/2022/12/01/20221201%E6%9C%88%E7%BB%93/</id>
+    <published>2022-12-01T12:13:00.000Z</published>
+    <updated>2022-12-02T16:00:39.936Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="又是一个月，该总结一下了"><a href="#又是一个月，该总结一下了" class="headerlink" title="又是一个月，该总结一下了"></a>又是一个月，该总结一下了</h5><p>  首先还是这个月干了啥。<br>  好像也没干啥？？？<br>  学了JS，PHP，数据库，一点点命令，还有算是课内知识的python爬虫<br>  虽然看着学了很多，但是基础并不牢固。<br>  因此<br>  我可能将要用至少一个月的时间来消化从建站到现在所学的内容<br>  毕竟…<br>  高数和现代终究是大头，还有一个计导虎视眈眈</p><p>  接着来说说接下来一个月的计划吧~<br>  首先，既然是在家上网课<br>  当然是要<br>  <del>吃了就睡，睡了就吃，跟个死猪一样</del><br>  <em><strong>好好学习，天天向上</strong></em></p><h5 id="鸭梨山大"><a href="#鸭梨山大" class="headerlink" title="鸭梨山大"></a>鸭梨山大</h5><p>  其实在这个月的学习中我的感触很深，网络安全绝不是一朝一夕可以完成的(屁话)<br>  现在所学的全部这些内容可以说都是前置知识的一部分<br>  包括在平时练习的CTF，都是走向安全的一段路<br>  那么，既然如此<br>  我更应该将重心放在基础上，而非一味的追求解题量<br>  甚至是成为众人最不屑的“赛棍”。</p><h5 id="还有啥好讲的？"><a href="#还有啥好讲的？" class="headerlink" title="还有啥好讲的？"></a>还有啥好讲的？</h5><p>  既然这是一篇发布在博客的文章，那就再聊聊博客的事吧<br>  首先是最令我头疼的事——主页解析的视频老是失效。真的是脑阔疼，我找了很久了，但是一直没有解决方法，如果有人有方法或是突发奇想请在GitHub上评论，十分感谢！！！<br>  然后是关于加载速度有些缓慢甚至是在网不好的情况下出现白屏的问题(响应速度还是蛮快的，并没有发生许多人所说的被墙的情况，尽管是在校园网的情况下)，是因为主页启用了过多插件的缘故，在一段时间后(可能年后有空时)，会对这个blog进行一次大修改，争取加载时间缩短到1000毫秒内吧。<br>  最后，还是重复说明一下。这个博客虽然是public的，但是我只希望它的作用只是个刻录我在大学四年或更久的时光里的里程碑。时不时记录下成长经历，时不时写点随笔，时不时慷慨地发点自己总结的知识梳理，方便我自己和其他来到这里的___朋友们___学习。</p><h5 id="好了，最后还是一句"><a href="#好了，最后还是一句" class="headerlink" title="好了，最后还是一句"></a>好了，最后还是一句</h5><p><strong>人，活的不是一个点，人活起伏。</strong><br>说人话版:是个三维的东西就不要天天像个二维的玩意一样躺平~</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;又是一个月，该总结一下了&quot;&gt;&lt;a href=&quot;#又是一个月，该总结一下了&quot; class=&quot;headerlink&quot; title=&quot;又是一个月，该总结一下了&quot;&gt;&lt;/a&gt;又是一个月，该总结一下了&lt;/h5&gt;&lt;p&gt;  首先还是这个月干了啥。&lt;br&gt;  好像也没干啥？？？&lt;b</summary>
+      
+    
+    
+    
+    <category term="随笔" scheme="https://liu1272.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="随笔" scheme="https://liu1272.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>Kali命令</title>
@@ -455,30 +479,6 @@
       
       
     <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h5 id=&quot;注-本章节较难，请选择性阅读&quot;&gt;&lt;a href=&quot;#注-本章节较难，请选择性阅读&quot; class=&quot;headerli</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221104</title>
-    <link href="https://liu1272.github.io/2022/11/04/20221104/"/>
-    <id>https://liu1272.github.io/2022/11/04/20221104/</id>
-    <published>2022-11-04T08:38:00.000Z</published>
-    <updated>2022-11-06T09:22:58.280Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="函数表达式"><a href="#函数表达式" class="headerlink" title="函数表达式"></a>函数表达式</h4><pre><code>let sayHi = function() &#123;  alert( &quot;Hello&quot; );&#125;;function关键字后面没有函数名。函数表达式允许省略函数名注意末尾会有个分号!因为这是以 function(…) &#123;…&#125; 的形式创建的。它不是函数语法的一部分。含义:&quot;创建一个函数并将其放入变量sayHi中&quot;。alert( sayHi );         // 显示函数代码————因为函数是一个值alert( sayHi() );       // 执行函数let func = sayHi;       //将 sayHi 复制到了变量 func</code></pre><h5 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h5><pre><code>function ask(question, yes, no) &#123;  if (confirm(question)) yes()  else no();&#125;function showOk() &#123;  alert( &quot;You agreed.&quot; );&#125;function showCancel() &#123;  alert( &quot;You canceled the execution.&quot; );&#125;// 用法：函数 showOk 和 showCancel 被作为参数传入到 askask(&quot;Do you agree?&quot;, showOk, showCancel);</code></pre><p>showOk 是回答 “yes” 的回调，showCancel 是回答 “no” 的回调。</p><h5 id="函数表达式-vs-函数声明"><a href="#函数表达式-vs-函数声明" class="headerlink" title="函数表达式 vs 函数声明"></a>函数表达式 vs 函数声明</h5><p>1.语法<br>函数声明：在主代码流中声明为单独的语句的函数<br>函数表达式：在一个表达式中或另一个语法结构中创建的函数。下面这个函数是在赋值表达式 = 右侧创建的<br>2.创建函数时机<br>在函数声明被定义之前，它就可以被调用。<br>函数表达式是在代码执行到达时被创建，并且仅从那一刻起可用。<br>3.块级作用域<br>严格模式下，当一个函数声明在一个代码块内时，它在该代码块内的任何位置都是可见的。但在代码块外不可见。</p><pre><code>let age = 16;              // 拿 16 作为例子if (age &lt; 18) &#123;  welcome();               // \   (运行)  function welcome() &#123;     //  |    alert(&quot;Hello!&quot;);       //  |  函数声明在声明它的代码块内任意位置都可用  &#125;                        //  |  在花括号外部调用函数，我们看不到它们内部的函数声明  welcome();               // /   (运行)&#125; else &#123;  function welcome() &#123;    alert(&quot;Greetings!&quot;);  &#125;&#125;welcome();                 // Error: welcome is not defined【正确写法】let age = prompt(&quot;What is your age?&quot;, 18);let welcome;if (age &lt; 18) &#123;  welcome = function() &#123;    alert(&quot;Hello!&quot;);  &#125;;&#125; else &#123;  welcome = function() &#123;    alert(&quot;Greetings!&quot;);  &#125;;&#125;welcome(); // 现在可以了【改进方法】let age = prompt(&quot;What is your age?&quot;, 18);let welcome = (age &lt; 18) ?  function() &#123; alert(&quot;Hello!&quot;); &#125; :  function() &#123; alert(&quot;Greetings!&quot;); &#125;;welcome(); // 现在可以了</code></pre><h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><pre><code>单行箭头函数:let sum = (a, b) =&gt; a + b;/* 这个箭头函数是下面这个函数的更短的版本：let sum = function(a, b) &#123;  return a + b;&#125;;*/alert( sum(1, 2) ); // 3多行箭头函数:let sum = (a, b) =&gt; &#123;  // 花括号表示开始一个多行函数  let result = a + b;  return result;       // 如果我们使用了花括号，那么我们需要一个显式的 “return”&#125;;alert( sum(1, 2) );    // 3从 =&gt; 的左侧获取参数，计算并返回右侧表达式的计算结果用花括号括起来之后，需要包含 return 才能返回值（就像常规函数一样）只有一个参数，还可以省略掉参数外的圆括号没有参数，括号则是空的（但括号必须保留）</code></pre><h4 id="函数总结"><a href="#函数总结" class="headerlink" title="函数总结"></a>函数总结</h4><p>1.函数是值。它们可以在代码的任何地方被分配，复制或声明。<br>2.如果函数在主代码流中被声明为单独的语句，则称为“函数声明”。<br>3.如果该函数是作为表达式的一部分创建的，则称其“函数表达式”。<br>4.在执行代码块之前，内部算法会先处理函数声明(所以函数声明在其被声明的代码块内的任何位置都是可见的)<br>5.函数表达式在执行流程到达时创建。<br>6.首选使用函数声明;仅当函数声明不适合对应的任务时，才应使用函数表达式。</p><h3 id="javascript基础复习"><a href="#javascript基础复习" class="headerlink" title="javascript基础复习"></a>javascript基础复习</h3><p>1.语句用分号分隔<br>2.即使我们在某处添加了「额外的」分号，这也不是错误。分号会被忽略的。<br>3.尽量使用”use strict”<br>4.使用let，const（不变的，不能被改变），var（旧式的，稍后会看到）声明变量<br>5.变量是动态类型的，它们可以存储任何值<br>6.有 8 种数据类型：<br>&nbsp;&nbsp;number — 可以是浮点数，也可以是整数，<br>&nbsp;&nbsp;bigint — 用于任意长度的整数，<br>&nbsp;&nbsp;string — 字符串类型，<br>&nbsp;&nbsp;boolean — 逻辑值：true/false，<br>&nbsp;&nbsp;null — 具有单个值 null 的类型，表示“空”或“不存在”，<br>&nbsp;&nbsp;undefined — 具有单个值 undefined 的类型，表示“未分配（未定义）”，<br>&nbsp;&nbsp;object 和 symbol — 对于复杂的数据结构和唯一标识符，我们目前还没学习这个类型。<br>7.交互:alert、prompt 和 confirm<br>8.二进制加号 + 可以连接字符串。如果任何一个操作数是一个字符串，那么另一个操作数也将被转换为字符串<br>9.三元运算符:cond?resultA:resultB。如果cond为真,则返回resultA,否则返回resultB<br>10.空值合并运算符:a??b的结果是a,除非a为null/undefined,这时结果是b。<br>11.在 for(let…) 循环内部声明的变量只在该循环内可见。但可以省略let并重用已有的变量。<br>12.break/continue允许退出整个循环/当前迭代。使用标签来打破嵌套循环<br>13.switch”结构可以替代多个if检查。它内部使用===进行比较。<br>14.prompt的结果是一个字符串，而不是数字<br>15.函数声明和循环语句后不需要加分号</p><h5 id="其它说明"><a href="#其它说明" class="headerlink" title="其它说明"></a>其它说明</h5><p><a href="https://zh.javascript.info/debugging-chrome">在浏览器中调试</a><br><a href="https://zh.javascript.info/coding-style#tasks">代码风格!!!</a><br><a href="https://zh.javascript.info/comments">注释</a></p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>从岐山到长安，高铁只需要一个小时就能抵达，这么一段路，丞相却走了一生。<br>从生至死，人需要经历百年，但有一段岁月，却跟着我走完了一生。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;函数表达式&quot;&gt;&lt;a href=&quot;#函数表达式&quot; class=&quot;headerlink&quot; title=&quot;函数表达式&quot;&gt;</summary>
       
     
     

@@ -4,14 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="20221103, Robin">
-    <meta name="description" content="每日一记循环while循环let i = 0;
-while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔值
-  alert( i );
-  i++;
-&amp;#125;
-
-如果循环体只有一条语句(单循环体)，">
+    <meta name="keywords" content="202211月总结, Robin">
+    <meta name="description" content="又是一个月，该总结一下了  首先还是这个月干了啥。  好像也没干啥？？？  学了JS，PHP，数据库，一点点命令，还有算是课内知识的python爬虫  虽然看着学了很多，但是基础并不牢固。  因此  我可能将要用至少一个月的时间来消化从建站">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +17,7 @@ while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔�
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>20221103 | Robin</title>
+    <title>202211月总结 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -349,12 +343,12 @@ while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔�
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/23.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">20221103</h1>
+                    <h1 class="description center-align post-title">202211月总结</h1>
                 </div>
             </div>
         </div>
@@ -376,8 +370,8 @@ while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔�
                     
                     <div class="article-tag">
                         
-                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                                <span class="chip bg-color">日报</span>
+                            <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
+                                <span class="chip bg-color">随笔</span>
                             </a>
                         
                     </div>
@@ -388,8 +382,8 @@ while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔�
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                日报
+                            <a href="../../../../categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                随笔
                             </a>
                         
                     </div>
@@ -401,28 +395,28 @@ while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔�
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-03
+                    2022-12-01
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-12
+                    2022-12-03
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    660
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    2 分
                 </div>
                 
 
@@ -442,122 +436,11 @@ while (i &amp;lt; 3) &amp;#123;           #条件的结果会被转化为布尔�
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><h5 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h5><pre><code>let i = 0;
-while (i &lt; 3) &#123;           #条件的结果会被转化为布尔值
-  alert( i );
-  i++;
-&#125;
-</code></pre>
-<p>如果循环体只有一条语句(单循环体)，则可以省略大括号</p>
-<h5 id="do…while循环"><a href="#do…while循环" class="headerlink" title="do…while循环"></a>do…while循环</h5><pre><code>let i = 0;
-do &#123;
-  alert( i );
-  i++;
-&#125; while (i &lt; 3);
-</code></pre>
-<p>将条件检查移至循环体下面<br>先执行循环体，然后检查条件，当条件为真时，重复执行循环体</p>
-<h5 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h5><pre><code>for (begin; condition; step) &#123;
-  循环体
-&#125;
-begin进入循环时执行一次
-condition判断条件
-body条件为真时，重复运行
-step每次循环体迭代后执行
-</code></pre>
-<p>内联变量声明:<br>&emsp;&emsp;函数在执行时，会先在自己的函数体里查询变量，如果没有，才会一级一级往上查找。函数show()在执行时，输出第一个变量a是undefined是因为它现在自己的执行环境里查询到变量a已声明，即变量提升（即变量可以提前声明但是赋值是不可以的），此时就输出了undefined。<br>&emsp;&emsp;因此会出现变量污染现象<br>省略语句段:<br>&emsp;&emsp;不需要做任何事的部分，就可以省略 begin 语句段<br>&emsp;&emsp;注意for的两个;必须存在</p>
-<h5 id="break与continue"><a href="#break与continue" class="headerlink" title="break与continue"></a>break与continue</h5><p>一，普通<br>用法与python一样<br>但是，禁止break/continue在‘?’的右边<br>所以，不建议使用?代替if语句<br>二，进阶</p>
-<pre><code>标签(在循环之前带有冒号的标识符)
-break &lt;labelName&gt; 语句跳出循环至标签labelName:处
-continue &lt;labelName&gt; 语句执行跳转到标记循环的下一次迭代
-可以将标签移至单独一行
-
-break 指令必须在代码块内
-continue 只有在循环内部才可行
-</code></pre>
-<h5 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h5><pre><code>
-至少一个 case 代码块和一个可选的 default 代码块
-switch(x) &#123;
-  case &#39;value1&#39;:  // if (x === &#39;value1&#39;)
-    ...
-    [break]
-  case &#39;value2&#39;:  // if (x === &#39;value2&#39;)
-    ...
-    [break]
-  default:
-    ...
-    [break]
-&#125;
-流程:
-判断条件从成立的开始往下执行直到break，若无break则走到尾(包括default)
-
-分组:
-case 3: // (*) 下面这两个 case 被分在一组，满足一个条件就执行，原理是没有break
-case 5:
-  alert(&#39;Wrong!&#39;);
-  alert(&quot;Why don&#39;t you take a math class?&quot;);
-  break;
-</code></pre>
-<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>在 JavaScript 中，函数不是“神奇的语言结构”，而是一种特殊的值<br>创建函数的三种方法:函数声明，函数表达式，箭头函数</p>
-<pre><code>function name(parameter1, parameter2, ... parameterN) &#123;
-  ...body...
-&#125;
-name();
-首先是关键字，然后是函数名，然后是括号之间的参数列表(用逗号分隔)，最后是花括号之间的代码(函数体)
-parameter是函数参数，下面引用函数时可以使用它作为参数(argument)
-未提供parameter时，那么相应的值就会变成undefined(默认参数)
-可以text = &quot;内容&quot;这样子来传参
-返回值return执行时，函数停止，并将值返回给调用代码，没有返回值会导致函数立即退出并为undefined
-</code></pre>
-<p>局部变量:<br>在函数中声明的变量只在该函数内部可见</p>
-<p>外部变量:<br>函数也可以访问外部变量<br>函数对外部变量拥有全部的访问权限。函数也可以修改外部变量。<br>函数内部声明了同名变量，那么函数会遮蔽外部变量</p>
-<pre><code>默认参数的计算:
-在JS中，函数在没带个别参数的情况下被调用，默认参数会被计算出来。
-如果传递了参数text，那么anotherFunction()就不会被调用。
-如果没传递参数text，那么anotherFunction()就会被调用。
-function showMessage(from, text = anotherFunction()) &#123;
-  // anotherFunction() 仅在没有给定 text 时执行
-  // 其运行结果将成为 text 的值
-&#125;
-
-也可以这样
-
-function showCount(count) &#123;
-  // 如果 count 为 undefined 或 null，则提示 &quot;unknown&quot;
-  alert(count ?? &quot;unknown&quot;);
-&#125;
-showCount(0); // 0
-showCount(null); // unknown
-showCount();                        // unknown
-
-或者这样
-
-function showMessage(text) &#123;
-  // ...
-  if (text === undefined) &#123;         // 如果参数未被传递进来
-    text = &#39;empty message&#39;;
-  &#125;
-  alert(text);
-&#125;
-showMessage();                      // empty message
-
-还可以这样
-
-function showMessage(text) &#123;
-  // 如果 text 为 undefined 或者为假值，那么将其赋值为 &#39;empty&#39;
-  text = text || &#39;empty&#39;;
-  alert(text);
-&#125;
-showMessage();                     // empty
-</code></pre>
-<p>返回值</p>
-<pre><code>function doNothing() &#123; /* 没有代码 */ &#125;
-alert( doNothing());
-函数无返回值，它就会像返回 undefined 一样
-空值的 return 和 return undefined 等效
-如果想要将返回的表达式写成跨多行的形式，那么应该在return的同一行开始写此表达式(比如先写个括号)
-</code></pre>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>作为参数传递给函数的值，会被复制到函数的局部变量。<br>函数可以访问外部变量。但它只能从内到外起作用。函数外部的代码看不到函数内的局部变量。<br>函数可以返回值。如果没有返回值，则其返回的结果是 undefined。<br>为了使代码简洁易懂，建议在函数中主要使用局部变量和参数，而不是外部变量<br>获取参数、使用参数并返回结果的函数更容易理解。<br>一个好的函数名能够让我们马上知道这个函数的功能是什么，会返回什么。<br>一个单独的函数不仅更容易测试和调试 —— 它的存在本身就是一个很好的注释！</p>
-<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>一月添香<br>二月夜未央<br>三月情诗慌张<br>四月对镜补红妆<br>五月相携游马十方<br>六月日日笙歌抛流光<br>七月为卿斟唱曲水流觞<br>八月年华辗转处陌上成双<br>九月田中百花争艳怜意满腔<br>十月眠里光阴归去思念倾满江<br>十一月冬雷阵阵我笑悲歌不恸上苍<br>十二月天寒地冻凭楼伫等把痴梦熬荒<br>可叹，人间再无双</p>
+                <h5 id="又是一个月，该总结一下了"><a href="#又是一个月，该总结一下了" class="headerlink" title="又是一个月，该总结一下了"></a>又是一个月，该总结一下了</h5><p>  首先还是这个月干了啥。<br>  好像也没干啥？？？<br>  学了JS，PHP，数据库，一点点命令，还有算是课内知识的python爬虫<br>  虽然看着学了很多，但是基础并不牢固。<br>  因此<br>  我可能将要用至少一个月的时间来消化从建站到现在所学的内容<br>  毕竟…<br>  高数和现代终究是大头，还有一个计导虎视眈眈</p>
+<p>  接着来说说接下来一个月的计划吧~<br>  首先，既然是在家上网课<br>  当然是要<br>  <del>吃了就睡，睡了就吃，跟个死猪一样</del><br>  <em><strong>好好学习，天天向上</strong></em></p>
+<h5 id="鸭梨山大"><a href="#鸭梨山大" class="headerlink" title="鸭梨山大"></a>鸭梨山大</h5><p>  其实在这个月的学习中我的感触很深，网络安全绝不是一朝一夕可以完成的(屁话)<br>  现在所学的全部这些内容可以说都是前置知识的一部分<br>  包括在平时练习的CTF，都是走向安全的一段路<br>  那么，既然如此<br>  我更应该将重心放在基础上，而非一味的追求解题量<br>  甚至是成为众人最不屑的“赛棍”。</p>
+<h5 id="还有啥好讲的？"><a href="#还有啥好讲的？" class="headerlink" title="还有啥好讲的？"></a>还有啥好讲的？</h5><p>  既然这是一篇发布在博客的文章，那就再聊聊博客的事吧<br>  首先是最令我头疼的事——主页解析的视频老是失效。真的是脑阔疼，我找了很久了，但是一直没有解决方法，如果有人有方法或是突发奇想请在GitHub上评论，十分感谢！！！<br>  然后是关于加载速度有些缓慢甚至是在网不好的情况下出现白屏的问题(响应速度还是蛮快的，并没有发生许多人所说的被墙的情况，尽管是在校园网的情况下)，是因为主页启用了过多插件的缘故，在一段时间后(可能年后有空时)，会对这个blog进行一次大修改，争取加载时间缩短到1000毫秒内吧。<br>  最后，还是重复说明一下。这个博客虽然是public的，但是我只希望它的作用只是个刻录我在大学四年或更久的时光里的里程碑。时不时记录下成长经历，时不时写点随笔，时不时慷慨地发点自己总结的知识梳理，方便我自己和其他来到这里的___朋友们___学习。</p>
+<h5 id="好了，最后还是一句"><a href="#好了，最后还是一句" class="headerlink" title="好了，最后还是一句"></a>好了，最后还是一句</h5><p><strong>人，活的不是一个点，人活起伏。</strong><br>说人话版:是个三维的东西就不要天天像个二维的玩意一样躺平~</p>
 
                 
             </div>
@@ -622,8 +505,8 @@ alert( doNothing());
                     
                         <div class="article-tag">
                             
-                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                                    <span class="chip bg-color">日报</span>
+                                <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
+                                    <span class="chip bg-color">随笔</span>
                                 </a>
                             
                         </div>
@@ -721,17 +604,18 @@ alert( doNothing());
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../04/20221104/">
+                <a href="">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/22.jpg" class="responsive-img" alt="20221104">
+                        <img src="../../../../medias/featureimages/18.jpg" class="responsive-img" alt="202211月总结">
                         
-                        <span class="card-title">20221104</span>
+                        <span class="card-title">202211月总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -741,26 +625,27 @@ alert( doNothing());
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
+                            <a href="../../../../categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                        <span class="chip bg-color">日报</span>
+                    <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
+                        <span class="chip bg-color">随笔</span>
                     </a>
                     
                 </div>
@@ -774,13 +659,13 @@ alert( doNothing());
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../02/b-16/">
+                <a href="../../../11/21/Kali%E5%91%BD%E4%BB%A4/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/0.jpg" class="responsive-img" alt="20221102">
+                        <img src="../../../../medias/featureimages/22.jpg" class="responsive-img" alt="Kali命令">
                         
-                        <span class="card-title">20221102</span>
+                        <span class="card-title">Kali命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -791,14 +676,14 @@ alert( doNothing());
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
-                                    日报
+                            <a href="../../../../categories/%E9%99%84%E5%BD%95/" class="post-category">
+                                    附录
                                 </a>
                             
                             
@@ -808,8 +693,8 @@ alert( doNothing());
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
-                        <span class="chip bg-color">日报</span>
+                    <a href="../../../../tags/%E9%99%84%E5%BD%95/">
+                        <span class="chip bg-color">附录</span>
                     </a>
                     
                 </div>
