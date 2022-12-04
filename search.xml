@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>20221204</title>
+      <link href="/2022/12/04/20221204/"/>
+      <url>/2022/12/04/20221204/</url>
+      
+        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><pre><code>【数组序列化】&lt;?php$a=null;echo serialize($a);?&gt;a:参数数量:&#123;i:0;s:字符串长度:&quot;字符串&quot;;&#125;$a=null;         N;$b=123456;       i:123456;$c=1.2;          d:1.2;$d=true;         b:1;$e=false;        b:0;$f=&#39;benben&#39;;     s:长度:字符串;【对象序列化】&lt;?phpclass lei&#123;    public $chengyuan=&#39;zifuchuan&#39;;    function hanshu()&#123;        echo $this-&gt;chengyuan;    &#125;&#125;$a=new lei();echo serialize($a);echo urlencode(serialize($a));?&gt;O:类名长度:&quot;类名&quot;:1:&#123;s:成员长度:&quot;成员名&quot;;s:值长度:&quot;值&quot;;&#125;修饰符public公有，private私有私有的成员属性要在前后都加上二进制的%00,在urlencode时可以看见【对象序列化的嵌套】&lt;?phpclass test&#123;    public $pub=&#39;benben&#39;;    function jineng()&#123;        echo $this-&gt;pub;    &#125;&#125;class test2&#123;    var $ben;&#125;$b=new test();$a=new test2();$a-&gt;ben=$b;echo serialize($a);?&gt;O:5:&quot;test2&quot;:1:&#123;s:3:&quot;ben&quot;;O:4:&quot;test&quot;:1:&#123;s:3:&quot;pub&quot;;s:6:&quot;benben&quot;;&#125;&#125;当在对象内调用对象时，会出现嵌套:实例化后的对象$a的成员变量&#39;ben&#39;调用实例化后的对象$b</code></pre><h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><p>1.反序列化后的内容为一个对象，与序列化相反<br>2.反序列化生成的对象内的值，由反序列化里的值提供，与原有类预定义的值无关<br>3.反序列化不触发类的成员方法，需要调用方法之后才能触发</p><pre><code>&lt;?phpclass test&#123;    public $a=&#39;benben&#39;;    protected $b=666;    private $c=false;    public function displayVar()&#123;        echo $this-&gt;a;    &#125;&#125;$d=new test();$d=serialize($d);echo urlencode($d);$a=urlencode($d);$b=unserialize(urldecode($a));$b-&gt;displayVar();var_dump($b);?&gt;benbenobject(test)#1 (3) &#123;  [&quot;a&quot;]=&gt;  string(6) &quot;benben&quot;  [&quot;b&quot;:protected]=&gt;  int(666)  [&quot;c&quot;:&quot;test&quot;:private]=&gt;  bool(false)&#125;</code></pre><h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3><p>搞docker去了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>20221202</title>
       <link href="/2022/12/02/20221202/"/>
       <url>/2022/12/02/20221202/</url>

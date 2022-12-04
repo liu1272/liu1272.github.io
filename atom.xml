@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2022-12-02T15:17:22.223Z</updated>
+  <updated>2022-12-04T16:28:18.219Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20221204</title>
+    <link href="https://liu1272.github.io/2022/12/04/20221204/"/>
+    <id>https://liu1272.github.io/2022/12/04/20221204/</id>
+    <published>2022-12-04T13:59:00.000Z</published>
+    <updated>2022-12-04T16:28:18.219Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><pre><code>【数组序列化】&lt;?php$a=null;echo serialize($a);?&gt;a:参数数量:&#123;i:0;s:字符串长度:&quot;字符串&quot;;&#125;$a=null;         N;$b=123456;       i:123456;$c=1.2;          d:1.2;$d=true;         b:1;$e=false;        b:0;$f=&#39;benben&#39;;     s:长度:字符串;【对象序列化】&lt;?phpclass lei&#123;    public $chengyuan=&#39;zifuchuan&#39;;    function hanshu()&#123;        echo $this-&gt;chengyuan;    &#125;&#125;$a=new lei();echo serialize($a);echo urlencode(serialize($a));?&gt;O:类名长度:&quot;类名&quot;:1:&#123;s:成员长度:&quot;成员名&quot;;s:值长度:&quot;值&quot;;&#125;修饰符public公有，private私有私有的成员属性要在前后都加上二进制的%00,在urlencode时可以看见【对象序列化的嵌套】&lt;?phpclass test&#123;    public $pub=&#39;benben&#39;;    function jineng()&#123;        echo $this-&gt;pub;    &#125;&#125;class test2&#123;    var $ben;&#125;$b=new test();$a=new test2();$a-&gt;ben=$b;echo serialize($a);?&gt;O:5:&quot;test2&quot;:1:&#123;s:3:&quot;ben&quot;;O:4:&quot;test&quot;:1:&#123;s:3:&quot;pub&quot;;s:6:&quot;benben&quot;;&#125;&#125;当在对象内调用对象时，会出现嵌套:实例化后的对象$a的成员变量&#39;ben&#39;调用实例化后的对象$b</code></pre><h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><p>1.反序列化后的内容为一个对象，与序列化相反<br>2.反序列化生成的对象内的值，由反序列化里的值提供，与原有类预定义的值无关<br>3.反序列化不触发类的成员方法，需要调用方法之后才能触发</p><pre><code>&lt;?phpclass test&#123;    public $a=&#39;benben&#39;;    protected $b=666;    private $c=false;    public function displayVar()&#123;        echo $this-&gt;a;    &#125;&#125;$d=new test();$d=serialize($d);echo urlencode($d);$a=urlencode($d);$b=unserialize(urldecode($a));$b-&gt;displayVar();var_dump($b);?&gt;benbenobject(test)#1 (3) &#123;  [&quot;a&quot;]=&gt;  string(6) &quot;benben&quot;  [&quot;b&quot;:protected]=&gt;  int(666)  [&quot;c&quot;:&quot;test&quot;:private]=&gt;  bool(false)&#125;</code></pre><h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3><p>搞docker去了</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;序列化&quot;&gt;&lt;a href=&quot;#序列化&quot; class=&quot;headerlink&quot; title=&quot;序列化&quot;&gt;&lt;/a&gt;序列</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>20221202</title>
@@ -443,30 +467,6 @@
       
       
     <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;数组&quot;&gt;&lt;a href=&quot;#数组&quot; class=&quot;headerlink&quot; title=&quot;数组&quot;&gt;&lt;/a&gt;数组&lt;/h</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221107</title>
-    <link href="https://liu1272.github.io/2022/11/07/20221107/"/>
-    <id>https://liu1272.github.io/2022/11/07/20221107/</id>
-    <published>2022-11-07T07:44:00.000Z</published>
-    <updated>2022-11-08T09:17:59.476Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="原始类型的方法"><a href="#原始类型的方法" class="headerlink" title="原始类型的方法"></a>原始类型的方法</h4><h5 id="原始类型和对象之间的关键区别。"><a href="#原始类型和对象之间的关键区别。" class="headerlink" title="原始类型和对象之间的关键区别。"></a>原始类型和对象之间的关键区别。</h5><p>一个原始值：<br>是原始类型中的一种值。<br>在 JavaScript 中有 7 种原始类型：string，number，bigint，boolean，symbol，null 和 undefined。<br>一个对象：<br>能够存储多个值作为属性。<br>可以使用大括号 {} 创建对象，例如：{name: “John”, age: 30}。JavaScript 中还有其他种类的对象，例如函数就是对象。<br>原始类型不是对象，它们不能存储额外的数据。</p><h4 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h4><p>两种类型:<br>常规数字以 64 位的格式 IEEE-754 存储，也被称为“双精度浮点数”<br>BigInt 用于表示任意长度的整数</p><p>编写数字的方法:<br>let billion = 1e9;           // 10 亿，字面意思：数字 1 后面跟 9 个 0<br>alert( 7.3e9 );              // 73 亿（与 7300000000 和 7_300_000_000 相同）<br>let mcs = 0.000001 = 1e-6;   // 1 的左边有 6 个 0;</p><p>二进制0b  八进制0o  十六进制0x</p><p>toString(base):<br>返回在给定 base 进制数字系统中 num 的字符串表示形式<br>alert( 123456..toString(36) );     // 三十六进制，2n9c</p><p>使用两个点来调用一个方法:<br>123456.toString(36)相当于(123456).toString(36)<br>语法隐含了第一个点之后的部分为小数部分。再放一个点，JS就知道小数部分为空。</p><p>舍入:</p><pre><code>        Math.floor     Math.ceil     Math.round     Math.trunc3.1        3              4             3             33.6        3              4           4           3-1.1       -2             -1            -1            -1-1.6       -2             -1            -2            -1</code></pre><p>Math.floor向下舍入<br>Math.ceil向上舍入<br>Math.round向最近的整数舍入<br>Math.trunc（IE 浏览器不支持这个方法）移除小数点后的所有内容而没有舍入</p><p>舍入到小数点后 n 位:<br>1.将数字乘以 100，调用舍入函数，然后再将其除回<br>2.toFixed(n) 将数字四舍五入到小数点后 n 位，并以字符串形式返回结果</p><p>不精确的计算:<br>数字是以 64 位格式 IEEE-754 表示的:其中 52 位被用于存储这些数字， 11 位用于存储小数点的位置，而 1 位用于符号。<br>1.如果一个数字真的很大，则可能会溢出 64 位存储，变成一个特殊的数值 Infinity<br>2.一个数字以其二进制的形式存储在内存中。但是在十进制数字系统中看起来很简单的 0.1，0.2 这样的小数，实际上在二进制形式中是无限循环小数<br>最可靠的解决方法是借助方法 toFixed(n) 对结果进行舍入</p><p>isFinite 和 isNaN:<br>属于 number 类型，但不是“普通”数字<br>Infinity（和 -Infinity）是一个特殊的数值，比任何数值都大（小）。<br>NaN 代表一个 error。<br>isNaN(value) 将其参数转换为数字，然后测试它是否为 NaN<br>isFinite(value) 将其参数转换为数字，如果是常规数字而不是 NaN/Infinity/-Infinity，则返回 true<br>注:在所有数字函数中，包括 isFinite，空字符串或仅有空格的字符串均被视为 0<br>比较两个值是否完全相同时，它使用Object.is(a,b) === true</p><p>parseInt(str, radix) 和 parseFloat:<br>从字符串中“读取”数字，直到无法读取为止。parseInt 返回一个整数，parseFloat 返回一个浮点数,没有数字可读时为NaN<br>parseInt(str, radix) 的第二个参数为要解析的str的进制,可选</p><p>其他数学函数:<br>Math.random()返回一个从 0 到 1 的随机数（不包括 1）<br>Math.max(a, b, c…)返回最大值<br>Math.pow(n, power)返回 n 的power次幂</p><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>文本数据被以字符串形式存储，单个字符没有单独的类型。<br>字符串的内部格式始终是 UTF-16，它不依赖于页面编码。<br>引号（Quotes）:<br>1.反引号允许我们通过 ${…} 将任何表达式嵌入到字符串中<br>2.允许字符串跨行</p><p>特殊字符:</p><pre><code>\n         换行\r         Windows 文本文件中，两个字符 \r\n 的组合代表一个换行。而在非 Windows 操作系统上，它就是 \n。\&#39;和\&quot;     引号\          转义字符\\         反斜线\t         制表符\b         退格\f         换页\v         垂直\xXX       十六进制 Unicode XX 的 Unicode 字符\u&#123;X…XXXXXX&#125;（1 到 6 个十六进制字符）     具有给定 UTF-32 编码的 Unicode 符号</code></pre><p>字符串长度:</p><pre><code>let str = `Hello`;// 第一个字符alert( str[0] ); // Halert( str.charAt(0) ); // H// 最后一个字符alert( str[str.length - 1] ); // o如果没有找到字符，[] 返回 undefined，而 charAt 返回一个空字符串</code></pre><p>字符串是不可变的:<br>要更改就要创建一个新的字符串，并将其分配给新字符串而不是以前的字符串</p><p>改变大小写:</p><pre><code>toLowerCase() 和 toUpperCase() 改变单个字符大小写alert( &#39;Interface&#39;[0].toLowerCase() ); // &#39;i&#39;</code></pre><p>查找子字符串:<br>str.indexOf(substr, pos)<br>从给定位置 pos 开始，在 str 中查找 substr，如果没有找到，则返回 -1，否则返回匹配成功的位置<br>如果我们对所有存在位置都感兴趣，可以在一个循环中使用 indexOf<br>str.lastIndexOf(substr, position)<br>从字符串的末尾开始搜索到开头,以相反的顺序列出这些事件</p><p>按位（bitwise）NOT :<br>将数字转换为 32-bit 整数（如果存在小数部分，则删除小数部分），然后对其二进制表示形式中的所有位均取反<br>对于 32-bit 整数，~n 等于 -(n+1)</p><p>includes，startsWith，endsWith:<br>includes检测匹配，但不需要它的位置,第二个可选参数是开始搜索的起始位置</p><pre><code>alert( &quot;Widget&quot;.startsWith(&quot;Wid&quot;) );        // true，&quot;Widget&quot; 以 &quot;Wid&quot; 开始alert( &quot;Widget&quot;.endsWith(&quot;get&quot;) );          // true，&quot;Widget&quot; 以 &quot;get&quot; 结束</code></pre><p>获取子字符串:</p><pre><code>str.slice(start,end)返回字符串从 start 到（但不包括）end 的部分start/end 也有可能是负值。它们的意思是起始位置从字符串结尾计算str.substring(start,end)返回字符串从 start 到（但不包括）end 的部分。这与 slice 几乎相同，但它允许 start 大于 endstr.substr(start,length)返回字符串从 start 开始的给定 length 的部分。与以前的方法相比，这个允许我们指定 length 而不是结束位置第一个参数可能是负数，从结尾算起</code></pre><p>比较字符串:<br>1.小写字母总是大于大写字母<br>2.带变音符号的字母存在“乱序”的情况(例如部分国家名字)<br>str.codePointAt(pos)返回在 pos 位置的字符代码<br>String.fromCodePoint(code)通过数字 code 创建字符<br>可以用 \u 后跟十六进制代码，通过这些代码添加 Unicode 字符</p><p><a href="https://zh.javascript.info/string#nei-bu-unicode">内部，Unicode</a></p><p>其他几种有用的字符串方法：<br>str.trim()删除字符串前后的空格 (“trims”)。<br>str.repeat(n)重复字符串 n 次。</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="我打江南走过"><a href="#我打江南走过" class="headerlink" title="我打江南走过"></a>我打江南走过</h5><h5 id="那等在季节里的容颜如莲花的开落"><a href="#那等在季节里的容颜如莲花的开落" class="headerlink" title="那等在季节里的容颜如莲花的开落"></a>那等在季节里的容颜如莲花的开落</h5><h5 id="东风不来，三月的柳絮不飞"><a href="#东风不来，三月的柳絮不飞" class="headerlink" title="东风不来，三月的柳絮不飞"></a>东风不来，三月的柳絮不飞</h5><h5 id="你底心如小小寂寞的城"><a href="#你底心如小小寂寞的城" class="headerlink" title="你底心如小小寂寞的城"></a>你底心如小小寂寞的城</h5><h5 id="恰若青石的街道向晚"><a href="#恰若青石的街道向晚" class="headerlink" title="恰若青石的街道向晚"></a>恰若青石的街道向晚</h5><h5 id="跫音不响，三月的春帷不揭"><a href="#跫音不响，三月的春帷不揭" class="headerlink" title="跫音不响，三月的春帷不揭"></a>跫音不响，三月的春帷不揭</h5><h5 id="你底心是小小的窗扉紧掩"><a href="#你底心是小小的窗扉紧掩" class="headerlink" title="你底心是小小的窗扉紧掩"></a>你底心是小小的窗扉紧掩</h5><h5 id="我达达的马蹄是美丽的错误"><a href="#我达达的马蹄是美丽的错误" class="headerlink" title="我达达的马蹄是美丽的错误"></a>我达达的马蹄是美丽的错误</h5><h5 id="我不是归人，是个过客"><a href="#我不是归人，是个过客" class="headerlink" title="我不是归人，是个过客"></a>我不是归人，是个过客</h5>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;原始类型的方法&quot;&gt;&lt;a href=&quot;#原始类型的方法&quot; class=&quot;headerlink&quot; title=&quot;原始类</summary>
       
     
     
