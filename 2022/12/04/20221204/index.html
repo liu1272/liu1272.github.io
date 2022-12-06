@@ -409,21 +409,21 @@ $a=null;    ">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-05
+                    2022-12-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    461
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    4 分
                 </div>
                 
 
@@ -525,7 +525,53 @@ benbenobject(test)#1 (3) &#123;
   bool(false)
 &#125;
 </code></pre>
-<h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3><p>搞docker去了</p>
+<h4 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h4><p>概念:<br>预定好的，在特定的情况下处罚的行为方法。<br>反序列化成因(作用):<br>反序列化过程中unserizlize()接收的值(字符串)可控；<br>通过更改这个值(字符串)，所得到的代码；<br>通过调用方法，触发代码执行。<br>相关机制:<br>触发时机(先决条件)-&gt;功能(最重要)-&gt;参数(尤其是pop链)-&gt;返回值<br>详解:</p>
+<pre><code>1.__construct()
+构造函数
+在实例化对象时，自动执行的方法
+只有当new时触发，不需要特地调用
+2.__destruct()
+析构函数
+在对象的所有引用都被删除或者对象被显式销毁时才触发
+new和unserialize之后会触发
+3.__sleep()
+清理对象
+可以传入成员属性，serialize之前触发
+并返回一个包含对象中所有需要被序列化的变量名称的数组
+如果无返回则NULL被序列化，产生E_NOTICE错误
+4.__wakeup()
+预先准备对象资源，返回void
+在unserialize前触发
+5.__tostring()
+表达方式错误
+把对象当成字符串调用时触发，如echo，print
+6.__invoke()
+格式表达错误
+把对象当成函数调用时触发，如echo $a() -&gt; hanshu
+7.__call()
+不存在方法
+不存在调用的方法时触发
+8.__callStatic()
+不存在方法
+静态调用或调用成员常量不存在时使用
+9.__get()
+不存在方法
+检查成员属性是否存在
+10.__set()
+不存在方法
+给不存在的成员属性赋值时触发
+11.__isset()或__empty()或__unset()
+不可访问
+对不可访问的属性访问时会触发
+如protect属性(不可读)或根本不存在的属性
+12.__clone()
+复制
+使用clone关键字拷贝完成一个对象后，
+新对象会自动调用定义的魔术方法__clone()
+</code></pre>
+<p>注意:<br>1.只有该类或对象包含了该魔术方法才能被使用或触发<br>2.先分析尾部代码看看有什么执行的步骤<br>3.接着从触发的方法及其顺序判断漏洞的利用地点<br>4.最后构造playload<br>5.比较长的代码建议使用反推法进行分析<br>6.一定要先实例化(new)</p>
+<h4 id="POP链"><a href="#POP链" class="headerlink" title="POP链"></a>POP链</h4><p>反序列化中成员变量可以被控制，使用有一种漏洞叫面向属性编程(POP)<br>POP链是利用魔术方法在里面多次跳转然后获取敏感信息的一种playload</p>
+<h4 id="POC编写"><a href="#POC编写" class="headerlink" title="POC编写"></a>POC编写</h4><p>概念验证(POC)是漏洞验证程序，只是为了证明提出者观点的一段代码</p>
 
                 
             </div>
@@ -888,7 +934,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">52.2k</span>
+                        class="white-color">52.9k</span>
             
             
             
