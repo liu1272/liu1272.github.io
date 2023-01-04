@@ -566,33 +566,33 @@
     </div>
 
     
-        <link rel="stylesheet" href="../../../../libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="../../../../css/my-gitalk.css">
 
-<div class="card gitalk-card" data-aos="fade-up">
+    
+        <link rel="stylesheet" href="../../../../libs/gitment/gitment-default.css">
+<link rel="stylesheet" href="../../../../css/gitment.css">
+
+<div class="gitment-card card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
         <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
         <span>评论</span>
     </div>
-    <div id="gitalk-container" class="card-content"></div>
+    <div id="gitment-content" class="card-content"></div>
 </div>
 
-<script src="../../../../libs/gitalk/gitalk.min.js"></script>
+<script src="../../../../libs/gitment/gitment.js"></script>
 <script>
-    let gitalk = new Gitalk({
-        clientID: 'f4ead2e57bb8af5d2210',
-        clientSecret: '341020a22a523e12f0987e3fc18b5ee6afc3b1e9',
-        repo: 'liu1272.github.io',
-        owner: 'liu1272',
-        admin: "liu1272",
-        id: '2022-10-04T16-07-13',
-        distractionFreeMode: false  // Facebook-like distraction free mode
-    });
+var gitment = new Gitment({
+    id: 'Tue Oct 04 2022 16:07:13 GMT+0800',
+    owner: 'liu1272',
+    repo: 'liu1272.github.io',
+    oauth: {
+        client_id: 'f4ead2e57bb8af5d2210',
+        client_secret: '341020a22a523e12f0987e3fc18b5ee6afc3b1e9'
+    }
+});
 
-    gitalk.render('gitalk-container');
+gitment.render('gitment-content');
 </script>
-
-    
 
     
 
