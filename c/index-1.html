@@ -543,30 +543,38 @@
     </div>
 
     
+        <link rel="stylesheet" href="../libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="../css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="../libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'f4ead2e57bb8af5d2210',
+        clientSecret: '341020a22a523e12f0987e3fc18b5ee6afc3b1e9',
+        repo: 'liu1272.github.io',
+        owner: 'liu1272',
+        admin: "liu1272",
+        id: '2022-10-04T20-00-53',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
     
 
     
-    <!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC81NzM4MC8zMzg0NA==">
-    <script type="text/javascript">
-      (function(d, s) {
-          var j, e = d.getElementsByTagName(s)[0];
-   
-          if (typeof LivereTower === 'function') { return; }
-   
-          j = d.createElement(s);
-          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-          j.async = true;
-   
-          e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
-   <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-   </div>
-   <!-- City版安装代码已完成 -->
+
     
 
     
