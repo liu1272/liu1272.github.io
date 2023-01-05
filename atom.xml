@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-01-04T12:18:55.050Z</updated>
+  <updated>2023-01-05T15:39:15.372Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20220105</title>
+    <link href="https://liu1272.github.io/2023/01/05/20220105/"/>
+    <id>https://liu1272.github.io/2023/01/05/20220105/</id>
+    <published>2023-01-05T15:37:00.000Z</published>
+    <updated>2023-01-05T15:39:15.372Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="能找到这里的都是Hentai"><a href="#能找到这里的都是Hentai" class="headerlink" title="能找到这里的都是Hentai"></a>能找到这里的都是<a href="https://track.mp3-malina.me/play-track/d33532303034b6303534368cb734823000/ff34543f34e2aa427c7b17347be4cc40/S3rl%20-%20Hentai.mp3">Hentai</a></h5>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;能找到这里的都是Hentai&quot;&gt;&lt;a href=&quot;#能找到这里的都是Hentai&quot; class=&quot;headerlink&quot; title=&quot;能找到这里的都是Hentai&quot;&gt;&lt;/a&gt;能找到这里的都是&lt;a href=&quot;https://track.mp3-malina.me</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>20220104</title>
@@ -449,30 +473,6 @@
       
     
     
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221110</title>
-    <link href="https://liu1272.github.io/2022/11/10/20221110/"/>
-    <id>https://liu1272.github.io/2022/11/10/20221110/</id>
-    <published>2022-11-10T10:09:00.000Z</published>
-    <updated>2022-11-19T09:37:40.828Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h5 id="开始学习PHP"><a href="#开始学习PHP" class="headerlink" title="开始学习PHP"></a>开始学习PHP</h5><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>PHP是超文本预处理器<br>运行在服务器端，内嵌在html脚本语言<br>由wampserver等集成环境，有mysql数据库和apache服务<br>使用localhost或127.0.0.1访问<br>写入的php文件一定要放在www目录下</p><h4 id="php信息"><a href="#php信息" class="headerlink" title="php信息"></a>php信息</h4><p>phpinfo();显示所有php的信息<br>php.ini配置文件</p><h4 id="PHP文件格式"><a href="#PHP文件格式" class="headerlink" title="PHP文件格式"></a>PHP文件格式</h4><pre><code>&lt;?php              //大小写都可以代码部分除最后一行以外每行结尾都要以;结尾?&gt;可以不写php但是要改ini配置文件的short_open_tag=On,要重启</code></pre><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>$变量名(不能是数字或特殊符号开头，可以是中文，建议驼峰命名法)=’value’;<br>echo “$变量名”;        //输出上面传入的值</p><h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><pre><code>单引号:如果里面有变量都作为一个字符串处理双引号:里面有变量会输出变量的值尽量使用单引号————效率高//单行注释/* */多行注释&quot;\n&quot;换行(双引号解释转义字符，单引号不解释)\r和\t同上&#39;\\&#39;时输出\&#39;\&#39;&#39;时输出&#39;因为\将后面的转义成没意义的字符变量和字符串之间用.连接，而且要&#39;将字符串包起来双引号中插入单引号，单引号再插入变量时，变量会解析成&#39;value&#39;双引号中插入变量时在变量后面加空格或,echo __FILE__;输出文件地址echo __LINE__;输出行号echo __DIR__;输出当前文件的文件夹的路径echo PHP_VERSION;获取php版本号echo __FUNCTION__;输出函数名false的情况:空字符串，0，空数组，null</code></pre><h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><pre><code>&lt;分类&gt;标量    浮点类型:float    整数型:int    布尔型:boolean    字符串:string(只要是引号包起来的)混合类型    数组:array    对象:object特殊类型    空:null     资源:resourse    &lt;转换&gt;intval()转整形floatval()转浮点型strval()转字符串boolval()转布尔型&lt;注&gt;空转整形为0空转浮点型变成浮点型的0空转字符串变成空字符串整形后面有字符串会清除字符串保留前面的数字浮点型后面有字符串会清除字符串保留前面的全部数字&lt;判断&gt;is_array();is_string()is_bool();is_float();is_int();is_object();is_numeric();is_resource();is_null();is_scalar();判断标量gettype();只获取类型var_dump();输出值和类型PHP中提供四种整形的定义方式，十进制定义，二进制定义，八进制定义和十六进制定义$a = 120 //十进制$a = 0b110 //二进制$a = 0120     //八进制$a = 0x120    //十六进制// 使用echo输出时。默认输出为十进制decbin() // 十进制转二进制decoct() // 十进制转八进制dechex() // 十进制转十六进制bindec() // 二进制转十进制bin2hex() //二进制转十六进制    字符串：字符串变量用于存储并处理文本。</code></pre><h4 id="系统常量"><a href="#系统常量" class="headerlink" title="系统常量"></a>系统常量</h4><p>定义:<br>define(‘常量名字’,’常量值————必须是常量’);<br>变量可重新定义，使用的变量必须在上面定义<br>defind(A);判断A是否已经被定义了</p><pre><code>使用 define() 函数设置常量:bool define ( string $name , mixed $value [, bool $case_insensitive = false ] )　　该函数有三个参数:name：必选参数，常量名称，即标志符。value：必选参数，常量的值。case_insensitive ：可选参数，如果设置为 TRUE，该常量则大小写不敏感。默认是大小写敏感的。&lt;?php // 常量define(&quot;CL&quot;, &quot;这是一个全局常量&quot;, true);echo CL; // 默认false，变量名区分大小写echo cl; // true不区分大小写?&gt;预定义常量PHP预定义了许多常量，这些常量无需使用define()函数定义，可直接在程序中使用。下面列举了一些常用的PHP预定义常量。（1）__FILE__(FILE前后分别是两个下画线)：当前正在处理的脚本文件名，若使用在一个被引用的文件中（include或require），那么　　它的值就是被引用的文件，而不是引用它的那个文件。（2）__LINE__(LINE前后分别是两个下画线)：正在处理的脚本文件的当前行数。（3）PHP_VERSION：当前PHP预处理器的版本，如5.4.16。（4）PHP_OS: PHP所在的操作系统的类型。如Linux。（5）TRUE：表示逻辑真。FALSE：表示逻辑假。NULL：表示没有值或值不确定。（6）DIRECTORY_SEPARATOR: 表示目录分隔符，UNIX或Linux操作系统环境时的值为“ / ”, Window操作系统环境时的值为 “ \ ”。</code></pre><h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><pre><code>算术运算符:+   -   *   /   %赋值运算符:=   +=   -=   /+   %=   .=自增自减运算符:++   --   比较运算符:&lt;   &gt;   &gt;=   &lt;=   ==   ===   !=(仅看值)   !==(看值和数据类型)   &lt;&gt;(相当于!=)逻辑运算符:&amp;&amp;   ||   !(真假反转)静态变量:static 放在函数体内，只会初始化一次变量，以后运行会记录上一次的值预递增++x         //先加再返回预递减--x         //先减再返回后递增x++         //先返回再加后递减x--         //先返回再减非!               //不是true就返回true或or/||           //一个true就true与and/&amp;&amp;          //都true才true异或xor           //有且仅有一个true才是true三元运算符:(expr1) ? (expr2) : (expr3)</code></pre><h4 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h4><pre><code>&lt;单分支&gt;if (条件) &#123;         //真区间;&#125; else &#123;         //假区间;&#125;后续代码;&lt;多分支&gt;switch (条件) &#123;    case 判断条件1 :    case 判断条件2 :    case 判断条件3 :        echo 执行1 ;        break;    case 判断条件4 :        echo 执行2 ;        break;    default:        echo 执行3 ;      //否则        break;&#125;if (条件判断1) &#123;    echo 执行1 ;&#125; else if (条件判断2) &#123;    echo 执行2 ;&#125; else if (条件判断3) &#123;    echo 执行3 ;&#125; else &#123;    echo 执行4 ;&#125;</code></pre><h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><pre><code>for (初始条件;条件判断;执行A) &#123;       //程序进行从初始条件开始逆时针    echo 执行B ;&#125;——————————————————————————————————————————————————————————————————————————————while (条件判断) &#123;    echo 执行 ;&#125;——————————————————————————————————————————————————————————————————————————————do &#123;    echo 执行 ;&#125; while (条件判断);     //成立才接着循环——————————————————————————————————————————————————————————————————————————————continue从下一次循环语句开始break终止循环语句</code></pre><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><pre><code>function 函数名 (设置参数$...=...) &#123;    echo 执行;    return 1;       //只返回不输出&#125;函数名 ();上面这样return的1是不会输出的，要输出就要在调用函数前echo函数可以在任何位置调用，但是变量不能在上面调用函数可以调用多次函数体内声明的变量是局部变量，否则是全局变量两者互不污染，同时局部变量与垃圾回收机制有关$_GET $_POST $_COOKIE $_SESSION $GLOBALS  超全局变量(统一内外变量)约束形参:function sum (int $num1 , int $num2)&#123;    return $num1 + $num2;&#125;(sum(&#39;2.3&#39;,3));约束返回值:function sum (int $num1 , int $num2):string&#123;    return $num1 + $num2;&#125;(sum(4,5));php7.0新特性:使用  ...$函数名  来将数组里的值一一给形参赋值匿名函数:将一个没有函数名的函数赋值给一个变量并调用(就是没有名字的函数)static的关键字的使用: * 当一个函数完成时，它的所有变量通常都会被删除。 * 然而，有时候您希望某个局部变量不要被删除。 * 要做到这一点，请在您第一次声明变量时使用 static 关键字：function test()&#123;    static $n=0;    $n++;    echo &quot;调用了一次&quot;.$n.&quot;\n&quot;;&#125;test();test();test();?&gt;</code></pre><h4 id="PHP变量作用域"><a href="#PHP变量作用域" class="headerlink" title="PHP变量作用域"></a>PHP变量作用域</h4><p>PHP 有三种不同的变量作用域：<br>local（局部）:函数内部声明的变量只能在函数内部进行访问<br>global（全局）:函数之外声明的变量只能在函数以外进行访问<br>static（静态）:静态变量仅在局部函数域中存在，当函数执行离开此作用域时，其值不会消失(例如拿来判断循环退出的变量)<br>内部函数想要引用外部变量可以引入global关键字global $outer;<br>注释：static变量仍然是函数的局部变量</p><h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><p>查手册</p><h4 id="书写建议"><a href="#书写建议" class="headerlink" title="书写建议"></a>书写建议</h4><p>能加空格就加</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="幸运的人一生被童年治愈，不幸的人用一生治愈童年。"><a href="#幸运的人一生被童年治愈，不幸的人用一生治愈童年。" class="headerlink" title="幸运的人一生被童年治愈，不幸的人用一生治愈童年。"></a>幸运的人一生被童年治愈，不幸的人用一生治愈童年。</h5>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h5 id=&quot;开始学习PHP&quot;&gt;&lt;a href=&quot;#开始学习PHP&quot; class=&quot;headerlink&quot; title=&quot;开始学</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
     
     
     <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
