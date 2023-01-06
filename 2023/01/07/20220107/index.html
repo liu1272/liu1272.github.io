@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="20221113, Robin">
-    <meta name="description" content="每日一记仔细收集php的常见字符操作函数addcslashes — 以 C 语言风格使用反斜线转义字符串中的字符
-addslashes — 使用反斜线引用字符串
-bin2hex — 函数把包含数据的二进制字符串转换为十六进制值
-chop —">
+    <meta name="keywords" content="20220107, Robin">
+    <meta name="description" content="每日一记今天是广州某大学的wx小程序研究资料。既然来了，那么话不多说，直接上教程首先下载安装必备的应用关于Python的安装和环境配置就不在这里赘述了Python传送门Charles1.前往官网下载安装最新版本2.在下图处输入pojie和9">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +17,7 @@ chop —">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>20221113 | Robin</title>
+    <title>20220107 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -346,12 +343,12 @@ chop —">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">20221113</h1>
+                    <h1 class="description center-align post-title">20220107</h1>
                 </div>
             </div>
         </div>
@@ -398,28 +395,28 @@ chop —">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-13
+                    2023-01-07
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-19
+                    2023-01-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    497
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    1 分
                 </div>
                 
 
@@ -439,136 +436,13 @@ chop —">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="仔细收集php的常见字符操作函数"><a href="#仔细收集php的常见字符操作函数" class="headerlink" title="仔细收集php的常见字符操作函数"></a>仔细收集php的常见字符操作函数</h4><pre><code>addcslashes — 以 C 语言风格使用反斜线转义字符串中的字符
-addslashes — 使用反斜线引用字符串
-bin2hex — 函数把包含数据的二进制字符串转换为十六进制值
-chop — rtrim 的别名 — 删除字符串末端的空白字符（或者其他字符）
-chr — 返回指定的字符 — chr ( int $ascii )
-chunk_split — 将字符串分割成小块
-convert_cyr_string — 将字符由一种 Cyrillic 字符转换成另一种
-convert_uudecode — 解码一个 uuencode 编码的字符串
-convert_uuencode — 使用 uuencode 编码一个字符串
-count_chars — 返回字符串所用字符的信息
-crc32 — 计算一个字符串的 crc32 多项式
-crypt — 单向字符串散列
-echo — 输出一个或多个字符串
-explode — 使用一个字符串分割另一个字符串
-fprintf — 将格式化后的字符串写入到流
-get_html_translation_table — 返回使用 htmlspecialchars 和 htmlentities 后的转换表
-hebrev — 将逻辑顺序希伯来文（logical-Hebrew）转换为视觉顺序希伯来文（visual-Hebrew）
-hebrevc — 将逻辑顺序希伯来文（logical-Hebrew）转换为视觉顺序希伯来文（visual-Hebrew），并且转换换行符
-hex2bin — 转换十六进制字符串为二进制字符串
-html_entity_decode — Convert HTML entities to their corresponding characters
-htmlentities — 将字符转换为 HTML 转义字符
-htmlspecialchars_decode — 将特殊的 HTML 实体转换回普通字符
-htmlspecialchars — 将特殊字符转换为 HTML 实体
-implode — 将一个一维数组的值转化为字符串
-join — 别名 implode
-lcfirst — 使一个字符串的第一个字符小写
-levenshtein — 计算两个字符串之间的编辑距离
-localeconv — Get numeric formatting information
-ltrim — 删除字符串开头的空白字符（或其他字符）
-md5_file — 计算指定文件的 MD5 散列值
-md5 — 计算字符串的 MD5 散列值
-metaphone — Calculate the metaphone key of a string
-money_format — 将数字格式化成货币字符串
-nl_langinfo — Query language and locale information
-nl2br — 在字符串所有新行之前插入 HTML 换行标记
-number_format — 以千位分隔符方式格式化一个数字
-ord — 转换字符串第一个字节为 0-255 之间的值
-parse_str — 将字符串解析成多个变量
-print — 输出字符串
-printf — 输出格式化字符串
-quoted_printable_decode — 将 quoted-printable 字符串转换为 8-bit 字符串
-quoted_printable_encode — 将 8-bit 字符串转换成 quoted-printable 字符串
-quotemeta — 转义元字符集
-rtrim — 删除字符串末端的空白字符（或者其他字符）
-setlocale — 设置地区信息
-sha1_file — 计算文件的 sha1 散列值
-sha1 — 计算字符串的 sha1 散列值
-similar_text — 计算两个字符串的相似度
-soundex — Calculate the soundex key of a string
-sprintf — Return a formatted string
-sscanf — 根据指定格式解析输入的字符
-str_contains — Determine if a string contains a given substring
-str_ends_with — Checks if a string ends with a given substring
-str_getcsv — 解析 CSV 字符串为一个数组
-str_ireplace — str_replace 的忽略大小写版本
-str_pad — 使用另一个字符串填充字符串为指定长度
-str_repeat — 重复一个字符串
-str_replace — 子字符串替换
-str_rot13 — 对字符串执行 ROT13 转换
-str_shuffle — 随机打乱一个字符串
-str_split — 将字符串转换为数组
-str_starts_with — Checks if a string starts with a given substring
-str_word_count — 返回字符串中单词的使用情况
-strcasecmp — 二进制安全比较字符串（不区分大小写）
-strchr — 别名 strstr
-strcmp — 二进制安全字符串比较
-strcoll — 基于区域设置的字符串比较
-strcspn — 获取不匹配遮罩的起始子字符串的长度
-strip_tags — 从字符串中去除 HTML 和 PHP 标记
-stripcslashes — 反引用一个使用 addcslashes 转义的字符串
-stripos — 查找字符串首次出现的位置（不区分大小写）
-stripslashes — 反引用一个引用字符串
-stristr — strstr 函数的忽略大小写版本
-strlen — 获取字符串长度
-strnatcasecmp — 使用“自然顺序”算法比较字符串（不区分大小写）
-strnatcmp — 使用自然排序算法比较字符串
-strncasecmp — 二进制安全比较字符串开头的若干个字符（不区分大小写）
-strncmp — 二进制安全比较字符串开头的若干个字符
-strpbrk — 在字符串中查找一组字符的任何一个字符
-strpos — 查找字符串首次出现的位置
-strrchr — 查找指定字符在字符串中的最后一次出现
-strrev — 反转字符串
-strripos — 计算指定字符串在目标字符串中最后一次出现的位置（不区分大小写）
-strrpos — 计算指定字符串在目标字符串中最后一次出现的位置
-strspn — 计算字符串中全部字符都存在于指定字符集合中的第一段子串的长度。
-strstr — 查找字符串的首次出现
-strtok — 标记分割字符串
-strtolower — 将字符串转化为小写
-strtoupper — 将字符串转化为大写
-strtr — 转换指定字符
-substr_compare — 二进制安全比较字符串（从偏移位置比较指定长度）
-substr_count — 计算字串出现的次数
-substr_replace — 替换字符串的子串
-substr — 返回字符串的子串
-trim — 去除字符串首尾处的空白字符（或者其他字符）
-ucfirst — 将字符串的首字母转换为大写
-ucwords — 将字符串中每个单词的首字母转换为大写
-vfprintf — 将格式化字符串写入流
-vprintf — 输出格式化字符串
-vsprintf — 返回格式化字符串
-wordwrap — 打断字符串为指定数量的字串
-is_array 判断是否为数组
-count 数组的元素数目
-array_search — 在数组中搜索给定的值，如果成功则返回相应的键名
-array_key_exists()在给定的 key 存在于数组中时返回 TRUE
-array_unshift()  将传入的单元插入到 array 数组的开头。注意单元是作为整体被插入的，因此传入单元将保持同样的顺序。所有的数值键名将修改为从零开始重新计数，所有的文字键名保持不变
-array_shift()  将array 的第一个单元移出并作为结果返回，将 array 的长度减一并将所有其它单元向前移动一位。所有的数字键名将改为从零开始计数，文字键名将不变。
-array_unique()  接受 array 作为输入并返回没有重复值的新数组。注意键名保留不变。 array_unique()  先将值作为字符串排序，然后对每个值只保留第一个遇到的键名，接着忽略所有后面的键名。这并不意味着在未排序的 array 中同一个值的第一个出现的键名会被保留。 
-in_array — 检查数组中是否存在某个值  如果找到指定的值则返回 TRUE，否则返回 FALSE 。in_array()是区分大小写的。
-PHP_EOL 为换行符
-</code></pre>
-<p>部分实例</p>
-<pre><code>$a=&#39;123456&#39;;
-echo $str.&quot; 一共有 &quot;.strlen($a).&quot;字符&quot;;
-//去掉空格
-echo trim($str);
-echo $str1;
-//查找字符串 返回位置
-echo strpos($str,&#39;暗月&#39;);
-//截取字符串
-echo substr($str,strpos($str,&#39;暗月&#39;),strpos($str,&#39;培训&#39;));
-//md5  加密
-echo md5($a);
-//通过下标 取字符的值
-echo $a[0];
-//字符串替换函数
-$a1=str_replace(&#39;1&#39;,&#39;0&#39;,$a);
-echo $a1;
-</code></pre>
-<h4 id="具体的使用方法请查看手册"><a href="#具体的使用方法请查看手册" class="headerlink" title="具体的使用方法请查看手册"></a>具体的使用方法请查看手册</h4><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="最后，分享一句圆桌派的话：“你可以是孤岛，也可-以连成一片。”"><a href="#最后，分享一句圆桌派的话：“你可以是孤岛，也可-以连成一片。”" class="headerlink" title="最后，分享一句圆桌派的话：“你可以是孤岛，也可 以连成一片。”"></a>最后，分享一句圆桌派的话：“你可以是孤岛，也可 以连成一片。”</h5>
+                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>今天是广州某大学的wx小程序研究资料。<br>既然来了，那么话不多说，直接上教程<br>首先下载安装必备的应用<br><em>关于Python的安装和环境配置就不在这里赘述了</em><br><strong><a href="https://blog.csdn.net/qq_45502336/article/details/109531599?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167291320016800186585384%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=167291320016800186585384&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-9-109531599-null-null.142%5Ev70%5Econtrol,201%5Ev4%5Eadd_ask&utm_term=python&spm=1018.2226.3001.4187">Python传送门</a></strong><br><strong>Charles</strong><br>1.前往<a href="https://www.charlesproxy.com/download/">官网</a>下载安装最新版本<br><img src="https://s2.loli.net/2023/01/07/m1S8RCupIAgQyP9.png" alt="随便选个喜欢的"><br>2.在下图处输入<strong>pojie</strong>和<strong>9d8fb452d26c0decc5</strong>后确定<br><img src="https://s2.loli.net/2023/01/07/ZzpSn2uRG8BgIoA.png" alt="恭喜你解锁VIP"></p>
+<h5 id="接下来是抓包"><a href="#接下来是抓包" class="headerlink" title="接下来是抓包"></a>接下来是抓包</h5><p>1.关闭防火墙:打开网络设置&gt;高级网络设置&gt;Windows防火墙&gt;公用网络&gt;关闭并确认<br>2.在PC端wx中打开该小程序<br>3.在任务管理器里找到该小程序的应用<br><img src="https://s2.loli.net/2023/01/07/meVHGjo6vDNUScL.png" alt="找到这个万恶之源！"><br>4.右键点开小程序，打开文件所在位置，找到一个叫Runtime的包<br>5.将小程序和微信都关闭掉（否则部分文件删除不掉），然后将Runtime包下的文件都删除掉<br>6.把Runtime文件夹改为只读状态<br><img src="https://s2.loli.net/2023/01/07/YtoPvDxO6Z8unwa.png" alt="就是它了"><br>7.重新进入该wx小程序登录<br>8.打开Charles后在小程序内随意进入一个页面<br>9.CTRL+F输入<strong>key</strong>找到并复制字段<br><img src="https://s2.loli.net/2023/01/07/ruwzPXvIG7AWCNB.png" alt="就类似于这样，不能放得更多了"></p>
+<h5 id="最后开始让代码跑起来"><a href="#最后开始让代码跑起来" class="headerlink" title="最后开始让代码跑起来"></a>最后开始让代码跑起来</h5><p>在主程序的这个位置粘贴刚刚复制的key并运行<br><img src="https://s2.loli.net/2023/01/07/tSf9DFdlPKWLBbs.png" alt="就在这里"></p>
+<h5 id="结束撒花！"><a href="#结束撒花！" class="headerlink" title="结束撒花！"></a>结束撒花！</h5><p>注:<br>如果运行时发生错误请检查网络或尝试重启<br>如果出现名字不显示或者各种奇奇怪怪的bug但确确实实在运行，那么看着就好(正所谓能跑就行)<br>如果显示<strong>得分失败，重新开始匹配</strong>就多等一会，因为没有真人跟你匹配是不会得分的<br>本章内容只对该小程序进行分析，仅限学习研究使用，严禁进行其他非法行为！造成的后果本人不承担相关责任。</p>
+<p><em><strong>最后感谢该校各位前辈的指导和帮助！！！</strong></em></p>
+<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p><strong>每个烟花都像是盲盒，不知道点燃升空之后会是什么颜色、什么形状、会持续多久。</strong></p>
+
                 
             </div>
             <hr/>
@@ -711,7 +585,7 @@ echo $a1;
         repo: 'liu1272.github.io',
         owner: 'liu1272',
         admin: "liu1272",
-        id: '2022-11-13T15-41-00',
+        id: '2023-01-07T00-08-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -739,17 +613,18 @@ echo $a1;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../14/20221114/">
+                <a href="">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/15.jpg" class="responsive-img" alt="20221114">
+                        <img src="../../../../medias/featureimages/2.jpg" class="responsive-img" alt="20220107">
                         
-                        <span class="card-title">20221114</span>
+                        <span class="card-title">20220107</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -759,9 +634,9 @@ echo $a1;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -774,6 +649,7 @@ echo $a1;
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -792,13 +668,13 @@ echo $a1;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../12/20221112/">
+                <a href="../../05/20220105/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/17.jpg" class="responsive-img" alt="20221112">
+                        <img src="../../../../medias/featureimages/4.jpg" class="responsive-img" alt="20220105">
                         
-                        <span class="card-title">20221112</span>
+                        <span class="card-title">20220105</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -809,7 +685,7 @@ echo $a1;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-05
                             </span>
                         <span class="publish-author">
                             

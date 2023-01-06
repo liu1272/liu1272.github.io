@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-01-05T15:39:15.372Z</updated>
+  <updated>2023-01-06T17:17:51.557Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>20220107</title>
+    <link href="https://liu1272.github.io/2023/01/07/20220107/"/>
+    <id>https://liu1272.github.io/2023/01/07/20220107/</id>
+    <published>2023-01-06T16:08:00.000Z</published>
+    <updated>2023-01-06T17:17:51.557Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>今天是广州某大学的wx小程序研究资料。<br>既然来了，那么话不多说，直接上教程<br>首先下载安装必备的应用<br><em>关于Python的安装和环境配置就不在这里赘述了</em><br><strong><a href="https://blog.csdn.net/qq_45502336/article/details/109531599?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167291320016800186585384%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=167291320016800186585384&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-9-109531599-null-null.142%5Ev70%5Econtrol,201%5Ev4%5Eadd_ask&utm_term=python&spm=1018.2226.3001.4187">Python传送门</a></strong><br><strong>Charles</strong><br>1.前往<a href="https://www.charlesproxy.com/download/">官网</a>下载安装最新版本<br><img src="https://s2.loli.net/2023/01/07/m1S8RCupIAgQyP9.png" alt="随便选个喜欢的"><br>2.在下图处输入<strong>pojie</strong>和<strong>9d8fb452d26c0decc5</strong>后确定<br><img src="https://s2.loli.net/2023/01/07/ZzpSn2uRG8BgIoA.png" alt="恭喜你解锁VIP"></p><h5 id="接下来是抓包"><a href="#接下来是抓包" class="headerlink" title="接下来是抓包"></a>接下来是抓包</h5><p>1.关闭防火墙:打开网络设置&gt;高级网络设置&gt;Windows防火墙&gt;公用网络&gt;关闭并确认<br>2.在PC端wx中打开该小程序<br>3.在任务管理器里找到该小程序的应用<br><img src="https://s2.loli.net/2023/01/07/meVHGjo6vDNUScL.png" alt="找到这个万恶之源！"><br>4.右键点开小程序，打开文件所在位置，找到一个叫Runtime的包<br>5.将小程序和微信都关闭掉（否则部分文件删除不掉），然后将Runtime包下的文件都删除掉<br>6.把Runtime文件夹改为只读状态<br><img src="https://s2.loli.net/2023/01/07/YtoPvDxO6Z8unwa.png" alt="就是它了"><br>7.重新进入该wx小程序登录<br>8.打开Charles后在小程序内随意进入一个页面<br>9.CTRL+F输入<strong>key</strong>找到并复制字段<br><img src="https://s2.loli.net/2023/01/07/ruwzPXvIG7AWCNB.png" alt="就类似于这样，不能放得更多了"></p><h5 id="最后开始让代码跑起来"><a href="#最后开始让代码跑起来" class="headerlink" title="最后开始让代码跑起来"></a>最后开始让代码跑起来</h5><p>在主程序的这个位置粘贴刚刚复制的key并运行<br><img src="https://s2.loli.net/2023/01/07/tSf9DFdlPKWLBbs.png" alt="就在这里"></p><h5 id="结束撒花！"><a href="#结束撒花！" class="headerlink" title="结束撒花！"></a>结束撒花！</h5><p>注:<br>如果运行时发生错误请检查网络或尝试重启<br>如果出现名字不显示或者各种奇奇怪怪的bug但确确实实在运行，那么看着就好(正所谓能跑就行)<br>如果显示<strong>得分失败，重新开始匹配</strong>就多等一会，因为没有真人跟你匹配是不会得分的<br>本章内容只对该小程序进行分析，仅限学习研究使用，严禁进行其他非法行为！造成的后果本人不承担相关责任。</p><p><em><strong>最后感谢该校各位前辈的指导和帮助！！！</strong></em></p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p><strong>每个烟花都像是盲盒，不知道点燃升空之后会是什么颜色、什么形状、会持续多久。</strong></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;p&gt;今天是广州某大学的wx小程序研究资料。&lt;br&gt;既然来了，那么话不多说，直接上教程&lt;br&gt;首先下载安装必备的应用&lt;br&gt;&lt;em</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>20220105</title>
@@ -451,28 +475,6 @@
     
     
     <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221111</title>
-    <link href="https://liu1272.github.io/2022/11/11/20221111/"/>
-    <id>https://liu1272.github.io/2022/11/11/20221111/</id>
-    <published>2022-11-11T08:28:00.000Z</published>
-    <updated>2022-11-17T15:09:46.582Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h4><pre><code>文件1function add()&#123;    echo &#39;执行&#39;;&#125;add增加，del删除，update更改，select查询文件2include (&#39;文件1.php&#39;);          //调用文件add();                         //调用函数include与require区别include在没有这个文件时报错并执行，但是require报错但是不执行include_once与require_once区别可以重复调用文件，区别同上</code></pre><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><pre><code>索引数组:$arr=[1,2,3,4,5];var_dump($arr);或$arr=array(1,2,3,4,5);var_dump($arr);关联数组:$arr=[    &#39;A&#39;=&gt;&#39;a&#39;,    &#39;B&#39;=&gt;&#39;b&#39;;];var_dump($arr);二维(多维)数组:$arr=[    &#39;A&#39;=&gt;[        &#39;a&#39;,        &#39;b&#39;,        &#39;c&#39;,    ]];var_dump($arr);</code></pre><h5 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h5><p>增加:直接声明$arr[位置]=’内容’;<br>删除:unset($arr[位置]);<br>修改:重新定义<br>对于多维数组要var_dump($arr[第一层位置][第二层位置]…….);<br>获取循环次数:echo count($arr);</p><pre><code>遍历foreach ($arr as $key =&gt; $value) &#123;    echo $key.&#39;&lt;br/&gt;&#39;;&#125;list($a , $b , $c , $d , $e) = $arr;echo $a,$b,$c,$d;一一赋值，多出来的跳过，只对有索引的有效while (list($key , $val) = each($arr)) &#123;    echo $key.&#39;--&#39;.$val.&#39;&lt;br/&gt;&#39;;&#125;排序sort() - 对数组进行升序排列rsort() - 对数组进行降序排列asort() - 根据关联数组的值，对数组进行升序排列ksort() - 根据关联数组的键，对数组进行升序排列arsort() - 根据关联数组的值，对数组进行降序排列krsort() - 根据关联数组的键，对数组进行降序排列数组的合拼$array1 =array(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;);$array2 = array(&#39;a1&#39;=&gt;&#39;php&#39;,&#39;a2&#39;=&gt;&#39;python&#39;,&#39;a3&#39;=&gt;&#39;java&#39;);$array3 = array_merge($array1,$array2);添加到指定位置array_splice(数组，位置，删除几个，增加元素）</code></pre><h4 id="超全局数组"><a href="#超全局数组" class="headerlink" title="超全局数组"></a>超全局数组</h4><p>配合html前端页面method=’get/post’<br>var_dump($_GET);获取GET的参(显示内容在URL)<br>var_dump($_POST);获取POST的参(不显示)<br>var_dump($_REQUEST);都可以获取<br>前端name所设置的会把参数传到后端<br>name=’username’<br>$username=$_GET[‘username’];</p><h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><pre><code>notice注意                   //后续代码会继续执行warning警告                  //后续代码会继续执行fatal error致命错误          //后续代码不会继续执行@可以消除警报(除了fatal error)在ini配置文件里display_errors:On可以取消报错(所有)在ini配置文件里error_log找错误日志</code></pre><h4 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h4><p>时间戳:时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数，不考虑闰秒。<br>配置文件可改时区，不详细讲</p><h4 id="数据库简介-dos操作"><a href="#数据库简介-dos操作" class="headerlink" title="数据库简介(dos操作)"></a>数据库简介(dos操作)</h4><pre><code>对数据库的解释:数据库相当于文件夹，表相当于文件，字段就是内容。注释符:#    &quot;--  &quot;    /* */&lt;不是内部命令就更改环境变量&gt;【库操作】连接数据库:mysql -uroot -p查库:show databases;建库creat database 库名;删库drop database 库名;退出mysql &gt; exit;mysql &gt; quit;mysql &gt; \q;重命名数据库RENAME database olddbname TO newdbname【表操作】进库:use 库名;建表:creat table 表名(id int,字段名 数据类型(长度) , 字段名 数据类型(位数));建表命令:show creat table 表名;改表名:alter table 原表名 rename 新名字查表:show tables;select * from table_name删表:drop table 表名;查表结构:desc 表名;                      //字段类型，主键，是否为空等属性，但不显示外键【字段操作】建表字段:alter table 表名 add 字段名 (字段类型)改表字段:alter table 表名 change 原来的字段名 现在的字段名 数据类型(位数);改表字段值:alter table 表名 modify 字段名 修改后的值删表字段:alter table 表名 drop 字段名更改表的存储引擎:alter table 表名 engine=存储引擎名;给所有字段增加数据:insert into users (字段名1,字段名2,字段名3)values(值1,值2,值3);【插入顺序】first    alter table 表名 add 字段(字段类型) firstafter    alter table 表名 add 字段名(字段类型) after (在谁后面)【其它命令】显示系统特定资源的信息show status;                   //例如，正在运行的线程数量。</code></pre><h4 id="mysql数据类型"><a href="#mysql数据类型" class="headerlink" title="mysql数据类型"></a>mysql数据类型</h4><p>整形:<br>int4字节，bigint8字节<br>浮点型:<br>float(m,d)<br>double(m,d)<br>decimal(m,d)<br>字符型:<br>char定长字符串(常用于32位md5密码)<br>varchar变长字符串(常用于用户名)<br>时间型:<br>4字节，年月日格式<br>auto_increment:<br>自动增加，只用于整形，priimary&emsp;key设置起始值(默认为1)<br><a href="https://www.cnblogs.com/-xlp/p/8617760.html">总结内容</a></p><h5 id="以上内容皆可使用phpMyAdmin和NavicatPremium更改"><a href="#以上内容皆可使用phpMyAdmin和NavicatPremium更改" class="headerlink" title="以上内容皆可使用phpMyAdmin和NavicatPremium更改"></a>以上内容皆可使用phpMyAdmin和NavicatPremium更改</h5><h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><pre><code>普通索引:alter table 表名 add index(字段);唯一索引:alter table 表名 add unique(字段);主键索引:alter table 表名 add primary key(字段);全文索引:alter table 表名 add fulltext(字段);显示索引:show index from 字段名</code></pre><p><a href="https://blog.csdn.net/qq_35190492/article/details/109257302?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166808686716782428672275%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=166808686716782428672275&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-109257302-null-null.142%5Ev63%5Ejs_top,201%5Ev3%5Econtrol,213%5Ev2%5Et3_esquery_v2&utm_term=mysql%E7%B4%A2%E5%BC%95&spm=1018.2226.3001.4187">使用及区别</a></p><h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><pre><code>select选择时如果要限制条件就在后面加上where和条件where age&lt;&gt;50; == where age!50                     //取非age in(18,16,17);                                  //固定查询的值address like &#39;Ax&#39;;                                 //模糊查询A开头的address like &#39;xAx&#39;;                                //模糊查询含A的select * from 表名 order by 列名 desc;             //降序显示，默认为升序(asc)select * from 表名 limit 5,5;                      //从第五个值开始往下取5个值select * from 表名 group by 列名;                  //分组(只保留一个，去重)select count(*) from 表名;                         //显示该列有几个数据select 列名 as 别名 from 表名;                     //给该列起别名注意:and优先级高于or，因此先计算and表达式再运算or表达式聚合查询:count()返回行数sum()返回某列值的和avg()返回某列平均值max()返回某列最大值min()返回某列最小值分组查询:select * from 表名 group by 字段名;select * from 表名 limit 开始行数,结束行数;select * from 表名 as 重命名;mysql子查询:类似于嵌套循环，将内层的结果传递到外层进行下一步操作大致有:where,from,exists三个联合查询(两个表的查询):原理——————取得两个结果集的并集union默认选取不同的值。如果允许重复的值，请使用union all(不会去掉结果中的重复行)union all 查询全部而且不会消除重复的行</code></pre><h4 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h4><pre><code>内联查询:select 列名1 from 表名1 inner join 表名2 on 条件;左连接查询(以左边为基准):select 列名1 from 表名1 left join 表名2 on 条件;右链接查询(左边没有的不会显示):select 列名1 from 表名1 right join 表名2 on 条件;嵌套查询:不建议，太慢</code></pre><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="双十一被学校关在宿舍饲养-不用走到哪都吃狗粮真是太开心了-dog"><a href="#双十一被学校关在宿舍饲养-不用走到哪都吃狗粮真是太开心了-dog" class="headerlink" title="双十一被学校关在宿舍饲养,不用走到哪都吃狗粮真是太开心了(dog)"></a>双十一被学校关在宿舍饲养,不用走到哪都吃狗粮真是太开心了(dog)</h5>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;文件包含&quot;&gt;&lt;a href=&quot;#文件包含&quot; class=&quot;headerlink&quot; title=&quot;文件包含&quot;&gt;&lt;/a</summary>
-      
-    
-    
     
     
     <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
