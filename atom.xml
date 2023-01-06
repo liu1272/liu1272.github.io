@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-01-06T17:17:51.557Z</updated>
+  <updated>2023-01-06T17:46:44.265Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://liu1272.github.io/2023/01/07/20220107/"/>
     <id>https://liu1272.github.io/2023/01/07/20220107/</id>
     <published>2023-01-06T16:08:00.000Z</published>
-    <updated>2023-01-06T17:17:51.557Z</updated>
+    <updated>2023-01-06T17:46:44.265Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>今天是广州某大学的wx小程序研究资料。<br>既然来了，那么话不多说，直接上教程<br>首先下载安装必备的应用<br><em>关于Python的安装和环境配置就不在这里赘述了</em><br><strong><a href="https://blog.csdn.net/qq_45502336/article/details/109531599?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167291320016800186585384%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=167291320016800186585384&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-9-109531599-null-null.142%5Ev70%5Econtrol,201%5Ev4%5Eadd_ask&utm_term=python&spm=1018.2226.3001.4187">Python传送门</a></strong><br><strong>Charles</strong><br>1.前往<a href="https://www.charlesproxy.com/download/">官网</a>下载安装最新版本<br><img src="https://s2.loli.net/2023/01/07/m1S8RCupIAgQyP9.png" alt="随便选个喜欢的"><br>2.在下图处输入<strong>pojie</strong>和<strong>9d8fb452d26c0decc5</strong>后确定<br><img src="https://s2.loli.net/2023/01/07/ZzpSn2uRG8BgIoA.png" alt="恭喜你解锁VIP"></p><h5 id="接下来是抓包"><a href="#接下来是抓包" class="headerlink" title="接下来是抓包"></a>接下来是抓包</h5><p>1.关闭防火墙:打开网络设置&gt;高级网络设置&gt;Windows防火墙&gt;公用网络&gt;关闭并确认<br>2.在PC端wx中打开该小程序<br>3.在任务管理器里找到该小程序的应用<br><img src="https://s2.loli.net/2023/01/07/meVHGjo6vDNUScL.png" alt="找到这个万恶之源！"><br>4.右键点开小程序，打开文件所在位置，找到一个叫Runtime的包<br>5.将小程序和微信都关闭掉（否则部分文件删除不掉），然后将Runtime包下的文件都删除掉<br>6.把Runtime文件夹改为只读状态<br><img src="https://s2.loli.net/2023/01/07/YtoPvDxO6Z8unwa.png" alt="就是它了"><br>7.重新进入该wx小程序登录<br>8.打开Charles后在小程序内随意进入一个页面<br>9.CTRL+F输入<strong>key</strong>找到并复制字段<br><img src="https://s2.loli.net/2023/01/07/ruwzPXvIG7AWCNB.png" alt="就类似于这样，不能放得更多了"></p><h5 id="最后开始让代码跑起来"><a href="#最后开始让代码跑起来" class="headerlink" title="最后开始让代码跑起来"></a>最后开始让代码跑起来</h5><p>在主程序的这个位置粘贴刚刚复制的key并运行<br><img src="https://s2.loli.net/2023/01/07/tSf9DFdlPKWLBbs.png" alt="就在这里"></p><h5 id="结束撒花！"><a href="#结束撒花！" class="headerlink" title="结束撒花！"></a>结束撒花！</h5><p>注:<br>如果运行时发生错误请检查网络或尝试重启<br>如果出现名字不显示或者各种奇奇怪怪的bug但确确实实在运行，那么看着就好(正所谓能跑就行)<br>如果显示<strong>得分失败，重新开始匹配</strong>就多等一会，因为没有真人跟你匹配是不会得分的<br>本章内容只对该小程序进行分析，仅限学习研究使用，严禁进行其他非法行为！造成的后果本人不承担相关责任。</p><p><em><strong>最后感谢该校各位前辈的指导和帮助！！！</strong></em></p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p><strong>每个烟花都像是盲盒，不知道点燃升空之后会是什么颜色、什么形状、会持续多久。</strong></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>今天是广州某大学的wx小程序研究资料。<br>既然来了，那么话不多说，直接上教程<br>首先下载安装必备的应用<br><em>关于Python的安装和环境配置就不在这里赘述了</em><br><strong><a href="https://blog.csdn.net/qq_45502336/article/details/109531599?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167291320016800186585384%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=167291320016800186585384&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-9-109531599-null-null.142%5Ev70%5Econtrol,201%5Ev4%5Eadd_ask&utm_term=python&spm=1018.2226.3001.4187">Python传送门</a></strong><br><strong>Charles</strong><br>1.前往<a href="https://www.charlesproxy.com/download/">官网</a>下载安装最新版本<br><img src="https://s2.loli.net/2023/01/07/m1S8RCupIAgQyP9.png" alt="随便选个喜欢的"><br>2.在下图处输入<strong>pojie</strong>和<strong>9d8fb452d26c0decc5</strong>后确定<br><img src="https://s2.loli.net/2023/01/07/ZzpSn2uRG8BgIoA.png" alt="恭喜你解锁VIP"></p><h5 id="接下来是抓包"><a href="#接下来是抓包" class="headerlink" title="接下来是抓包"></a>接下来是抓包</h5><p>1.关闭防火墙:打开网络设置&gt;高级网络设置&gt;Windows防火墙&gt;公用网络&gt;关闭并确认<br>2.在PC端wx中打开该小程序<br>3.在任务管理器里找到该小程序的应用<br><img src="https://s2.loli.net/2023/01/07/meVHGjo6vDNUScL.png" alt="找到这个万恶之源！"><br>4.右键点开小程序，打开文件所在位置，找到一个叫Runtime的包<br>5.将小程序和微信都关闭掉（否则部分文件删除不掉），然后将Runtime包下的文件都删除掉<br>6.把Runtime文件夹改为只读状态<br><img src="https://s2.loli.net/2023/01/07/YtoPvDxO6Z8unwa.png" alt="就是它了"><br>7.重新进入该wx小程序登录<br>8.打开Charles后在小程序内随意进入一个页面<br>9.CTRL+F输入<strong>key</strong>找到并复制字段<br><img src="https://s2.loli.net/2023/01/07/ruwzPXvIG7AWCNB.png" alt="就类似于这样，不能放得更多了"></p><h5 id="最后开始让代码跑起来"><a href="#最后开始让代码跑起来" class="headerlink" title="最后开始让代码跑起来"></a>最后开始让代码跑起来</h5><p>在主程序的这个位置粘贴刚刚复制的key并运行<br><img src="https://s2.loli.net/2023/01/07/tSf9DFdlPKWLBbs.png" alt="报错没有库的自己装"></p><h5 id="结束撒花！"><a href="#结束撒花！" class="headerlink" title="结束撒花！"></a>结束撒花！</h5><p>注:<br>如果运行时发生错误请检查网络或尝试重启<br>如果出现名字不显示或者各种奇奇怪怪的bug但确确实实在运行，那么看着就好(正所谓能跑就行)<br>如果显示<strong>得分失败，重新开始匹配</strong>就多等一会，因为没有真人跟你匹配是不会得分的<br>本章内容只对该小程序进行分析，仅限学习研究使用，严禁进行其他非法行为！造成的后果本人不承担相关责任。</p><p><em><strong>最后感谢该校各位前辈的指导和帮助！！！</strong></em></p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p><strong>每个烟花都像是盲盒，不知道点燃升空之后会是什么颜色、什么形状、会持续多久。</strong></p>]]></content>
     
     
       
@@ -37,6 +37,30 @@
     
     
     <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>20220106</title>
+    <link href="https://liu1272.github.io/2023/01/06/20220106/"/>
+    <id>https://liu1272.github.io/2023/01/06/20220106/</id>
+    <published>2023-01-06T03:34:00.000Z</published>
+    <updated>2023-01-06T17:50:23.106Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="无聊玩了一下Midjourney，挺方便，功能也很强大"><a href="#无聊玩了一下Midjourney，挺方便，功能也很强大" class="headerlink" title="无聊玩了一下Midjourney，挺方便，功能也很强大"></a>无聊玩了一下Midjourney，挺方便，功能也很强大</h5><p><img src="https://s2.loli.net/2023/01/06/vBlOqfjzJATF2kG.png#pic_center" alt="荒星"><br><img src="https://s2.loli.net/2023/01/07/uTWD6a93ZHOlxLq.png#pic_center" alt="好像刀妹"><br><img src="https://s2.loli.net/2023/01/06/X1FeICpcr74lkL9.png#pic_center" alt="粉毛YYDS"></p><h5 id="最后放个邀请地址"><a href="#最后放个邀请地址" class="headerlink" title="最后放个邀请地址"></a>最后放个<a href="https://discord.com/invite/midjourney">邀请地址</a></h5>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;无聊玩了一下Midjourney，挺方便，功能也很强大&quot;&gt;&lt;a href=&quot;#无聊玩了一下Midjourney，挺方便，功能也很强大&quot; class=&quot;headerlink&quot; title=&quot;无聊玩了一下Midjourney，挺方便，功能也很强大&quot;&gt;&lt;/a&gt;无聊玩了一</summary>
+      
+    
+    
+    
+    <category term="随笔" scheme="https://liu1272.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="随笔" scheme="https://liu1272.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
@@ -446,30 +470,6 @@
       
       
     <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;仔细收集php的常见字符操作函数&quot;&gt;&lt;a href=&quot;#仔细收集php的常见字符操作函数&quot; class=&quot;head</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221112</title>
-    <link href="https://liu1272.github.io/2022/11/12/20221112/"/>
-    <id>https://liu1272.github.io/2022/11/12/20221112/</id>
-    <published>2022-11-12T05:48:00.000Z</published>
-    <updated>2022-11-19T09:38:27.469Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="PHP超级全局变量"><a href="#PHP超级全局变量" class="headerlink" title="PHP超级全局变量"></a>PHP超级全局变量</h4><p>PHP超级全局变量列表：<br>$GLOBALS　　一个包含了全部变量的全局组合数组。变量的名字就是数组的键。<br>$_SERVER　　一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的数组<br>$_REQUEST　　用于收集HTML表单提交的数据。<br>它可以获取 cookie  get  post<br>$_POST　　应用于收集表单数据，在HTML form标签的指定该属性：”method=”post”。<br>$_GET　　应用于收集表单数据，在HTML form标签的指定该属性：”method=”get”。<br>Array []<br>$_FILES　　<br>$_ENV　　<br>$_COOKIE　　<br>$_SESSION</p><h4 id="PHP-Include-文件"><a href="#PHP-Include-文件" class="headerlink" title="PHP Include 文件"></a>PHP Include 文件</h4><p>服务器端包含用于创建可在多个页面重复使用的函数、页眉、页脚或元素。</p><pre><code>将 PHP 文件的内容插入另一个 PHP 文件:include &#39;filename&#39;;require &#39;filename&#39;;错误处理方面:require 会生成致命错误（E_COMPILE_ERROR）并停止脚本include 只生成警告（E_WARNING），但脚本会继续</code></pre><h4 id="PHP-文件处理"><a href="#PHP-文件处理" class="headerlink" title="PHP 文件处理"></a>PHP 文件处理</h4><p>操作文件:<br>readfile() 函数读取文件，并把它写入输出缓冲。<br>文件打开/读取/关闭:<br>fopen(“AAA.txt”,”/r”)函数的第一个参数包含被打开的文件名，第二个参数规定打开文件的模式。</p><p>打开模式详解:<br>r:打开只读文件，指针在文件开头<br>w:只写文件，如果不存在就删除或创建，指针在文件开头<br>a:只写文件，保留数据，指针在结尾，如果文件不存在就创建新文件<br>x:创建新文件为只写，如果文件存在就返回false和错误<br>r+:打开文件为读/写，指针在开头<br>w+:打开文件为读/写，如果不存在就创建或删除，指针在开头<br>a+:打开文件为读/写，保留数据，指针在结尾，如果不存在就创建新文件<br>x+:创建文件为读/写，如果文件已存在就返回false和错误</p><p>fread($文件名,filesize(“AAA.txt”));<br>第一个参数包含待读取文件的文件名，第二个参数规定待读取的最大字节数</p><p>fclose($文件名);<br>关闭打开的文件，节约服务器资源</p><p>fgets($文件名);<br>从文件读取单行，调用后，文件指针会移动到下一行。</p><p>feof($myfile);<br>检查是否已到达文件末尾(EOF)，常用于遍历未知长度的数据</p><p>fgetc($myfile);<br>从文件中读取单个字符，调用后，文件指针会移动到下一个字符。</p><p>fopen(“文件名”, “w”)；<br>如果用来打开不存在的文件，此函数会创建文件，假定文件被打开为写入（w）或增加（a）。</p><p>fwrite($文件名,要发送的字符串);<br>写入文件,会发生覆盖原数据</p><h4 id="文件的-复制-删除-重名"><a href="#文件的-复制-删除-重名" class="headerlink" title="文件的 复制 删除 重名"></a>文件的 复制 删除 重名</h4><p>php文件重命名：函数rename()。<br>php文件复制：函数copy();<br>php文件删除：函数unlink();</p><h4 id="获取文件属性"><a href="#获取文件属性" class="headerlink" title="获取文件属性"></a>获取文件属性</h4><pre><code>file_exists(string $filename)是否存在,返回false或trueis_file() 是否为文件,返回false或truefilesize() 文件大小,返回false或trueis_readable() 文件名是否可读,返回false或trueis_writable() 文件名是否可改,返回false或trueis_executable() 文件名是否可执行,返回false或truefilectime() 文件创建时间，返回UNX时间戳filemtime() 文件修改时间，返回UNX时间戳fileatime() 上次访问时间，返回UNX时间戳stat() 获取大部分属性值，返回包含文件信息的数组</code></pre><h4 id="PHP目录操作"><a href="#PHP目录操作" class="headerlink" title="PHP目录操作"></a>PHP目录操作</h4><p>新建目录：mkdir(路径，权限，递归创建)<br>删除目录：rmdir()<br>移动（改名）：rename()<br>获取目录内容：<br>//打开目录<br>目录句柄 = opendir()<br>//读取目录<br>文件名 = readdir(目录句柄)<br>依次读取文件名，同时向下移动文件句柄指针，读取不到则返回false<br>//关闭目录<br>closedir()</p><p>注:前目录. 上级目录用..</p><h4 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h4><p>定义：人为的将内存进行分隔<br>作用：让不同内存区域的同名结构共存<br>目的：解决重名结构问题<br>空间元素：函数，常量，类，不包括变量！！!<br>语法:<br>namespace 空间名<br>namespace 空间名\子空间</p><p>命名空间访问(url)<br>1.定名称访问：直接访问空间元素的名字（只访问自己命名空间的元素）<br>2.名称访问：使用自己当前的子空间名字+ \ + 元素名字<br>3.访问：\ + 全局空间 + \  +  元素名字<br>注：任何空间元素访问，只针对函数，类，常量，不包括变量！！!</p><p>全局空间(C盘)<br>如果定义了命名空间，非限定名称的寻找系统常量的方式：<br>首先,自己的空间内找<br>然后,果找不到元素<br>系统常量–&gt;进入全局空间寻找<br>系统类–&gt;不会自动进入全局空间寻找，而是会报错</p><pre><code>命名空间的引入1.空间引入方式：use关键字    (1)类：use 空间名\类名    (2)数：use function 空间名\函数名    (3)量：use const 空间名\常量名2.当引入元素时重名，通过 as 来起别名    use 空间名\类名 as 别名3.引入多个元素    use 空间名\&#123;        类名，        function 函数名，        const 常量    &#125;       4. 引入空间    use 空间名</code></pre><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="此爱隔山海，山海不可平。"><a href="#此爱隔山海，山海不可平。" class="headerlink" title="此爱隔山海，山海不可平。"></a>此爱隔山海，山海不可平。</h5>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;PHP超级全局变量&quot;&gt;&lt;a href=&quot;#PHP超级全局变量&quot; class=&quot;headerlink&quot; title=</summary>
       
     
     
