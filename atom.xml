@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-01-09T14:08:32.756Z</updated>
+  <updated>2023-01-12T16:06:28.066Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>20220107</title>
+    <title>20230112</title>
+    <link href="https://liu1272.github.io/2023/01/12/20230112/"/>
+    <id>https://liu1272.github.io/2023/01/12/20230112/</id>
+    <published>2023-01-12T15:00:00.000Z</published>
+    <updated>2023-01-12T16:06:28.066Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://s2.loli.net/2023/01/12/HxhJLnMmr7TvGIX.png" alt="真正值得纪念的，或许不止是一张画片......."></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2023/01/12/HxhJLnMmr7TvGIX.png&quot; alt=&quot;真正值得纪念的，或许不止是一张画片.......&quot;&gt;&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="随笔" scheme="https://liu1272.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="随笔" scheme="https://liu1272.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>20230107</title>
     <link href="https://liu1272.github.io/2023/01/07/20220107/"/>
     <id>https://liu1272.github.io/2023/01/07/20220107/</id>
     <published>2023-01-06T16:08:00.000Z</published>
-    <updated>2023-01-09T14:08:32.756Z</updated>
+    <updated>2023-01-12T16:00:11.714Z</updated>
     
     <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>今天是广州某大学的wx小程序研究资料。<br>既然来了，那么话不多说，直接上教程<br>首先下载安装必备的应用<br><em>关于Python的安装和环境配置就不在这里赘述了</em><br><strong><a href="https://blog.csdn.net/qq_45502336/article/details/109531599?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522167291320016800186585384%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=167291320016800186585384&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-9-109531599-null-null.142%5Ev70%5Econtrol,201%5Ev4%5Eadd_ask&utm_term=python&spm=1018.2226.3001.4187">Python传送门</a></strong><br><strong>Charles</strong><br>1.前往<a href="https://www.charlesproxy.com/download/">官网</a>下载安装最新版本<br><img src="https://s2.loli.net/2023/01/07/m1S8RCupIAgQyP9.png" alt="随便选个喜欢的"><br>2.在下图处输入<strong>pojie</strong>和<strong>9d8fb452d26c0decc5</strong>后确定<br><img src="https://s2.loli.net/2023/01/07/ZzpSn2uRG8BgIoA.png" alt="恭喜你解锁VIP"></p><h5 id="接下来是抓包"><a href="#接下来是抓包" class="headerlink" title="接下来是抓包"></a>接下来是抓包</h5><p>1.关闭防火墙:打开网络设置&gt;高级网络设置&gt;Windows防火墙&gt;公用网络&gt;关闭并确认<br>2.在PC端wx中打开该小程序<br>3.在任务管理器里找到该小程序的应用<br><img src="https://s2.loli.net/2023/01/07/meVHGjo6vDNUScL.png" alt="找到这个万恶之源！"><br>4.右键点开小程序，打开文件所在位置，找到一个叫Runtime的包<br>5.将小程序和微信都关闭掉（否则部分文件删除不掉），然后将Runtime包下的文件都删除掉<br>6.把Runtime文件夹改为只读状态<br><img src="https://s2.loli.net/2023/01/07/YtoPvDxO6Z8unwa.png" alt="就是这个"><br>7.重新进入该wx小程序登录<br>8.打开Charles后在小程序内随意进入一个页面<br>9.CTRL+F输入<strong>key</strong>找到并复制字段<br><img src="https://s2.loli.net/2023/01/07/ruwzPXvIG7AWCNB.png" alt="就类似于这样，不能放得更多了"></p><h5 id="最后开始让代码跑起来"><a href="#最后开始让代码跑起来" class="headerlink" title="最后开始让代码跑起来"></a>最后开始让代码跑起来</h5><p>在主程序的这个位置粘贴刚刚复制的key并运行<br><img src="https://s2.loli.net/2023/01/07/tSf9DFdlPKWLBbs.png" alt="报错没有库的自己装"></p><h4 id="这就结束了？当然不！"><a href="#这就结束了？当然不！" class="headerlink" title="这就结束了？当然不！"></a>这就结束了？当然不！</h4><h5 id="接下来是移动端部分"><a href="#接下来是移动端部分" class="headerlink" title="接下来是移动端部分"></a>接下来是移动端部分</h5><p>1.打开<a href="https://pan.baidu.com/s/1ff-HmcwQSz8cHGqgpMJrcw">百度网盘</a>链接下载安装pydriod，提取码:de5q<br>2.打开保存在手机里的主程序文件并填入key<br>3.左栏Pip中选择INSTALL，分别输入requests,json,random,urllib,time并INSTALL<br>4.左栏Settings的Editor选项内打开Preserve files on exit<br>5.点击大大的黄色的运行按钮</p><p>注:<br>如果运行时发生错误请检查网络或尝试重启<br>如果出现名字不显示或者各种奇奇怪怪的bug但确确实实在运行，那么看着就好(正所谓能跑就行)<br>如果显示<strong>得分失败，重新开始匹配</strong>就多等一会，因为没有真人跟你匹配是不会得分的<br>本章内容只对该小程序进行分析，仅限学习研究使用，严禁进行其他非法行为！造成的后果本人不承担相关责任。</p><p><em><strong>最后感谢该校各位前辈的指导和帮助！！！</strong></em></p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p><strong>每个烟花都像是盲盒，不知道点燃升空之后会是什么颜色、什么形状、会持续多久。</strong></p>]]></content>
     
@@ -41,11 +66,11 @@
   </entry>
   
   <entry>
-    <title>20220106</title>
+    <title>20230106</title>
     <link href="https://liu1272.github.io/2023/01/06/20220106/"/>
     <id>https://liu1272.github.io/2023/01/06/20220106/</id>
     <published>2023-01-06T03:34:00.000Z</published>
-    <updated>2023-01-06T17:50:23.106Z</updated>
+    <updated>2023-01-12T16:00:19.700Z</updated>
     
     <content type="html"><![CDATA[<h5 id="无聊玩了一下Midjourney，挺方便，功能也很强大"><a href="#无聊玩了一下Midjourney，挺方便，功能也很强大" class="headerlink" title="无聊玩了一下Midjourney，挺方便，功能也很强大"></a>无聊玩了一下Midjourney，挺方便，功能也很强大</h5><p><img src="https://s2.loli.net/2023/01/06/vBlOqfjzJATF2kG.png#pic_center" alt="荒星"><br><img src="https://s2.loli.net/2023/01/07/uTWD6a93ZHOlxLq.png#pic_center" alt="好像刀妹"><br><img src="https://s2.loli.net/2023/01/06/X1FeICpcr74lkL9.png#pic_center" alt="粉毛YYDS"></p><h5 id="最后放个邀请地址"><a href="#最后放个邀请地址" class="headerlink" title="最后放个邀请地址"></a>最后放个<a href="https://discord.com/invite/midjourney">邀请地址</a></h5>]]></content>
     
@@ -65,11 +90,11 @@
   </entry>
   
   <entry>
-    <title>20220105</title>
+    <title>20230105</title>
     <link href="https://liu1272.github.io/2023/01/05/20220105/"/>
     <id>https://liu1272.github.io/2023/01/05/20220105/</id>
     <published>2023-01-05T15:37:00.000Z</published>
-    <updated>2023-01-05T15:39:15.372Z</updated>
+    <updated>2023-01-12T16:00:26.816Z</updated>
     
     <content type="html"><![CDATA[<h5 id="能找到这里的都是Hentai"><a href="#能找到这里的都是Hentai" class="headerlink" title="能找到这里的都是Hentai"></a>能找到这里的都是<a href="https://track.mp3-malina.me/play-track/d33532303034b6303534368cb734823000/ff34543f34e2aa427c7b17347be4cc40/S3rl%20-%20Hentai.mp3">Hentai</a></h5>]]></content>
     
@@ -89,11 +114,11 @@
   </entry>
   
   <entry>
-    <title>20220104</title>
+    <title>20230104</title>
     <link href="https://liu1272.github.io/2023/01/04/20220104/"/>
     <id>https://liu1272.github.io/2023/01/04/20220104/</id>
     <published>2023-01-04T10:12:00.000Z</published>
-    <updated>2023-01-04T12:18:55.050Z</updated>
+    <updated>2023-01-12T16:00:31.934Z</updated>
     
     <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h5 id="图床的创建"><a href="#图床的创建" class="headerlink" title="图床的创建"></a>图床的创建</h5><p>市面上免费的图床有SM.MS&emsp;Sibnet&emsp; Shutterfly<br>不完全免费的也有腾讯云&emsp; 阿里云&emsp; 七牛云<br>这里我把阿里云和SM.MS都试了一下</p><p>创建的话就跟着下面的步骤走就行了:<br>一.阿里云<br>&emsp;1.打开<a href="https://www.aliyun.com/?spm=5176.8466032.top-nav.dlogo.27b81450NiIk8F">官网</a>点击右上角进行注册/登录<br>&emsp;2.实名认证<br>&emsp;3.在左上角折叠页面里选择对象存储OSS<br>&emsp;4.右侧Bucket管理板块点击添加Bucket<br>&emsp;5.名称填写Bucket的名字，读写权限更改为公共读，其他的默认即可<br>&emsp;6.创建完成之后鼠标移至右上角头像上，选择AccessKey管理<br>&emsp;7.查看Secret并分别复制两行ID<br>&emsp;8.前往<a href="https://github.com/Molunerfinn/PicGo/releases">PicGo下载页面</a>选择对应版本下载安装<br>&emsp;9.打开PicGo图床设置的阿里云页面填写相关资料<br>&emsp;10.上传区选择格式就能使用了<br>二.SM.MS<br>&emsp;1.<a href="https://smms.app/">官网注册/登录</a><br>&emsp;2.复制<a href="https://smms.app/home/apitoken">此页面</a>的Secret Token<br>&emsp;3.在<a href="https://smms.app/">此页面</a>上传文件<br>&emsp;4.打开PicGo的SM.MS页面粘贴Secret Token<br>&emsp;5.上传区选择格式就能使用了</p><p>注:<br>1.我在使用PicGo链接SM.MS时总是失败，不知道为啥<br>2.因为阿里云不是免费的，想省钱可以选择香港<br>3.一定要设置<a href="https://help.aliyun.com/document_detail/31869.html?spm=5176.8466032.bucket.28.27b81450rEXDcJ">防盗链</a></p><h5 id="图床在markdown中的使用"><a href="#图床在markdown中的使用" class="headerlink" title="图床在markdown中的使用"></a>图床在markdown中的使用</h5><p>方法一:使用img标签</p><pre><code> &lt;img src=&quot;图片地址&quot;&gt;</code></pre><p>方法二:md语法</p><pre><code> ![图片简介](图片地址)</code></pre><h5 id="更改图片参数"><a href="#更改图片参数" class="headerlink" title="更改图片参数"></a>更改图片参数</h5><pre><code>使用html更改位置&lt;center&gt;&lt;img src=&quot;地址&quot;&gt;&lt;/center&gt;居中对齐操作：#pic_center向左对齐操作：#pic_left向右对齐操作：#pic_right想调整图片的尺寸就在上面这个指令后面加上=200x200(=200x宽高自适应)width=&quot;100&quot;调整大小</code></pre><p>今天的内容就这么多，下次有空再继续写。</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p><strong>眼下的生活，不是没有快乐。只是所有快乐都暗含着一层谨慎的底色。</strong></p>]]></content>
     
@@ -446,30 +471,6 @@
       
       
     <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;类与对象&quot;&gt;&lt;a href=&quot;#类与对象&quot; class=&quot;headerlink&quot; title=&quot;类与对象&quot;&gt;&lt;/a</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221113</title>
-    <link href="https://liu1272.github.io/2022/11/13/20221113/"/>
-    <id>https://liu1272.github.io/2022/11/13/20221113/</id>
-    <published>2022-11-13T07:41:00.000Z</published>
-    <updated>2022-11-19T09:38:51.905Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="仔细收集php的常见字符操作函数"><a href="#仔细收集php的常见字符操作函数" class="headerlink" title="仔细收集php的常见字符操作函数"></a>仔细收集php的常见字符操作函数</h4><pre><code>addcslashes — 以 C 语言风格使用反斜线转义字符串中的字符addslashes — 使用反斜线引用字符串bin2hex — 函数把包含数据的二进制字符串转换为十六进制值chop — rtrim 的别名 — 删除字符串末端的空白字符（或者其他字符）chr — 返回指定的字符 — chr ( int $ascii )chunk_split — 将字符串分割成小块convert_cyr_string — 将字符由一种 Cyrillic 字符转换成另一种convert_uudecode — 解码一个 uuencode 编码的字符串convert_uuencode — 使用 uuencode 编码一个字符串count_chars — 返回字符串所用字符的信息crc32 — 计算一个字符串的 crc32 多项式crypt — 单向字符串散列echo — 输出一个或多个字符串explode — 使用一个字符串分割另一个字符串fprintf — 将格式化后的字符串写入到流get_html_translation_table — 返回使用 htmlspecialchars 和 htmlentities 后的转换表hebrev — 将逻辑顺序希伯来文（logical-Hebrew）转换为视觉顺序希伯来文（visual-Hebrew）hebrevc — 将逻辑顺序希伯来文（logical-Hebrew）转换为视觉顺序希伯来文（visual-Hebrew），并且转换换行符hex2bin — 转换十六进制字符串为二进制字符串html_entity_decode — Convert HTML entities to their corresponding charactershtmlentities — 将字符转换为 HTML 转义字符htmlspecialchars_decode — 将特殊的 HTML 实体转换回普通字符htmlspecialchars — 将特殊字符转换为 HTML 实体implode — 将一个一维数组的值转化为字符串join — 别名 implodelcfirst — 使一个字符串的第一个字符小写levenshtein — 计算两个字符串之间的编辑距离localeconv — Get numeric formatting informationltrim — 删除字符串开头的空白字符（或其他字符）md5_file — 计算指定文件的 MD5 散列值md5 — 计算字符串的 MD5 散列值metaphone — Calculate the metaphone key of a stringmoney_format — 将数字格式化成货币字符串nl_langinfo — Query language and locale informationnl2br — 在字符串所有新行之前插入 HTML 换行标记number_format — 以千位分隔符方式格式化一个数字ord — 转换字符串第一个字节为 0-255 之间的值parse_str — 将字符串解析成多个变量print — 输出字符串printf — 输出格式化字符串quoted_printable_decode — 将 quoted-printable 字符串转换为 8-bit 字符串quoted_printable_encode — 将 8-bit 字符串转换成 quoted-printable 字符串quotemeta — 转义元字符集rtrim — 删除字符串末端的空白字符（或者其他字符）setlocale — 设置地区信息sha1_file — 计算文件的 sha1 散列值sha1 — 计算字符串的 sha1 散列值similar_text — 计算两个字符串的相似度soundex — Calculate the soundex key of a stringsprintf — Return a formatted stringsscanf — 根据指定格式解析输入的字符str_contains — Determine if a string contains a given substringstr_ends_with — Checks if a string ends with a given substringstr_getcsv — 解析 CSV 字符串为一个数组str_ireplace — str_replace 的忽略大小写版本str_pad — 使用另一个字符串填充字符串为指定长度str_repeat — 重复一个字符串str_replace — 子字符串替换str_rot13 — 对字符串执行 ROT13 转换str_shuffle — 随机打乱一个字符串str_split — 将字符串转换为数组str_starts_with — Checks if a string starts with a given substringstr_word_count — 返回字符串中单词的使用情况strcasecmp — 二进制安全比较字符串（不区分大小写）strchr — 别名 strstrstrcmp — 二进制安全字符串比较strcoll — 基于区域设置的字符串比较strcspn — 获取不匹配遮罩的起始子字符串的长度strip_tags — 从字符串中去除 HTML 和 PHP 标记stripcslashes — 反引用一个使用 addcslashes 转义的字符串stripos — 查找字符串首次出现的位置（不区分大小写）stripslashes — 反引用一个引用字符串stristr — strstr 函数的忽略大小写版本strlen — 获取字符串长度strnatcasecmp — 使用“自然顺序”算法比较字符串（不区分大小写）strnatcmp — 使用自然排序算法比较字符串strncasecmp — 二进制安全比较字符串开头的若干个字符（不区分大小写）strncmp — 二进制安全比较字符串开头的若干个字符strpbrk — 在字符串中查找一组字符的任何一个字符strpos — 查找字符串首次出现的位置strrchr — 查找指定字符在字符串中的最后一次出现strrev — 反转字符串strripos — 计算指定字符串在目标字符串中最后一次出现的位置（不区分大小写）strrpos — 计算指定字符串在目标字符串中最后一次出现的位置strspn — 计算字符串中全部字符都存在于指定字符集合中的第一段子串的长度。strstr — 查找字符串的首次出现strtok — 标记分割字符串strtolower — 将字符串转化为小写strtoupper — 将字符串转化为大写strtr — 转换指定字符substr_compare — 二进制安全比较字符串（从偏移位置比较指定长度）substr_count — 计算字串出现的次数substr_replace — 替换字符串的子串substr — 返回字符串的子串trim — 去除字符串首尾处的空白字符（或者其他字符）ucfirst — 将字符串的首字母转换为大写ucwords — 将字符串中每个单词的首字母转换为大写vfprintf — 将格式化字符串写入流vprintf — 输出格式化字符串vsprintf — 返回格式化字符串wordwrap — 打断字符串为指定数量的字串is_array 判断是否为数组count 数组的元素数目array_search — 在数组中搜索给定的值，如果成功则返回相应的键名array_key_exists()在给定的 key 存在于数组中时返回 TRUEarray_unshift()  将传入的单元插入到 array 数组的开头。注意单元是作为整体被插入的，因此传入单元将保持同样的顺序。所有的数值键名将修改为从零开始重新计数，所有的文字键名保持不变array_shift()  将array 的第一个单元移出并作为结果返回，将 array 的长度减一并将所有其它单元向前移动一位。所有的数字键名将改为从零开始计数，文字键名将不变。array_unique()  接受 array 作为输入并返回没有重复值的新数组。注意键名保留不变。 array_unique()  先将值作为字符串排序，然后对每个值只保留第一个遇到的键名，接着忽略所有后面的键名。这并不意味着在未排序的 array 中同一个值的第一个出现的键名会被保留。 in_array — 检查数组中是否存在某个值  如果找到指定的值则返回 TRUE，否则返回 FALSE 。in_array()是区分大小写的。PHP_EOL 为换行符</code></pre><p>部分实例</p><pre><code>$a=&#39;123456&#39;;echo $str.&quot; 一共有 &quot;.strlen($a).&quot;字符&quot;;//去掉空格echo trim($str);echo $str1;//查找字符串 返回位置echo strpos($str,&#39;暗月&#39;);//截取字符串echo substr($str,strpos($str,&#39;暗月&#39;),strpos($str,&#39;培训&#39;));//md5  加密echo md5($a);//通过下标 取字符的值echo $a[0];//字符串替换函数$a1=str_replace(&#39;1&#39;,&#39;0&#39;,$a);echo $a1;</code></pre><h4 id="具体的使用方法请查看手册"><a href="#具体的使用方法请查看手册" class="headerlink" title="具体的使用方法请查看手册"></a>具体的使用方法请查看手册</h4><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="最后，分享一句圆桌派的话：“你可以是孤岛，也可-以连成一片。”"><a href="#最后，分享一句圆桌派的话：“你可以是孤岛，也可-以连成一片。”" class="headerlink" title="最后，分享一句圆桌派的话：“你可以是孤岛，也可 以连成一片。”"></a>最后，分享一句圆桌派的话：“你可以是孤岛，也可 以连成一片。”</h5>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;仔细收集php的常见字符操作函数&quot;&gt;&lt;a href=&quot;#仔细收集php的常见字符操作函数&quot; class=&quot;head</summary>
       
     
     
