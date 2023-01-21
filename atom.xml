@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-01-13T15:13:49.520Z</updated>
+  <updated>2023-01-21T13:39:10.296Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>新年快乐！</title>
+    <link href="https://liu1272.github.io/2023/01/21/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90%EF%BC%81/"/>
+    <id>https://liu1272.github.io/2023/01/21/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90%EF%BC%81/</id>
+    <published>2023-01-21T13:15:00.000Z</published>
+    <updated>2023-01-21T13:39:10.296Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://s2.loli.net/2023/01/20/1R8PjGN5Baq7dJW.jpg" alt="随便写点东西"><br><img src="https://s2.loli.net/2023/01/20/PJjSVf2ZcrsplF6.png" alt="随便放点喜欢的图"><br><img src="https://s2.loli.net/2023/01/20/5QgoSpuZj8tzY4H.jpg" alt="过年就要做喜欢的事"><br><img src="https://s2.loli.net/2023/01/20/ASsKZNOHUvQ1oh3.jpg" alt="开心就好呐"><br><img src="https://s2.loli.net/2023/01/20/cUhNVqupKTbSa57.png" alt="过去没达到的目标"><br><img src="https://s2.loli.net/2023/01/20/QPysl5H9gJKNMY3.png" alt="就让它留在过去吧"><br><img src="https://s2.loli.net/2023/01/20/T5jayCcslFYtbG7.jpg" alt="但是现在立下的目标"><br><img src="https://s2.loli.net/2023/01/20/sDyIUJd1zkepg5H.jpg" alt="一定要为它负责啊！"></p><h6 id="小事记"><a href="#小事记" class="headerlink" title="小事记"></a>小事记</h6><p>本来打算在春节之前写完一个CVE的漏洞复现，但是写了一半才发现已经被师兄抢了！！！<br>师兄你不讲武德，抢了所有任务里最简单的一个哈哈哈。<br>没办法只能写另外一个CVE了，但是由于不是很懂java和c，所以理解很困难。<br>看了一堆大佬的文章之后终于搞明白了，也磕磕绊绊地大概写了一个exp<br>最后看到只能自己搭建漏洞环境来测试，这下就真的顶不住了……<br>现在我不打算继续搭建了，毕竟这样子做出来的成本太高，效果很差不说，跟我现在接触的知识还有些脱节。</p><h6 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h6><p>世界有长久事物，便是安慰。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2023/01/20/1R8PjGN5Baq7dJW.jpg&quot; alt=&quot;随便写点东西&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://s2.loli.net/2023/01/20/PJjSVf2ZcrsplF6.p</summary>
+      
+    
+    
+    
+    <category term="随笔" scheme="https://liu1272.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
+    
+    
+    <category term="随笔" scheme="https://liu1272.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>20230112</title>
@@ -454,30 +478,6 @@
     
     
     <category term="附录" scheme="https://liu1272.github.io/tags/%E9%99%84%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221114</title>
-    <link href="https://liu1272.github.io/2022/11/14/20221114/"/>
-    <id>https://liu1272.github.io/2022/11/14/20221114/</id>
-    <published>2022-11-14T08:34:00.000Z</published>
-    <updated>2022-11-19T09:39:16.453Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h4><p>类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。<br>对象 − 是类的实例。<br>对象的主要三个特性：<br>1.对象的行为：可以对对象施加那些操作，开灯，关灯就是行为。<br>2.对象的形态：当施加那些方法是对象如何响应，颜色，尺寸，外型。<br>3.对象的表示：对象的表示就相当于身份证，具体区分在相同的行为与状态下有什么不同。</p><h4 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>成员变量 − 定义在类内部的变量。该变量的值对外是不可见的，但是可以通过成员函数访问，在类被实例化为对象后，该变量即可称为对象的属性。</p><p>成员函数 − 定义在类的内部，可用于访问对象的数据。</p><p>继承 − 继承性是子类自动共享父类数据结构和方法的机制，这是类之间的一种关系。在定义和实现一个类的时候，可以在一个已经存在的类的基础之上来进行，把这个已经存在的类所定义的内容作为自己的内容，并加入若干新的内容。</p><p>父类 − 一个类被其他类继承，可将该类称为父类，或基类，或超类。</p><p>子类 − 一个类继承其他类称为子类，也可称为派生类。</p><p>多态 − 多态性是指相同的操作或函数、过程可作用于多种类型的对象上并获得不同的结果。不同的对象，收到同一消息可以产生不同的结果，这种现象称为多态性。</p><p>重载 − 简单说，就是函数或者方法有同样的名称，但是参数列表不相同的情形，这样的同名不同参数的函数或者方法之间，互相称之为重载函数或者方法。</p><p>抽象性 − 抽象性是指将具有一致的数据结构（属性）和行为（操作）的对象抽象成类。一个类就是这样一种抽象，它反映了与应用有关的重要性质，而忽略其他一些无关内容。任何类的划分都是主观的，但必须与具体的应用有关。</p><p>封装 − 封装是指将现实世界中存在的某个客体的属性与行为绑定在一起，并放置在一个逻辑单元内。</p><p>构造函数 − 主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。</p><p>析构函数 − 析构函数(destructor) 与构造函数相反，当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。析构函数往往用来做”清理善后” 的工作（例如在建立对象时用new开辟了一片内存空间，应在退出前在析构函数中用delete释放）。</p><h5 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h5><pre><code>【定义函数】&lt;?php                                      //1.定义类class 类名 &#123;  /* 成员变量 */  var $var1;  var $var2 = &quot;constant string&quot;;  /* 成员函数 */  function 成员函数的函数名 ($arg1, $arg2)   &#123;      return $this-&gt;函数 = 变量             //赋值并调用函数  &#125;&#125;?&gt;$对象名 = new 类名;                         //2.创建对象echo $对象名-&gt;成员函数(&quot;传入的参数&quot;);        //3.调用成员方法大括号&#123;&#125;内可以定义变量和方法变量使用 var 来声明, 变量也可以初始化值函数定义类似 PHP 函数的定义，但函数只能通过该类及其实例化的对象访问。变量 $this 代表自身的对象【构造函数】在创建对象时， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。&lt;?phpclass 类名 &#123;   function __construct() &#123;       print &quot;构造函数&quot;;       $this-&gt;name = &quot;&quot;;   &#125;   function __destruct() &#123;       print &quot;销毁&quot; . $this-&gt;name . &quot;\n&quot;;   &#125;&#125;$obj = new 类名();?&gt;【继承】子类继承父类的特征和行为，使得子类对象具有父类的属性和方法，或子类从父类继承方法，使得子类具有父类相同的行为(父类=基类)&lt;?php // 子类扩展站点类别class 类名 &#123;           //extends继承一个类   var $category;    function setCate($par)&#123;        $this-&gt;category = $par;    &#125;    function getCate()&#123;        echo $this-&gt;category . PHP_EOL;    &#125;&#125;注意:PHP 不支持多继承【方法重写】顾名思义重新定义function【访问控制】PHP 对属性或方法的访问控制，是通过在前面添加关键字 public（公有）protected(受保护的)只能被自身子父类访问private(私有的)只能被定义的类访问publice(公有的)可以在任何地方访问类属性必须被定义，var视为publice【接口】概念:指定某个类必须实现哪些方法，但不需要定义这些方法的具体内容。特性:通过interface定义，但是其中定义的所有方法都必须是公有而且要是空的。类可以实现多个接口，用逗号来分隔多个接口的名称。【常量】在类中始终保持不变的值定义为常量。在定义和使用常量的时候不需要使用 $ 符号。常量的值必须是一个定值【接口与抽象类】1. 接口（1）对接口的使用是通过关键字implements（2）接口不能定义成员变量（包括类静态变量），能定义常量（3）子类必须实现接口定义的所有方法（4）接口只能定义不能实现该方法（5）接口没有构造函数（6）接口中的方法和实现它的类默认都是public类型的2. 抽象类（1）对抽象类的使用是通过关键字extends（2）不能被实例化，可以定义子类必须实现的方法（3）子类必须定义父类中的所有抽象方法，这些方法的访问控制必须和父类中一样（或者更为宽松）（4）如一个类中有一个抽象方法，则该类必须定义为抽象类（5）抽象类可以有构造函数（6）抽象类中的方法可以使用private,protected,public来修饰。（7）一个类可以同时实现多个接口，但一个类只能继承于一个抽象类。【关键字】1.Static(1)声明类属性或方法为 static(静态)，就可以不实例化类而直接访问(2)静态属性不能通过一个类已实例化的对象来访问（但静态方法可以）。(3)由于静态方法不需要通过对象即可调用，所以伪变量 $this 在静态方法中不可用。(4)静态属性不可以由对象通过 -&gt; 操作符来访问。2.Final(1)如果父类中的方法被声明为 final，则子类无法覆盖该方法。(2)如果一个类被声明为 final，则不能被继承。【调用父类构造方法】PHP 不会在子类的构造方法中自动的调用父类的构造方法。要执行父类的构造方法，需要在子类的构造方法中调用 parent::__construct() </code></pre><h4 id="面向对象暂时先写到这里，后面有新的认识再回来更改。"><a href="#面向对象暂时先写到这里，后面有新的认识再回来更改。" class="headerlink" title="面向对象暂时先写到这里，后面有新的认识再回来更改。"></a>面向对象暂时先写到这里，后面有新的认识再回来更改。</h4><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="当废话满天飞的时候，沉默是人类最大的贡献。"><a href="#当废话满天飞的时候，沉默是人类最大的贡献。" class="headerlink" title="当废话满天飞的时候，沉默是人类最大的贡献。"></a>当废话满天飞的时候，沉默是人类最大的贡献。</h5>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;类与对象&quot;&gt;&lt;a href=&quot;#类与对象&quot; class=&quot;headerlink&quot; title=&quot;类与对象&quot;&gt;&lt;/a</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
     
   </entry>
   
