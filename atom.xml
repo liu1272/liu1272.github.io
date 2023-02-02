@@ -45,9 +45,9 @@
     <link href="https://liu1272.github.io/2023/02/01/202301%E6%9C%88%E6%80%BB%E7%BB%93/"/>
     <id>https://liu1272.github.io/2023/02/01/202301%E6%9C%88%E6%80%BB%E7%BB%93/</id>
     <published>2023-02-01T12:20:00.000Z</published>
-    <updated>2023-02-02T13:33:59.219Z</updated>
+    <updated>2023-02-02T13:38:58.445Z</updated>
     
-    <content type="html"><![CDATA[<p>半个月前，我一时兴起入坑QQbot，在go-cqhttp和nonebot2上接触到异步代码。<br>以及，在Python的异步代码里使用requests会堵塞这个问题。<br>自己写了点插件，也爬了很多api端口和网站。<br>本来想着在官网上也发布一个插件的，但是想想自己的臃肿的代码还是算了。<br><img src="https://s2.loli.net/2023/02/02/V57JDlnIgtaz2iq.png" alt="bot1.png"><br><img src="https://s2.loli.net/2023/02/02/x8DAz94RnSQHZVJ.png" alt="bot2.png"><br>近几天在玩刷机，拿个高通410的随身wifi刷了Debian。<br>超频到2.1GHz，同时释放了内存，现在它有这么大！<br><img src="https://s2.loli.net/2023/02/02/JeSaDVBqiMIc5yZ.png" alt="finalshell.png"><br>你敢相信？他能跑上面所说的nonebot2<br>甚至能流畅运行1.8.8及更高版本的mc服务器！<br>今天下午试着用ZeroTier内网穿透，但是很可惜没做完。</p><p>由于17号要开学了，所以接下来还是多看看课本吧。<br>毕竟开学之后每周一从早八到晚上九点真的要命！！！</p>]]></content>
+    <content type="html"><![CDATA[<p>半个月前，我一时兴起入坑QQbot，在go-cqhttp和nonebot2上接触到异步代码。<br>以及，在Python的异步代码里使用requests会堵塞这个问题。<br>自己写了点插件，也爬了很多api端口和网站。<br>本来想着在官网上也发布一个插件的，但是想想自己的臃肿的代码还是算了。<br><img src="https://s2.loli.net/2023/02/02/V57JDlnIgtaz2iq.png" alt="Bot长这样"><br><img src="https://s2.loli.net/2023/02/02/x8DAz94RnSQHZVJ.png" alt="查看服务器状态的插件"><br>近几天在玩刷机，拿个高通410的随身wifi刷了Debian。<br>超频到2.1GHz，同时释放了内存，现在它有这么大！<br><img src="https://s2.loli.net/2023/02/02/JeSaDVBqiMIc5yZ.png" alt="就问你离不离谱！"><br>你敢相信？他能跑上面所说的nonebot2<br>甚至能流畅运行1.8.8及更高版本的mc服务器！<br>今天下午试着用ZeroTier内网穿透，但是很可惜没做完。</p><p>由于17号要开学了，所以接下来还是多看看课本吧。<br>毕竟开学之后每周一从早八到晚上九点真的要命！！！</p>]]></content>
     
     
       
