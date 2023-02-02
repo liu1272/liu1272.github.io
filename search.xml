@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>20230202</title>
+      <link href="/2023/02/02/20230202/"/>
+      <url>/2023/02/02/20230202/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Github-Action"><a href="#Github-Action" class="headerlink" title="Github Action"></a>Github Action</h3><p>今天小小地了解了一下Github Action这个东西<br>感觉它实际上就是一个轻量级服务器而已<br>用户每个月有限制内存和运行时间，但是基本上不用担心用完</p><p>Action可以选择很多模板，也可以自己设置定时任务。<br>文件是yaml类型，语法不难理解<br>尝试几次就成功把以前那个该死的经典诵读文件做成一个定时任务了。</p><p>感觉很好的是密钥的添加很方便，也很好管理<br>但是，还是要翻旧账批评它没有一键删除history这个功能</p><p>这个定时任务文件代码放在这里了，有需要的自己改了用吧</p><pre><code># This workflow will install Python dependencies, run tests and lint with a single version of Python# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-pythonname: Python applicationon:  schedule:  # 定时任务，在每天的上午11点推送天气信息到邮箱    - cron: &#39;0 3 * * *&#39;    jobs:  build:    runs-on: ubuntu-latest    steps:    - uses: actions/checkout@v3    - name: Set up Python 3.10      uses: actions/setup-python@v3      with:        python-version: &quot;3.10&quot;            - name: Install dependencies      run: |        python -m pip install --upgrade pip        pip install flake8 pytest        pip3 install requests        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi            - name: RunScripts      run: |        # stop the build if there are Python syntax errors or undefined names        python 程序.py        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>202301月总结</title>
+      <link href="/2023/02/01/202301%E6%9C%88%E6%80%BB%E7%BB%93/"/>
+      <url>/2023/02/01/202301%E6%9C%88%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<p>半个月前，我一时兴起入坑QQbot，在go-cqhttp和nonebot2上接触到异步代码。<br>以及，在Python的异步代码里使用requests会堵塞这个问题。<br>自己写了点插件，也爬了很多api端口和网站。<br>本来想着在官网上也发布一个插件的，但是想想自己的臃肿的代码还是算了。<br><img src="https://s2.loli.net/2023/02/02/V57JDlnIgtaz2iq.png" alt="bot1.png"><br><img src="https://s2.loli.net/2023/02/02/x8DAz94RnSQHZVJ.png" alt="bot2.png"><br>近几天在玩刷机，拿个高通410的随身wifi刷了Debian。<br>超频到2.1GHz，同时释放了内存，现在它有这么大！<br><img src="https://s2.loli.net/2023/02/02/JeSaDVBqiMIc5yZ.png" alt="finalshell.png"><br>你敢相信？他能跑上面所说的nonebot2<br>甚至能流畅运行1.8.8及更高版本的mc服务器！<br>今天下午试着用ZeroTier内网穿透，但是很可惜没做完。</p><p>由于17号要开学了，所以接下来还是多看看课本吧。<br>毕竟开学之后每周一从早八到晚上九点真的要命！！！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 闲聊 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 闲聊 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>新年快乐！</title>
       <link href="/2023/01/21/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90%EF%BC%81/"/>
       <url>/2023/01/21/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90%EF%BC%81/</url>
