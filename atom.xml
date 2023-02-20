@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-02-02T13:16:46.256Z</updated>
+  <updated>2023-02-20T14:01:19.009Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>UOOC中国近现代史纲要答案</title>
+    <link href="https://liu1272.github.io/2023/02/20/UOOC%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%E7%AD%94%E6%A1%88/"/>
+    <id>https://liu1272.github.io/2023/02/20/UOOC%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2%E7%BA%B2%E8%A6%81%E7%AD%94%E6%A1%88/</id>
+    <published>2023-02-20T13:53:00.000Z</published>
+    <updated>2023-02-20T14:01:19.009Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="此文章答案仅为个人记录所用，请勿用于其他用途"><a href="#此文章答案仅为个人记录所用，请勿用于其他用途" class="headerlink" title="此文章答案仅为个人记录所用，请勿用于其他用途"></a><em>此文章答案仅为个人记录所用，请勿用于其他用途</em></h5><h4 id="第1章-进入近代后中华民族的磨难与抗争"><a href="#第1章-进入近代后中华民族的磨难与抗争" class="headerlink" title="第1章 进入近代后中华民族的磨难与抗争"></a>第1章 进入近代后中华民族的磨难与抗争</h4><p>单选<br>CCABB — DCBDD<br>多选<br>AB — ABCD — ABCD — ABCD — ABCD<br>ABCD — ABCD — ABCD — BCD — ACD<br>AB — AB<br>判断<br>BABBB — BBBBB</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;此文章答案仅为个人记录所用，请勿用于其他用途&quot;&gt;&lt;a href=&quot;#此文章答案仅为个人记录所用，请勿用于其他用途&quot; class=&quot;headerlink&quot; title=&quot;此文章答案仅为个人记录所用，请勿用于其他用途&quot;&gt;&lt;/a&gt;&lt;em&gt;此文章答案仅为个人记录所用，请勿</summary>
+      
+    
+    
+    
+    <category term="闲聊" scheme="https://liu1272.github.io/categories/%E9%97%B2%E8%81%8A/"/>
+    
+    
+    <category term="闲聊" scheme="https://liu1272.github.io/tags/%E9%97%B2%E8%81%8A/"/>
+    
+  </entry>
   
   <entry>
     <title>20230202</title>
@@ -443,31 +467,6 @@
       
       
     <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;Python爬虫思路&quot;&gt;&lt;a href=&quot;#Python爬虫思路&quot; class=&quot;headerlink&quot; titl</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>20221116</title>
-    <link href="https://liu1272.github.io/2022/11/16/20221116/"/>
-    <id>https://liu1272.github.io/2022/11/16/20221116/</id>
-    <published>2022-11-16T05:45:00.000Z</published>
-    <updated>2022-11-19T09:40:07.690Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>php7之前是mysql链接(硬链接)<br>php7之后是mysqli链接(i链接/improved链接)</p><h4 id="PHP连接数据库-MySQLi-面向对象"><a href="#PHP连接数据库-MySQLi-面向对象" class="headerlink" title="PHP连接数据库(MySQLi - 面向对象)"></a>PHP连接数据库(MySQLi - 面向对象)</h4><pre><code>&lt;?php$servername = &quot;localhost&quot;;$username = &quot;username&quot;;$password = &quot;password&quot;;// 创建连接$conn = new mysqli($servername, $username, $password);// 检测连接if ($conn-&gt;connect_error) &#123;    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);&#125;echo &quot;Connected successfully&quot;;?&gt;</code></pre><h4 id="关闭连接-MySQLi-面向对象"><a href="#关闭连接-MySQLi-面向对象" class="headerlink" title="关闭连接(MySQLi - 面向对象)"></a>关闭连接(MySQLi - 面向对象)</h4><p>连接在脚本执行完后会自动关闭,也可以手动关闭<br>$conn-&gt;close();</p><h4 id="创建数据库-MySQLi-面向对象"><a href="#创建数据库-MySQLi-面向对象" class="headerlink" title="创建数据库(MySQLi - 面向对象)"></a>创建数据库(MySQLi - 面向对象)</h4><p>需要 CREATE 权限来创建或删除 MySQL 数据库。</p><pre><code>&lt;?php$servername = &quot;localhost&quot;;$username = &quot;username&quot;;$password = &quot;password&quot;;// 创建连接$conn = new mysqli($servername, $username, $password);// 检测连接if ($conn-&gt;connect_error) &#123;    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);&#125;// Create database$sql = &quot;CREATE DATABASE myDB&quot;;                     //库名叫做myDBif ($conn-&gt;query($sql) === TRUE) &#123;    echo &quot;Database created successfully&quot;;&#125; else &#123;    echo &quot;Error creating database: &quot; . $conn-&gt;error;&#125;$conn-&gt;close();?&gt;</code></pre><h4 id="创建表-MySQLi-面向对象"><a href="#创建表-MySQLi-面向对象" class="headerlink" title="创建表(MySQLi - 面向对象)"></a>创建表(MySQLi - 面向对象)</h4><p>在 PHP 中创建完数据库之后，我们需要在数据库中创建一个或者多个的数据表。<br>一个数据表有一个唯一名称，并有行和列组成。<br>创建表前，我们需要使用use myDB;来选择要操作的数据库</p><pre><code>&lt;?php$servername = &quot;localhost&quot;;$username = &quot;username&quot;;$password = &quot;password&quot;;$dbname = &quot;myDB&quot;;// 创建连接$conn = new mysqli($servername, $username, $password, $dbname);// 检测连接if ($conn-&gt;connect_error) &#123;    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);&#125;// sql to create table$sql = &quot;CREATE TABLE MyGuests (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,firstname VARCHAR(30) NOT NULL,lastname VARCHAR(30) NOT NULL,email VARCHAR(50),reg_date TIMESTAMP)&quot;;if ($conn-&gt;query($sql) === TRUE) &#123;    echo &quot;Table MyGuests created successfully&quot;;&#125; else &#123;    echo &quot;Error creating table: &quot; . $conn-&gt;error;&#125;$conn-&gt;close();?&gt;</code></pre><p>其中表内数据类型有<a href="https://www.w3cschool.cn/mysql/sql-datatypes.html">规定</a></p><p>同时可以为每个列指定其他选项的属性:<br>NOT NULL - 每一行都必须含有值（不能为空），null 值是不允许的。<br>DEFAULT value - 设置默认值<br>UNSIGNED - 使用无符号数值类型，0 及正数<br>AUTO INCREMENT - 设置 MySQL 字段的值在新增记录时每次自动增长 1<br>PRIMARY KEY - 设置数据表中每条记录的唯一标识。 通常列的 PRIMARY KEY 设置为 ID 数值，与AUTO_INCREMENT 一起使用。</p><p>每个表都应该有一个主键(本列为 “id” 列)，主键必须包含唯一的值。</p><h4 id="插入数据-MySQLi-面向对象"><a href="#插入数据-MySQLi-面向对象" class="headerlink" title="插入数据(MySQLi - 面向对象)"></a>插入数据(MySQLi - 面向对象)</h4><p>语法规则:<br>1.PHP 中 SQL 查询语句必须使用引号<br>2.在 SQL 查询语句中的字符串值必须加引号<br>3.数值的值不需要引号<br>4.NULL 值不需要引号<br>向 MySQL 表添加新的记录:<br>INSERT INTO table_name (column1, column2, column3,…)<br>VALUES (value1, value2, value3,…)</p><pre><code>在连接检测和关闭数据库中间加入$sql = &quot;INSERT INTO MyGuests (firstname, lastname, email)VALUES (&#39;John&#39;, &#39;Doe&#39;, &#39;john@example.com&#39;)&quot;;                    //向 &quot;MyGuests&quot; 表添加新的记录if ($conn-&gt;query($sql) === TRUE) &#123;    echo &quot;New record created successfully&quot;;&#125; else &#123;    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;&#125;</code></pre><h4 id="插入多条数据-MySQLi-面向对象"><a href="#插入多条数据-MySQLi-面向对象" class="headerlink" title="插入多条数据(MySQLi - 面向对象)"></a>插入多条数据(MySQLi - 面向对象)</h4><p>【方法一:使用函数】<br>mysqli_multi_query() 函数可用来执行多条SQL语句。</p><pre><code>$sql = &quot;INSERT INTOMyGuests (firstname, lastname, email)VALUES (&#39;John&#39;, &#39;Doe&#39;, &#39;john@example.com&#39;);&quot;;$sql .= &quot;INSERT INTOMyGuests (firstname, lastname, email)VALUES (&#39;Mary&#39;, &#39;Moe&#39;, &#39;mary@example.com&#39;);&quot;;$sql .= &quot;INSERT INTOMyGuests (firstname, lastname, email)VALUES (&#39;Julie&#39;, &#39;Dooley&#39;, &#39;julie@example.com&#39;)&quot;;if ($conn-&gt;multi_query($sql) === TRUE) &#123;echo &quot;Newrecords created successfully&quot;;&#125; else &#123;echo&quot;Error: &quot; . $sql . &quot;&quot; . $conn-&gt;error;&#125;</code></pre><p>注意:每个SQL语句必须用分号隔开。</p><p>【方法二:MySQLi 使用预处理语句】</p><pre><code>// 为 mysqli_stmt_prepare() 初始化statement 对象$stmt =mysqli_stmt_init($conn);//预处理语句if (mysqli_stmt_prepare($stmt, $sql)) &#123;// 绑定参数mysqli_stmt_bind_param($stmt, &#39;sss&#39;, $firstname, $lastname, $email);// 设置参数并执行$firstname = &#39;John&#39;;$lastname= &#39;Doe&#39;;$email =&#39;john@example.com&#39;;mysqli_stmt_execute($stmt);$firstname = &#39;Mary&#39;;$lastname= &#39;Moe&#39;;$email =&#39;mary@example.com&#39;;mysqli_stmt_execute($stmt);$firstname = &#39;Julie&#39;;$lastname = &#39;Dooley&#39;;$email =&#39;julie@example.com&#39;;mysqli_stmt_execute($stmt);&#125;</code></pre><p>每个参数必须指定类型，来保证数据的安全性。通过类型的判断可以减少SQL注入漏洞带来的风险。<br>参数类型:<br>i - integer<br>d - double<br>s - string<br>b - BLOB</p><h4 id="MySQLi使用预处理语句-包括面向对象和面向过程"><a href="#MySQLi使用预处理语句-包括面向对象和面向过程" class="headerlink" title="MySQLi使用预处理语句(包括面向对象和面向过程)"></a>MySQLi使用预处理语句(包括面向对象和面向过程)</h4><p>流程:<br>1.预处理:创建 SQL 语句模板并发送到数据库。预留的值使用参数 “?” 标记<br>2.数据库解析并编译(内部处理):对SQL语句模板执行查询优化，并存储结果(不输出)<br>3.执行:将应用绑定的值传递给参数（?标记），数据库执行语句。(如果参数的值不一样,可以多次执行语句)</p><p>优点:<br>1.减少了分析时间，只做了一次查询（虽然语句多次执行）<br>2.绑定参数减少了服务器带宽，你只需要发送查询的参数，而不是整个语句<br>3.预处理语句针对SQL注入是非常有用的，因为参数值发送后使用不同的协议，保证了数据的合法性。</p><pre><code>// 步骤一，prepare and bind$stmt = $conn-&gt;prepare(&quot;INSERT INTO MyGuests (firstname, lastname, email) VALUES(?, ?, ?)&quot;);$stmt-&gt;bind_param(&quot;sss&quot;, $firstname, $lastname, $email);// 步骤三，设置参数并执行$firstname = &quot;John&quot;;$lastname = &quot;Doe&quot;;$email = &quot;john@example.com&quot;;$stmt-&gt;execute();$firstname = &quot;Mary&quot;;$lastname = &quot;Moe&quot;;$email = &quot;mary@example.com&quot;;$stmt-&gt;execute();             $firstname = &quot;Julie&quot;;$lastname = &quot;Dooley&quot;;$email = &quot;julie@example.com&quot;;$stmt-&gt;execute();echo &quot;New records created successfully&quot;;$stmt-&gt;close();</code></pre><p>语句中如果有?就转换为其他类型的数据</p><h4 id="读取数据-MySQLi-面向对象"><a href="#读取数据-MySQLi-面向对象" class="headerlink" title="读取数据(MySQLi - 面向对象)"></a>读取数据(MySQLi - 面向对象)</h4><pre><code>SELECT 语句用于从数据表中读取数据:SELECT column_name(s) FROM table_name我们可以使用 * 号来读取所有数据表中的字段:SELECT * FROM table_name用 WHERE 命令来筛选出满足条件的结果:SELECT column_name(s)  FROM table_name  WHERE column_name operator value——————————————————————————————————————————————————————————————————————————————                           【SELECT】$sql = &quot;SELECT id, firstname, lastname FROM MyGuests&quot;;$result = $conn-&gt;query($sql);if ($result-&gt;num_rows &gt; 0) &#123;    // 输出每行数据    while($row = $result-&gt;fetch_assoc()) &#123;        echo &quot;id: &quot;. $row[&quot;id&quot;]. &quot; - Name: &quot;. $row[&quot;firstname&quot;]. &quot; &quot; . $row[&quot;lastname&quot;]. &quot;&lt;br&gt;&quot;;    &#125;&#125; else &#123;    echo &quot;0 results&quot;;&#125;——————————————————————————————————————————————————————————————————————————————                           【WHERE】$result = mysqli_query($con,&quot;SELECT * FROM PersonsWHERE FirstName=&#39;Peter&#39;&quot;);while($row = mysqli_fetch_array($result))&#123;echo $row[&#39;FirstName&#39;] . &quot; &quot; . $row[&#39;LastName&#39;];echo &quot;&lt;br&gt;&quot;;&#125;</code></pre><h4 id="处理数据"><a href="#处理数据" class="headerlink" title="处理数据"></a>处理数据</h4><pre><code>ORDER BY 关键词用于对记录集中的数据进行排序。SELECT column_name(s)FROM table_nameORDER BY column1, column2... ASC|DESC    默认是升序ASC，DESC改为降序$result = mysqli_query($con,&quot;SELECT * FROM Persons ORDER BY age&quot;);while($row = mysqli_fetch_array($result))&#123;echo $row[&#39;FirstName&#39;];echo &quot; &quot; . $row[&#39;LastName&#39;];echo &quot; &quot; . $row[&#39;Age&#39;];echo &quot;&lt;br&gt;&quot;;&#125;可以根据多个列进行排序(第一列的值相同时才使用第二列)</code></pre><h4 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h4><p>UPDATE 语句用于更新数据库表中已存在的记录。<br>WHERE 子句规定了哪些记录需要更新。<br>如果您想省去 WHERE 子句，所有的记录都会被更新！<br>PHP执行该语句，必须使用mysqli_query()函数(该函数用于向 MySQL 连接发送查询或命令)</p><pre><code>语法:UPDATE table_name SET column1=value, column2=value2,... WHERE some_column=some_value 操作:mysqli_query($con,&quot;UPDATE Persons SET Age=36WHERE FirstName=&#39;Peter&#39; AND LastName=&#39;Griffin&#39;&quot;);</code></pre><h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><p>DELETE FROM 语句用于从数据库表中删除记录。<br>WHERE 子句规定了哪些记录需要更新。<br>如果您想省去 WHERE 子句，所有的记录都会被更新！<br>PHP执行该语句，必须使用mysqli_query()函数(该函数用于向 MySQL 连接发送查询或命令)</p><pre><code>语法:DELETE FROM table_name WHERE some_column = some_value操作:mysqli_query($con,&quot;DELETE FROM Persons WHERE LastName=&#39;Griffin&#39;&quot;);</code></pre><h4 id="PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi-面向过程和PDO请前往此处"><a href="#PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi-面向过程和PDO请前往此处" class="headerlink" title="PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi - 面向过程和PDO请前往此处"></a>PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi - 面向过程和PDO请前往<a href="https://www.w3cschool.cn/php/php-mysql-connect.html">此处</a></h4><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="我们生而破碎，用活着来修修补补。"><a href="#我们生而破碎，用活着来修修补补。" class="headerlink" title="我们生而破碎，用活着来修修补补。"></a>我们生而破碎，用活着来修修补补。</h5>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;p&gt;php7之前是mysql链接(硬链接)&lt;br&gt;php7之后是mysqli链接(i链接/improved链接)&lt;/p&gt;
-&lt;h4</summary>
       
     
     
