@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-03-08T16:13:09.309Z</updated>
+  <updated>2023-03-09T15:04:25.321Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>拷贝相关</title>
+    <link href="https://liu1272.github.io/2023/03/09/%E6%8B%B7%E8%B4%9D%E7%9B%B8%E5%85%B3/"/>
+    <id>https://liu1272.github.io/2023/03/09/%E6%8B%B7%E8%B4%9D%E7%9B%B8%E5%85%B3/</id>
+    <published>2023-03-09T14:49:00.000Z</published>
+    <updated>2023-03-09T15:04:25.321Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h5 id="本篇文章简要记录一下C-拷贝相关的知识以及误区。"><a href="#本篇文章简要记录一下C-拷贝相关的知识以及误区。" class="headerlink" title="本篇文章简要记录一下C++拷贝相关的知识以及误区。"></a>本篇文章简要记录一下C++拷贝相关的知识以及误区。</h5><p>   <strong>首先上定义:</strong><br>   拷贝和浅拷贝是指在对对象一份复制或者复制某些部分时所表现出来的差异。</p><p>   浅拷贝只复制对象的引用，由于是引用，所以当拷贝对象中的属性变化时，原始对象和拷贝对象共享这些属性的变化，也就是说，拷贝对象的属性变化会影响到原始对象的属性。因为是浅拷贝，所以拷贝的对象和原来的对象不是两个的独立存在，而是共享数据存储空间。</p><p>   深拷贝则是在复制对象的指针引用的同时，完全复制一份内容相同的对象。也就是说，深度拷贝会创建一个新的对象，而不仅仅是拷贝其指针引用，因此，它们的变化互不影响。人们可以自由操作两个对象，而不会对另一个产生影响。因此，深拷贝能够完整地承载原对象所有信息。这个复制后的对象与原对象彻底分离，内存空间也不同了。</p><p>   简单地说:浅拷贝会影响原有的数据，相当于做了路径引用；深拷贝是另外开辟了内存空间，相当于复制了一个。</p><p>   <strong>然后是一个比较大的误区(可能是我比较菜所以搞不懂):</strong><br>   使用指针传递值是浅拷贝。</p><p>   当使用指针传递值时，函数参数传递的是指针所指向的内存地址，而不是实际的变量本身。因此，函数内部对于指针所指向的数据进行的操作，会直接影响到原始数据，属于浅拷贝。</p><p>   如果需要进行深拷贝，可以使用其他方式，比如使用引用传递或者复制构造函数等。</p><p><strong>上代码才看得懂！</strong></p><pre class="line-numbers language-c++"><code class="language-c++">指针可以直接访问和修改原数据的地址，从而实现更改原数据。具体操作步骤如下：1. 定义指针变量并初始化为原数据的地址：int data = 10;int* pData = &data;2. 通过指针访问和修改原数据：*pData = 20;  // 将原数据修改为20完整示例代码如下：#include <iostream>using namespace std;int main() &#123;    int data = 10;    int* pData = &data;    cout << "原数据：" << data << endl;    *pData = 20;    cout << "更改后的数据：" << data << endl;    return 0;&#125;输出结果为：原数据：10更改后的数据：20<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h4 id="今天就这么多，写作业去了。"><a href="#今天就这么多，写作业去了。" class="headerlink" title="今天就这么多，写作业去了。"></a>今天就这么多，写作业去了。</h4>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h5 id=&quot;本篇文章简要记录一下C-拷贝相关的知识以及误区。&quot;&gt;&lt;a href=&quot;#本篇文章简要记录一下C-拷贝相关的知识以及</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>Arcaea</title>
@@ -447,30 +471,6 @@
       
       
     <summary type="html">&lt;h1 id=&quot;kali的常用命令&quot;&gt;&lt;a href=&quot;#kali的常用命令&quot; class=&quot;headerlink&quot; title=&quot;kali的常用命令&quot;&gt;&lt;/a&gt;kali的常用命令&lt;/h1&gt;&lt;h3 id=&quot;1-基础命令&quot;&gt;&lt;a href=&quot;#1-基础命令&quot; class=&quot;head</summary>
-      
-    
-    
-    
-    <category term="附录" scheme="https://liu1272.github.io/categories/%E9%99%84%E5%BD%95/"/>
-    
-    
-    <category term="附录" scheme="https://liu1272.github.io/tags/%E9%99%84%E5%BD%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Windows常用命令</title>
-    <link href="https://liu1272.github.io/2022/11/20/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>https://liu1272.github.io/2022/11/20/Windows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</id>
-    <published>2022-11-20T11:37:00.000Z</published>
-    <updated>2022-11-21T11:38:20.217Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Windows常用命令"><a href="#Windows常用命令" class="headerlink" title="Windows常用命令"></a>Windows常用命令</h3><pre><code>ifconfig /all 获取获取域名、IP地址、DHCP服务器、网关、MAC地址、主机名net time /domain 查看域名、时间net view /domain 查看域内所有共享net view ip 查看对方局域网内开启了哪些共享net config workstation 查看域名、机器名等net user 用户名 密码 /add 建立用户net user 用户名 /del #删除用户net user guest /active:yes 激活guest账户net user 查看账户net user 账户名 查看指定账户信息net user /domain 查看域内有哪些用户，Windows NT Workstation 计算机上可用，由此可以此判断用户是否是域成员。net user 用户名 /domain 查看账户信息net group /domain 查看域中的组net group &quot;domain admins&quot; /domain 查看当前域的管理用户query user 查看当前在线的用户net localgroup 查看所有的本地组net localgroup administrators 查看administrators组中有哪些用户net localgroup administrators 用户名 /add 把用户添加到管理员组中net start 查看开启服务net start 服务名 开启某服务net stop 服务名 停止某服务net share 查看本地开启的共享net share ipc$ 开启ipc$共享net share ipc$ /del 删除ipc$共享net share c$ /del 删除C：共享\\192.168.0.108\c 访问默认共享c盘dsquery server 查看所有域控制器dsquery subnet 查看域内内子网dsquery group 查看域内工作组dsquery site 查看域内站点netstat -a 查看开启了哪些端口,常用netstat -annetstat -n 查看端口的网络连接情况，常用netstat -annetstat -v 查看正在进行的工作netstat -p 协议名 例：netstat -p tcq/ip 查看某协议使用情况（查看tcp/ip协议使用情况）netstat -s 查看正在使用的所有协议使用情况nbtstat -A ip 对方136到139其中一个端口开了的话，就可查看对方最近登陆的用户名（03前的为用户名）-注意：参数-A要大写reg save hklm\sam sam.hive 导出用户组信息、权限配置reg save hklm\system system.hive 导出SYSKEYnet use \\目标IP\ipc$ 密码 /u:用户名 连接目标机器at \\目标IP 21:31 c:\server.exe 在某个时间启动某个应用wmic /node:&quot;目标IP&quot; /password:&quot;123456&quot; /user:&quot;admin&quot; 连接目标机器psexec.exe \\目标IP -u username -p password -s cmd 在目标机器上执行cmdfinger username @host 查看最近有哪些用户登陆route print 显示出IP路由，将主要显示网络地址Network addres，子网掩码Netmask，网关地址Gateway addres，接口地址Interfacearp 查看和处理ARP缓存，ARP是名字解析的意思，负责把一个IP解析成一个物理性的MAC地址。arp -a 将显示出全部信息nslookup IP地址侦测器tasklist 查看当前进程taskkill /pid PID数 终止指定PID进程whoami 查看当前用户及权限systeminfo 查看计算机信息（版本，位数，补丁情况）ver 查看计算机操作系统版本tasklist /svc 查看当前计算机进程情况netstat -ano 查看当前计算机进程情况wmic product &gt; ins.txt 查看安装软件以及版本路径等信息，重定向到ins.txt</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;Windows常用命令&quot;&gt;&lt;a href=&quot;#Windows常用命令&quot; class=&quot;headerlink&quot; title=&quot;Windows常用命令&quot;&gt;&lt;/a&gt;Windows常用命令&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;ifconfig /all 获取获取域名、IP地址、</summary>
       
     
     
