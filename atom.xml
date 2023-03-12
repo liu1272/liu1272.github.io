@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-03-09T15:04:25.321Z</updated>
+  <updated>2023-03-12T02:21:28.447Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL联合注入</title>
+    <link href="https://liu1272.github.io/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/"/>
+    <id>https://liu1272.github.io/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/</id>
+    <published>2023-03-11T16:47:00.000Z</published>
+    <updated>2023-03-12T02:21:28.447Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="SQL联合注入"><a href="#SQL联合注入" class="headerlink" title="SQL联合注入"></a>SQL联合注入</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>有回显且可进行联合查询</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>SQL中union select查询的方式将结果合在一起，并删除重复的数据。这就是联合查询。</p><h4 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h4><p>1、判断是否存在注入点<br>（1）修改参数值，查看数据是否改变<br>（2）插入单、双引号的检测方法，未闭合的单引号会有报错</p><p>2、判断注入点是整形还是字符型<br>（1）数字型：通过</p><pre><code>and 1=1</code></pre><p>（2）字符串型：闭合单引号测试语句</p><pre><code>&#39;and&#39;1&#39;=&#39;1</code></pre><p>3、判断查询列数</p><pre><code>select username,password from where username=&#39;root&#39; and password=123 order by x</code></pre><p>当输入x报错时，真实的列数是「x-1」<br>(1)为什么用order by 可以证明前面语句查询了三列数据呢？<br>&emsp;&emsp;select * from order by (你要按照排序的对象)<br>&emsp;&emsp;order by可以按照指定的「字段名」排序<br>&emsp;&emsp;还可以按照「索引」进行排序，索引就是从左至右将列名按照123排序<br>&emsp;&emsp;对MySQL中查询结果按照指定字段名进行排序，左边第一个字段对应的索引是 1<br>&emsp;&emsp;当输入的索引溢出时它就会报错。<br>(2)我们为什么要知道前面查询了多少语句呢？<br>&emsp;&emsp;因为union前面查询语句查询的元素与后面查询语句查询的元素要在数量上一样<br>&emsp;&emsp;select 甲,乙,丙 union select 1,2,3<br>&emsp;&emsp;因为前面查询的语句有三个元素（甲，乙，丙）<br>&emsp;&emsp;所以后面查询的语句必须是三个元素（1，2，3）</p><p>4、找到显示位</p><pre><code>?id=-1 union select 1,2,3,4,5,6 --+</code></pre><p>如果在使用UNION SELECT 1,2,3…,11 from table时，网页中显示了信息8<br>那么说明网页只能够显示第8列中信息，不能显示其他列的信息。<br>也可以理解为网页只开放了8这个窗口，你想要查询数据库信息就必须要通过这个窗口。<br>所以如果我们想要知道某个属性的值，比如admin；<br>就要把admin属性放到8的位置上，这样就能通过第8列爆出admin的信息。<br>但是为了爆出第一位后面的显示位需要隐藏正常结果<br>比如将id=1改为id=-1，使union前面的语句报错，执行后面的，爆出显示位</p><p>5、利用显示位获取库名</p><pre><code>select group_concat(SCHEMA_NAME) from information_schema.SCHEMATA</code></pre><p>在高版本中查询该表就行，具体看上一篇文章。<br>group_concat()函数将所有查询的库名连在一起成为一条数据</p><pre><code>?id=-1&#39; union select 1,database(),3 --+</code></pre><p>假设判断出在2号位显示，那么在二号位换成想插入的SQL语句就行了。<br>相同的，这里也要让union前面的语句报错，执行后面的。</p><p>6、获取表名</p><pre><code>?id=-1&#39; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#39;库名&#39; --+</code></pre><p>相同的，这里也要让union前面的语句报错，执行后面的。<br>group_concat()函数将所有查询的表名连在一起成为一条数据</p><p>7、查询表中列名</p><pre><code>?id=-1&#39; union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=database() and table_name=&#39;users&#39; --+</code></pre><p>数据库有个information_schema库，里面有个columns表，存有整个数据库的列名。<br>我们要去查找的列，就是在这个库中去找。</p><p>8、获取字段信息</p><pre><code>?id=-1’ union select 1,group_concat(列名),3 from 库名.表名 --+</code></pre><p>平平无奇，跟上面的没啥不同，等价于下面这条</p><pre><code>?id=-1’ union select 1,列名,3 from 库名.表名 limit 0,1 --+</code></pre><h4 id="联合查询注入是最简单的了，一定要完全看懂"><a href="#联合查询注入是最简单的了，一定要完全看懂" class="headerlink" title="联合查询注入是最简单的了，一定要完全看懂"></a>联合查询注入是最简单的了，一定要完全看懂</h4><h3 id="黑盒，白盒，灰盒测试"><a href="#黑盒，白盒，灰盒测试" class="headerlink" title="黑盒，白盒，灰盒测试"></a>黑盒，白盒，灰盒测试</h3><h4 id="黑盒测试（测试功能）"><a href="#黑盒测试（测试功能）" class="headerlink" title="黑盒测试（测试功能）"></a>黑盒测试（测试功能）</h4><p>黑盒测试是以用户的角度，从输入数据与输出数据的对应关系出发进行测试的。<br>目的是检测程序是否能适当地接收输入数据而产生正确的输出信息。<br>很明显，如果外部特性本身设计有问题或规格说明的规定有误，用黑盒测试方法是发现不了的。</p><h4 id="白盒测试（优化程序）"><a href="#白盒测试（优化程序）" class="headerlink" title="白盒测试（优化程序）"></a>白盒测试（优化程序）</h4><p>以开发者的角度，对程序内部细节的严密检验</p><h4 id="灰盒测试（修复bug）"><a href="#灰盒测试（修复bug）" class="headerlink" title="灰盒测试（修复bug）"></a>灰盒测试（修复bug）</h4><p>多用于集成测试阶段，不仅关注输出、输入的正确性，同时也关注程序内部的情况。<br>灰盒测试不像白盒那样详细、完整，但又比黑盒测试更关注程序的内部逻辑。<br>常常是通过一些表征性的现象、事件、标志来判断内部的运行状态。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;SQL联合注入&quot;&gt;&lt;a href=&quot;#SQL联合注入&quot; class=&quot;headerlink&quot; title=&quot;SQL联合注入&quot;&gt;&lt;/a&gt;SQL联合注入&lt;/h3&gt;&lt;h4 id=&quot;表现&quot;&gt;&lt;a href=&quot;#表现&quot; class=&quot;headerlink&quot; title=&quot;表</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SQL注入前置知识及注入原理</title>
+    <link href="https://liu1272.github.io/2023/03/11/SQL%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/"/>
+    <id>https://liu1272.github.io/2023/03/11/SQL%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</id>
+    <published>2023-03-11T15:09:00.000Z</published>
+    <updated>2023-03-12T02:14:58.904Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h4><p>BurpSuite的及其拓展的安装及使用<br>SQLmap的下载及基本命令<br>了解少许PHP语言<br><strong>不断尝试的热情！</strong>                    </p><h4 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h4><h5 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h5><p>由于SQL语言是结构化查询语言(是操作数据库的语言,不懂的自己找我之前的文章)可以据库进行增、删、改、查等操作。<br>又因为程序员写的PHP代码不严谨，导致访问提交数据时，我们可以把代码提交到后台数据库，后台数据库处理这些数据时这些数据插入或拼接在一起形成了SQL语句命令，最后这个SQL语句可以被后台数据库作为恶意代码执行，从而达到你想达到的注入效果。</p><h5 id="注入类型"><a href="#注入类型" class="headerlink" title="注入类型"></a>注入类型</h5><p>按照注入时的表现来区分:<br>boolean-based blind – 布尔盲注<br>error-based – 报错注入<br>time-base blind – 延时注入<br>UNION query – 联合查询注入<br>堆叠查询注入</p><p>按照注入点区分:<br>字符型<br>数字型</p><p>按照提交数据方式来区分:<br>GET注入<br>POST注入<br>Cookie注入<br>HTTP头部注入</p><h5 id="注入测试一般流程"><a href="#注入测试一般流程" class="headerlink" title="注入测试一般流程"></a>注入测试一般流程</h5><pre><code>(1)寻找注入点:可通过web扫描工具实现；        是否存在注入并且判断注入类型(2)利用注入点:尝试通过注入获得各种信息，越多越好；(3)数据处理:猜解关键数据库表及其重要字段与内容；        猜解SQL查询语句的字段数        确定回显点        查询数据库信息        查询用户名，数据库名(4)后续攻击:通过获取的用户信息，寻找后台登录并利用后台或了解的进一步信息。        文件读取        写入shell</code></pre><h4 id="一些杂七杂八的拓展知识"><a href="#一些杂七杂八的拓展知识" class="headerlink" title="一些杂七杂八的拓展知识"></a>一些杂七杂八的拓展知识</h4><pre><code>在MySQL5.0版本以后MySQL数据库中会默认存放一个information_schema的数据库，在该数据库中，我们需要记住三个表名，分别是schemata，tables，columns。schemata表字段schema_name记录着数据库的库名；tables表字段table_schema和table_nmae分别记录着数据库中的库名和表名；columns表字段table_schema和table_name以及columns_name分别记录着数据库的库名、表名、字段名；select 原始查询内容 union select 构造的内容两者下一级的个数必须保持一致select * from order by 你要按照排序的对象对MySQL中查询结果按照指定字段名进行排序，左边第一个字段对应的索引是 1limit 一个一个打印出来group_concat 一次性全部打印group_concat()函数将同一组的列显示出来，相当于爆出该数据库的全部表concat_ws(分隔符，str1，str2，……)函数同时显示多个字段，并以分隔符分开concat(str1，str2，str3，…)函数同时显示多个字段，其中有一个字段为null，则返回nullSQL语句结尾加上limit 0,1表示一个一个输出前面的语句的结果0x20是空格常用函数:length()                # 返回字符串的长度substring()                        substr()                # 截取字符串mid()left()                    # 从左侧开始取指定字符个数的字符串concat()                    # 没有分隔符的连接字符串concat_ws()              # 含有分割符的连接字符串group_conat()           # 连接一个组的字符串ord()                    # 返回ASCII 码ascii()    hex()                    # 将字符串转换为十六进制unhex()                    # hex 的反向操作md5()                    # 返回MD5 值floor(x)                # 返回不大于x 的最大整数round()                    # 返回参数x 接近的整数rand()                    # 返回0-1 之间的随机浮点数load_file()                # 读取文件，并返回文件内容作为一个字符串sleep()                    # 睡眠时间为指定的秒数if(true,t,f)            # if 判断find_in_set()            # 返回字符串在字符串列表中的位置benchmark()                # 指定语句执行的次数</code></pre><h5 id="最后哔哔一句，如果你丫这都看不懂，那你别学了。"><a href="#最后哔哔一句，如果你丫这都看不懂，那你别学了。" class="headerlink" title="最后哔哔一句，如果你丫这都看不懂，那你别学了。"></a>最后哔哔一句，如果你丫这都看不懂，那你别学了。</h5>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;前置知识&quot;&gt;&lt;a href=&quot;#前置知识&quot; class=&quot;headerlink&quot; title=&quot;前置知识&quot;&gt;&lt;/a&gt;前置知识&lt;/h4&gt;&lt;p&gt;BurpSuite的及其拓展的安装及使用&lt;br&gt;SQLmap的下载及基本命令&lt;br&gt;了解少许PHP语言&lt;br&gt;&lt;strong</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>拷贝相关</title>
@@ -431,54 +479,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>小声比比</title>
-    <link href="https://liu1272.github.io/2022/12/01/20221201%E6%9C%88%E7%BB%93/"/>
-    <id>https://liu1272.github.io/2022/12/01/20221201%E6%9C%88%E7%BB%93/</id>
-    <published>2022-12-01T12:13:00.000Z</published>
-    <updated>2023-03-03T11:33:57.550Z</updated>
-    
-    <content type="html"><![CDATA[<h5 id="又是一个月，该总结一下了"><a href="#又是一个月，该总结一下了" class="headerlink" title="又是一个月，该总结一下了"></a>又是一个月，该总结一下了</h5><p>  首先还是这个月干了啥。<br>  好像也没干啥？？？<br>  学了JS，PHP，数据库，一点点命令，还有算是课内知识的python爬虫<br>  虽然看着学了很多，但是基础并不牢固。<br>  因此<br>  我可能将要用至少一个月的时间来消化从建站到现在所学的内容<br>  毕竟…<br>  高数和现代终究是大头，还有一个计导虎视眈眈</p><p>  接着来说说接下来一个月的计划吧~<br>  首先，既然是在家上网课<br>  当然是要<br>  <del>吃了就睡，睡了就吃，跟个死猪一样</del><br>  <em><strong>好好学习，天天向上</strong></em></p><h5 id="鸭梨山大"><a href="#鸭梨山大" class="headerlink" title="鸭梨山大"></a>鸭梨山大</h5><p>  其实在这个月的学习中我的感触很深，网络安全绝不是一朝一夕可以完成的(屁话)<br>  现在所学的全部这些内容可以说都是前置知识的一部分<br>  包括在平时练习的CTF，都是走向安全的一段路<br>  那么，既然如此<br>  我更应该将重心放在基础上，而非一味的追求解题量<br>  甚至是成为众人最不屑的“赛棍”。</p><h5 id="还有啥好讲的？"><a href="#还有啥好讲的？" class="headerlink" title="还有啥好讲的？"></a>还有啥好讲的？</h5><p>  既然这是一篇发布在博客的文章，那就再聊聊博客的事吧<br>  首先是最令我头疼的事——主页解析的视频老是失效。真的是脑阔疼，我找了很久了，但是一直没有解决方法，如果有人有方法或是突发奇想请在GitHub上评论，十分感谢！！！<br>  然后是关于加载速度有些缓慢甚至是在网不好的情况下出现白屏的问题(响应速度还是蛮快的，并没有发生许多人所说的被墙的情况，尽管是在校园网的情况下)，是因为主页启用了过多插件的缘故，在一段时间后(可能年后有空时)，会对这个blog进行一次大修改，争取加载时间缩短到1000毫秒内吧。<br>  最后，还是重复说明一下。这个博客虽然是public的，但是我只希望它的作用只是个刻录我在大学四年或更久的时光里的里程碑。时不时记录下成长经历，时不时写点随笔，时不时慷慨地发点自己总结的知识梳理，方便我自己和其他来到这里的 <em><strong>朋友们</strong></em> 学习。</p><h5 id="好了，最后还是一句"><a href="#好了，最后还是一句" class="headerlink" title="好了，最后还是一句"></a>好了，最后还是一句</h5><p><strong>人，活的不是一个点，人活起伏。</strong><br>说人话版:是个三维的东西就不要天天像个二维的玩意一样躺平~</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h5 id=&quot;又是一个月，该总结一下了&quot;&gt;&lt;a href=&quot;#又是一个月，该总结一下了&quot; class=&quot;headerlink&quot; title=&quot;又是一个月，该总结一下了&quot;&gt;&lt;/a&gt;又是一个月，该总结一下了&lt;/h5&gt;&lt;p&gt;  首先还是这个月干了啥。&lt;br&gt;  好像也没干啥？？？&lt;b</summary>
-      
-    
-    
-    
-    <category term="随笔" scheme="https://liu1272.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="随笔" scheme="https://liu1272.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kali常用命令</title>
-    <link href="https://liu1272.github.io/2022/11/21/Kali%E5%91%BD%E4%BB%A4/"/>
-    <id>https://liu1272.github.io/2022/11/21/Kali%E5%91%BD%E4%BB%A4/</id>
-    <published>2022-11-21T05:12:00.000Z</published>
-    <updated>2023-03-03T11:34:08.395Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="kali的常用命令"><a href="#kali的常用命令" class="headerlink" title="kali的常用命令"></a>kali的常用命令</h1><h3 id="1-基础命令"><a href="#1-基础命令" class="headerlink" title="1.基础命令"></a>1.基础命令</h3><pre><code>passwd 修改密码passwd root 修改root用户密码date 显示系统日期sudo 后面加命令 就可以调用管理权限apt-get update 更新软件列表访问源列表里的每个网址，并读取软件列表，然后保存在本地电脑。我们在新立得软件包管理器里看到的软件列表，都是通过update命令更新的。apt-get upgrade 更新软件把本地已安装的软件，与刚下载的软件列表里对应软件进行对比，如果发现已安装的软件版本太低，就会提示你更新。apt-get dist-upgrade 更新软件  --+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--【apt-get upgrade 与 apt-get dist-upgrade 的区别】upgrade:系统将现有的Package升级,如果有相依性的问题,而此相依性需要安装其它新的Package或影响到其它Package的相依性时,此Package就不会被升级,会保留下来.dist-upgrade:如果有相依性问题,需要安装/移除新的Package,就会试着去安装/移除它.(所以通常这个会被认为是有点风险的升级)apt-get upgrade 和 apt-get dist-upgrade 本质上是没有什么不同的，只不过dist-upgrade会识别出当依赖关系改变的情形并作出处理，而upgrade对此情形不处理。例如软件包 a 原先依赖 b c d，但是在源里面可能已经升级了，现在是 a 依赖 b c e。这种情况下，dist-upgrade 会删除 d 安装 e，并把 a 软件包升级，而 upgrade 会认为依赖关系改变而拒绝升级 a软件包。--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--clear 清屏sudo gpedit 特权调用gpedit编辑器reboot 重启apt-get install XXXXX 安装缺少的依赖包，（XXX）里面输入缺少依赖包的名字apt-get autoremove –purge 软件名 删除包及其依赖的软件包+配置文件等apt-get install +模块名 这种方法也可以安装模块,或者apt-get install python-模块名firefox 浏览器打开shutdown -h now 关闭系统(1)init 0 关闭系统(2)telinit 0 关闭系统(3)shutdown -h hours:minutes &amp; 按预定时间关闭系统shutdown -c 取消按预定时间关闭系统shutdown -r now 重启(1)reboot 重启(2)su -l 切换登陆用户logout 注销用户登陆pwd 当前路径</code></pre><h3 id="2-文件夹或文本操作"><a href="#2-文件夹或文本操作" class="headerlink" title="2.文件夹或文本操作"></a>2.文件夹或文本操作</h3><pre><code>cd .. 返回上一级目录cd ../.. 返回上级两级目录cd - 返回上次所在的目录cd 文件夹名  进去文件夹cd ~ 进去当前用户主目录pwd 显示当前工作路径touch 文件名  常见文件cat 文件名 读取文档内容mkdir 文件名 创建文件夹mkdir -p 文件夹 递归创建文件夹cp 复制命令cp -r moon moons 复制moon 文件夹到当前 moons 如果有里面有文件 使用-r mv 移动命令mv moon moons 也可以说是改名mkdir 文件名 文件名 创建多个文件夹ls 显示文件和文件夹名ls -a 显示所有的文件和文件夹 包含隐藏文件ls -l 显示文件和目录的详细资料rm -f 文件  删除文件rm 文件夹名 删除文件夹rm -rf  文件/文件夹  删除文件夹 及其目录下的文件bzip2 file1 压缩一个叫做 ‘file1’ 的文件gunzip file1.gz 解压一个叫做 ‘file1.gz’的文件gzip file1 压缩一个叫做 ‘file1’的文件gzip -9 file1 最大程度压缩rar a file1.rar test_file 创建一个叫做 ‘file1.rar’ 的包rar x file1.rar 解压rar包unrar x file1.rar 解压rar包dpkg -i package.deb 安装/更新一个 deb 包dpkg -r package_name 从系统删除一个 deb 包dpkg -l 显示系统中所有已经安装的 deb 包dpkg -l | grep httpd 显示所有名称中包含 “httpd” 字样的deb包dpkg -s package_name 获得已经安装在系统中一个特殊包的信息dpkg -L package_name 显示系统中已经安装的一个deb包所提供的文件列表dpkg –contents package.deb 显示尚未安装的一个包所提供的文件列表tar zcvf +压缩文件名 压缩文件tar zxvf +解压包名 解压文件tar -jcvf renwolesshel.tar.bz2 打包tar jxvf renwolesshel.tar.bz2 解压zip -q -r renwolesshel.zip renwolesshel/ 解压zip格式的压缩包unzip renwolesshel.zipwhich 加软件名 可以查出软件目录在哪./+文件名或者apt-get +文件名 安装文件</code></pre><h3 id="3-系统信息"><a href="#3-系统信息" class="headerlink" title="3.系统信息"></a>3.系统信息</h3><pre><code>arch 显示机器的处理器架构(1)uname -m 显示机器的处理器架构(2)uname -r 显示正在使用的内核版本cat /proc/version 显示内核的版本cat /proc/net/dev 显示网络适配器及统计cat /proc/cpuinfo 显示CPU info的信息cat /proc/mounts 显示已加载的文件系统</code></pre><h3 id="4-vi-常用命令"><a href="#4-vi-常用命令" class="headerlink" title="4.vi 常用命令"></a>4.vi 常用命令</h3><p>vi编辑器分为三种状态，分别是：<br>1.命令模式（command mode）<br>控制屏幕光标的移动，字符、字或行的删除，移动复制某区段及进入Insert mode下，或者到 last line mode。<br>2.插入模式（Insert mode）<br>只有在Insert mode下，才可以做文字输入，按「ESC」键可回到命令行模式。<br>3.底行模式（last line mode）<br>将文件保存或退出vi，也可以设置编辑环境，如寻找字符串、列出行号……等。</p><pre><code>**打开**vi filename :打开或新建文件，并将光标置于第一行首vi +n filename ：打开文件，并将光标置于第n行首vi + filename ：打开文件，并将光标置于最后一行首**编辑**i 在当前位置生前插入I 在当前行首插入a 在当前位置后插入A 在当前行尾插入o 在当前行之后插入一行O 在当前行之前插入一行编辑结束，按Esc返回命令模式**基本查找**/text　　查找text，按n健查找下一个，按N健查找前一个。?text　　查找text，反向查找，按n健查找下一个，按N健查找前一个。查找很长的词，如果一个词很长，键入麻烦，可以将光标移动到该词上，按*或#键即可以该单词进行搜索，相当于/搜索。而#命令相当于?搜索。**删除**删除当前行 dd删除2行 2dd**拷贝和粘贴**yy 拷贝当前行nyy 拷贝当前后开始的n行，比如2yy拷贝当前行及其下一行。p  在当前光标后粘贴区块拷贝1. 将光标移动到要复制的文本开始的地方，按 v进入可视模式。2. 将光标移动到要复制的文本的结束的地方，按y复制。此时vim会自动将光标定位到选中文本的开始的地方，并退出可视模式。3. 我移动光标到文本结束的地方，按 p粘贴。**退出命令**:wq 保存并退出:q! 强制退出并忽略所有更改:e! 放弃所有修改，并打开原来文件:w保存修改**显示行号**set numberset nu输入:n，代表跳转到第n行，如:100，就跳转到第100行。撤销操作u——&gt; vim与vi的区别——&gt; vim是vi的延申 vim编辑源码会高亮 vim的命令对vi是完全兼容的</code></pre><h3 id="5-文件搜索"><a href="#5-文件搜索" class="headerlink" title="5.文件搜索"></a>5.文件搜索</h3><pre><code>find / -name file1 从 ‘/’ 开始进入根文件系统搜索文件和目录find / -user user1 搜索属于用户 ‘user1’ 的文件和目录find /home/user1 -name *.bin 在目录 ‘/ home/user1’ 中搜索带有’.bin’ 结尾的文件find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件find . -name &#39;*.php&#39; -mmin -30  查找最近30分钟修改的当前目录下的.php文件find . -name &#39;*.php&#39; -mtime 0  查找最近24小时修改的当前目录下的.php文件find . -name &#39;*.inc&#39; -mtime 0 -ls  查找最近24小时修改的当前目录下的.php文件，并列出详细信息find . -type f -mtime 1  查找当前目录下，最近24-48小时修改过的常规文件。find . -type f -mtime +1  查找当前目录下，最近1天前修改过的常规文件。-atime 文件访问时间-ctime 文件常见时间-mtime文件修改时间-mtime n : n为数字，意思为在n天之前的“一天之内”被更改过内容的文件-mtime +n : 列出在n天之前（不含n天本身）被更改过内容的文件名-mtime -n : 列出在n天之内（含n天本身）被更改过内容的文件名-type f 代表一个普通格式的文件 二进制文件-type d 代表文件夹find / -name *.rpm -exec chmod 755 ‘&#123;&#125;’ ; 搜索以 ‘.rpm’ 结尾的文件并定义其权限--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--文件中r w x -的含义:r是只读权限，w是写的权限，x是可执行权限,-是没有任何权限。目录中r w x的含义:r具有ls权限，w是在目录上可以增加、删除、创建权限，x是具有ls –l权限。权限     读    写   执行        读    写   执行      读   写   执行字符     r     w     x           r     w    x         r    w    x数字     4     2     1           4     2    1         4    2    1分配     对象文件所有者          文件所属组用户         其他用户chmod 777 +文件名 给单独文件赋所有权限chmod -R 777 /home/user  表示将整个/home/user目录与其中的文件和子目录的权限都设置为rwxrwxrwx常用权限-rw------- (600) 只有所有者才有读和写的权限-rw-r--r-- (644) 只有所有者才有读和写的权限，组群和其他人只有读的权限-rwx------ (700) 只有所有者才有读，写，执行的权限-rwxr-xr-x (755) 只有所有者才有读，写，执行的权限，组群和其他人只有读和执行的权限-rwx--x--x (711) 只有所有者才有读，写，执行的权限，组群和其他人只有执行的权限-rw-rw-rw- (666) 每个人都有读写的权限-rwxrwxrwx (777) 每个人都有读写和执行的权限也可以使用字母模式chmod +x 和chmod a+x 是一样的，一般没有明确要求，可以就用chmod +xu代表用户   g代表用户组   o代表其它   a代表所有创建一个文件只有用户具有完全控制的权限touch 文件名chmod u+rwx 文件名 当前用户加全部的权限chmod g-r 文件名   群组把读取权限去掉chmod o-r 文件名   其他用户读取权限去掉--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--find / -xdev -name *.rpm 搜索以 ‘.rpm’ 结尾的文件，忽略光驱、捷盘等可移动设备locate *.ps 寻找以 ‘.ps’ 结尾的文件 - 先运行 ‘updatedb’ 命令whereis halt 显示一个二进制文件、源码或man的位置which halt 显示一个二进制文件或可执行文件的完整路径grep kali /etc/passwd grep关键词搜索find / -name moonsec 2&gt;/dev/null   搜索某个文件/文件夹 屏蔽出错信息</code></pre><h3 id="6-用户和群组"><a href="#6-用户和群组" class="headerlink" title="6.用户和群组"></a>6.用户和群组</h3><pre><code>groupadd group_name 创建一个新用户组groupdel group_name 删除一个用户组cat /etc/group | grep group_name usermod -a -G moontea k1把用户k1附加其他用户组useradd moonsecpasswd moonsecuseradd -r -m -s /bin/bash moonsec参数的意思：-r 建立系统账号-m 自动建立用户的登入目录-s /bin/bash 指定用户登入后所使用的shellsu - root 切换到root用户su 用户名 切换到普通用户</code></pre><h3 id="7-系统管理"><a href="#7-系统管理" class="headerlink" title="7.系统管理"></a>7.系统管理</h3><pre><code>top  查看正在指向的程序信息ps -ef 查看所有进程信息ps -ef | grep tomcat 查找指定进程kill -9 id 强制杀死进程env 当前的变量查看系统变量echo $PATHhostname 查看主机名history 查看历史命令</code></pre><h3 id="8-查看磁盘信息"><a href="#8-查看磁盘信息" class="headerlink" title="8.查看磁盘信息"></a>8.查看磁盘信息</h3><pre><code>df   默认不带单位，挂载点、总容量、已用、可用df  -h   友好显示（带单位），很多命令的友好显示都是-h</code></pre><h3 id="9-查看内存信息"><a href="#9-查看内存信息" class="headerlink" title="9.查看内存信息"></a>9.查看内存信息</h3><pre><code>free   默认以KB为单位，总容量、已用、可用、缓存大小free  -m   默认以MB为单位free  -h   上面2种都不带单位、只显示数值，这种是友好显示的，会带单位G、M等</code></pre><h3 id="10-查看环境变量"><a href="#10-查看环境变量" class="headerlink" title="10.查看环境变量"></a>10.查看环境变量</h3><pre><code>echo  $JAVA_HOMEecho $PATH | grep jdk</code></pre><h3 id="11-开机自启"><a href="#11-开机自启" class="headerlink" title="11.开机自启"></a>11.开机自启</h3><p>有很多程序往往都需要设置开机自启，比如tomcat、mysql、nginx等。</p><pre><code>vim /etc/rc.d/rc.local   在/etc/rc.d/rc.local文件中加入开机要自动执行的程序mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share   挂载一个windows网络共享</code></pre><h3 id="12-网卡配置"><a href="#12-网卡配置" class="headerlink" title="12.网卡配置"></a>12.网卡配置</h3><pre><code>vi /etc/network/interfacesauto eth0                     //指定网卡（根据ifconfig结果修改）iface eth0 inet static        //启动静态ipaddress 192.168.0.66          // 设置静态ipnetmask 255.255.255.0         //子网掩码gateway 192.168.0.1           //指定网关service networking restart    //重启网络systemctl restart networking  //重启网络ifconfig eth0 192.168.0.33    //设置临时ip</code></pre><h3 id="13网卡DNS服务器"><a href="#13网卡DNS服务器" class="headerlink" title="13网卡DNS服务器"></a>13网卡DNS服务器</h3><pre><code>vi /etc/resovl.confnameserver 114.114.114.114重启网卡service networking restartsystemctl restart networking注意有时候重启才生效</code></pre><h3 id="14-服务相关"><a href="#14-服务相关" class="headerlink" title="14.服务相关"></a>14.服务相关</h3><pre><code>apache2服务器打开：/etc/init.d/apache2 start 重启：/etc/init.d/apache2 restart关闭：/etc/init.d/apache2 stop/etc/init.d/network start  启动网卡echo 1 &gt; /proc/sys/net/ipv4/ip_forward  开启路由转发</code></pre><h3 id="15-linux常用网络命令"><a href="#15-linux常用网络命令" class="headerlink" title="15.linux常用网络命令"></a>15.linux常用网络命令</h3><p>网络和监控命令类似于这些： hostname, ping, ifconfig, iwconfig, netstat, nslookup, traceroute, finger, telnet, ethtool<br>用于查看 linux 服务器 ip 地址，管理服务器网络配置，通过 telnet 和 ethernet 建立与 linux 之间的网络链接，查看 linux 的服务器信息等。</p><pre><code>hostname 查看本机名ping  一般用于测试网络是否通 内网icmpping www.baidu.com -c 3 执行3次ifconfig 网卡信息iwconfig 用于配置或获取无线网络设备信息netstat -a (all)显示所有选项，默认不显示LISTEN相关-t (tcp)仅显示tcp相关选项-u (udp)仅显示udp相关选项-n 拒绝显示别名，能显示数字的全部转化成数字。-l 仅列出有在 Listen (监听) 的服務状态-p 显示建立相关链接的程序名-r 显示路由信息，路由表-e 显示扩展信息，例如uid等-s 按各个协议进行统计-c 每隔一个固定时间，执行该netstat命令。提示：LISTEN和LISTENING的状态只有用-a或者-l才能看到netstat -ano-an 查看当前所有已连接端口-nlpt 查看当前所有tcp端口-nlpu 查看当前所有udp端口-nlpt | grep 80 查看所有80端口使用情况netstat -lntup 查看所有的tcp和upd端口nslookup 查询其他记录直接查询返回的是A记录，我们可以指定参数，查询其他记录，比如AAAA、MX等。nslookup -qt=type domain [dns-server]其中，type可以是以下这些类型：A 地址记录AAAA 地址记录AFSDB Andrew文件系统数据库服务器记录ATMA ATM地址记录CNAME 别名记录HINFO 硬件配置记录，包括CPU、操作系统信息ISDN 域名对应的ISDN号码MB 存放指定邮箱的服务器MG 邮件组记录MINFO 邮件组和邮箱的信息记录MR 改名的邮箱记录MX 邮件服务器记录NS 名字服务器记录PTR 反向记录RP 负责人记录RT 路由穿透记录SRV TCP服务器信息记录TXT 域名对应的文本信息X25 域名对应的X.25地址记录traceroute-d 使用Socket层级的排错功能。-f 设置第一个检测数据包的存活数值TTL的大小。-F 设置勿离断位。-g 设置来源路由网关，最多可设置8个。-i 使用指定的网络界面送出数据包。-I 使用ICMP回应取代UDP资料信息。-m 设置检测数据包的最大存活数值TTL的大小。-n 直接使用IP地址而非主机名称。-p 设置UDP传输协议的通信端口。-r 忽略普通的Routing Table，直接将数据包送到远端主机上。-s 设置本地主机送出数据包的IP地址。-t 设置检测数据包的TOS数值。-v 详细显示指令的执行过程。-w 设置等待远端主机回报的时间。-x 开启或关闭数据包的正确性检验。(traceroute是用来检测发出数据包的主机到目标主机之间所经过的网关数量的工具。)(traceroute的原理是试图以最小的TTL（存活时间）发出探测包来跟踪数据包到达目标主机所经过的网关，然后监听一个来自网关ICMP的应答。发送数据包的大小默认为38个字节。)telnetLinux telnet命令用于远端登入。执行telnet指令开启终端机阶段作业，并登入远端主机。现在多数用于检测某个端口是否开放FingerFinger是一种用户信息分享服务。它工作在TCP 79端口，可以用来公开用户的特定信息。Nmap的finger的脚本可以向Finger服务器发送请求，查询并获取用户的相关信息，如登录名、用户名、TTY类型、登录时间等。ethtool 是用于查询及设置网卡参数的命令</code></pre><h3 id="16-防火墙iptables"><a href="#16-防火墙iptables" class="headerlink" title="16.防火墙iptables"></a>16.防火墙iptables</h3><pre><code>iptalbes -L  查看防火墙规则iptables -F   清除规则/etc/init.d/iptables stop   关闭防火墙service iptables stop安装：apt-get install ufw关闭：ufw disable # To disable the firewall开启：ufw enable # To enable the firewall</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;kali的常用命令&quot;&gt;&lt;a href=&quot;#kali的常用命令&quot; class=&quot;headerlink&quot; title=&quot;kali的常用命令&quot;&gt;&lt;/a&gt;kali的常用命令&lt;/h1&gt;&lt;h3 id=&quot;1-基础命令&quot;&gt;&lt;a href=&quot;#1-基础命令&quot; class=&quot;head</summary>
-      
-    
-    
-    
-    <category term="附录" scheme="https://liu1272.github.io/categories/%E9%99%84%E5%BD%95/"/>
-    
-    
-    <category term="附录" scheme="https://liu1272.github.io/tags/%E9%99%84%E5%BD%95/"/>
     
   </entry>
   

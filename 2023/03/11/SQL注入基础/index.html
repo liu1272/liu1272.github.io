@@ -4,9 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="有点意思~, Robin">
-    <meta name="description" content="
-">
+    <meta name="keywords" content="SQL注入前置知识及注入原理, Robin">
+    <meta name="description" content="前置知识BurpSuite的及其拓展的安装及使用SQLmap的下载及基本命令了解少许PHP语言不断尝试的热情！                    
+相关知识SQL注入原理由于SQL语言是结构化查询语言(是操作数据库的语言,不懂的自己找我">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>有点意思~ | Robin</title>
+    <title>SQL注入前置知识及注入原理 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -344,12 +344,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">有点意思~</h1>
+                    <h1 class="description center-align post-title">SQL注入前置知识及注入原理</h1>
                 </div>
             </div>
         </div>
@@ -371,8 +371,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
-                                <span class="chip bg-color">随笔</span>
+                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                <span class="chip bg-color">日报</span>
                             </a>
                         
                     </div>
@@ -383,8 +383,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="../../../../categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                随笔
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                日报
                             </a>
                         
                     </div>
@@ -396,28 +396,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-01-12
+                    2023-03-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-03
+                    2023-03-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    965
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -437,8 +437,76 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><img src="https://s2.loli.net/2023/01/12/HxhJLnMmr7TvGIX.png" alt="真正值得纪念的，或许不止是一张画片"><br><img src="https://s2.loli.net/2023/01/13/1vqJb5eflmtMFIp.png" alt="你见证了她的努力，此时就再守护她一会吧"><br><img src="https://s2.loli.net/2023/01/13/sCdprRjVKS1Gz3X.png" alt="想找出“恋爱”的公式，或许还需要一段时间"><br><img src="https://s2.loli.net/2023/01/13/SHhNsIKOYijGLuz.png" alt="玫瑰的意义，只存在于你我心中"></p>
+                <h4 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h4><p>BurpSuite的及其拓展的安装及使用<br>SQLmap的下载及基本命令<br>了解少许PHP语言<br><strong>不断尝试的热情！</strong>                    </p>
+<h4 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h4><h5 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h5><p>由于SQL语言是结构化查询语言(是操作数据库的语言,不懂的自己找我之前的文章)可以据库进行增、删、改、查等操作。<br>又因为程序员写的PHP代码不严谨，导致访问提交数据时，我们可以把代码提交到后台数据库，后台数据库处理这些数据时这些数据插入或拼接在一起形成了SQL语句命令，最后这个SQL语句可以被后台数据库作为恶意代码执行，从而达到你想达到的注入效果。</p>
+<h5 id="注入类型"><a href="#注入类型" class="headerlink" title="注入类型"></a>注入类型</h5><p>按照注入时的表现来区分:<br>boolean-based blind – 布尔盲注<br>error-based – 报错注入<br>time-base blind – 延时注入<br>UNION query – 联合查询注入<br>堆叠查询注入</p>
+<p>按照注入点区分:<br>字符型<br>数字型</p>
+<p>按照提交数据方式来区分:<br>GET注入<br>POST注入<br>Cookie注入<br>HTTP头部注入</p>
+<h5 id="注入测试一般流程"><a href="#注入测试一般流程" class="headerlink" title="注入测试一般流程"></a>注入测试一般流程</h5><pre><code>(1)寻找注入点:可通过web扫描工具实现；
+        是否存在注入并且判断注入类型
+(2)利用注入点:尝试通过注入获得各种信息，越多越好；
+(3)数据处理:猜解关键数据库表及其重要字段与内容；
+        猜解SQL查询语句的字段数
+        确定回显点
+        查询数据库信息
+        查询用户名，数据库名
+(4)后续攻击:通过获取的用户信息，寻找后台登录并利用后台或了解的进一步信息。
+        文件读取
+        写入shell
+</code></pre>
+<h4 id="一些杂七杂八的拓展知识"><a href="#一些杂七杂八的拓展知识" class="headerlink" title="一些杂七杂八的拓展知识"></a>一些杂七杂八的拓展知识</h4><pre><code>在MySQL5.0版本以后MySQL数据库中会默认存放一个information_schema的数据库，在该数据库中，我们需要记住三个表名，分别是schemata，tables，columns。
+schemata表字段schema_name记录着数据库的库名；
+tables表字段table_schema和table_nmae分别记录着数据库中的库名和表名；
+columns表字段table_schema和table_name以及columns_name分别记录着数据库的库名、表名、字段名；
 
+select 原始查询内容 union select 构造的内容
+两者下一级的个数必须保持一致
+
+select * from order by 你要按照排序的对象
+对MySQL中查询结果按照指定字段名进行排序，左边第一个字段对应的索引是 1
+
+limit 一个一个打印出来
+group_concat 一次性全部打印
+
+group_concat()函数
+将同一组的列显示出来，相当于爆出该数据库的全部表
+
+concat_ws(分隔符，str1，str2，……)函数
+同时显示多个字段，并以分隔符分开
+
+concat(str1，str2，str3，…)函数
+同时显示多个字段，其中有一个字段为null，则返回null
+
+SQL语句结尾加上limit 0,1
+表示一个一个输出前面的语句的结果
+
+0x20是空格
+
+常用函数:
+length()                # 返回字符串的长度
+substring()                        
+substr()                # 截取字符串
+mid()
+left()                    # 从左侧开始取指定字符个数的字符串
+concat()                    # 没有分隔符的连接字符串
+concat_ws()              # 含有分割符的连接字符串
+group_conat()           # 连接一个组的字符串
+ord()                    # 返回ASCII 码
+ascii()    
+hex()                    # 将字符串转换为十六进制
+unhex()                    # hex 的反向操作
+md5()                    # 返回MD5 值
+floor(x)                # 返回不大于x 的最大整数
+round()                    # 返回参数x 接近的整数
+rand()                    # 返回0-1 之间的随机浮点数
+load_file()                # 读取文件，并返回文件内容作为一个字符串
+sleep()                    # 睡眠时间为指定的秒数
+if(true,t,f)            # if 判断
+find_in_set()            # 返回字符串在字符串列表中的位置
+benchmark()                # 指定语句执行的次数
+
+</code></pre>
+<h5 id="最后哔哔一句，如果你丫这都看不懂，那你别学了。"><a href="#最后哔哔一句，如果你丫这都看不懂，那你别学了。" class="headerlink" title="最后哔哔一句，如果你丫这都看不懂，那你别学了。"></a>最后哔哔一句，如果你丫这都看不懂，那你别学了。</h5>
                 
             </div>
             <hr/>
@@ -452,8 +520,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
-                                    <span class="chip bg-color">随笔</span>
+                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                    <span class="chip bg-color">日报</span>
                                 </a>
                             
                         </div>
@@ -536,13 +604,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="../../21/%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90%EF%BC%81/">
+                <a href="../../12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/8.jpg" class="responsive-img" alt="新年快乐！">
+                        <img src="../../../../medias/featureimages/17.jpg" class="responsive-img" alt="SQL联合注入">
                         
-                        <span class="card-title">新年快乐！</span>
+                        <span class="card-title">SQL联合注入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -553,14 +621,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-01-21
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-12
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="../../../../categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                    随笔
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
                                 </a>
                             
                             
@@ -570,8 +638,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E9%9A%8F%E7%AC%94/">
-                        <span class="chip bg-color">随笔</span>
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
                     </a>
                     
                 </div>
@@ -585,13 +653,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../07/20220107/">
+                <a href="../../09/%E6%8B%B7%E8%B4%9D%E7%9B%B8%E5%85%B3/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/3.jpg" class="responsive-img" alt="经典诵读的正确打开方式">
+                        <img src="../../../../medias/featureimages/9.jpg" class="responsive-img" alt="拷贝相关">
                         
-                        <span class="card-title">经典诵读的正确打开方式</span>
+                        <span class="card-title">拷贝相关</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -602,7 +670,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-09
                             </span>
                         <span class="publish-author">
                             
