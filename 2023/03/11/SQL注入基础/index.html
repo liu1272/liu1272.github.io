@@ -60,9 +60,9 @@
 
     <script src="../../../../libs/jquery/jquery-3.6.0.min.js"></script>
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
+</head>
 
 
 <body>
@@ -410,14 +410,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    965
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -439,6 +439,7 @@
             <div id="articleContent">
                 <h4 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h4><p>BurpSuite的及其拓展的安装及使用<br>SQLmap的下载及基本命令<br>了解少许PHP语言<br><strong>不断尝试的热情！</strong>                    </p>
 <h4 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h4><h5 id="SQL注入原理"><a href="#SQL注入原理" class="headerlink" title="SQL注入原理"></a>SQL注入原理</h5><p>由于SQL语言是结构化查询语言(是操作数据库的语言,不懂的自己找我之前的文章)可以据库进行增、删、改、查等操作。<br>又因为程序员写的PHP代码不严谨，导致访问提交数据时，我们可以把代码提交到后台数据库，后台数据库处理这些数据时这些数据插入或拼接在一起形成了SQL语句命令，最后这个SQL语句可以被后台数据库作为恶意代码执行，从而达到你想达到的注入效果。</p>
+<h5 id="SQL注入三要素"><a href="#SQL注入三要素" class="headerlink" title="SQL注入三要素"></a>SQL注入三要素</h5><p><em><strong>未严格过滤（没开waf等防护）<br>允许恶意修改（具有一定权限）<br>执行语句（能够闭合并执行的合法SQL语句）</strong></em></p>
 <h5 id="注入类型"><a href="#注入类型" class="headerlink" title="注入类型"></a>注入类型</h5><p>按照注入时的表现来区分:<br>boolean-based blind – 布尔盲注<br>error-based – 报错注入<br>time-base blind – 延时注入<br>UNION query – 联合查询注入<br>堆叠查询注入</p>
 <p>按照注入点区分:<br>字符型<br>数字型</p>
 <p>按照提交数据方式来区分:<br>GET注入<br>POST注入<br>Cookie注入<br>HTTP头部注入</p>
@@ -505,6 +506,19 @@ if(true,t,f)            # if 判断
 find_in_set()            # 返回字符串在字符串列表中的位置
 benchmark()                # 指定语句执行的次数
 
+</code></pre>
+<h4 id="较难理解的注释语句"><a href="#较难理解的注释语句" class="headerlink" title="较难理解的注释语句"></a>较难理解的注释语句</h4><pre><code>#和-- 表示注释，可以使它们后面的语句不被执行(--后有个空格)
+get请求解释执行的时候，url中#号是锚点，所以HTTP请求中使用#闭合无法注释。
+而-- 在传输过程中--与后面的单引号连接在一起，也无法形成有效的mysql语句。
+那么要启动空格的作用就需要在--后面加上一点字符，比如+或&#39;(因为+会被解释成空格)
+
+当然，也可以使用--%20，把空格转换为urlencode编码格式，也不会报错。
+同理把#变成%23,也不报错。
+
+如果是post请求，则可以直接使用#来进行闭合。
+常见的就是表单注入，如在后台登录框中进行注入。
+
+另外#后面可以有空格，也可以没有(sql就是这么规定的，记住就行了)
 </code></pre>
 <h5 id="最后哔哔一句，如果你丫这都看不懂，那你别学了。"><a href="#最后哔哔一句，如果你丫这都看不懂，那你别学了。" class="headerlink" title="最后哔哔一句，如果你丫这都看不懂，那你别学了。"></a>最后哔哔一句，如果你丫这都看不懂，那你别学了。</h5>
                 
@@ -809,7 +823,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">61.3k</span>
+                        class="white-color">62.9k</span>
             
             
             
