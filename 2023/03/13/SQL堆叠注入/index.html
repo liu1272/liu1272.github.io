@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SQL二次注入, Robin">
-    <meta name="description" content="未完待续…">
+    <meta name="keywords" content="SQL二次注入&amp;宽字节注入, Robin">
+    <meta name="description" content="SQL二次注入表现在二次注入中，一般不会是单纯的二次注入通常会与报错注入或Bool盲注结合。比如，在注册页面输入的用户名在登录后才有盲注的回显这时候我们需要自己编写脚本模拟注册及登录。
+无法通过扫描工具或者手工测试出来，二次注入一般在审计代">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>SQL二次注入 | Robin</title>
+    <title>SQL二次注入&amp;宽字节注入 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -343,12 +344,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SQL二次注入</h1>
+                    <h1 class="description center-align post-title">SQL二次注入&amp;宽字节注入</h1>
                 </div>
             </div>
         </div>
@@ -402,21 +403,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-13
+                    2023-03-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4
+                    1.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    4 分
                 </div>
                 
 
@@ -436,7 +437,37 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h3>
+                <h3 id="SQL二次注入"><a href="#SQL二次注入" class="headerlink" title="SQL二次注入"></a>SQL二次注入</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>在二次注入中，一般不会是单纯的二次注入<br>通常会与报错注入或Bool盲注结合。<br>比如，在注册页面输入的用户名在登录后才有盲注的回显<br>这时候我们需要自己编写脚本模拟注册及登录。</p>
+<p>无法通过扫描工具或者手工测试出来，二次注入一般在审计代码过程中发现<br>从前端或黑盒测试无法看到</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>攻击者构造恶意的数据并存储在数据库后<br>防御者对语句中的特殊字符进行了转义处理<br>但在恶意数据插入到数据库时被处理的数据又被还原并存储在数据库中<br>当程序调用恶意数据并执行SQL查询时就发生了SQL二次注入。<br>总而言之:<br>用户输入恶意的数据库查询语句时会被转义，<br>但在数据库调用读取语句时又被还原导致语句执行。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p><strong>第一步：构造恶意语句</strong><br>没有恶意代码怎么能行？先上传含有能被转义的字符的恶意查询语句<br><strong>第二步：插入恶意数据</strong><br>传入数据并任他对其中特殊字符进行转义处理，但在保存在数据库时<strong>保留了原来的味道</strong><br><strong>第三步：二次构造语句，引用恶意数据</strong><br>因为开发者默认存在数据库里的数据都是安全的<br>所以在进行查询时，直接从数据库中取出九转大肠<br>结果如下:<br><img src="https://s2.loli.net/2023/03/13/wrX4BSlGyjPmqgH.jpg" alt="只保留了一点原始的味道"></p>
+<h4 id="注入方法"><a href="#注入方法" class="headerlink" title="注入方法"></a>注入方法</h4><h5 id="构造并存入一个恶意语句"><a href="#构造并存入一个恶意语句" class="headerlink" title="构造并存入一个恶意语句"></a>构造并存入一个恶意语句</h5><p>由于这种注入太难以被判断及发现，所以本文只作简单说明(其实是因为我太菜了)</p>
+<pre><code>在注册等类似能上传并存储数据的页面存入
+admin&#39;#
+
+mysql_escape_string()等函数会在特殊字符前加 \ 造成过滤的效果
+</code></pre>
+<p>此时传入时不会执行恶意代码，因为它过滤了。<br>但是存入的时候没有更改原来的数据。</p>
+<h5 id="调用数据库中的恶意语句"><a href="#调用数据库中的恶意语句" class="headerlink" title="调用数据库中的恶意语句"></a>调用数据库中的恶意语句</h5><p>既然原来的数据没改，那就再调出来用(相当于执行了恶意代码)。</p>
+<pre><code>下面是sqllab靶场的题，二次执行时整个语句变成了这样子
+update password=$new where username=admin&#39;#
+</code></pre>
+<p>admin后引号对前面的单引号进行了闭合，#注释掉了后面的语句，就相当于对admin进行了改密</p>
+<h3 id="SQL宽字节注入"><a href="#SQL宽字节注入" class="headerlink" title="SQL宽字节注入"></a>SQL宽字节注入</h3><h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>**单字节字符集:**所有的字符都使用一个字节来表示（ASCII 编码0-127）<br>**多字节字符集:**在多字节字符集中，用多个字节来表示（也有可能一部分用一个字节表示）<br>**宽字符:**用多个字节来代表的字符称之为宽字符<br>**字符、字符集:**字符是组成字符集的基本单位<br>**UTF8:**由于ASCII表示的字符只有128个，因此网络世界的规范是使用UNICODE编码，但是用ASCII表示的字符使用UNICODE并不高效。因此出现了中间格式字符集，被称为通用转换格式，及UTF。<br>**宽字节:**GB2312、GBK、GB18030、BIG5、Shift_JIS等这些都是常说的宽字节，实际上只有两字节。宽字节带来的安全问题主要是吃ASCII字符(一字节)的现象，即将两个ascii字符误认为是一个宽字节字符。</p>
+<h4 id="表现-1"><a href="#表现-1" class="headerlink" title="表现"></a>表现</h4><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>1、宽字节注入是利用mysql的一个特性:<br>&emsp;&emsp;PHP中编码为GBK，函数执行添加的是ASCII编码（添加的符号为\）<br>&emsp;&emsp;MYSQL默认字符集是GBK等宽字节字符集。<br>2、PHP发送请求到mysql，mysql在使用GBK编码的时候会认为两个字符是一个汉字<br>3、字符和转义的反斜杠组成了新的汉字，但是组成的新汉字又不是一个正常的汉字，就起到了注掉 \ 的作用</p>
+<h4 id="转义函数"><a href="#转义函数" class="headerlink" title="转义函数"></a>转义函数</h4><pre><code>addslashes函数:
+对单引号(’)、双引号(&quot;)、反斜线(\)与x00 (NULL字符）
+magic_quotes_gpc函数:
+判断解析用户提交的数据，有post、get、cookie数据时增加转义字符“\”
+mysql_real_escape_string函数
+mysql_escape_string函数
+</code></pre>
+<h4 id="注入方法-1"><a href="#注入方法-1" class="headerlink" title="注入方法"></a>注入方法</h4><p>方法一:<br>比如and’的编码是%df’，传参时单引号被加上\变成了 %df&#39;<br>其中\的十六进制是%5C ，那么现在 %df&#39; =%df%5c%27<br>如果程序的默认字符集是GBK等宽字节字符集<br>则MySQL用GBK的编码时，会认为 %df%5c 是一个宽字符，也就是縗</p>
+<pre><code>也就是说:%df\&#39; = %df%5c%27=縗&#39;
+</code></pre>
+<p>我们再回想到注入的三要素，有了单引号(闭合)后就好注入了</p>
+<p>方法二:<br>使用汉字绕过。<br>PHP接收到一个汉字后通过UTF-8编码（三字节），并和\两两配对组成两个汉字，避免了后面引号的转义</p>
+
                 
             </div>
             <hr/>
@@ -539,9 +570,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/8.jpg" class="responsive-img" alt="SQL二次注入">
+                        <img src="../../../../medias/featureimages/9.jpg" class="responsive-img" alt="SQL二次注入&amp;宽字节注入">
                         
-                        <span class="card-title">SQL二次注入</span>
+                        <span class="card-title">SQL二次注入&amp;宽字节注入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -741,7 +772,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">64k</span>
+                        class="white-color">65.2k</span>
             
             
             
