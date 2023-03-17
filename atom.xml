@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-03-13T16:43:35.294Z</updated>
+  <updated>2023-03-17T05:30:58.644Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Cookie/Base64/HTTP头部注入</title>
+    <link href="https://liu1272.github.io/2023/03/15/cookie%E6%B3%A8%E5%85%A5/"/>
+    <id>https://liu1272.github.io/2023/03/15/cookie%E6%B3%A8%E5%85%A5/</id>
+    <published>2023-03-15T14:30:00.000Z</published>
+    <updated>2023-03-17T05:30:58.644Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Cookie注入"><a href="#Cookie注入" class="headerlink" title="Cookie注入"></a>Cookie注入</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>常见于&emsp;.asp?id=xx&emsp;之类的带参数的URL</p><h4 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h4><p>cookie是一些数据信息，类型为“小型文本文件”，存储于电脑上的文本文件中。<br>cookie是服务器创建后返回给游览器的。游览器只进行了保存。<br> 一般cookie是以键值对进行表示的(key-value)</p><pre><code>cookie常用属性的解释：       Name： cookie的名字       Value： cooke的值       Path： 定义了Web站点上可以访问该Cookie的目录       Expires： 表示cookie的过期时间，也就是有效值       Size： 表示cookie的大小</code></pre><p>cookie有2种存储方式，会话性（关浏览器就清除）和持久性（保留到有效期结束）</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>ASP脚本中的request对象，被用于从用户那里获取信息。<br>Request对象的使用方法：request.[集合名称]（参数名称）<br>但是它同时允许提交时省略集合名称<br>按QueryString、Form、Cookies、ServerVariables的顺序来获取数据的<br>所以，当未指明使用request对象的具体方法进行获取且未过滤语句时存在注入。</p><h4 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h4><p>（1）寻找.asp?id=xx这样的页面<br>（2）将“id=xx”删掉，看页面是否正常。不正常则说明参数在数据传递中启直接作用<br>（3）清空网址，输入</p><pre><code>javascript:alert(document.cookie=“id=”+escape(“xx”));document.cookie:表示当前浏览器中的cookie变量alert():弹出一个对话框escape():对字符串进行编码</code></pre><p>&emsp;&emsp;按Enter键后弹出一个对话框，内容是“id=xx”<br>&emsp;&emsp;然后重新输入原来URL回车<br>&emsp;&emsp;如果显示正常，说明是用Request(“id”)方式获取数据<br>（4）判断是否存在漏洞:将SQL判断语句带入，并重复第三步</p><pre><code>javascript:alert(document.cookie=“id=”+escape(“xx and 1=1”));javascript:alert(document.cookie=“id=”+escape(“xx and 1=2”));两次回显不一样则说明存在注入漏洞，并可以进行cookie注入</code></pre><p>（5）代入SQL语句</p><pre><code>javascript:alert(document.cookie=&quot;id=&quot;+escape(&quot;xx order by 2&quot;));javascript:alert(document.cookie=&quot;id=&quot;+escape(&quot;284 union select 1,…… from xx&quot;));</code></pre><h3 id="Base64注入"><a href="#Base64注入" class="headerlink" title="Base64注入"></a>Base64注入</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>程序对GET的传参进行接收，并且对其进行解码，然后再放入查询语句中。<br>这时候我们可以编码，然后程序执行的时候，会把我们所编码的注入语句解码，再拼接到了原本程序要执行的代码中</p><h4 id="讲解"><a href="#讲解" class="headerlink" title="讲解"></a>讲解</h4><p>Base64注入实质上并不是一个全新的注入手段，而是一种对数据处理的方法。<br>Base64注入可以发生在cookie注入中，只要有</p><pre><code>$id = base64_decode($_GET[&#39;id&#39;]);</code></pre><p>这个函数语句，就会发生Base64的解码，甚至可以加解密成其他的格式<br>此时就需要一个个试或者进行白盒测试了。</p><h3 id="最后总结一下HTTP头部注入"><a href="#最后总结一下HTTP头部注入" class="headerlink" title="最后总结一下HTTP头部注入"></a>最后总结一下HTTP头部注入</h3><p>原理:后台开发人员为了验证客户端HTTP Header（比如常用的Cookie验证等）或者通过HTTP Header头信息获取客户端的一些信息（例如：User-Agent、Accept字段等），会对客户端HTTP Header 进行获取并使用SQL语句进行处理，如果此时没有足够的安全考虑，就可能导致基于HTTP Header的注入漏洞</p><p>使用HTTP头部注入漏洞的前提条件:<br>（1）能够对请求头消息进行修改<br>（2）修改的请求头信息能够带入数据库执行<br>（3）数据库没有对输入的请求头做过滤</p><p>常见方法:<br>Cookie注入<br>User-Agent注入<br>Referer注入<br>XFF注入（X-Forwarded-For）</p><p>如果要详细了解请自行查询。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;Cookie注入&quot;&gt;&lt;a href=&quot;#Cookie注入&quot; class=&quot;headerlink&quot; title=&quot;Cookie注入&quot;&gt;&lt;/a&gt;Cookie注入&lt;/h3&gt;&lt;h4 id=&quot;表现&quot;&gt;&lt;a href=&quot;#表现&quot; class=&quot;headerlink&quot; titl</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>SQL二次注入&amp;宽字节注入</title>
@@ -471,30 +495,6 @@
     
     
     <category term="资源" scheme="https://liu1272.github.io/tags/%E8%B5%84%E6%BA%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>图床及其相关</title>
-    <link href="https://liu1272.github.io/2023/01/04/20220104/"/>
-    <id>https://liu1272.github.io/2023/01/04/20220104/</id>
-    <published>2023-01-04T10:12:00.000Z</published>
-    <updated>2023-03-03T11:32:35.191Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h5 id="图床的创建"><a href="#图床的创建" class="headerlink" title="图床的创建"></a>图床的创建</h5><p>市面上免费的图床有SM.MS&emsp;Sibnet&emsp; Shutterfly<br>不完全免费的也有腾讯云&emsp; 阿里云&emsp; 七牛云<br>这里我把阿里云和SM.MS都试了一下</p><p>创建的话就跟着下面的步骤走就行了:<br>一.阿里云<br>&emsp;1.打开<a href="https://www.aliyun.com/?spm=5176.8466032.top-nav.dlogo.27b81450NiIk8F">官网</a>点击右上角进行注册/登录<br>&emsp;2.实名认证<br>&emsp;3.在左上角折叠页面里选择对象存储OSS<br>&emsp;4.右侧Bucket管理板块点击添加Bucket<br>&emsp;5.名称填写Bucket的名字，读写权限更改为公共读，其他的默认即可<br>&emsp;6.创建完成之后鼠标移至右上角头像上，选择AccessKey管理<br>&emsp;7.查看Secret并分别复制两行ID<br>&emsp;8.前往<a href="https://github.com/Molunerfinn/PicGo/releases">PicGo下载页面</a>选择对应版本下载安装<br>&emsp;9.打开PicGo图床设置的阿里云页面填写相关资料<br>&emsp;10.上传区选择格式就能使用了<br>二.SM.MS<br>&emsp;1.<a href="https://smms.app/">官网注册/登录</a><br>&emsp;2.复制<a href="https://smms.app/home/apitoken">此页面</a>的Secret Token<br>&emsp;3.在<a href="https://smms.app/">此页面</a>上传文件<br>&emsp;4.打开PicGo的SM.MS页面粘贴Secret Token<br>&emsp;5.上传区选择格式就能使用了</p><p>注:<br>1.我在使用PicGo链接SM.MS时总是失败，不知道为啥<br>2.因为阿里云不是免费的，想省钱可以选择香港<br>3.一定要设置<a href="https://help.aliyun.com/document_detail/31869.html?spm=5176.8466032.bucket.28.27b81450rEXDcJ">防盗链</a></p><h5 id="图床在markdown中的使用"><a href="#图床在markdown中的使用" class="headerlink" title="图床在markdown中的使用"></a>图床在markdown中的使用</h5><p>方法一:使用img标签</p><pre><code> &lt;img src=&quot;图片地址&quot;&gt;</code></pre><p>方法二:md语法</p><pre><code> ![图片简介](图片地址)</code></pre><h5 id="更改图片参数"><a href="#更改图片参数" class="headerlink" title="更改图片参数"></a>更改图片参数</h5><pre><code>使用html更改位置&lt;center&gt;&lt;img src=&quot;地址&quot;&gt;&lt;/center&gt;居中对齐操作：#pic_center向左对齐操作：#pic_left向右对齐操作：#pic_right想调整图片的尺寸就在上面这个指令后面加上=200x200(=200x宽高自适应)width=&quot;100&quot;调整大小</code></pre><p>今天的内容就这么多，下次有空再继续写。</p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p><strong>眼下的生活，不是没有快乐。只是所有快乐都暗含着一层谨慎的底色。</strong></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;每日一记&quot;&gt;&lt;a href=&quot;#每日一记&quot; class=&quot;headerlink&quot; title=&quot;每日一记&quot;&gt;&lt;/a&gt;每日一记&lt;/h3&gt;&lt;h5 id=&quot;图床的创建&quot;&gt;&lt;a href=&quot;#图床的创建&quot; class=&quot;headerlink&quot; title=&quot;图床的创建&quot;&gt;</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
     
   </entry>
   

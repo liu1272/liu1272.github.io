@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Cookie/Base64/HTTP头部注入</title>
+      <link href="/2023/03/15/cookie%E6%B3%A8%E5%85%A5/"/>
+      <url>/2023/03/15/cookie%E6%B3%A8%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Cookie注入"><a href="#Cookie注入" class="headerlink" title="Cookie注入"></a>Cookie注入</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>常见于&emsp;.asp?id=xx&emsp;之类的带参数的URL</p><h4 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h4><p>cookie是一些数据信息，类型为“小型文本文件”，存储于电脑上的文本文件中。<br>cookie是服务器创建后返回给游览器的。游览器只进行了保存。<br> 一般cookie是以键值对进行表示的(key-value)</p><pre><code>cookie常用属性的解释：       Name： cookie的名字       Value： cooke的值       Path： 定义了Web站点上可以访问该Cookie的目录       Expires： 表示cookie的过期时间，也就是有效值       Size： 表示cookie的大小</code></pre><p>cookie有2种存储方式，会话性（关浏览器就清除）和持久性（保留到有效期结束）</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>ASP脚本中的request对象，被用于从用户那里获取信息。<br>Request对象的使用方法：request.[集合名称]（参数名称）<br>但是它同时允许提交时省略集合名称<br>按QueryString、Form、Cookies、ServerVariables的顺序来获取数据的<br>所以，当未指明使用request对象的具体方法进行获取且未过滤语句时存在注入。</p><h4 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h4><p>（1）寻找.asp?id=xx这样的页面<br>（2）将“id=xx”删掉，看页面是否正常。不正常则说明参数在数据传递中启直接作用<br>（3）清空网址，输入</p><pre><code>javascript:alert(document.cookie=“id=”+escape(“xx”));document.cookie:表示当前浏览器中的cookie变量alert():弹出一个对话框escape():对字符串进行编码</code></pre><p>&emsp;&emsp;按Enter键后弹出一个对话框，内容是“id=xx”<br>&emsp;&emsp;然后重新输入原来URL回车<br>&emsp;&emsp;如果显示正常，说明是用Request(“id”)方式获取数据<br>（4）判断是否存在漏洞:将SQL判断语句带入，并重复第三步</p><pre><code>javascript:alert(document.cookie=“id=”+escape(“xx and 1=1”));javascript:alert(document.cookie=“id=”+escape(“xx and 1=2”));两次回显不一样则说明存在注入漏洞，并可以进行cookie注入</code></pre><p>（5）代入SQL语句</p><pre><code>javascript:alert(document.cookie=&quot;id=&quot;+escape(&quot;xx order by 2&quot;));javascript:alert(document.cookie=&quot;id=&quot;+escape(&quot;284 union select 1,…… from xx&quot;));</code></pre><h3 id="Base64注入"><a href="#Base64注入" class="headerlink" title="Base64注入"></a>Base64注入</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>程序对GET的传参进行接收，并且对其进行解码，然后再放入查询语句中。<br>这时候我们可以编码，然后程序执行的时候，会把我们所编码的注入语句解码，再拼接到了原本程序要执行的代码中</p><h4 id="讲解"><a href="#讲解" class="headerlink" title="讲解"></a>讲解</h4><p>Base64注入实质上并不是一个全新的注入手段，而是一种对数据处理的方法。<br>Base64注入可以发生在cookie注入中，只要有</p><pre><code>$id = base64_decode($_GET[&#39;id&#39;]);</code></pre><p>这个函数语句，就会发生Base64的解码，甚至可以加解密成其他的格式<br>此时就需要一个个试或者进行白盒测试了。</p><h3 id="最后总结一下HTTP头部注入"><a href="#最后总结一下HTTP头部注入" class="headerlink" title="最后总结一下HTTP头部注入"></a>最后总结一下HTTP头部注入</h3><p>原理:后台开发人员为了验证客户端HTTP Header（比如常用的Cookie验证等）或者通过HTTP Header头信息获取客户端的一些信息（例如：User-Agent、Accept字段等），会对客户端HTTP Header 进行获取并使用SQL语句进行处理，如果此时没有足够的安全考虑，就可能导致基于HTTP Header的注入漏洞</p><p>使用HTTP头部注入漏洞的前提条件:<br>（1）能够对请求头消息进行修改<br>（2）修改的请求头信息能够带入数据库执行<br>（3）数据库没有对输入的请求头做过滤</p><p>常见方法:<br>Cookie注入<br>User-Agent注入<br>Referer注入<br>XFF注入（X-Forwarded-For）</p><p>如果要详细了解请自行查询。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>SQL二次注入&amp;宽字节注入</title>
       <link href="/2023/03/13/SQL%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/"/>
       <url>/2023/03/13/SQL%E5%A0%86%E5%8F%A0%E6%B3%A8%E5%85%A5/</url>
