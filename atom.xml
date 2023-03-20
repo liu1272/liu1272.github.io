@@ -41,6 +41,19 @@
   </entry>
   
   <entry>
+    <title>说点啥好呢？</title>
+    <link href="https://liu1272.github.io/2023/03/21/%E7%8A%B9%E8%B1%AB/"/>
+    <id>https://liu1272.github.io/2023/03/21/%E7%8A%B9%E8%B1%AB/</id>
+    <published>2023-03-20T16:29:47.000Z</published>
+    <updated>2023-03-20T16:38:31.964Z</updated>
+    
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>信息收集概述</title>
     <link href="https://liu1272.github.io/2023/03/20/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%A6%82%E8%BF%B0/"/>
     <id>https://liu1272.github.io/2023/03/20/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%A6%82%E8%BF%B0/</id>
@@ -452,30 +465,6 @@
     
     
     <category term="闲聊" scheme="https://liu1272.github.io/tags/%E9%97%B2%E8%81%8A/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Github Action初体验</title>
-    <link href="https://liu1272.github.io/2023/02/02/20230202/"/>
-    <id>https://liu1272.github.io/2023/02/02/20230202/</id>
-    <published>2023-02-02T12:41:00.000Z</published>
-    <updated>2023-03-03T11:17:09.894Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Github-Action"><a href="#Github-Action" class="headerlink" title="Github Action"></a>Github Action</h3><p>今天小小地了解了一下Github Action这个东西<br>感觉它实际上就是一个轻量级服务器而已<br>用户每个月有限制内存和运行时间，但是基本上不用担心用完</p><p>Action可以选择很多模板，也可以自己设置定时任务。<br>文件是yaml类型，语法不难理解<br>尝试几次就成功把以前那个该死的经典诵读文件做成一个定时任务了。</p><p>感觉很好的是密钥的添加很方便，也很好管理<br>但是，还是要翻旧账批评它没有一键删除history这个功能</p><p>这个定时任务文件代码放在这里了，有需要的自己改了用吧</p><pre><code># This workflow will install Python dependencies, run tests and lint with a single version of Python# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-pythonname: Python applicationon:  schedule:  # 定时任务，在每天的上午11点推送天气信息到邮箱    - cron: &#39;0 3 * * *&#39;    jobs:  build:    runs-on: ubuntu-latest    steps:    - uses: actions/checkout@v3    - name: Set up Python 3.10      uses: actions/setup-python@v3      with:        python-version: &quot;3.10&quot;            - name: Install dependencies      run: |        python -m pip install --upgrade pip        pip install flake8 pytest        pip3 install requests        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi            - name: RunScripts      run: |        # stop the build if there are Python syntax errors or undefined names        python 程序.py        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;Github-Action&quot;&gt;&lt;a href=&quot;#Github-Action&quot; class=&quot;headerlink&quot; title=&quot;Github Action&quot;&gt;&lt;/a&gt;Github Action&lt;/h3&gt;&lt;p&gt;今天小小地了解了一下Github Action这个东</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
     
   </entry>
   
