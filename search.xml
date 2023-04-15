@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>PHP反序列化</title>
+      <link href="/2023/04/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
+      <url>/2023/04/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<h4 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h4><p>在各类语言中，将对象的状态信息转换为可存储或可传输的过程就是序列化<br>序列化的逆过程就是便是反序列化，主要是为了方便对象传输。<br>为了完整安全地将对象保存到文件或数据库中，或者在网络上传输对象，就需要使用序列化。</p><p>不同类型数据序列化之后的形式:</p><pre><code>$number = 34;$float = 11.11111;$str = &#39;user&#39;;$bool = true;$null = NULL;$arr = array(&#39;a&#39; =&gt; 10, &#39;b&#39; =&gt; 200);$test = new TEST(&#39;uu&#39;, true);$test2 = new TEST(&#39;uu&#39;, true);$test2-&gt;data = &amp;$test2-&gt;data2;i:34;d:11.11111;s:4:&quot;user&quot;;b:1;N;a:2:&#123;s:1:&quot;a&quot;;i:10;s:1:&quot;b&quot;;i:200;&#125;O:4:&quot;TEST&quot;:3:&#123;s:4:&quot;data&quot;;s:2:&quot;uu&quot;;s:5:&quot;data2&quot;;s:9:&quot;dazzhuang&quot;;s:10:&quot;TESTpass&quot;;b:1;&#125;O:4:&quot;TEST&quot;:3:&#123;s:4:&quot;data&quot;;s:9:&quot;dazzhuang&quot;;s:5:&quot;data2&quot;;R:2;s:10:&quot;TESTpass&quot;;b:1;&#125;只序列化成员函数，不序列化成员方法私有属性的序列化加上类名并且在成员函数前后加上空(url编码的%00)对象内调用对象时序列化后显示为套娃形式</code></pre><p>反序列化之后:</p><pre><code>只实例化new之后object(test)#1 (3) &#123;  [&quot;a&quot;]=&gt;                      // public  string(6) &quot;benben&quot;  [&quot;b&quot;:protected]=&gt;            // protected  int(666)  [&quot;c&quot;:&quot;test&quot;:private]=&gt;       // private  bool(false)&#125;反序列化的过程只看序列化链，不管存不存在这个类反序列化不触发成员方法，也不改变类的成员方法</code></pre><p><strong>魔术方法是什么？</strong><br>是一个预定义好的，在特定情况下自动触发的方法<br><strong>魔术方法有什么作用？</strong><br>反序列化过程中，代码通过调用方法，触发代码执行<br><strong>魔术方法需要了解什么？</strong><br>触发时机、触发优先级、功能、参数、返回值</p><h4 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h4><p>反序列化过程中，unserialize()接收的值 (字符串)可控<br>通过更改这个值 (字符串)，得到所需要的代码，即生成的对象的属性值</p><h4 id="魔术方法全解"><a href="#魔术方法全解" class="headerlink" title="魔术方法全解"></a>魔术方法全解</h4><pre><code>（1）  __construct()触发时机: 实例化对象后立即触发功能: 提前清理不必要内容参数: 非必要返回值特点: 序列化和反序列化时不会触发（2）  __destruct()触发时机: 销毁对象时立即触发功能: 关闭文件、释放结果集参数: 不能带有任何参数特点: 序列化时不会触发（3）  __sleep()触发时机: 序列化serialize()之前功能: 返回需要被序列化存储的成员属性，删除不必要的属性参数: 成员属性返回值: 需要被序列化存储的成员属性（4）  __wakeup()触发时机: 反序列化unserialize()之前功能: 重新建立数据库连接或执行其他初始化操作参数: 不能带有任何参数特点: 序列化时不会触发（5）  __toString()触发时机: 对象被当成字符串调用时功能: 以字符串表示对象，可以自定义格式，常用于构造pop链参数: 不能带有任何参数（6）  __invoke()触发时机: 尝试以调用函数的方式调用一个对象时功能: 将一个对象像函数一样调用，在对象上下文中实现函数式编程参数: 可以接受任意数量的参数（7）  __call()触发时机: 调用一个不存在的方法时参数: 可传参返回值: 调用的不存在的方法的名称和参数（8）  __callStatic()触发时机: 静态调用或调用成员常量时使用的方法不存在时参数: 可传参返回值: 调用的不存在的方法的名称和参数（9）  __get()触发时机: 访问不存在或不可访问的属性时参数: 可传参返回值:不存在的成员属性的名称和赋的值（10）  __set()触发时机: 给不存在或不可访问的属性赋值时参数: 可传参返回值: 不存在的成员属性的名称和赋的值（11）  __isset()触发时机: 对不可访问属性使用isset()或empty()时参数: 可传参返回值: 不存在的成员属性的名称（12）  __unset()触发时机: 对不可访问属性使用unset()时参数: 可传参返回值: 不存在的成员属性的名称（13）  __clone()触发时机: 当使用clone拷贝完成一个对象后，新对象会自动调用（14）  __set_state()触发时机: 使用var_export()函数导出一个对象时，或者使用eval()函数导入一个对象时参数: 只有一个参数(数组)，包含对象的状态信息。键是对象的属性名，值是对象的属性值。功能: 用于返回一个对象的状态数组特点: 只能在类中定义，不能在对象中定义（15）  __autoload()触发时机: 使用未定义的类时，或者使用未加载的类时功能: 根据类名动态加载对应的类文件，并定义对应的类参数: 只有一个参数，即要加载的类名特点: PHP 7.2.0及以上版本中，__autoload()魔术方法已被废弃，推荐使用spl_autoload_register()（16）  __debugInfo()触发时机: 在使用var_dump()函数打印对象时功能: 被var_dump()函数输出一个数组，包含对象的调试信息参数: 没有参数</code></pre><h4 id="POP链前置知识"><a href="#POP链前置知识" class="headerlink" title="POP链前置知识"></a>POP链前置知识</h4><p><strong>POP是什么？</strong><br>在反序列化中，我们能控制的数据就是对象中的属性值<br>POP链就是利用魔法方法在里面进行多次跳转然后获取敏感数据的种payload<br><strong>POC是什么？</strong><br>POC (Proof of concept)又称概念验证，可以理解成漏洞验证程序<br>POC是一段不完整的程序，仅仅是为了证明提出者的观点的一段代码<br><strong>如何分析POP链？</strong><br>最好使用反推法！<br>1.找到可利用的函数<br>2.根据参数的传递与调用反推出哪个变量需要是什么<br>3.分析判断有哪些魔术方法可以被利用以及如何被调用<br><strong>如何利用漏洞？</strong><br><img src="https://s2.loli.net/2023/04/16/wSFIaq7h4Ol32tg.png" alt="POP链构造例子.png"><br><strong>构造如下:</strong><br><img src="https://s2.loli.net/2023/04/16/iSj1gtLHqTQaNsx.png" alt="POP链构造例子解析.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>文件上传</title>
       <link href="/2023/04/14/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
       <url>/2023/04/14/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</url>
