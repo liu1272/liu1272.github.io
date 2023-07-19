@@ -394,21 +394,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-18
+                    2023-07-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    372
+                    580
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -474,6 +474,10 @@ xmlData = etree.parse(xmlSource,etree.XMLParser(resolve_entities=False))
 </code></pre>
 </li>
 </ol>
+<h4 id="CSRF-和-XSS-和-XXE-有什么区别，以及修复方式？"><a href="#CSRF-和-XSS-和-XXE-有什么区别，以及修复方式？" class="headerlink" title="CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？"></a>CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？</h4><p><a href="https://smms.app/image/mKHhc1M6lY5OjnD" target="_blank"><img src="https://s2.loli.net/2023/07/19/mKHhc1M6lY5OjnD.png" ></a></p>
+<p><code>XSS</code> 是跨站脚本攻击，用户提交的数据中可以构造代码来执行，从而实现窃取用户信息等攻击。<br>修复方式：对字符实体进行转义、使用HTTP Only来禁止JavaScript读取Cookie值、输入时校验、浏览器与Web应用端采用相同的字符编码。</p>
+<p><code>CSRF</code> 是跨站请求伪造攻击，没有在关键操作执行时进行是否由用户自愿发起的确认。<br>修复方式：筛选出需要防范CSRF的页面然后嵌入Token、再次输入密码、检验Referer.</p>
+<p><code>XXE</code> 是XML中可以通过调用实体来请求本地或者远程内容<br>修复方式：XML解析库在调用时严格禁止对外部实体的解析</p>
 
                 
             </div>
@@ -777,7 +781,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">97.7k</span>
+                        class="white-color">100.2k</span>
             
             
             

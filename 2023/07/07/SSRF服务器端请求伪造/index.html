@@ -403,21 +403,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-08
+                    2023-07-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    961
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -491,6 +491,11 @@
 <p><a href="http://localhost/">http://localhost/</a>         # localhost就是代指127.0.0.1<br><a href="http://0.0.0.0/">http://0/</a>                 # 0在window下代表0.0.0.0，而在liunx下代表127.0.0.1<br>http://[0:0:0:0:0:ffff:127.0.0.1]/    # 在liunx下可用，window测试了下不行<br>http://[::]:80/           # 在liunx下可用，window测试了下不行<br><a href="http://127.0.0.1/">http://127。0。0。1/</a>       # 用中文句号绕过<br>http://①②⑦.⓪.⓪.①<br><a href="http://127.0.0.1/">http://127.1/</a><br><a href="http://127.0.0.1/">http://127.00000.00000.001/</a> # 0的数量多一点少一点都没影响，最后还是会指向127.0.0.1</p>
 <p>```</p>
 <h4 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h4><p>1.地址做白名单处理<br>2.域名识别IP 过滤内部IP<br>3.校验返回的内容对比是否与假定的一致</p>
+<h4 id="CSRF、SSRF和重放攻击有什么区别？"><a href="#CSRF、SSRF和重放攻击有什么区别？" class="headerlink" title="CSRF、SSRF和重放攻击有什么区别？"></a>CSRF、SSRF和重放攻击有什么区别？</h4><ul>
+<li>CSRF是跨站请求伪造攻击，由客户端发起</li>
+<li>SSRF是服务器端请求伪造，由服务器发起</li>
+<li>重放攻击是将截获的数据包进行重放，达到身份认证等目的</li>
+</ul>
 
                 
             </div>
@@ -794,7 +799,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">97.7k</span>
+                        class="white-color">100.2k</span>
             
             
             
