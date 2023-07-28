@@ -402,21 +402,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-19
+                    2023-07-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    2.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    10 分
                 </div>
                 
 
@@ -562,7 +562,175 @@ dpkg --verify
 <h4 id="响应事件——内核态rootkit"><a href="#响应事件——内核态rootkit" class="headerlink" title="响应事件——内核态rootkit"></a>响应事件——内核态rootkit</h4><p><strong>相关表现:</strong> 无明显表现<br><strong>相关危害:</strong> 将后门、木马持久化在系统中:隐藏文件、进程等信息<br><strong>排查要点:</strong> 确定是否存在无法使用常规命令查看的文件、进程;<br><strong>操作要点:</strong> 使用tyton内核态rootkit检测工具检测:检查/etc/modules是否有未知的内核模块</p>
 <h4 id="响应事件——计划任务"><a href="#响应事件——计划任务" class="headerlink" title="响应事件——计划任务"></a>响应事件——计划任务</h4><p><strong>相关表现:</strong> 特定时间间隔触发木马、后门、网络链接、DNS请求、篡改页面等行为<br><strong>相关危害:</strong> 将后门、木马持久化在系统中:周期性篡改页面、拉取数据等<br><strong>排查要点:</strong> 判断是否存在周期性出现的异常现象，检查/var/spool/cron/crontabs/，/etc/cron.*等常用计划任务配置文件<br><strong>操作要点:</strong> 停止计划任务服务后再操作;注意辨别利用\r回车符的障眼法小技巧</p>
 <h4 id="响应事件——远控木马"><a href="#响应事件——远控木马" class="headerlink" title="响应事件——远控木马"></a>响应事件——远控木马</h4><p><strong>相关表现:</strong> 有持续或间断性的对外网络链接或DNS请求等通信行为<br><strong>相关危害:</strong> 窃取系统资料、作为跳板进一步攻击内网其他机器<br><strong>排查要点:</strong> 关注tcp、udp、icmp等一切网络行为，检查注册表、服务、开机目录、计划任务等一系列常见的持久化点<br><strong>操作要点:</strong> 检查网络连接，以及IDS设备上的异常远控告警</p>
-<h3 id="Linux应急响应"><a href="#Linux应急响应" class="headerlink" title="Linux应急响应"></a>Linux应急响应</h3><h3 id="Windows应急响应"><a href="#Windows应急响应" class="headerlink" title="Windows应急响应"></a>Windows应急响应</h3>
+<h3 id="Linux应急响应"><a href="#Linux应急响应" class="headerlink" title="Linux应急响应"></a>Linux应急响应</h3><h3 id="Windows应急响应"><a href="#Windows应急响应" class="headerlink" title="Windows应急响应"></a>Windows应急响应</h3><h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>regedit</td>
+<td>注册表</td>
+</tr>
+<tr>
+<td>Taskmgr</td>
+<td>注册表</td>
+</tr>
+<tr>
+<td>Msconfig</td>
+<td>系统配置(包含启动项)</td>
+</tr>
+<tr>
+<td>eventvwr.msc</td>
+<td>事件查看器</td>
+</tr>
+<tr>
+<td>compmgmt.msc</td>
+<td>计算机管理(本地用户和组)</td>
+</tr>
+<tr>
+<td>gpedit.msc</td>
+<td>本地组策略</td>
+</tr>
+<tr>
+<td>taskschd.msc</td>
+<td>计划任务</td>
+</tr>
+<tr>
+<td>lusrmgr.msc</td>
+<td>本地用户和组</td>
+</tr>
+</tbody></table>
+<pre><code>
+获取本机用户列表: net user
+
+本机管理员: net localgroup administrators
+
+查看当前会话: net session
+
+查看当前运行的服务: net start
+
+远程连接: net use
+
+查看当前用户下的共享目录: net share
+
+最近打开的文件:%UserProfile%\Recent
+          %APPDATA%\Microsoft\Windows\Recent
+          
+查找文件中的字符串: findstr /m /i /s &quot;hello&quot; *.txt
+
+查看网络连接: netstat - ano
+
+操作系统的详细配置信息: systeminfo
+
+获取系统进程信息: Wmic process
+
+根据应用程序查找PID: wmic process where name=&quot;cmd.exe”get processid,executablepath,name
+
+根据PID查找应用程序: wmic process where processid=&quot;4296”get executablepath,name
+
+获取系统进程信息:tasklist
+
+对于要查询特定dll的调用情况，可以使用命令tasklist /m dll名称
+
+计算样本MD5: certutil -hashfile %样本文件名% MD5
+</code></pre>
+<h4 id="应急管理工具"><a href="#应急管理工具" class="headerlink" title="应急管理工具"></a>应急管理工具</h4><p><strong>PChunter</strong><br>系统信息监控工具，主要拿来看数字签名<br>黑色是微软认证的<br>粉红色是未认证的<br>红色是可疑进程</p>
+<p><strong>Autoruns</strong><br>启动项、计划任务等动态监测工具</p>
+<p><strong>Process Explorer</strong><br>应用程序监测工具<br>数据量很大，需要过滤</p>
+<p><strong>TCPView</strong><br>其实就是<code>netstat -ano</code>的输出，但是可视化方便处理</p>
+<p><strong>Microsoft Network Monitor</strong><br>很小的一个流量监控软件<br>安装完需要重启，可以监测单个程序进程</p>
+<p><strong>D盾</strong><br>查杀webshell</p>
+<p><strong>Everything</strong><br>快速查找文件和目录</p>
+<p><strong>sysmon</strong><br>微软开发的系统监控工具，常用来判断挖矿后门等等</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Event ID 1</td>
+<td>进程创建事件，恶意进程的创建，包括他的父进程，PID，执行命令及对应文件所在目录记录信息等等</td>
+</tr>
+<tr>
+<td>Event ID 3</td>
+<td>网络连接事件，当恶意程序外连 CC 服务器或者矿地址池等操作的时候，可监控到是哪个进程发起的连接，并找到对应程序所在目录进行清理操作。</td>
+</tr>
+<tr>
+<td>Event ID 11</td>
+<td>文件创建事件，创建或覆盖文件时，这些创建操作会被记录下来。此事件对于监控自动启动位置，如启动文件夹目录、临时目录、下载目录非常有用.，而这些目录正是初始感染阶段恶意运行要用到的目录</td>
+</tr>
+<tr>
+<td>Event ID 22</td>
+<td>记录 DNS 查询，容易受该功能影响的一种场景就是基于 DNS 的 C2 通信，其中大量请求会被记录下来</td>
+</tr>
+</tbody></table>
+<p><strong>威胁分析平台</strong></p>
+<p><strong>BeaconEye</strong><br>监测CS木马后门特征</p>
+<p><strong>DumpIt</strong><br>内存取证工具，需要dump整个系统，取证空间占用太大，不建议使用<br>替代工具:<code>FTK Imager</code>和<code>WinPMem</code></p>
+<p><strong>Volatility</strong><br>内存取证工具</p>
+<h4 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h4><p>windows主要有以下三类日志记录系统事件: 系统日志、安全日志、应用程序日志</p>
+<pre><code>
+打开方式:
+1、开始 -&gt; 运行 -&gt; eventvwr
+2、开始-&gt; 管理工具 -&gt; 事件查看 -&gt; 安全
+</code></pre>
+<p><strong>系统日志</strong><br>默认位置:%SystemRoot%System32WinevtLogsSystem.evtx</p>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>ID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>系统启动</td>
+<td>6005</td>
+</tr>
+<tr>
+<td>事件日志服务已启动</td>
+<td>6006</td>
+</tr>
+<tr>
+<td>事件日志服务已停止</td>
+<td>12</td>
+</tr>
+<tr>
+<td>系统关闭</td>
+<td>13</td>
+</tr>
+</tbody></table>
+<p><strong>安全日志</strong><br>%SystemRoot%System32WinevtLogsSecurity.evtx<br>注意：不同版本的系统日志ID可能不同，建议自行查找<br><a href="https://smms.app/image/ZjJkrGV3hI9zd5i" target="_blank"><img src="https://s2.loli.net/2023/07/28/ZjJkrGV3hI9zd5i.png" width="400"></a></p>
+<p><strong>应用程序日志</strong><br>%SystemRoot%System32WinevtLogsApplication.evtx</p>
+<h3 id="Linux应急响应-1"><a href="#Linux应急响应-1" class="headerlink" title="Linux应急响应"></a>Linux应急响应</h3><h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><p><strong><code>top</code>和<code>ps -aux</code></strong><br>查看系统资源占用</p>
+<p><strong><code>netstat -antpl</code></strong><br>查看网络连接以及其对应可执行程序</p>
+<p><strong>lsof</strong><br>查看开放端口的进程</p>
+<p><strong>登录信息查看</strong><br>显示错误的尝试登录信息: lastb<br>显示系统用户最近的登录信息: last<br>现实所有的用户最近的登录信息: lastlog</p>
+<p><strong>grep</strong><br>查找符合条件的字符串:netstat -antpl lgrep 22</p>
+<p><strong>crontab</strong><br>查看定时任务: crontab -1 、 cat /etc/crontab</p>
+<p><strong>历史命令</strong><br>查看历史命令: history、cat ~/.bash history</p>
+<p><strong>校验RPM软件包</strong><br>校验RPM软件包: rpm -Va、dpkg -verify<br>S：表示对应文件的大小 (Size) 不一致<br>M: 表示对于文件的mode不一致<br>5:表示对应文件的MD5不一致<br>D:表示文件的major和minor号不一致<br>L:表示文件的符号连接内容不一致<br>U:表示文件的owner不一致<br>G: 表示文件的group不一致<br>T:表示文件的修改时间不一致</p>
+<p><strong>其它</strong><br>登录成功的IP<br>grep “Accepted” /var/log/secure | awk ‘{print $11}’ | sort | uniq -c | sort -nr | more<br>定位有爆破行为的IP<br>grep “Failed password” /var/log/secure awk ‘{print $11}’ | sort | uniq -c | sort -nr | more<br>查看隐藏进程<br>ps -ef  awk ‘{print $11}’ | sort -n | uniq &gt;1<br>ls /proc | sort -n | uniq &gt;2<br>diff 1 2</p>
+<h4 id="应急工具"><a href="#应急工具" class="headerlink" title="应急工具"></a>应急工具</h4><p><strong>BusyBox</strong><br>静态链接库的BusyBox<br>当命令被替换时使用<br>赋予可执行权限后.\即可</p>
+<p><strong>chkrootkit</strong><br>监测RootKit的脚本</p>
+<p><strong>Rkhunter</strong><br>同上</p>
+<p><strong>unhide</strong><br>查找隐藏的UDP/TCP进程</p>
+<p><strong>ClamAV</strong><br>检测各种恶意木马，病毒，进程<br>注意是否存在so文件的注入</p>
+<p><strong>河马Webshell</strong></p>
+<h4 id="Web日志分析"><a href="#Web日志分析" class="headerlink" title="Web日志分析"></a>Web日志分析</h4><p><a href="https://smms.app/image/PT3z2eDRXrnEfFA" target="_blank"><img src="https://s2.loli.net/2023/07/28/PT3z2eDRXrnEfFA.png" width="400"></a></p>
+<p><a href="https://smms.app/image/QRHjtKZ7Ulh25iW" target="_blank"><img src="https://s2.loli.net/2023/07/28/QRHjtKZ7Ulh25iW.png" width="400"></a></p>
+<p><a href="https://smms.app/image/uS1eGAtZMsj3p2n" target="_blank"><img src="https://s2.loli.net/2023/07/28/uS1eGAtZMsj3p2n.png" width="400"></a></p>
+<p><a href="https://smms.app/image/j3QUfAiM6x1aJOR" target="_blank"><img src="https://s2.loli.net/2023/07/28/j3QUfAiM6x1aJOR.png" width="400"></a></p>
+<p><strong>查找文件中的恶意/危险函数</strong></p>
+<pre><code>PHP: eval(、system(、assert (
+JSP: getRunTime(、FileOutputStream(
+ASP: eval(、execute(、ExecuteGlobal (
+</code></pre>
+<p><strong>从日志记录中查找</strong><br>查看每个 IP 地址访问次数:<br>cat access.log |awk ‘{print $1}’ |sort|uniq - c<br>访问URL排序:<br>cat access.log |awk ‘{print $1}’ |sort|uniq - c |sort -rn|head<br>访问指定资源日志:<br>cat access.log |awk ‘{print $7}’ |grep /%25Domain |sort|uniq - c |sort -rn|more</p>
+
                 
             </div>
             <hr/>
@@ -867,7 +1035,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">102.3k</span>
+                        class="white-color">103.7k</span>
             
             
             
