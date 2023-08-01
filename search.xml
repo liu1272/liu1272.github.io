@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>阅经题总结</title>
+      <link href="/2023/08/01/%E9%98%85%E7%BB%8F%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+      <url>/2023/08/01/%E9%98%85%E7%BB%8F%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h5 id="拿到目标站以后的渗透思路？"><a href="#拿到目标站以后的渗透思路？" class="headerlink" title="拿到目标站以后的渗透思路？"></a>拿到目标站以后的渗透思路？</h5><p>渗透测试流程：</p><ol><li>项目前期准备工作</li><li>信息收集：whois、网站源IP、开放端口、旁站、C段网站、服务器系统版本、容器版本、程序版本、数据库类型、二级域名、防火墙WAF</li><li>自动化漏洞扫描：Nessus, AWVS，XRAY</li><li>手动挖掘：逻辑漏洞</li><li>验证漏洞</li><li>修复建议</li><li>（如果有）基线检查/复验漏洞</li><li>输出报告</li></ol><h5 id="如何绕过CDN查真实IP？"><a href="#如何绕过CDN查真实IP？" class="headerlink" title="如何绕过CDN查真实IP？"></a>如何绕过CDN查真实IP？</h5><ol><li>多地ping看是否有cdn（基本上非洲的那些ping就是真的了）</li><li>邮件订阅或者rss订阅（QQ邮箱的ip溯源）</li><li>二级域名可能不会做cdn</li><li>nslookup <a href="http://xxx.com/">http://xxx.com</a> 国外dns</li></ol><h5 id="sleep函数被禁用后怎么进行sql注入？"><a href="#sleep函数被禁用后怎么进行sql注入？" class="headerlink" title="sleep函数被禁用后怎么进行sql注入？"></a>sleep函数被禁用后怎么进行sql注入？</h5><p>BENCHMARK，Get_lock函数，当都被禁用后可以用计算量比较大的语句（例如MD5）使数据库查询时间变长，从而达到延时注入的效果。</p><pre><code>AND (SELECT count(*) FROM information_schema.columns A,information_schema.columns B, information_schema.SCHEMATA C);</code></pre><h5 id="哪些地方存在xxe？架构问题？"><a href="#哪些地方存在xxe？架构问题？" class="headerlink" title="哪些地方存在xxe？架构问题？"></a>哪些地方存在xxe？架构问题？</h5><p><strong>xxe常见场景</strong><br>pdf在线解析、word在线解析、定制协议，留言板等，跟逻辑设计有关而与语言无关，最好是不要让XML作为参数传输或整体结构可被用户篡改。如果一定要使用，至少要禁用DTD、Entity。<br><strong>xxe危害</strong><br>读取本地文件，执行系统命令，探测内网端口，攻击内网服务<br>探测内网端口的协议有gopher file dict，不同语言支持不同的协议，是具体情况而定，file http ftp是常用的<br><strong>防范</strong><br>python用lxml时可以对resolve_entities设为false。或者过滤用户提交的xml<br>客户端也可以有xxe攻击，有的网站会使用office打开docx进行解析<br>Java解析XML的常用三方库，如果不禁用DTD、Entity都会导致XXE漏洞：<br>javax.xml.stream.XMLStreamReader;<br>javax.xml.parsers.DocumentBuilderFactory;</p><h5 id="如何绕过Http-only？"><a href="#如何绕过Http-only？" class="headerlink" title="如何绕过Http-only？"></a>如何绕过Http-only？</h5><p>HTTP-Only禁止的是JS读取cookie信息，Http Trace攻击就可以将你的Header里的Cookie回显出来，利用Ajax或者flash就可以完成这种攻击；或者配置或者应用程序上可能Bypass，比如header头的泄露</p><h5 id="SQL二次注入？"><a href="#SQL二次注入？" class="headerlink" title="SQL二次注入？"></a>SQL二次注入？</h5><p>第一次进行数据库插入数据的时候，仅仅只是使用了<code>addslashes</code>或者是借助<code>get_magic_quotes_gpc</code>对其中的特殊字符进行了转义，在写入数据库的时候还是保留了<br>原来的数据，但是数据本身还是脏数据。<br>在将数据存入到了数据库中之后，开发者就认为数据是可信的。在下一次进行需要进行查询的时候，直接从数据库中取出了脏数据，没有进行进一步的检验和处理，这样就会造成SQL的二次注入。<br>一些交友网站，填写年龄处是一个注入点，页面会显示出与你相同年龄的用户有几个。使用and 1=1确定注入点，用order by探测列数，union select探测输出点是第几列，</p><ol><li>爆库 <code>group_concat(schema_name) from information_schema.schemata</code></li><li>爆表 <code>group_concat(table_name) from information_schema.schemata where table_schema=&#39;hhh&#39;</code></li><li>获取数据 <code>concat(flag) from flag</code><br>修复：在从数据库或文件中取数据的时候，也要进行转义或者过滤。</li></ol><h5 id="SQLserver提权"><a href="#SQLserver提权" class="headerlink" title="SQLserver提权?"></a>SQLserver提权?</h5><p><strong>xp_cmdshell提权</strong><br>xp_cmdshell是Sql Server中的一个组件，可以用来执行系统命令,在拿到sa口令之后，经常可以通过xp_cmdshell来进行提权<br>前提：<br>getshell或者存在sql注入并且能够执行命令。<br>sql server是system权限，sql server默认就是system权限<br><strong>sp_oacreate提权</strong><br>在xp_cmdshell被删除或者出错情况下，可以充分利用SP_OACreate进行提权<br>前提：<br>需要同时具备sp_oacreate和sp_oamethod两个功能组件</p><h5 id="GPC是什么？GPC之后怎么绕过？"><a href="#GPC是什么？GPC之后怎么绕过？" class="headerlink" title="GPC是什么？GPC之后怎么绕过？"></a>GPC是什么？GPC之后怎么绕过？</h5><p>如果<code>magic_quotes_gpc=On</code>，PHP解析器就会自动为post、get、cookie过来的数据增加转义字符“\”，以确保这些数据不会引起程序，特别是数据库语句因为特殊字符（认为是php的字符）引起的污染</p><h5 id="如何防范webshell"><a href="#如何防范webshell" class="headerlink" title="如何防范webshell?"></a>如何防范webshell?</h5><p>防范的措施大概有三种:</p><ul><li>将专门存放上传文件的文件夹里面的脚本类型文件，解析成其他类型的文件，服务器不会以脚本类型来执行它。</li><li>匹配文件夹里的脚本类型文件，将其设置为无法读取及操作。</li><li>将文件上传到一个单独的文件夹，给一个二级的域名，然后不给这个虚拟站点解析脚本的权限，听说很多网站都用这种方式。</li><li>干脆只能局域网访问，做个隔离谁都看不到</li></ul><h5 id="webshell检查思路？"><a href="#webshell检查思路？" class="headerlink" title="webshell检查思路？"></a>webshell检查思路？</h5><p>首先，通过浏览器以HTTP协议访问Web Server上的一个CGI文件，是一个合法的TCP连接，TCP/IP的应用层之下没有任何特征，只能在<strong>应用层进行检测</strong>。<br>黑客不管是传文件还是改文件，必然有一个文件会包含webshell代码，很容易想到从文件代码入手，这是<strong>静态特征检测</strong>。<br>webshell运行后，B/S数据通过HTTP交互，HTTP请求/响应中可以找到蛛丝马迹，这是<strong>动态特征检测</strong>。</p><p>【静态检测】<br>静态检测通过匹配特征码，特征值，危险函数函数来查找webshell的方法。<br>优点是快速方便，对已知的webshell查找准确率高，部署方便。<br>缺点漏报率、误报率高，无法查找0day型webshell，而且容易被绕过。</p><p>【静态检测配合人工】<br>一个检查工具 <a href="https://github.com/he1m4n6a/findWebshell">https://github.com/he1m4n6a/findWebshell</a></p><p>【动态检测】<br>Linux下就是nobody用户起了bash，Win下就是IIS User启动cmd，这些都是动态特征。<br>如果黑客反向连接的话，那很更容易检测了，Agent和IDS都可以抓现行。<br>Webshell总有一个HTTP请求，如果我在网络层监控HTTP，并且检测到有人访问了一个从没反问过得文件，而且返回了200，则很容易定位到webshell，这便是http异常模型检测，就和检测文件变化一样，如果非管理员新增文件，则说明被人入侵了。<br>缺点也很明显，黑客只要利用原文件就很轻易绕过了，并且部署代价高，网站时常更新的话规则也要不断添加。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>护网面试总结</title>
       <link href="/2023/07/31/%E6%8A%A4%E7%BD%91%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/"/>
       <url>/2023/07/31/%E6%8A%A4%E7%BD%91%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</url>
