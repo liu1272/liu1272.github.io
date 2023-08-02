@@ -406,21 +406,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-01
+                    2023-08-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    3.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    13 分
                 </div>
                 
 
@@ -482,7 +482,95 @@ AND (SELECT count(*) FROM information_schema.columns A,information_schema.column
 <p>【静态检测】<br>静态检测通过匹配特征码，特征值，危险函数函数来查找webshell的方法。<br>优点是快速方便，对已知的webshell查找准确率高，部署方便。<br>缺点漏报率、误报率高，无法查找0day型webshell，而且容易被绕过。</p>
 <p>【静态检测配合人工】<br>一个检查工具 <a href="https://github.com/he1m4n6a/findWebshell">https://github.com/he1m4n6a/findWebshell</a></p>
 <p>【动态检测】<br>Linux下就是nobody用户起了bash，Win下就是IIS User启动cmd，这些都是动态特征。<br>如果黑客反向连接的话，那很更容易检测了，Agent和IDS都可以抓现行。<br>Webshell总有一个HTTP请求，如果我在网络层监控HTTP，并且检测到有人访问了一个从没反问过得文件，而且返回了200，则很容易定位到webshell，这便是http异常模型检测，就和检测文件变化一样，如果非管理员新增文件，则说明被人入侵了。<br>缺点也很明显，黑客只要利用原文件就很轻易绕过了，并且部署代价高，网站时常更新的话规则也要不断添加。</p>
-
+<p>【日志检测】<br>使用Webshell一般不会在系统日志中留下记录，但是会在网站的web日志中留下Webshell页<br>面的访问数据和数据提交记录。<br>日志分析检测技术通过大量的日志文件建立请求模型从而检测出异常文件，称之为：HTTP异常请求模型检测</p>
+<p>【寻找webshell】<br>1.自动化查找：D盾 河马 fotify<br>2.手动查找：windows sublime 全文件夹查找 IDE PHPSTORM 全局查找<br>Linux 命令查找 <code>grep -rn &quot;eval(&quot; *</code><br>webshell特征 PHP的危险函数<br>还有<code>phar &lt;?php XXXXX</code></p>
+<h5 id="见过哪些登录页面的漏洞？"><a href="#见过哪些登录页面的漏洞？" class="headerlink" title="见过哪些登录页面的漏洞？"></a>见过哪些登录页面的漏洞？</h5><p>注入点以及万能密码（分jsp，php等页面的万能密码）<br>敏感信息泄露（未授权，文件路径）<br>越权漏洞（多是框架编写问题）<br>验证码绕过<br>无限注册帐号<br>任意密码重置<br>明文传输</p>
+<h5 id="如何快速判定XSS类型？"><a href="#如何快速判定XSS类型？" class="headerlink" title="如何快速判定XSS类型？"></a>如何快速判定XSS类型？</h5><p>存储型XSS：<br>你发送一次带XSS代码的请求，以后这个页面的返回包里都会有XSS代码；<br>反射型XSS：<br>你发送一次带XSS代码的请求，只能在当前返回的数据包中发现XSS代码；<br>DOM型XSS：<br>你发送一次带XSS代码的请求，在返回包里压根儿就找不到XSS代码的影子；<br>CSP策略：浏览器内容安全策略，减少xss攻击。</p>
+<h5 id="CSRF、SSRF和重放攻击有什么区别？"><a href="#CSRF、SSRF和重放攻击有什么区别？" class="headerlink" title="CSRF、SSRF和重放攻击有什么区别？"></a>CSRF、SSRF和重放攻击有什么区别？</h5><ul>
+<li>CSRF是跨站请求伪造攻击，由客户端发起</li>
+<li>SSRF是服务器端请求伪造，由服务器发起</li>
+<li>重放攻击是将截获的数据包进行重放，达到身份认证等目的</li>
+</ul>
+<h5 id="CSRF-和-XSS-和-XXE-有什么区别，以及修复方式？"><a href="#CSRF-和-XSS-和-XXE-有什么区别，以及修复方式？" class="headerlink" title="CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？"></a>CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？</h5><ol>
+<li>XSS是跨站脚本攻击，用户提交的数据中可以构造代码来执行，从而实现窃取用户信息等攻击。</li>
+</ol>
+<p><strong>修复方式</strong>：对字符实体进行转义、使用HTTP Only来禁止JavaScript读取Cookie值、输入时校验、浏览器与Web应用端采用相同的字符编码。<br>2. CSRF是跨站请求伪造攻击，XSS是实现CSRF的诸多手段中的一种，是由于没有在关键操作执行时进行是否由用户自愿发起的确认。<br><strong>修复方式</strong>：筛选出需要防范CSRF的页面然后嵌入Token、再次输入密码、检验Referer.<br>3. XXE是XML外部实体注入攻击，XML中可以通过调用实体来请求本地或者远程内容，和远程文件保护类似，会引发相关安全问题，例如敏感文件读取。<br><strong>修复方式</strong>：XML解析库在调用时严格禁止对外部实体的解析。</p>
+<h5 id="mysql的网站，5-0以上和5-0以下有什么区别？"><a href="#mysql的网站，5-0以上和5-0以下有什么区别？" class="headerlink" title="mysql的网站，5.0以上和5.0以下有什么区别？"></a>mysql的网站，5.0以上和5.0以下有什么区别？</h5><p>5.0以下没有information_schema这个系统表，无法列表名等，只能暴力跑表名。<br>5.0以下是多用户单操作，5.0以上是多用户多操作</p>
+<h5 id="关于MySQL写shell的问题"><a href="#关于MySQL写shell的问题" class="headerlink" title="关于MySQL写shell的问题"></a>关于MySQL写shell的问题</h5><p><del>妈了个逼的怎么这么喜欢问这方面的东西</del><br>1.写shell用什么函数？</p>
+<ul>
+<li><code>select &#39;&lt;?php phpinfo()&gt; into outfile &#39;D:/shelltest.php&#39;</code></li>
+<li><code>dumpfile</code></li>
+<li><code>file_put_contents</code></li>
+</ul>
+<p>2.outfile不能用了怎么办？<br><code>select unhex(&#39;udf.dll hex code&#39;) intodumpfile &#39;c:/mysql/mysql server 5.1/lib/plugin/xxoo.dll&#39;;</code>这样子可以UDF提权</p>
+<p>3.dumpfile和outfile有什么不一样？<br>outfile适合导库，在行末尾会写入新行并转义，因此不能写入二进制可执行文件。</p>
+<p>4.sleep()能不能写shell？<br>SLEEP()函数本身并不能获取shell，但是可以联动其它漏洞获取shell</p>
+<p>5.写shell的条件？</p>
+<ul>
+<li>用户权限</li>
+<li>目录读写权限</li>
+<li>防止命令执行：<code>disable_functions</code>，禁止了<code>disable_functions=phpinfo,exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source</code>，但是可以用dl扩展执行命令或者ImageMagick漏洞<br>其中<code>open_basedir</code>: 将用户可操作的文件限制在某目录下</li>
+</ul>
+<p>6.mysql写shell的条件？</p>
+<ul>
+<li>网站可访问路径的绝对路径</li>
+<li>secure_file_priv 的值非NULL或包含了导出的绝对路径</li>
+<li>mysql服务有对网站可访问路径的写权限</li>
+<li>mysql连接用户有FILE权限/ROOT用户或ROOT权限</li>
+<li>GPC关闭//未对闭合用的引号转义<br>secure_file_priv的值在mysql配置文件my.ini中设置，这个参数用来限制数据导入导出<br>Mysql&gt;=5.5.53 默认为NULL，即默认禁止导入导出<br>Mysql&lt;5.5.53 默认为空，即默认无限制<br>outfile 和 dumpfile的路径不支持hex，必须有引号包裹</li>
+</ul>
+<p>7.mysql日志写shell的条件？<br>与导出函数写Shell相比，规避了 secure_file_priv 的限制</p>
+<ol>
+<li>网站可访问路径的绝对路径</li>
+<li>mysql服务有对网站可访问路径的写权限</li>
+<li>mysql连接用户有权限开启日志记录和更换日志路径/ROOT权限</li>
+<li>GPC关闭/未对闭合用的引号转义<br>虽然日志路径可以hex编码，但被记入日志的查询语句中的shell内容需要引号包裹，加<code>\</code>后传到数据库执行会报错，无法记录进日志</li>
+</ol>
+<p>8.disable_functions 怎么绕过？</p>
+<ol>
+<li>黑名单总有漏网之鱼，多尝试一些函数</li>
+<li>LD_PRELOAD：原理就是劫持系统函数，使程序加载恶意动态链接库文件，从而执行系统命令等敏感操作</li>
+<li>lmageMagick：利用lmageMagick命令执行漏洞（CVE-2016-3714）</li>
+<li>Windows系统组件COM绕过</li>
+<li>PHP7.4 FFI绕过</li>
+<li>利用Bash破壳（CVE-2014-6271）漏洞绕过</li>
+<li>利用imap_open()绕过（CVE-2018-19518）</li>
+<li>利用pcntl插件绕过</li>
+</ol>
+<p>9.Mysql有几种提权方式？<br>【Mysql_UDF 提权】<br>利用了root高权限，创建带有调用 cmd 的函数的 udf.dll 动态链接库<br>导出 udf.dll 文件后，我们就可以直接在命令框输入 cmd<br>限制条件：</p>
+<ol>
+<li>MySQL 数据库没有开启安全模式（确认secure_file_priv=’’是否为空）</li>
+<li>已知的数据库账号具有对MySQL数据库insert和delete的权限，最好是root最高权限。</li>
+<li>shell有写入到数据库安装目录的权限。<br>【MOF提权】<br>基本上在Windows Server 2003的环境下才可以成功。<br>原理是C:/Windows/system32/wbem/mof/目录下的mof文件每隔几秒钟左右都会被系统执行，因为这个 MOF 里面有一部分是 VBS脚本，所以可以利用这个VBS脚本来调用CMD来执行系统命令，如果 MySQL有权限操作 mof 目录的话，就可以来执行任意命令了。<br>【反弹端口连接提权】<br>需要一个root弱密码，并且可以外连</li>
+</ol>
+<p>10.报错注入的函数有哪些？</p>
+<pre><code>
+updatexml、extractvalue、floor、exp
+</code></pre>
+<h5 id="拿到webshell不出网情况下怎么办？"><a href="#拿到webshell不出网情况下怎么办？" class="headerlink" title="拿到webshell不出网情况下怎么办？"></a>拿到webshell不出网情况下怎么办？</h5><p>reg上传去正向连接。或探测出网协议，如dns，icmp</p>
+<h5 id="知不知道脏牛提权漏洞？"><a href="#知不知道脏牛提权漏洞？" class="headerlink" title="知不知道脏牛提权漏洞？"></a>知不知道脏牛提权漏洞？</h5><p>Linux内核 &gt;= 2.6.22的内存子系统在处理写入复制时产生了竞争条件（race condition）。<br>恶意用户可利用此漏洞，来获取高权限，对只读内存映射进行写访问。<br>利用这一漏洞，攻击者可在其目标系统提升权限，甚至可能获得root权限</p>
+<h5 id="sqlmap的–level和–risk的区别？"><a href="#sqlmap的–level和–risk的区别？" class="headerlink" title="sqlmap的–level和–risk的区别？"></a>sqlmap的–level和–risk的区别？</h5><p>level级别越高发送的请求越多，并且在level3以上时会尝试对referer注入。<br>而risk则是风险系数，默认是1会测试大部分的测试语句，2会增加基于事件的测试语句，3会增加OR语句的QL注入测试。</p>
+<h5 id="MYSQL-数据库的站，只有一个-80-端口开放？"><a href="#MYSQL-数据库的站，只有一个-80-端口开放？" class="headerlink" title="MYSQL 数据库的站，只有一个 80 端口开放？"></a>MYSQL 数据库的站，只有一个 80 端口开放？</h5><p>做了站库分离；更改了端口使3306端口不对外开放。</p>
+<h5 id="3389-无法连接是什么情况？"><a href="#3389-无法连接是什么情况？" class="headerlink" title="3389 无法连接是什么情况？"></a>3389 无法连接是什么情况？</h5><ul>
+<li>没开放 3389 端口</li>
+<li>端口被修改</li>
+<li>防护拦截</li>
+<li>处于内网(需进行端口转发)</li>
+</ul>
+<h5 id="上传图片可以正常访问，上传脚本格式访问则403怎么办？"><a href="#上传图片可以正常访问，上传脚本格式访问则403怎么办？" class="headerlink" title="上传图片可以正常访问，上传脚本格式访问则403怎么办？"></a>上传图片可以正常访问，上传脚本格式访问则403怎么办？</h5><p>有可能Web服务器配置把上传目录写死了不执行相应脚本，尝试改后缀名绕过。</p>
+<h5 id="token和refer横向对比-谁安全等级高？"><a href="#token和refer横向对比-谁安全等级高？" class="headerlink" title="token和refer横向对比 谁安全等级高？"></a>token和refer横向对比 谁安全等级高？</h5><p>token安全等级更高，因为并不是任何服务器都可以取得referer，如果从HTTPS 跳到HTTP，也不会发送referer。并且FLASH一些版本中可以自定义referer。<br>但是token的话，要保证其足够随机且不可泄露。(不可预测性原则)</p>
+<h5 id="代码执行、文件读取、命令执行函数有哪些？"><a href="#代码执行、文件读取、命令执行函数有哪些？" class="headerlink" title="代码执行、文件读取、命令执行函数有哪些？"></a>代码执行、文件读取、命令执行函数有哪些？</h5><pre><code>
+建议熟背一下！
+1）代码执行：
+eval,preg_replace+/e,assert,call_user_func,call_user_func_array,create_function
+2）文件读取：
+file_get_contents(),highlight_file(),fopen(),readfile(),fread(),fgetss(),fgets(),parse_ini_file(),show_source(),file()等
+3)命令执行：
+system(), exec(), shell_exec(), passthru() ,pcntl_exec(),popen(),proc_open()
+</code></pre>
+<h5 id="为什么aspx木马权限比asp大？"><a href="#为什么aspx木马权限比asp大？" class="headerlink" title="为什么aspx木马权限比asp大？"></a>为什么aspx木马权限比asp大？</h5><p>aspx使用的是.net技术。IIS中默认不支持，ASP只是脚本语言而已。<br>入侵的时候asp的木马一般是guest权限而APSX的木马一般是users权限。</p>
+<h5 id="提权为何选择可读写目录？不用带空格的目录？"><a href="#提权为何选择可读写目录？不用带空格的目录？" class="headerlink" title="提权为何选择可读写目录？不用带空格的目录？"></a>提权为何选择可读写目录？不用带空格的目录？</h5><p>因为exp执行多半需要空格界定参数</p>
+<h5 id="持续更新中……"><a href="#持续更新中……" class="headerlink" title="持续更新中……"></a>持续更新中……</h5>
                 
             </div>
             <hr/>
@@ -787,7 +875,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">107.9k</span>
+                        class="white-color">110.1k</span>
             
             
             
