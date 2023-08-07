@@ -4,12 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="阅经题总结, Robin">
-    <meta name="description" content="拿到目标站以后的渗透思路？渗透测试流程：
-
-项目前期准备工作
-信息收集：whois、网站源IP、开放端口、旁站、C段网站、服务器系统版本、容器版本、程序版本、数据库类型、二级域名、防火墙WAF
-自动化漏洞扫描：Nessus, AWVS，XR">
+    <meta name="keywords" content="内网渗透, Robin">
+    <meta name="description" content="内网渗透的流程
+从外网拿下一个主机当做跳板
+用net user /domian命令查看跳板机是否在域内，探测存活主机
+提权、提取hash
+进行横向移动，定位dc位置
+查看是否有能直接提权域管的漏洞，拿到dc控制权后进行提权
+最后制作黄金票据">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +23,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>阅经题总结 | Robin</title>
+    <title>内网渗透 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -347,12 +349,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">阅经题总结</h1>
+                    <h1 class="description center-align post-title">内网渗透</h1>
                 </div>
             </div>
         </div>
@@ -399,28 +401,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-08-01
+                    2023-08-06
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-08-02
+                    2023-08-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.8k
+                    3.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    13 分
+                    12 分
                 </div>
                 
 
@@ -440,137 +442,149 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h5 id="拿到目标站以后的渗透思路？"><a href="#拿到目标站以后的渗透思路？" class="headerlink" title="拿到目标站以后的渗透思路？"></a>拿到目标站以后的渗透思路？</h5><p>渗透测试流程：</p>
+                <h5 id="内网渗透的流程"><a href="#内网渗透的流程" class="headerlink" title="内网渗透的流程"></a>内网渗透的流程</h5><ol>
+<li>从外网拿下一个主机当做跳板</li>
+<li>用<code>net user /domian</code>命令查看跳板机是否在域内，探测存活主机</li>
+<li>提权、提取hash</li>
+<li>进行横向移动，定位dc位置</li>
+<li>查看是否有能直接提权域管的漏洞，拿到dc控制权后进行提权</li>
+<li>最后制作黄金票据做好维权，清理日志</li>
+</ol>
+<h5 id="内网渗透的一些基础概念"><a href="#内网渗透的一些基础概念" class="headerlink" title="内网渗透的一些基础概念"></a>内网渗透的一些基础概念</h5><table>
+<thead>
+<tr>
+<th>简写</th>
+<th>全称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DC</td>
+<td>Domain Controller</td>
+<td>域控</td>
+</tr>
+<tr>
+<td>KDC</td>
+<td>Key Distribution Center</td>
+<td>秘钥分发中心</td>
+</tr>
+<tr>
+<td>AD</td>
+<td>Account Database</td>
+<td>账户数据库</td>
+</tr>
+<tr>
+<td>ST</td>
+<td>Service Tickets</td>
+<td>ST服务票据，由TGS服务发送</td>
+</tr>
+<tr>
+<td>AS</td>
+<td>Authentication Server</td>
+<td>身份验证服务，认证用户的身份，并为其发放TGT的服务</td>
+</tr>
+<tr>
+<td>AP</td>
+<td>Application Server</td>
+<td>提供用户所需的服务</td>
+</tr>
+<tr>
+<td>TGS</td>
+<td>Ticket Granting Server</td>
+<td>票据授予发放服务</td>
+</tr>
+<tr>
+<td>TGT</td>
+<td>Ticket Granting Ticket</td>
+<td>TGT认证票据，由AS服务发放，存储在内存，默认有效期为10小时</td>
+</tr>
+<tr>
+<td>黄金票据</td>
+<td>Golden Ticket</td>
+<td>使用域账号krbtgt的NTLM Hash进行加密</td>
+</tr>
+<tr>
+<td>白银票据</td>
+<td>Silver Ticket</td>
+<td>使用服务账户的NTLM Hash进行加密</td>
+</tr>
+</tbody></table>
+<h5 id="socket通信与代理"><a href="#socket通信与代理" class="headerlink" title="socket通信与代理"></a>socket通信与代理</h5><p><strong>两台计算机间的通信</strong>，其实是两台计算机中应用程序（进程）与应用程序（进程）间的通信。但“IP地址”仅能定位到计算机，如何定位到应用程序（进程）呢？答案是“协议+端口”。<br>如果你对同源策略有所了解就能马上反应过来，这就是IP + 协议 + 端口<br><strong>Socket</strong> 就是一个类，封装了许多功能函数，当需要建立连接进行通信时，它会先进行初始化，然后通过内置的功能函数建立连接并完成通信（打开、读/写IO、关闭），其中就包含了TCP的三次握手。<br><strong>正向代理和反向代理</strong>本质上并无区别，正向代理即客户端代理，代理客户端，服务端不知道实际发起请求的客户端。反向代理即服务端代理，代理服务端，客户端不知道实际提供服务的服务端。<br>正向代理可以隐藏用户的信息，并能够将其作为跳板访问我们无法访问的资源，如翻墙。反向代理可以隐藏服务器的信息，保障了内网的安全，同时能够用来实现负载均衡。（负载均衡也是防御DOS攻击的一种方式）<br>在<strong>地址转换与端口映射</strong>中，<code>静态NAT</code>是路由器上手动配置，一个内网地址和一个公网地址相关联，一一对应。<code>动态NAT</code>是路由器上配置一个公网IP地址池，当内网地址访问外网时从地址池里获取公网IP进行映射。当公网IP地址池分配完时，只能等待被占用的公网IP被释放后，其他主机才能获取公网IP访问公网。这种将源地址进行转换的方式也可称之为 SNAT（源地址转换）。<code>NAPT 网络地址端口转换</code>是允许多个内网地址映射到同一个公网IP的不同端口。这种将源地址和端口进行转换的方式也可称之为 SNAPT（源地址端口转换）。<br><strong>端口转发</strong>，有时被叫做隧道，是安全壳（SSH）为网络安全通信使用的一种方法。在内网中，是没有办法直接访问外网的。但是我们可以通过路由器的NAT方式访问外网。<br><strong>内网穿透</strong>是当想要访问内部网络但又没有权限去操作防火墙做端口映射的情况的时候，就需要搭建一条隧道来做端口转发和流量转发。<br><strong>正向socks</strong>：当一个机器同时存在内外网IP时就能在外网通过正向连接去访问其它内网机器，而且这里跳板机就相当于正向代理。因为对于攻击者来说它是可知的，而对于内网机来说，它们并不知道它们返回给跳板机的响应又被发送给了攻击者。<br><a href="https://smms.app/image/iTNEZ9mCukscY68" target="_blank"><img src="https://s2.loli.net/2023/08/06/iTNEZ9mCukscY68.png" ></a><br><strong>反弹socks</strong>：当目标机器没有公网IP，但可访问内网资源时。攻击者可以在内网跳板机上运行EarthWorm使其反弹到某台对外连接的内网服务器上，然后攻击者再通过外网连接到对外服务器进而进入到内网中。这里公网服务器既是正向代理也是反向代理。对于攻击者来说它是可知的，因为我们要通过它访问我们无法访问的资源；对于内网服务器（跳板机）来说它也是可知的，因为我们是在内网服务器（跳板机）上执行的反弹命令，使其反向连接到公网服务器上。而内网服务器（跳板机）在这里充当的仅是公网服务器的正向代理，因为它对于公网服务器来说是可知的，而对于其他内网机来说则是不可知的。<br><a href="https://smms.app/image/wH4klfLjbCJ7Qhi" target="_blank"><img src="https://s2.loli.net/2023/08/06/wH4klfLjbCJ7Qhi.png" ></a></p>
+<h5 id="kerberos协议认证是什么？"><a href="#kerberos协议认证是什么？" class="headerlink" title="kerberos协议认证是什么？"></a>kerberos协议认证是什么？</h5><p>Kerberos是一种网络身份认证的协议，协议设计目的是通过使用秘钥加密技术为客户端/服务器应用程序提供强身份验证。该认证过程的实现不依赖于主机操作系统的认证，无需基于主机地址的信任，不要求网络上所有主机的物理安全，并假定网络上传送的数据包可以被任意的读取、修改和插入数据。在以上情况下，Kerberos作为一种可信任的第三方认证服务，通过传统的密码技术执行认证服务。<br><strong>Kerberos认证流程：</strong><br>票据中心授予的票据先去AS身份验证服务，返回身份验证，带着身份验证去TGS拿票据，带着拿回来的票据去服务器。</p>
+<h5 id="白银票据与黄金票据的原理？"><a href="#白银票据与黄金票据的原理？" class="headerlink" title="白银票据与黄金票据的原理？"></a>白银票据与黄金票据的原理？</h5><p><strong>金票</strong>：在 Kerberos 认证中,Client 通过身份认证后,AS 会给 Client一个Logon Session Key 和 TGT,而 Logon Session Key 并不会保存在 KDC 中，krbtgt 的NTLM Hash 又是固定的,所以只要得到 krbtgt 的 NTLM Hash，就可以伪造TGT 和Logon Session Key 来进入下一步 Client 与 TGS 的交互。而已有了金票后,就跳过AS 验证,不用验证账户和密码,所以也不担心域管密码修改。<br><strong>银票</strong>：如果说黄金票据是伪造的 TGT,那么白银票据就是伪造的 ST。在 Kerberos 认证的第三步，Client 带着 ST 和Authenticator3 向 Server 上的某个服务进行请求，Server 接收到 Client 的请求之后,通过自己的 Master Key 解密 ST,从而获得Session Key。通过 Session Key 解密 Authenticator3,进而验证对方的身份，验证成功就让 Client 访问 server 上的指定服务了。所以我们只需要知道 Server 用户的Hash 就可以伪造出一个 ST,且不会经过 KDC,但是伪造的门票只对部分服务起作用。<br><strong>金票和银票的区别</strong>：<br>获取的权限不同<br>认证流程不同<br>加密方式不同</p>
+<h5 id="针对kerbores的攻击有哪些？"><a href="#针对kerbores的攻击有哪些？" class="headerlink" title="针对kerbores的攻击有哪些？"></a>针对kerbores的攻击有哪些？</h5><ol>
+<li>用户名爆破</li>
+<li>密码喷洒和密码爆破</li>
+<li>Kerberoasting</li>
+<li>ASRepRoasting</li>
+<li>黄金票据和白银票据</li>
+<li>MS14-068</li>
+<li>非约束委派、约束委派、基于资源的约束委派</li>
+<li>票据传递（ptt/ptk/ptc）</li>
+<li>mimikatz加密降级攻击(万能钥匙)</li>
+<li>使用恶意的kerberos证书做权限维持</li>
+</ol>
+<h5 id="黄金票的条件要求？"><a href="#黄金票的条件要求？" class="headerlink" title="黄金票的条件要求？"></a>黄金票的条件要求？</h5><p>1.域名称 AD PowerShell模块：（Get-ADDomain）.DNSRoot<br>2.域的SID 值 AD PowerShell模块：（Get-ADDomain）.DomainSID.Value（就是域成员SID值去掉最后的）<br>3.目标服务器的 FQDN<br>4.可利用的服务<br>5.域的KRBTGT账户NTLM密码哈希<br>6.需要伪造的用户名<br>一旦攻击者拥有管理员访问域控制器的权限，就可以使用Mimikatz来提取KRBTGT帐户密码哈希值</p>
+<h5 id="票据伪造"><a href="#票据伪造" class="headerlink" title="票据伪造"></a>票据伪造</h5><p>票据分为黄金票据和白银票据。<br>黄金票据是伪造TGT，伪造黄金票据必须拿到域控管理员的权限才可以。<br>伪造黄金票据需要：域名城、域SID值、域的KRBTGT账户、NTLM哈希密码、伪造用户名</p>
+<h5 id="横向连接方式"><a href="#横向连接方式" class="headerlink" title="横向连接方式"></a>横向连接方式</h5><p>$IPC、Psexec、WMI、Schtasks、AT、SC、WINRM</p>
+<h5 id="如何获取内网中机器数量"><a href="#如何获取内网中机器数量" class="headerlink" title="如何获取内网中机器数量"></a>如何获取内网中机器数量</h5><p>可以使用命令net user /domian<br>使用扫描器扫一下</p>
+<h5 id="内网环境不出网怎么办？"><a href="#内网环境不出网怎么办？" class="headerlink" title="内网环境不出网怎么办？"></a>内网环境不出网怎么办？</h5><ol>
+<li>通过webshell实现内网socket代理</li>
+<li>正向链接</li>
+<li>ssh隧道</li>
+<li>协议不同出网的方式不同，如dns对应dnscat2 tcp对应</li>
+<li>测试是否是特定协议或端口出网</li>
+</ol>
+<h5 id="mimikatz使用方法"><a href="#mimikatz使用方法" class="headerlink" title="mimikatz使用方法"></a>mimikatz使用方法</h5><p>mimikatz是一款强大的系统密码破解获取工具。可以破解哈希值，是一个可加载的Meterpreter模块。<br>如果system的权限无法执行执行。需要先进行提权。<br>在meterpreter中输入<code>run post/multi/recon/local_exploit_suggester</code>，进行提权漏洞检测。</p>
+<h5 id="拿下边界机器如何内网渗透？"><a href="#拿下边界机器如何内网渗透？" class="headerlink" title="拿下边界机器如何内网渗透？"></a>拿下边界机器如何内网渗透？</h5><p>拿下机器后，使用代理访问内网<br>windows环境：reGeorg与proxifier<br>Linux环境：reGeorg与proxychains，<br>使用nmap等工具进行扫描，发现web服务的主机和其它信息。有时这些边界机器上会记录一些内网服务器上的一些信息，这时候可以拿到探测的内部一些开放的端口判断进行渗透，通常用户这里基本是统一命名的，拿到的各种记录会暴露出部分内网通讯的ip.</p>
+<h5 id="linux常见的提权办法"><a href="#linux常见的提权办法" class="headerlink" title="linux常见的提权办法"></a>linux常见的提权办法</h5><ol>
+<li>uid提权 (find / -perm -u=s -type f 2&gt;/dev/null)</li>
+<li><code>sudo git help config !/bin/bash</code> 或者 <code>！&#39;sh&#39;</code>完成提权</li>
+<li>脏牛提权</li>
+<li>内核提权</li>
+<li>环境劫持</li>
+<li>suid提权</li>
+<li>cve-2021-4034</li>
+<li>docker提权</li>
+</ol>
+<h5 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h5><p><strong>Windows机器：</strong></p>
 <ol>
-<li>项目前期准备工作</li>
-<li>信息收集：whois、网站源IP、开放端口、旁站、C段网站、服务器系统版本、容器版本、程序版本、数据库类型、二级域名、防火墙WAF</li>
-<li>自动化漏洞扫描：Nessus, AWVS，XRAY</li>
-<li>手动挖掘：逻辑漏洞</li>
-<li>验证漏洞</li>
-<li>修复建议</li>
-<li>（如果有）基线检查/复验漏洞</li>
-<li>输出报告</li>
+<li>替换系统文件类(shift 后门,放大镜后门)</li>
+<li>修改注册表类<br>自启动项、屏幕保护程序注册表、用户登陆初始化、登录脚本、映像劫持、影子账户、AppCertDlls 注册表项、AppInit_DLLs 注册表项、文件关联、用户登陆初始化、xx.Netsh Helper DLL</li>
+<li>文件类<br>自启动文件夹、office Word StartUp 劫持</li>
+<li>计划任务<br>schtasks 、WMI、bitsadmin</li>
 </ol>
-<h5 id="如何绕过CDN查真实IP？"><a href="#如何绕过CDN查真实IP？" class="headerlink" title="如何绕过CDN查真实IP？"></a>如何绕过CDN查真实IP？</h5><ol>
-<li>多地ping看是否有cdn（基本上非洲的那些ping就是真的了）</li>
-<li>邮件订阅或者rss订阅（QQ邮箱的ip溯源）</li>
-<li>二级域名可能不会做cdn</li>
-<li>nslookup <a href="http://xxx.com/">http://xxx.com</a> 国外dns</li>
-</ol>
-<h5 id="sleep函数被禁用后怎么进行sql注入？"><a href="#sleep函数被禁用后怎么进行sql注入？" class="headerlink" title="sleep函数被禁用后怎么进行sql注入？"></a>sleep函数被禁用后怎么进行sql注入？</h5><p>BENCHMARK，Get_lock函数，当都被禁用后可以用计算量比较大的语句（例如MD5）使数据库查询时间变长，从而达到延时注入的效果。</p>
-<pre><code>
-AND (SELECT count(*) FROM information_schema.columns A,information_schema.columns B, information_schema.SCHEMATA C);
-</code></pre>
-<h5 id="哪些地方存在xxe？架构问题？"><a href="#哪些地方存在xxe？架构问题？" class="headerlink" title="哪些地方存在xxe？架构问题？"></a>哪些地方存在xxe？架构问题？</h5><p><strong>xxe常见场景</strong><br>pdf在线解析、word在线解析、定制协议，留言板等，跟逻辑设计有关而与语言无关，最好是不要让XML作为参数传输或整体结构可被用户篡改。如果一定要使用，至少要禁用DTD、Entity。<br><strong>xxe危害</strong><br>读取本地文件，执行系统命令，探测内网端口，攻击内网服务<br>探测内网端口的协议有gopher file dict，不同语言支持不同的协议，是具体情况而定，file http ftp是常用的<br><strong>防范</strong><br>python用lxml时可以对resolve_entities设为false。或者过滤用户提交的xml<br>客户端也可以有xxe攻击，有的网站会使用office打开docx进行解析<br>Java解析XML的常用三方库，如果不禁用DTD、Entity都会导致XXE漏洞：<br>javax.xml.stream.XMLStreamReader;<br>javax.xml.parsers.DocumentBuilderFactory;</p>
-<h5 id="如何绕过Http-only？"><a href="#如何绕过Http-only？" class="headerlink" title="如何绕过Http-only？"></a>如何绕过Http-only？</h5><p>HTTP-Only禁止的是JS读取cookie信息，Http Trace攻击就可以将你的Header里的Cookie回显出来，利用Ajax或者flash就可以完成这种攻击；或者配置或者应用程序上可能Bypass，比如header头的泄露</p>
-<h5 id="SQL二次注入？"><a href="#SQL二次注入？" class="headerlink" title="SQL二次注入？"></a>SQL二次注入？</h5><p>第一次进行数据库插入数据的时候，仅仅只是使用了<code>addslashes</code>或者是借助<code>get_magic_quotes_gpc</code>对其中的特殊字符进行了转义，在写入数据库的时候还是保留了<br>原来的数据，但是数据本身还是脏数据。<br>在将数据存入到了数据库中之后，开发者就认为数据是可信的。在下一次进行需要进行查询的时候，直接从数据库中取出了脏数据，没有进行进一步的检验和处理，这样就会造成SQL的二次注入。<br>一些交友网站，填写年龄处是一个注入点，页面会显示出与你相同年龄的用户有几个。使用and 1=1确定注入点，用order by探测列数，union select探测输出点是第几列，</p>
+<p><strong>Linux:</strong></p>
 <ol>
-<li>爆库 <code>group_concat(schema_name) from information_schema.schemata</code></li>
-<li>爆表 <code>group_concat(table_name) from information_schema.schemata where table_schema=&#39;hhh&#39;</code></li>
-<li>获取数据 <code>concat(flag) from flag</code><br>修复：在从数据库或文件中取数据的时候，也要进行转义或者过滤。</li>
+<li>预加载型动态链接库后门</li>
+<li>strace 后门</li>
+<li>SSH 后门</li>
+<li>SUID 后门</li>
+<li>inetd 服务后门</li>
+<li>协议后门</li>
+<li>vim 后门</li>
+<li>PAM 后门</li>
+<li>进程注入</li>
+<li>Rootkit</li>
+<li>端口复用</li>
 </ol>
-<h5 id="SQLserver提权"><a href="#SQLserver提权" class="headerlink" title="SQLserver提权?"></a>SQLserver提权?</h5><p><strong>xp_cmdshell提权</strong><br>xp_cmdshell是Sql Server中的一个组件，可以用来执行系统命令,在拿到sa口令之后，经常可以通过xp_cmdshell来进行提权<br>前提：<br>getshell或者存在sql注入并且能够执行命令。<br>sql server是system权限，sql server默认就是system权限<br><strong>sp_oacreate提权</strong><br>在xp_cmdshell被删除或者出错情况下，可以充分利用SP_OACreate进行提权<br>前提：<br>需要同时具备sp_oacreate和sp_oamethod两个功能组件</p>
-<h5 id="GPC是什么？GPC之后怎么绕过？"><a href="#GPC是什么？GPC之后怎么绕过？" class="headerlink" title="GPC是什么？GPC之后怎么绕过？"></a>GPC是什么？GPC之后怎么绕过？</h5><p>如果<code>magic_quotes_gpc=On</code>，PHP解析器就会自动为post、get、cookie过来的数据增加转义字符“\”，以确保这些数据不会引起程序，特别是数据库语句因为特殊字符（认为是php的字符）引起的污染</p>
-<h5 id="如何防范webshell"><a href="#如何防范webshell" class="headerlink" title="如何防范webshell?"></a>如何防范webshell?</h5><p>防范的措施大概有三种:</p>
-<ul>
-<li>将专门存放上传文件的文件夹里面的脚本类型文件，解析成其他类型的文件，服务器不会以脚本类型来执行它。</li>
-<li>匹配文件夹里的脚本类型文件，将其设置为无法读取及操作。</li>
-<li>将文件上传到一个单独的文件夹，给一个二级的域名，然后不给这个虚拟站点解析脚本的权限，听说很多网站都用这种方式。</li>
-<li>干脆只能局域网访问，做个隔离谁都看不到</li>
+<h5 id="拿到shell后如何接管域控？"><a href="#拿到shell后如何接管域控？" class="headerlink" title="拿到shell后如何接管域控？"></a>拿到shell后如何接管域控？</h5><p>如果拿到的就是域内用户，定位一下域控，提取本机<code>hash</code>看域管是否登陆过本机，是否有域用户的进程之类的注入域用户进程窃取下权限，然后使用一些域内漏洞来提权到域管从而接管域控，然后通过<code>dcsync</code>权限维持或者<code>adminsdhound</code>权限维持，也可以修改机器账号的<code>useraccount</code>为 8192 达成权限维持。<br>（注：把机器账户的UserAccountControl属性修改为8192后，活动目录就会认为这个机器账户是域控）</p>
+<h5 id="内网渗透搭建隧道常见的攻击？"><a href="#内网渗透搭建隧道常见的攻击？" class="headerlink" title="内网渗透搭建隧道常见的攻击？"></a>内网渗透搭建隧道常见的攻击？</h5><p><strong>frp、ew、ssh、Neo-reGeorg、netsh、Lcx</strong><br>网络层：Ipv6情况、icmp情况、Gre隧道0<br>传输层：Tcp 隧道、udp 隧道 常规端口转发<br>应用层：ssh隧道、http隧道、https隧道、dns隧道</p>
+<h5 id="内网横向扩展具体方法？"><a href="#内网横向扩展具体方法？" class="headerlink" title="内网横向扩展具体方法？"></a>内网横向扩展具体方法？</h5><p>密码喷洒、IPC$、WMI、mimikatz、PTH、MS14-068、web漏洞、系统漏洞</p>
+<h5 id="KDC服务默认开放哪些端口？"><a href="#KDC服务默认开放哪些端口？" class="headerlink" title="KDC服务默认开放哪些端口？"></a>KDC服务默认开放哪些端口？</h5><p>88 kerberos krb5、464kerberos kpasswd（v5）</p>
+<h5 id="桌面有管理员会话，想要做会话劫持怎么做？"><a href="#桌面有管理员会话，想要做会话劫持怎么做？" class="headerlink" title="桌面有管理员会话，想要做会话劫持怎么做？"></a>桌面有管理员会话，想要做会话劫持怎么做？</h5><p>提权到system权限，然后去通过工具，就能够劫持任何处于已登录用户的会话，而无需获得该用户的登录凭证。<br>终端服务会话可以是连接状态也可以是未连接状态</p>
+<h5 id="域内攻击方法有什么？"><a href="#域内攻击方法有什么？" class="headerlink" title="域内攻击方法有什么？"></a>域内攻击方法有什么？</h5><p>MS14-068、Roasting攻击离线爆破密码、非约束性委派、基于资源的约束委派、ntlmrelay、CVE-2021-42287/CVE-2021-42278</p>
+<h5 id="抓取密码"><a href="#抓取密码" class="headerlink" title="抓取密码"></a>抓取密码</h5><p>procdump+mimikatz 转储然后用mimikatz离线读取，或者Sam获取然后离线读取。<br>windows server 2012之后，或者打了补丁都抓不到了。<br>只能翻阅文件查找运维等等是否记录密码，或者hash传递、或者获取浏览器的账号密码。</p>
+<h5 id="psexec和wmic的区别"><a href="#psexec和wmic的区别" class="headerlink" title="psexec和wmic的区别"></a>psexec和wmic的区别</h5><p>psexec会记录大量日志，wmic不会记录日志并且更为隐蔽</p>
+<h5 id="横向渗透命令执行手段"><a href="#横向渗透命令执行手段" class="headerlink" title="横向渗透命令执行手段"></a>横向渗透命令执行手段</h5><p>psexec，wmic，smbexec，winrm，net use共享+计划任务+type命令</p>
+<h5 id="内网的白名单如何突破？"><a href="#内网的白名单如何突破？" class="headerlink" title="内网的白名单如何突破？"></a>内网的白名单如何突破？</h5><ul>
+<li>利用已在白名单中的软件执行目标代码，甚至发动无文件攻击</li>
+<li>白名单污染</li>
+<li>暴力破解白名单防护软件</li>
 </ul>
-<h5 id="webshell检查思路？"><a href="#webshell检查思路？" class="headerlink" title="webshell检查思路？"></a>webshell检查思路？</h5><p>首先，通过浏览器以HTTP协议访问Web Server上的一个CGI文件，是一个合法的TCP连接，TCP/IP的应用层之下没有任何特征，只能在<strong>应用层进行检测</strong>。<br>黑客不管是传文件还是改文件，必然有一个文件会包含webshell代码，很容易想到从文件代码入手，这是<strong>静态特征检测</strong>。<br>webshell运行后，B/S数据通过HTTP交互，HTTP请求/响应中可以找到蛛丝马迹，这是<strong>动态特征检测</strong>。</p>
-<p>【静态检测】<br>静态检测通过匹配特征码，特征值，危险函数函数来查找webshell的方法。<br>优点是快速方便，对已知的webshell查找准确率高，部署方便。<br>缺点漏报率、误报率高，无法查找0day型webshell，而且容易被绕过。</p>
-<p>【静态检测配合人工】<br>一个检查工具 <a href="https://github.com/he1m4n6a/findWebshell">https://github.com/he1m4n6a/findWebshell</a></p>
-<p>【动态检测】<br>Linux下就是nobody用户起了bash，Win下就是IIS User启动cmd，这些都是动态特征。<br>如果黑客反向连接的话，那很更容易检测了，Agent和IDS都可以抓现行。<br>Webshell总有一个HTTP请求，如果我在网络层监控HTTP，并且检测到有人访问了一个从没反问过得文件，而且返回了200，则很容易定位到webshell，这便是http异常模型检测，就和检测文件变化一样，如果非管理员新增文件，则说明被人入侵了。<br>缺点也很明显，黑客只要利用原文件就很轻易绕过了，并且部署代价高，网站时常更新的话规则也要不断添加。</p>
-<p>【日志检测】<br>使用Webshell一般不会在系统日志中留下记录，但是会在网站的web日志中留下Webshell页<br>面的访问数据和数据提交记录。<br>日志分析检测技术通过大量的日志文件建立请求模型从而检测出异常文件，称之为：HTTP异常请求模型检测</p>
-<p>【寻找webshell】<br>1.自动化查找：D盾 河马 fotify<br>2.手动查找：windows sublime 全文件夹查找 IDE PHPSTORM 全局查找<br>Linux 命令查找 <code>grep -rn &quot;eval(&quot; *</code><br>webshell特征 PHP的危险函数<br>还有<code>phar &lt;?php XXXXX</code></p>
-<h5 id="见过哪些登录页面的漏洞？"><a href="#见过哪些登录页面的漏洞？" class="headerlink" title="见过哪些登录页面的漏洞？"></a>见过哪些登录页面的漏洞？</h5><p>注入点以及万能密码（分jsp，php等页面的万能密码）<br>敏感信息泄露（未授权，文件路径）<br>越权漏洞（多是框架编写问题）<br>验证码绕过<br>无限注册帐号<br>任意密码重置<br>明文传输</p>
-<h5 id="如何快速判定XSS类型？"><a href="#如何快速判定XSS类型？" class="headerlink" title="如何快速判定XSS类型？"></a>如何快速判定XSS类型？</h5><p>存储型XSS：<br>你发送一次带XSS代码的请求，以后这个页面的返回包里都会有XSS代码；<br>反射型XSS：<br>你发送一次带XSS代码的请求，只能在当前返回的数据包中发现XSS代码；<br>DOM型XSS：<br>你发送一次带XSS代码的请求，在返回包里压根儿就找不到XSS代码的影子；<br>CSP策略：浏览器内容安全策略，减少xss攻击。</p>
-<h5 id="CSRF、SSRF和重放攻击有什么区别？"><a href="#CSRF、SSRF和重放攻击有什么区别？" class="headerlink" title="CSRF、SSRF和重放攻击有什么区别？"></a>CSRF、SSRF和重放攻击有什么区别？</h5><ul>
-<li>CSRF是跨站请求伪造攻击，由客户端发起</li>
-<li>SSRF是服务器端请求伪造，由服务器发起</li>
-<li>重放攻击是将截获的数据包进行重放，达到身份认证等目的</li>
-</ul>
-<h5 id="CSRF-和-XSS-和-XXE-有什么区别，以及修复方式？"><a href="#CSRF-和-XSS-和-XXE-有什么区别，以及修复方式？" class="headerlink" title="CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？"></a>CSRF 和 XSS 和 XXE 有什么区别，以及修复方式？</h5><ol>
-<li>XSS是跨站脚本攻击，用户提交的数据中可以构造代码来执行，从而实现窃取用户信息等攻击。</li>
-</ol>
-<p><strong>修复方式</strong>：对字符实体进行转义、使用HTTP Only来禁止JavaScript读取Cookie值、输入时校验、浏览器与Web应用端采用相同的字符编码。<br>2. CSRF是跨站请求伪造攻击，XSS是实现CSRF的诸多手段中的一种，是由于没有在关键操作执行时进行是否由用户自愿发起的确认。<br><strong>修复方式</strong>：筛选出需要防范CSRF的页面然后嵌入Token、再次输入密码、检验Referer.<br>3. XXE是XML外部实体注入攻击，XML中可以通过调用实体来请求本地或者远程内容，和远程文件保护类似，会引发相关安全问题，例如敏感文件读取。<br><strong>修复方式</strong>：XML解析库在调用时严格禁止对外部实体的解析。</p>
-<h5 id="mysql的网站，5-0以上和5-0以下有什么区别？"><a href="#mysql的网站，5-0以上和5-0以下有什么区别？" class="headerlink" title="mysql的网站，5.0以上和5.0以下有什么区别？"></a>mysql的网站，5.0以上和5.0以下有什么区别？</h5><p>5.0以下没有information_schema这个系统表，无法列表名等，只能暴力跑表名。<br>5.0以下是多用户单操作，5.0以上是多用户多操作</p>
-<h5 id="关于MySQL写shell的问题"><a href="#关于MySQL写shell的问题" class="headerlink" title="关于MySQL写shell的问题"></a>关于MySQL写shell的问题</h5><p><del>妈了个逼的怎么这么喜欢问这方面的东西</del><br>1.写shell用什么函数？</p>
-<ul>
-<li><code>select &#39;&lt;?php phpinfo()&gt; into outfile &#39;D:/shelltest.php&#39;</code></li>
-<li><code>dumpfile</code></li>
-<li><code>file_put_contents</code></li>
-</ul>
-<p>2.outfile不能用了怎么办？<br><code>select unhex(&#39;udf.dll hex code&#39;) intodumpfile &#39;c:/mysql/mysql server 5.1/lib/plugin/xxoo.dll&#39;;</code>这样子可以UDF提权</p>
-<p>3.dumpfile和outfile有什么不一样？<br>outfile适合导库，在行末尾会写入新行并转义，因此不能写入二进制可执行文件。</p>
-<p>4.sleep()能不能写shell？<br>SLEEP()函数本身并不能获取shell，但是可以联动其它漏洞获取shell</p>
-<p>5.写shell的条件？</p>
-<ul>
-<li>用户权限</li>
-<li>目录读写权限</li>
-<li>防止命令执行：<code>disable_functions</code>，禁止了<code>disable_functions=phpinfo,exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source</code>，但是可以用dl扩展执行命令或者ImageMagick漏洞<br>其中<code>open_basedir</code>: 将用户可操作的文件限制在某目录下</li>
-</ul>
-<p>6.mysql写shell的条件？</p>
-<ul>
-<li>网站可访问路径的绝对路径</li>
-<li>secure_file_priv 的值非NULL或包含了导出的绝对路径</li>
-<li>mysql服务有对网站可访问路径的写权限</li>
-<li>mysql连接用户有FILE权限/ROOT用户或ROOT权限</li>
-<li>GPC关闭//未对闭合用的引号转义<br>secure_file_priv的值在mysql配置文件my.ini中设置，这个参数用来限制数据导入导出<br>Mysql&gt;=5.5.53 默认为NULL，即默认禁止导入导出<br>Mysql&lt;5.5.53 默认为空，即默认无限制<br>outfile 和 dumpfile的路径不支持hex，必须有引号包裹</li>
-</ul>
-<p>7.mysql日志写shell的条件？<br>与导出函数写Shell相比，规避了 secure_file_priv 的限制</p>
-<ol>
-<li>网站可访问路径的绝对路径</li>
-<li>mysql服务有对网站可访问路径的写权限</li>
-<li>mysql连接用户有权限开启日志记录和更换日志路径/ROOT权限</li>
-<li>GPC关闭/未对闭合用的引号转义<br>虽然日志路径可以hex编码，但被记入日志的查询语句中的shell内容需要引号包裹，加<code>\</code>后传到数据库执行会报错，无法记录进日志</li>
-</ol>
-<p>8.disable_functions 怎么绕过？</p>
-<ol>
-<li>黑名单总有漏网之鱼，多尝试一些函数</li>
-<li>LD_PRELOAD：原理就是劫持系统函数，使程序加载恶意动态链接库文件，从而执行系统命令等敏感操作</li>
-<li>lmageMagick：利用lmageMagick命令执行漏洞（CVE-2016-3714）</li>
-<li>Windows系统组件COM绕过</li>
-<li>PHP7.4 FFI绕过</li>
-<li>利用Bash破壳（CVE-2014-6271）漏洞绕过</li>
-<li>利用imap_open()绕过（CVE-2018-19518）</li>
-<li>利用pcntl插件绕过</li>
-</ol>
-<p>9.Mysql有几种提权方式？<br>【Mysql_UDF 提权】<br>利用了root高权限，创建带有调用 cmd 的函数的 udf.dll 动态链接库<br>导出 udf.dll 文件后，我们就可以直接在命令框输入 cmd<br>限制条件：</p>
-<ol>
-<li>MySQL 数据库没有开启安全模式（确认secure_file_priv=’’是否为空）</li>
-<li>已知的数据库账号具有对MySQL数据库insert和delete的权限，最好是root最高权限。</li>
-<li>shell有写入到数据库安装目录的权限。<br>【MOF提权】<br>基本上在Windows Server 2003的环境下才可以成功。<br>原理是C:/Windows/system32/wbem/mof/目录下的mof文件每隔几秒钟左右都会被系统执行，因为这个 MOF 里面有一部分是 VBS脚本，所以可以利用这个VBS脚本来调用CMD来执行系统命令，如果 MySQL有权限操作 mof 目录的话，就可以来执行任意命令了。<br>【反弹端口连接提权】<br>需要一个root弱密码，并且可以外连</li>
-</ol>
-<p>10.报错注入的函数有哪些？</p>
-<pre><code>
-updatexml、extractvalue、floor、exp
-</code></pre>
-<h5 id="拿到webshell不出网情况下怎么办？"><a href="#拿到webshell不出网情况下怎么办？" class="headerlink" title="拿到webshell不出网情况下怎么办？"></a>拿到webshell不出网情况下怎么办？</h5><p>reg上传去正向连接。或探测出网协议，如dns，icmp</p>
-<h5 id="知不知道脏牛提权漏洞？"><a href="#知不知道脏牛提权漏洞？" class="headerlink" title="知不知道脏牛提权漏洞？"></a>知不知道脏牛提权漏洞？</h5><p>Linux内核 &gt;= 2.6.22的内存子系统在处理写入复制时产生了竞争条件（race condition）。<br>恶意用户可利用此漏洞，来获取高权限，对只读内存映射进行写访问。<br>利用这一漏洞，攻击者可在其目标系统提升权限，甚至可能获得root权限</p>
-<h5 id="sqlmap的–level和–risk的区别？"><a href="#sqlmap的–level和–risk的区别？" class="headerlink" title="sqlmap的–level和–risk的区别？"></a>sqlmap的–level和–risk的区别？</h5><p>level级别越高发送的请求越多，并且在level3以上时会尝试对referer注入。<br>而risk则是风险系数，默认是1会测试大部分的测试语句，2会增加基于事件的测试语句，3会增加OR语句的QL注入测试。</p>
-<h5 id="MYSQL-数据库的站，只有一个-80-端口开放？"><a href="#MYSQL-数据库的站，只有一个-80-端口开放？" class="headerlink" title="MYSQL 数据库的站，只有一个 80 端口开放？"></a>MYSQL 数据库的站，只有一个 80 端口开放？</h5><p>做了站库分离；更改了端口使3306端口不对外开放。</p>
-<h5 id="3389-无法连接是什么情况？"><a href="#3389-无法连接是什么情况？" class="headerlink" title="3389 无法连接是什么情况？"></a>3389 无法连接是什么情况？</h5><ul>
-<li>没开放 3389 端口</li>
-<li>端口被修改</li>
-<li>防护拦截</li>
-<li>处于内网(需进行端口转发)</li>
-</ul>
-<h5 id="上传图片可以正常访问，上传脚本格式访问则403怎么办？"><a href="#上传图片可以正常访问，上传脚本格式访问则403怎么办？" class="headerlink" title="上传图片可以正常访问，上传脚本格式访问则403怎么办？"></a>上传图片可以正常访问，上传脚本格式访问则403怎么办？</h5><p>有可能Web服务器配置把上传目录写死了不执行相应脚本，尝试改后缀名绕过。</p>
-<h5 id="token和refer横向对比-谁安全等级高？"><a href="#token和refer横向对比-谁安全等级高？" class="headerlink" title="token和refer横向对比 谁安全等级高？"></a>token和refer横向对比 谁安全等级高？</h5><p>token安全等级更高，因为并不是任何服务器都可以取得referer，如果从HTTPS 跳到HTTP，也不会发送referer。并且FLASH一些版本中可以自定义referer。<br>但是token的话，要保证其足够随机且不可泄露。(不可预测性原则)</p>
-<h5 id="代码执行、文件读取、命令执行函数有哪些？"><a href="#代码执行、文件读取、命令执行函数有哪些？" class="headerlink" title="代码执行、文件读取、命令执行函数有哪些？"></a>代码执行、文件读取、命令执行函数有哪些？</h5><pre><code>
-建议熟背一下！
-1）代码执行：
-eval,preg_replace+/e,assert,call_user_func,call_user_func_array,create_function
-2）文件读取：
-file_get_contents(),highlight_file(),fopen(),readfile(),fread(),fgetss(),fgets(),parse_ini_file(),show_source(),file()等
-3)命令执行：
-system(), exec(), shell_exec(), passthru() ,pcntl_exec(),popen(),proc_open()
-</code></pre>
-<h5 id="为什么aspx木马权限比asp大？"><a href="#为什么aspx木马权限比asp大？" class="headerlink" title="为什么aspx木马权限比asp大？"></a>为什么aspx木马权限比asp大？</h5><p>aspx使用的是.net技术。IIS中默认不支持，ASP只是脚本语言而已。<br>入侵的时候asp的木马一般是guest权限而APSX的木马一般是users权限。</p>
-<h5 id="提权为何选择可读写目录？不用带空格的目录？"><a href="#提权为何选择可读写目录？不用带空格的目录？" class="headerlink" title="提权为何选择可读写目录？不用带空格的目录？"></a>提权为何选择可读写目录？不用带空格的目录？</h5><p>因为exp执行多半需要空格界定参数</p>
-<h5 id="持续更新中……"><a href="#持续更新中……" class="headerlink" title="持续更新中……"></a>持续更新中……</h5>
+<h5 id="内网135端口具体有哪些利用方式？"><a href="#内网135端口具体有哪些利用方式？" class="headerlink" title="内网135端口具体有哪些利用方式？"></a>内网135端口具体有哪些利用方式？</h5><p>爆破用户、wmic执行命令进行横向</p>
+<h5 id="怎么做域控定位？"><a href="#怎么做域控定位？" class="headerlink" title="怎么做域控定位？"></a>怎么做域控定位？</h5><p><strong>cmd定位</strong>：<br>net group “Domain controllers” /Domain //查询域控<br>net time /domain//方式来定位域控，显示域控时间<br><strong>DNS解析记录定位</strong>：<br><code>nslookup -type=all _ldap._tcp.dc._msdcs.tubai.com</code><br>若当前主机dns为域内dns，则可以通过解析记录定位端口探测定位：扫描内网中同时开放<code>389</code>、<code>636</code>与<code>53</code>的机器，<code>389</code>默认是<code>LDAP</code>协议端口，<code>636</code>端口是<code>LDAPS</code>，<code>53</code>端口默认是DNS端口，主要用于域名解析，通过DNS服务器可以实现域名与ip地址之间转换，他们都是域控机器开放的端口<br><strong>SPN扫描定位</strong>：由于<code>SPN</code>本身就是正常的<code>kerberos</code>请求，所以扫描隐蔽，它不同于<code>TCP</code>与<code>UDP</code>常规端口扫描。大部分windows已经自带<code>setspn.exe</code>，且此操作无需管理权限<br>命令：setspn -T tubai.com -Q /<br>扫描结果中根据：<code>CN=AD-SERVER,OU=Domain Controllers,DC=tubai,DC=com</code>来进行域控的定位</p>
+
                 
             </div>
             <hr/>
@@ -664,11 +678,12 @@ system(), exec(), shell_exec(), passthru() ,pcntl_exec(),popen(),proc_open()
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../06/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/">
+                <a href="">
                     <div class="card-image">
                         
                         
@@ -684,9 +699,9 @@ system(), exec(), shell_exec(), passthru() ,pcntl_exec(),popen(),proc_open()
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-08-06
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-06
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -699,6 +714,7 @@ system(), exec(), shell_exec(), passthru() ,pcntl_exec(),popen(),proc_open()
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -717,13 +733,13 @@ system(), exec(), shell_exec(), passthru() ,pcntl_exec(),popen(),proc_open()
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../../07/31/%E6%8A%A4%E7%BD%91%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">
+                <a href="../../01/%E9%98%85%E7%BB%8F%E9%A2%98%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/8.jpg" class="responsive-img" alt="护网面试总结">
+                        <img src="../../../../medias/featureimages/22.jpg" class="responsive-img" alt="阅经题总结">
                         
-                        <span class="card-title">护网面试总结</span>
+                        <span class="card-title">阅经题总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -734,7 +750,7 @@ system(), exec(), shell_exec(), passthru() ,pcntl_exec(),popen(),proc_open()
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-01
                             </span>
                         <span class="publish-author">
                             
