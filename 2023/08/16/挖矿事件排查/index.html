@@ -4,8 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="标签: 学术, Robin">
-    <meta name="description" content="Welcome">
+    <meta name="keywords" content="挖矿事件排查, Robin">
+    <meta name="description" content="第一步：获取信息
+下线服务器之后从DNS服务器、防火墙、态势感知平台等地方获取到攻击事件详细信息
+根据上传来源的IP/域名，在威胁情报平台查询确定木马类型
+获取异常进程的pid
+
+CPU占用：
+top -c -o %CPU
+ps -eo p">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,8 +24,8 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>标签: 学术 | Robin</title>
-    <link rel="icon" type="image/png" href="../../favicon.png">
+    <title>挖矿事件排查 | Robin</title>
+    <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
         body{
@@ -35,29 +42,29 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="../../libs/awesome/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="../../libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="../../libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="../../libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="../../libs/lightGallery/css/lightgallery.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/matery.css">
-<link rel="stylesheet" type="text/css" href="../../css/my.css">
-<link rel="stylesheet" type="text/css" href="../../css/dark.css" media="none" onload="if(media!='all')media='all'">
+<link rel="stylesheet" type="text/css" href="../../../../libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="../../../../libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../css/matery.css">
+<link rel="stylesheet" type="text/css" href="../../../../css/my.css">
+<link rel="stylesheet" type="text/css" href="../../../../css/dark.css" media="none" onload="if(media!='all')media='all'">
 
 
 
 
-    <link rel="stylesheet" href="../../css/post.css">
+    <link rel="stylesheet" href="../../../../css/post.css">
 
 
 
     
-        <link rel="stylesheet" type="text/css" href="../../css/reward.css">
+        <link rel="stylesheet" type="text/css" href="../../../../css/reward.css">
     
 
 
 
-    <script src="../../libs/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../../../../libs/jquery/jquery-3.6.0.min.js"></script>
 
 <!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><link rel="alternate" href="atom.xml" title="Robin" type="application/atom+xml">
@@ -69,9 +76,9 @@
     <nav id="headNav" class="bg-color nav-transparent">
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
-                <a href="../../index.html" class="waves-effect waves-light">
+                <a href="../../../../index.html" class="waves-effect waves-light">
                     
-                    <img src="../../medias/logo.png" class="logo-img" alt="LOGO">
+                    <img src="../../../../medias/logo.png" class="logo-img" alt="LOGO">
                     
                     <span class="logo-span">Robin</span>
                 </a>
@@ -83,7 +90,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../../index.html" class="waves-effect waves-light">
+    <a href="../../../../index.html" class="waves-effect waves-light">
       
       <i class="fas fa-home" style="zoom: 0.6;"></i>
       
@@ -94,7 +101,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../../tags" class="waves-effect waves-light">
+    <a href="../../../../tags" class="waves-effect waves-light">
       
       <i class="fas fa-tags" style="zoom: 0.6;"></i>
       
@@ -105,7 +112,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../../categories" class="waves-effect waves-light">
+    <a href="../../../../categories" class="waves-effect waves-light">
       
       <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
       
@@ -116,7 +123,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../../archives" class="waves-effect waves-light">
+    <a href="../../../../archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
       
@@ -127,7 +134,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../../about" class="waves-effect waves-light">
+    <a href="../../../../about" class="waves-effect waves-light">
       
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
@@ -138,7 +145,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../../comments" class="waves-effect waves-light">
+    <a href="../../../../comments" class="waves-effect waves-light">
       
       <i class="fas fa-envelope" style="zoom: 0.6;"></i>
       
@@ -149,7 +156,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="../../link" class="waves-effect waves-light">
+    <a href="../../../../link" class="waves-effect waves-light">
       
       <i class="fas fa-link" style="zoom: 0.6;"></i>
       
@@ -175,7 +182,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="../../medias/logo.png" class="logo-img circle responsive-img">
+        <img src="../../../../medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">Robin</div>
         <div class="logo-desc">
@@ -189,7 +196,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../../index.html" class="waves-effect waves-light">
+		<a href="../../../../index.html" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-home"></i>
 			
@@ -200,7 +207,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../../tags" class="waves-effect waves-light">
+		<a href="../../../../tags" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-tags"></i>
 			
@@ -211,7 +218,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../../categories" class="waves-effect waves-light">
+		<a href="../../../../categories" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-bookmark"></i>
 			
@@ -222,7 +229,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../../archives" class="waves-effect waves-light">
+		<a href="../../../../archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
 			
@@ -233,7 +240,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../../about" class="waves-effect waves-light">
+		<a href="../../../../about" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
@@ -244,7 +251,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../../comments" class="waves-effect waves-light">
+		<a href="../../../../comments" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-envelope"></i>
 			
@@ -255,7 +262,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="../../link" class="waves-effect waves-light">
+		<a href="../../../../link" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-link"></i>
 			
@@ -339,199 +346,497 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                LiuGuobin&#39;s blog
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="../../libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "烟花易逝，人情长存",
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">挖矿事件排查</h1>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                <span class="chip bg-color">日报</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                日报
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-08-16
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-08-16
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    599
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    2 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h5 id="第一步：获取信息"><a href="#第一步：获取信息" class="headerlink" title="第一步：获取信息"></a>第一步：获取信息</h5><ul>
+<li>下线服务器之后从DNS服务器、防火墙、态势感知平台等地方获取到攻击事件详细信息</li>
+<li>根据上传来源的IP/域名，在威胁情报平台查询确定木马类型</li>
+<li>获取异常进程的pid</li>
+</ul>
+<pre><code>CPU占用：
+top -c -o %CPU
+ps -eo pid,ppid,%mem,%cpu,cmd --sort=-%cpu | head -n 5
+
+内存占用：
+top -c -o %MEM
+ps -eo pid,ppid,%mem,%cpu,cmd --sort=-%mem | head -n 5
+
+网络占用：
+安装后使用nethogs或者jnettop进行查询
+
+根据进程名或字符串查询：
+pidof &quot;name&quot;
+ps -aux | grep &quot;name&quot;
+ps -ef | grep &quot;name&quot; | grep -v grep | awk &#39;&#123;print $2&#125;&#39;
+pgrep -f &quot;name&quot;
+</code></pre>
+<ul>
+<li>根据pid查询详细信息（当查询不到时有可能是/proc/pid隐藏了）</li>
+</ul>
+<pre><code>lsof -p pid
+pwdx pid
+systemctl status pid
+cat /proc/pid/maps
+ls -al /proc/pid/exe
+</code></pre>
+<ul>
+<li>根据pid查看对应线程</li>
+</ul>
+<pre><code>ps H -T -p pid
+ps -aLf pid
+pstree -agplU（推荐使用）
+</code></pre>
+<ul>
+<li>确定进程运行时间</li>
+</ul>
+<pre><code>ps -eo pid,lstart,etime,cmd | grep &lt;pid&gt;
+</code></pre>
+<ul>
+<li>比对恶意文件的创建时间</li>
+</ul>
+<pre><code>stat xxx.xx
+ls -al xxx.xx
+</code></pre>
+<ul>
+<li>样本采集分析</li>
+</ul>
+<pre><code>使用SCP/Xshell等将样本移出主机，计算哈希值后到威胁情报平台中去搜索
+certutil -hashfile 文件 MD5
+</code></pre>
+<ul>
+<li>进程查杀</li>
+</ul>
+<pre><code>【查找子进程】
+ps ajfx
+systemctl status
+
+【杀死进程】
+kill -9 pid   （这样子是杀不死子进程的！！！）
+kill -9 -pid   （杀掉进程组）
+</code></pre>
+<ul>
+<li>删除文件</li>
+</ul>
+<pre><code># 查看文件占用，解除占用后删除
+lsof xxxx.xx
+
+# 移除 i, a 属性
+chattr -ia file.sh
+# 查看是否移除成功
+lsattr file.sh
+# 移除文件
+rm -rf file.sh
+
+# 奇怪文件名无法删除，先查inode再删除
+ls -li xxxx.xx
+find ./* -inum 12327526 -delete
+find ./ -inum 12327526 -exec rm &#123;&#125; \;
+find ./* -inum 12327526 -exec rm -i &#123;&#125; \;
+find ./* -inum 12327526 -exec rm -f &#123;&#125; \;
+find ./* -inum 12327526 |xargs rm -f
+rm `find ./* -inum 12327526`
+
+# 目录挂载无法删除（Device or resource busy）
+sudo lsblk -a
+sudo umount /dev/sdb1
+rm -rf xxxx.xx
+</code></pre>
+<ul>
+<li>网页挖矿排查</li>
+</ul>
+<pre><code># 浏览器查看历史记录，定位到该事件点访问的页面
+
+# 进入虚拟机进行访问，并限制进程只允许占用一个cpu
+
+# 查看该网页的源码和网络链接调用
+
+# 将浏览器缓存文件进行检测（大多数是JS）
+
+# 清除浏览数据&gt;清除缓存文件
+
+# 解密恶意文件查看矿池地址以及连接条件
+
+# 上区块链网站溯源
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                    <span class="chip bg-color">日报</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="../../../../libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="../../../../libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="../../../../medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="../../../../medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="">
+                    <div class="card-image">
+                        
+                        
+                        <img src="../../../../medias/featureimages/9.jpg" class="responsive-img" alt="挖矿事件排查">
+                        
+                        <span class="card-title">挖矿事件排查</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="../../12/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="../../../../medias/featureimages/17.jpg" class="responsive-img" alt="安全工具">
+                        
+                        <span class="card-title">安全工具</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                    日报
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                        <span class="chip bg-color">日报</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
 </div>
 
 
 <script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "../../medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('50')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Robin<br />'
+            + '文章作者: liuGuobin<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
 </script>
 
 
-    </div>
-</div>
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="../../../../libs/codeBlock/codeBlockFuction.js"></script>
 
-<main class="content">
 
-    
 
-<div id="tags" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="../%E6%97%A5%E6%8A%A5/" title="日报: 73">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="日报" style="background-color: #F9EBEA;">日报
-                        <span class="tag-length">73</span>
-                    </span>
-                </a>
-                
-                
-                <a href="" title="学术: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            data-tagname="学术" style="background-color: #F5EEF8;">学术
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="../%E9%9A%8F%E7%AC%94/" title="随笔: 7">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="随笔" style="background-color: #D5F5E3;">随笔
-                        <span class="tag-length">7</span>
-                    </span>
-                </a>
-                
-                
-                <a href="../%E9%99%84%E5%BD%95/" title="附录: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="附录" style="background-color: #E8F8F5;">附录
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="../%E9%97%B2%E8%81%8A/" title="闲聊: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="闲聊" style="background-color: #FEF9E7;">闲聊
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="../%E8%B5%84%E6%BA%90/" title="资源: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="资源" style="background-color: #F8F9F9;">资源
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="../%E5%9B%BE%E7%89%87/" title="图片: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="图片" style="background-color: #82E0AA;">图片
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</div>
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeShrink.js"></script>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="../../../../libs/codeBlock/codeBlockFunction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="../../../../libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
 
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="学术" data-aos="fade-up">
-                <div class="card">
-                    <a href="../../2022/10/05/b-1/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="../../medias/featureimages/8.jpg" class="responsive-img" alt="深度了解HexoBlog">
-                            
-                            <span class="card-title">深度了解HexoBlog</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-05
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                liuGuobin
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            
-            <div class="article tag-post col s12 m6 l4" data-tags="学术" data-aos="fade-up">
-                <div class="card">
-                    <a href="../../2022/10/04/a/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="../../medias/featureimages/7.jpg" class="responsive-img" alt="试验">
-                            
-                            <span class="card-title">试验</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-04
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                liuGuobin
-                                
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </article>
 </main>
 
 
@@ -547,7 +852,7 @@
             
                 <span id="year">2020-2023</span>
             
-            <a href="../../about" target="_blank">liuGuobin</a>
+            <a href="../../../../about" target="_blank">liuGuobin</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
@@ -605,7 +910,7 @@
 
 
 
-    <a href="../../atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+    <a href="../../../../atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
         <i class="fas fa-rss"></i>
     </a>
 
@@ -716,7 +1021,7 @@ $(function () {
         });
     };
 
-    searchFunc('../../search.xml', 'searchInput', 'searchResult');
+    searchFunc('../../../../search.xml', 'searchInput', 'searchResult');
 });
 </script>
 
@@ -752,12 +1057,12 @@ $(function () {
 </div>
 
 
-    <script src="../../libs/materialize/materialize.min.js"></script>
-    <script src="../../libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="../../libs/aos/aos.js"></script>
-    <script src="../../libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="../../libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="../../js/matery.js"></script>
+    <script src="../../../../libs/materialize/materialize.min.js"></script>
+    <script src="../../../../libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="../../../../libs/aos/aos.js"></script>
+    <script src="../../../../libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="../../../../libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="../../../../js/matery.js"></script>
 
     
 
@@ -767,7 +1072,7 @@ $(function () {
             // 只在桌面版网页启用特效
             var windowWidth = $(window).width();
             if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="../../libs/others/sakura-half.js"><\/script>');
+                document.write('<script type="text/javascript" src="../../../../libs/others/sakura-half.js"><\/script>');
             }
         </script>
     
@@ -793,10 +1098,10 @@ $(function () {
     <!-- Baidu Push -->
 
     
-    <script src="../../libs/others/clicklove.js" async="async"></script>
+    <script src="../../../../libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="../../libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="../../../../libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -810,15 +1115,15 @@ $(function () {
     
     
     <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="../../libs/background/ribbon-refresh.min.js" async="async"></script>
+        zIndex="-1" src="../../../../libs/background/ribbon-refresh.min.js" async="async"></script>
     
 
     
-    <script type="text/javascript" src="../../libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="../../../../libs/background/ribbon-dynamic.js" async="async"></script>
     
 
     
-    <script src="../../libs/instantpage/instantpage.js" type="module"></script>
+    <script src="../../../../libs/instantpage/instantpage.js" type="module"></script>
     
 
 <!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
