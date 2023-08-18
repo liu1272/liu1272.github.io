@@ -4,6 +4,81 @@
   
     
     <entry>
+      <title>暴力破解排查</title>
+      <link href="/2023/08/17/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%8E%92%E6%9F%A5/"/>
+      <url>/2023/08/17/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%8E%92%E6%9F%A5/</url>
+      
+        <content type="html"><![CDATA[<h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><p>暴力破解一般针对<br>ssh、mysql、ftp、redis、mongodb、smtp</p><h5 id="SSH暴力破解"><a href="#SSH暴力破解" class="headerlink" title="SSH暴力破解"></a>SSH暴力破解</h5><ol><li><p>使用<code>netstat -pantu</code>查看网络状态，重点是PID（当被破解时会有大量的ESTABLISHED）</p></li><li><p>使用<code>awk -F: &#39;&#123;if($3==0) print $1&#125;&#39; /etc/passwd</code>查找特殊权限账号（默认root）</p></li><li><p>查找可以使用ssh登录的账号</p><pre><code>s=$( sudo cat /etc/shadow | grep &#39;^[^:]*:[^\*!]&#39; | awk -F: &#39;&#123;print $1&#125;&#39;);for i in $s;do cat/etc/passwd | grep -v &quot;/bin/false\|/nologin&quot;| grep $i;done | sort | uniq |awk -F: &#39;&#123;print$1&#125;&#39;</code></pre></li><li><p>查看正在连接的ssh-session</p><pre><code>who -awlast -p nowsudo netstat -tnpa | grep &#39;ESTABLISHED.*sshd&#39;pgrep -af sshdecho $SSH_CONNECTIONss | grep ssh</code></pre></li><li><p>查看所有的账号信息</p><pre><code>/var/log/auth.log（Ubuntu）/var/log/secure（centOS）列出当前账户         who am i  </code></pre></li><li><p>查看登录日志</p><pre><code># 查看日志cd /var/log# 成功登录cat /var/log/auth.log | grep &quot;Accept&quot;# 正常退出cat /var/log/auth.log | grep &quot;pam_unix(sshd:session): session closed&quot;# 密码错误cat /var/log/auth.log | grep &quot;authentication failure&quot;# 连续错误cat /var/log/auth.log | grep &quot;message repeated 2 times&quot;</code></pre></li><li><p>统计数据</p><pre><code># 登录失败的用户名及其次数grep &quot;Failed password&quot; /var/log/auth.log|perl -e &#39;while($_=&lt;&gt;)&#123; /for(.*?)from/; print&quot;$1\n&quot;;&#125;&#39;|sort|uniq -c|sort -nr# 登录失败的IP及其次数cat /var/log/auth.log | grep &quot;Failed password for&quot; | grep &quot;root&quot; | grep -Po &#39;(1\d&#123;2&#125;|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])(\.(1\d&#123;2&#125;|2[0-4]\d|25[0-5]|[1-9]\d|\d))&#123;3&#125;&#39; |sort|uniq -c|sort -nr</code></pre></li><li><p>加固防护<br>升级SSH版本至少为 7.7版本以上，7.7及以下版本存在SSH用户名枚举<br>加强口令复杂程度<br>禁止root用户登录，可以通过其他用户su到root<br>安装 <a href="https://github.com/fail2ban/fail2ban"><code>fail2ban</code></a> 来进行防御</p></li></ol><h5 id="Mysql暴力破解"><a href="#Mysql暴力破解" class="headerlink" title="Mysql暴力破解"></a>Mysql暴力破解</h5><p>Mysql 默认安装会保留登录日志，在 Ubuntu 上默认位置为 <code>/var/og/mysql/error.log</code></p><ol><li><p>查看登录失败的用户名</p><pre><code>cat /var/log/mysql/error.log | grep &quot;Access denied for user&quot; | grep &quot;using password: YES&quot; | awk -F &quot;&#39;&quot; &#39;&#123;print $2&#125;&#39; | sort | uniq -c | sort -nr</code></pre></li><li><p>查看登录失败的IP及次数</p><pre><code>cat /var/log/mysql/error.log | grep &quot;Access denied for user&quot; | grep &quot;using password: YES&quot; | awk -F &quot;&#39;&quot; &#39;&#123;print $2&#125;&#39; | sort| uniq | while read line;do echo $line;cat /var/log/mysql/error.log | grep &quot;Access denied for user&quot; | grep &quot;using password&quot; | awk -F &quot;&#39;&quot; &#39;&#123;print $4&#125;&#39; | sort | uniq -c | sort -nr; done</code></pre></li></ol><h5 id="FTP暴力破解"><a href="#FTP暴力破解" class="headerlink" title="FTP暴力破解"></a>FTP暴力破解</h5><ol><li>查看网络连接（如果有爆破会有大量的ESTABLISHED状态和TIME WAIT状态的网络连接）<pre><code>netstat -pantu</code></pre></li><li>查看最近的一个ftp会话（也可以用ftpwho查找）<pre><code>last -w -t</code></pre></li><li>查找日志<pre><code>cat /var/log/vsftpd.log   具体的位置可能不太一样，需要自己查找</code></pre></li><li>查找登录失败的账号<pre><code>cat /var/log/vsftpd.log | grep FAIL | cut -d &quot;[&quot; -f 3 | cut -d &quot;]&quot; -f 1 | sort | uniq -c | sort -nr</code></pre></li><li>查找登录失败的IP<pre><code>cat /var/log/vsftpd.log | grep FAIL | cut -d &quot;[&quot; -f 3 | cut -d &quot;]&quot; -f 1 | sort | uniq | while read line;do echo $line;cat /var/log/vsftpd.log | grep $line | cut -d &quot;:&quot; -f 7 | cut -d &#39;&quot;&#39; -f 1 | sort | uniq -c | sort -nr; done</code></pre></li><li>FTP服务加固<br>禁用 anonymous 和 ftp 两个账号<br>使用 SSL 加密 FTP<br>安装 fail2ban 来进行防御</li></ol><h5 id="Redis未授权暴力破解"><a href="#Redis未授权暴力破解" class="headerlink" title="Redis未授权暴力破解"></a>Redis未授权暴力破解</h5><p>将redis.conf 中的 requirepass 前的注释打开，并且设置一个复杂密码<br>缩减开放端口，建议仅在本机127.0.0.1使用<br>配置完成后需要重启来生效</p><ul><li>只有手动设置logfile才能保存日志，默认不设置默认的日志级别notice是不会记录登录、执行指令、退出的。</li><li>loglevel设置为 verbose或者debug才会记录登录主机</li><li>执行的指令<code>info，set</code>等即使 loglevel是 debug 级别也不会记录，但是会记录我们设置了多少个key， 具体key名称以及内容不会记录</li></ul><p><strong>虽然如此，但是失败成功的登录日志都是一样的……</strong><br><strong>没办法区分是不是攻击行为，只能问有没有人那个时候登过了</strong></p><h5 id="MongoDB暴力破解"><a href="#MongoDB暴力破解" class="headerlink" title="MongoDB暴力破解"></a>MongoDB暴力破解</h5><p>默认配置文件位置为 /etc/mongodb.conf<br>默认的的日志位置为 /var/og/mongodb/mongodb.log<br>打开verbose后能看到大量的failed事件<br>在/var/log/mongodb/mongodb.log查看</p><ol><li>登录失败的账户<pre><code>cat /var/log/mongodb/mongodb.log | grep -v &quot;UserNotFound&quot;|grep failed | awk -F &quot; &quot; &#39;&#123;print $9&#125;&#39; | sort|uniq -c|sort -nr</code></pre></li><li>登录所有账户失败的IP及次数<pre><code>cat /var/log/mongodb/mongodb.log | grep -v &quot;UserNotFound&quot;|grep failed | awk -F &quot; &quot; &#39;&#123;print $9&#125;&#39; |sort | uniq | while read line;do echo $line;cat /var/log/mongodb/mongodb.log |grep -v &quot;UserNotFound&quot; | grep failed | grep $line | awk -F &quot; &quot; &#39;&#123;print $14&#125;&#39; | cut -d &quot;:&quot; -f 1 | sort | uniq -c | sort -nr; done</code></pre></li><li>不存在账户的爆破事件<pre><code>cat /var/log/mongodb/mongodb.log | grep &quot;UserNotFound&quot;|grep failed | awk -F &quot; &quot; &#39;&#123;print $9&#125;&#39; |sort | uniq | while read line;do echo $line;cat /var/log/mongodb/mongodb.log |grep &quot;UserNotFound&quot; | grep failed | grep $line | awk -F &quot; &quot; &#39;&#123;print $14&#125;&#39; | cut -d &quot;:&quot; -f 1 | sort | uniq -c | sort -nr; done</code></pre></li></ol><h5 id="SMTP暴力破解"><a href="#SMTP暴力破解" class="headerlink" title="SMTP暴力破解"></a>SMTP暴力破解</h5><p>SMTP负责发，POP3、IMAP负责收，POP3协议客户端收到邮件，服务器端就会将其删除，除非有特殊的配置。<br>IMAP则弥补了这一缺陷，客户端该收收，服务端还给你保存着，同时你在客户端的各种配置操作都会在服务器上进行同步</p><pre><code>验证失败的账户IPcat /var/log/mail.log | grep &quot;authentication failed&quot; | grep -Po &#39;(1\d&#123;2&#125;|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])(\.(1\d&#123;2&#125;|2[0-4]\d|25[0-5]|[1-9]\d|\d))&#123;3&#125;&#39; |sort|uniq -c|sort -nr</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>勒索病毒排查</title>
+      <link href="/2023/08/17/%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92%E6%8E%92%E6%9F%A5/"/>
+      <url>/2023/08/17/%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92%E6%8E%92%E6%9F%A5/</url>
+      
+        <content type="html"><![CDATA[<h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>正常情况下遇到勒索病毒就两种方法，要么找办法解开要么给钱。</p><h5 id="处置方法"><a href="#处置方法" class="headerlink" title="处置方法"></a>处置方法</h5><ol><li>查找勒索病毒特征，收集相关信息</li><li>深信服千里目实验室公众号直接回复病毒关键字</li><li>安全响应及EDR知识赋能平台</li><li>Freebuf</li><li>淘宝、闲鱼</li></ol><h5 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h5><p><strong>有解密工具就用解密工具<br>无解密工具就交钱</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>远控后门排查</title>
+      <link href="/2023/08/17/%E8%BF%9C%E6%8E%A7%E5%90%8E%E9%97%A8%E6%8E%92%E6%9F%A5/"/>
+      <url>/2023/08/17/%E8%BF%9C%E6%8E%A7%E5%90%8E%E9%97%A8%E6%8E%92%E6%9F%A5/</url>
+      
+        <content type="html"><![CDATA[<h5 id="获取事件告警信息"><a href="#获取事件告警信息" class="headerlink" title="获取事件告警信息"></a>获取事件告警信息</h5><p>监控EDR、态势感知、防火墙等平台查看威胁告警以及日志。</p><h5 id="定位后门文件"><a href="#定位后门文件" class="headerlink" title="定位后门文件"></a>定位后门文件</h5><pre><code>根据告警信息定位后门文件位置，查找进程pidlsof | grep xxxx.xxlsof /root/xxxx.xxfuser /root/xxxx.xx</code></pre><h5 id="查看外连事件详情"><a href="#查看外连事件详情" class="headerlink" title="查看外连事件详情"></a>查看外连事件详情</h5><pre><code>根据五元组来查找通信的端口ip对应的pidnetstat -pantu | grep 114.114.114.114netstat -pantu | grep 65533lsof -i:65533netstat -pantu | grep 65533lsof -i:65533</code></pre><h5 id="查找进程信息"><a href="#查找进程信息" class="headerlink" title="查找进程信息"></a>查找进程信息</h5><pre><code>查找进程相关文件lsof -p 1234   （需要root权限）pwdx获取pid程序详细信息lsof -p pidpwdx pidsystemctl status pidcat /proc/pid/mapsls -al /proc/pid/exe</code></pre><h5 id="根据pid查看对应线程"><a href="#根据pid查看对应线程" class="headerlink" title="根据pid查看对应线程"></a>根据pid查看对应线程</h5><pre><code>ps H -T -p pidps -aLf pidpstree -agplU（推荐使用）</code></pre><h5 id="确定进程运行时间"><a href="#确定进程运行时间" class="headerlink" title="确定进程运行时间"></a>确定进程运行时间</h5><pre><code>ps -eo pid,lstart,etime,cmd | grep &lt;pid&gt;</code></pre><h5 id="比对恶意文件的创建时间"><a href="#比对恶意文件的创建时间" class="headerlink" title="比对恶意文件的创建时间"></a>比对恶意文件的创建时间</h5><pre><code>stat xxx.xxls -al xxx.xx</code></pre><h5 id="样本采集分析"><a href="#样本采集分析" class="headerlink" title="样本采集分析"></a>样本采集分析</h5><pre><code>使用SCP/Xshell等将样本移出主机，计算哈希值后到威胁情报平台中去搜索certutil -hashfile 文件 MD5</code></pre><h5 id="进程查杀"><a href="#进程查杀" class="headerlink" title="进程查杀"></a>进程查杀</h5><pre><code>【查找子进程】ps ajfxsystemctl status【杀死进程】kill -9 pid   （这样子是杀不死子进程的！！！）kill -9 -pid   （杀掉进程组）</code></pre><h5 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h5><pre><code># 查看文件占用，解除占用后删除lsof xxxx.xx# 移除 i, a 属性chattr -ia file.sh# 查看是否移除成功lsattr file.sh# 移除文件rm -rf file.sh# 奇怪文件名无法删除，先查inode再删除ls -li xxxx.xxfind ./* -inum 12327526 -deletefind ./ -inum 12327526 -exec rm &#123;&#125; \;find ./* -inum 12327526 -exec rm -i &#123;&#125; \;find ./* -inum 12327526 -exec rm -f &#123;&#125; \;find ./* -inum 12327526 |xargs rm -frm `find ./* -inum 12327526`# 目录挂载无法删除（Device or resource busy）sudo lsblk -asudo umount /dev/sdb1rm -rf xxxx.xx</code></pre><h5 id="补充：守护进程"><a href="#补充：守护进程" class="headerlink" title="补充：守护进程"></a>补充：守护进程</h5><pre><code># 守护进程是什么？其他进程都是在用户登录或运行程序时创建，在运行结束或用户注销时终止，但系统服务进程（守护进程）不受用户登录注销的影响，它们一直在运行着。# 守护进程的本质是什么？（1）守护进程的本职就是孤儿进程，该进程自成会话，自成进程组，一般守护进程与终端无关；（即：pid=sid=gid）（2）后台进程受用户登录注销的影响，而守护进程不受用户登录和注销的影响。但是它们都受关机的影响。# 守护进程有什么特点？1. 没有控制终端，终端名设置为？号2. 父进程不是用户创建的进程，一般由init进程或者systemd（pid=1）的进程为父进程3. 进程名字通常以字母 d 结束4. 工作目录为/（根），主要是为了防止占用磁盘导致无法卸载磁盘5. 以kthreadd内核进程创建的守护进程以kthreadd为父进程# 守护进程如何设置？1. 执行一个fork()，之后父进程退出，子进程继续执行。2. 子进程调用setsid()开启一个新回话并释放它与控制终端之间的所有关联关系。3. 在setsid()调用之后执行第二个fork()，让父进程退出并让孙进程继续执行。确保了子进程不会成为会话组长。（根据System V中获取终端的规则，进程永远不会重新请求一个控制终端。多一个fork()调用不会带来任何坏处。）4. 使用  umask(0);  清除进程的umask以确保当daemon创建文件和目录时拥有所需的权限。5. 修改进程的当前工作目录，通常会改为根目录（/）。6. 关闭daemon从其父进程继承而来的所有打开着的文件描述符。# 守护进程如何删除？1. 首先ps axj | grep 守护进程名字，找到相应的守护进程，然后使用kill -9 守护进程名杀掉；2. 利用ps -ef命令查找相应的守护进程，再用kill -9命令将其杀死；3. 创建shell脚本对进程的启动、关闭、重启进行自动管理。注：kill -9 -pid   （杀掉进程组）</code></pre><h5 id="补充：screen的原理"><a href="#补充：screen的原理" class="headerlink" title="补充：screen的原理"></a>补充：screen的原理</h5><ul><li>当用户启动Screen时，它会创建一个守护进程作为后台进程，并与用户终端会话（称为控制终端）分离。</li><li>控制终端不再直接处理用户输入和输出，而是由Screen守护进程负责接收和处理。</li><li>守护进程通过与Unix域套接字进行通信，与控制终端保持连接。</li><li>用户在控制终端中输入的命令会被发送到守护进程，并由守护进程解析和执行。</li><li>守护进程还负责从虚拟终端读取输出内容，并将其发送回控制终端进行显示。</li></ul><p>通过这种方式，Screen实现了在控制终端与守护进程之间的交互，并通过守护进程来管理多个虚拟终端、处理窗口切换、保存会话状态等功能。<br>需要注意的是，虽然Screen的守护进程在后台运行，但用户仍然可以通过重新连接到控制终端来恢复与之前会话的交互，即使之前的SSH连接断开或终端关闭。这是Screen的一个重要特性，允许用户在断开连接后恢复他们的工作环境。</p><h5 id="补充：恢复守护进程会话的交互"><a href="#补充：恢复守护进程会话的交互" class="headerlink" title="补充：恢复守护进程会话的交互"></a>补充：恢复守护进程会话的交互</h5><p>可以使用<code>nohup</code>命令启动一个守护进程，并将输出重定向到文件中，例如：</p><pre class="line-numbers language-shell"><code class="language-shell">nohup ./your_daemon &<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>通过这种方式启动的守护进程不会因为用户退出终端而停止运行。</p><p>当用户重新连接到控制终端时，可以使用<code>jobs</code>命令查看守护进程的状态，并使用<code>fg</code>命令将其调至前台，恢复与之前会话的交互。例如：</p><pre class="line-numbers language-shell"><code class="language-shell">jobsfg %job_id<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>其中，<code>job_id</code>是守护进程的作业号，可以在<code>jobs</code>命令的输出中找到。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>挖矿事件排查</title>
       <link href="/2023/08/16/%E6%8C%96%E7%9F%BF%E4%BA%8B%E4%BB%B6%E6%8E%92%E6%9F%A5/"/>
       <url>/2023/08/16/%E6%8C%96%E7%9F%BF%E4%BA%8B%E4%BB%B6%E6%8E%92%E6%9F%A5/</url>
