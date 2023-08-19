@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-08-18T07:53:19.444Z</updated>
+  <updated>2023-08-19T09:16:25.153Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -17,11 +17,63 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>善后处理</title>
+    <link href="https://liu1272.github.io/2023/08/18/%E5%96%84%E5%90%8E%E5%A4%84%E7%90%86/"/>
+    <id>https://liu1272.github.io/2023/08/18/%E5%96%84%E5%90%8E%E5%A4%84%E7%90%86/</id>
+    <published>2023-08-18T02:34:00.000Z</published>
+    <updated>2023-08-19T09:16:25.153Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="杀死进程"><a href="#杀死进程" class="headerlink" title="杀死进程"></a>杀死进程</h5><pre><code>top d1   //运行top命令后，键入大写字母P按cpu排序ps aux | sort -k4nr   //运行top命令后，键入大写字母M按内存排序ls -la /proc/$pid/exe   //查找进程文件strace -tt  -T -e  trace=all  -p $pid   //跟踪进程运行lsof -p $pid   //进程打开的文件netstat -anltp | grep $pid   //查看进程端口情况</code></pre><h5 id="查看账号"><a href="#查看账号" class="headerlink" title="查看账号"></a>查看账号</h5><pre><code>awk -F &quot;:&quot; &#39;$3==0&#123;print $1&#125;&#39; /etc/passwd   //查看特权用户awk &#39;/\$1|\$6/&#123;print $1&#125;&#39; /etc/shadow   //可远程登录的账号信息cat /etc/sudoers | grep -v &quot;^#\|^$&quot; | grep &quot;ALL=(ALL)&quot;   //sudo的账号w   //当前用户及其行为lastlog   //所有用户最后登录时间last   //所有用户关键信息grep &quot;Accepted &quot; /var/log/secure* | awk &#39;&#123;print $1,$2,$3,$9,$11&#125;&#39;   //成功登录日期、用户名及ip//查看试图爆破主机的ipgrep refused /var/log/secure* | awk &#123;&#39;print $9&#39;&#125; | sort | uniq -c |sort -nr | moregrep &quot;Failed password&quot; /var/log/secure* | grep -E -o &quot;(([0-9]&#123;1,3&#125;)\.([0-9]&#123;1,3&#125;)\.([0-9]&#123;1,3&#125;)\.([0-9]&#123;1,3&#125;))&quot; | uniq -c grep &quot;Failed password for root&quot; /var/log/secure | awk &#39;&#123;print $11&#125;&#39; | sort   //查看爆破root的ipgrep &quot;Failed password&quot; /var/log/secure | awk &#123;&#39;print $9&#39;&#125; | sort | uniq -c | sort -nr   //查看爆破的用户名字典</code></pre><h5 id="锁定目录"><a href="#锁定目录" class="headerlink" title="锁定目录"></a>锁定目录</h5><pre><code>chmod 000 /usr/bin/风险目录chattr +i /usr/binchattr +i /binchattr +i /tmp</code></pre><h5 id="检查异常文件"><a href="#检查异常文件" class="headerlink" title="检查异常文件"></a>检查异常文件</h5><pre><code>【检查特权文件】find / -perm /6000find / -perm /4000find / -perm /2000【检查corn文件】/var/spool/cron/*/etc/crontab /etc/cron.d/* /etc/cron.daily/*/etc/cron.hourly/* /etc/cron.monthly/* /etc/cron.weekly/ /etc/anacrontab     /var/spool/anacron/*【最近被修改的系统文件】find /etc/ /usr/bin/ /usr/sbin/ /bin/ /usr/local/bin/  -type f -mtime -T | xargs ls -la【被替换的命令/动态链接库劫持】echo $LD_PRELOADecho $LD_LIBRARY_PATH注：基本上上面两个命令回显是空白的，如果有回显大概率是被劫持ls -alt /usr/bin /usr/sbin /bin /usr/local/binrpm -Va&gt;rpm.log</code></pre><h5 id="删除计划任务等"><a href="#删除计划任务等" class="headerlink" title="删除计划任务等"></a>删除计划任务等</h5><pre><code>rm -f /etc/init.d/风险目录rm -f /etc/rc#.d/木马连接文件cat /etc/rc.local   //开机启动项chkconfig --list   //开机启动项注意：建议使用vim查看，cat有可能显示不全</code></pre><h5 id="rootkit查杀"><a href="#rootkit查杀" class="headerlink" title="rootkit查杀"></a>rootkit查杀</h5><p>rootkit主要有两种类型：文件级别和内核级别。<br>文件级别的rootkit: 一般是通过程序漏洞或者系统漏洞进入系统后，通过修改系统的重要文件来达到隐藏自己的目的。<br>内核级rootkit: 是比文件级rootkit更高级的一种入侵方式，它可以使攻击者获得对系统底层的完全控制权，此时攻击者可以修改系统内核，进而截获运行程序向内核提交的命令，并将其重定向到入侵者所选择的程序并运行此程序。内核级rootkit主要依附在内核上，它并不对系统文件做任何修改。以防范为主。<br><strong>查杀工具：</strong><br><a href="http://www.chkrootkit.org/"> chkrootkit </a>、<a href="http://rkhunter.sourceforge.net/"> rkhunter </a>、<a href="http://www.clamav.net/download.html"> ClamAV </a></p><h5 id="其它检查方面"><a href="#其它检查方面" class="headerlink" title="其它检查方面"></a>其它检查方面</h5><ul><li>BASH内置命令<pre><code>compgen -b</code></pre></li><li>BASH函数<pre><code>compgen -funset -f functionName</code></pre></li><li>环境变量<pre><code>envsetexportcat /proc/$PID/environdeclare</code></pre></li><li>SSH key</li><li>SSH config文件<pre><code>/etc/ssh/ssh_config 和 ~/.ssh/config将LocalCommand 和 ProxyCommand 参数封禁</code></pre></li><li>alias命令替换<pre><code>alias 命令的功能是为命令设置别名alert   //检查是否存在替换unalias alert   //删除别名</code></pre></li><li>DNS配置文件<pre><code>/etc/resolv.conf</code></pre></li><li>禁止ptrace_scope操作<pre><code>cat /proc/sys/kernel/yama/ptrace_scope</code></pre></li><li>ASLR<pre><code>cat /proc/sys/kernel/randomize_va_space   //调成2减缓溢出攻击</code></pre></li><li>capabilities<pre><code>getcap -r / 2&gt;/dev/null   //查看对权限的默认情况setcap   //重新设置权限</code></pre></li><li> iptables端口复用<pre><code>sudo iptables -L   //查看默认情况</code></pre></li><li>密码填充检查<pre><code>cat /etc/passwd | cut -d &quot;:&quot; -f 2 | grep -v &quot;x   //默认情况应该是空的</code></pre></li><li>服务检查<pre><code>sudo systemctl list-units --type=service --state=running   //正在运行的服务systemctl status xxx.service   //查看单一服务进程状态systemctl cat xxx.service   //获取服务配置文件systemctl cat </code></pre></li><li>MOTD<pre><code>是Linux中发送问候消息的功能，一般在我们登录服务器后显示每次任意用户登录时都会触发 motd 服务的功能,这个功能的脚本几乎都是使用 root 权限来启动的，所以很适合用来做后门</code></pre></li><li>进程启动文件<pre><code>恶意程序执行后，可能会删除本地文件，但是该文件已经被进程加载，可以通过遍历这种情况来排查恶意程序sudo lsof | grep deletedsudo ls -al /proc/*/exe 2&gt;/dev/null | grep deleted   //建议使用这一个命令</code></pre></li><li>检查系统及应用程序配置文件</li><li>sudo配置文件检查<pre><code>/etc/sudo.conf/etc/sudoers/etc/sudoers.d/</code></pre></li><li>第三方GPG密钥检查<br>```<br>sudo apt-key list<br>具体存储⽬录为 /etc/apt/trusted.gpg.d/</li></ul><p>gpg –quiet –show-keys /etc/pki/rpm-gpg/*<br>具体存储⽬录为 /etc/pki/rpm-gpg/<br>```</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;杀死进程&quot;&gt;&lt;a href=&quot;#杀死进程&quot; class=&quot;headerlink&quot; title=&quot;杀死进程&quot;&gt;&lt;/a&gt;杀死进程&lt;/h5&gt;&lt;pre&gt;&lt;code&gt;top d1   //运行top命令后，键入大写字母P按cpu排序
+
+ps aux | sort -k4nr</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常见问题处置方案</title>
+    <link href="https://liu1272.github.io/2023/08/17/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%A4%84%E7%BD%AE%E6%96%B9%E6%A1%88/"/>
+    <id>https://liu1272.github.io/2023/08/17/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%A4%84%E7%BD%AE%E6%96%B9%E6%A1%88/</id>
+    <published>2023-08-17T08:08:00.000Z</published>
+    <updated>2023-08-19T09:16:18.723Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="文件无法删除"><a href="#文件无法删除" class="headerlink" title="文件无法删除"></a>文件无法删除</h5><p><strong>被进程占用：</strong></p><pre><code>lsof xxxx.xx</code></pre><p><strong>文件存在隐藏属性：</strong></p><pre><code>sattr xxxx.xxchattr -a xxxx.xxchattr -i xxxx.xx</code></pre><p><strong>上层文件存在SBIT权限：</strong><br>这种情况只存在于非 root 权限去删除其他用户创建的目录的情况，即使文件权限是 777 也无法进行删除。<br>当目录被设置了粘滞位权限以后，即便用户对该目录有写入权限，也不能删除该目录中其他用户的文件数据，而是只有该文件的所有者和root用户才有权将其删除。<br>这种办法可以保持一种动态的平衡：允许各用户在目录中任意写入、删除数据，但是禁止随意删除其他用户的数据。<br>需要注意的是，粘滞位权限只能针对目录设置，对于文件无效。<br>设置了粘滞位权限的目录，使用ls命令查看其属性时，其他用户权限处的“x”将变为“t”。<br>粘滞位权限都是针对其他用户设置，使用chmod命令设置目录权限时，“o+t”、“o-t”权限模式可分别用于添加、移除粘滞位权限。</p><h5 id="netstat-pantu-不显示-pid-而显示"><a href="#netstat-pantu-不显示-pid-而显示" class="headerlink" title="netstat -pantu 不显示 pid  而显示 -"></a>netstat -pantu 不显示 pid  而显示 -</h5><p>可能是使用了<code>mkdir .hidden  或者  mount -o bind .hidden /proc/PID</code>来隐藏</p><pre><code>cat /proc/$$/mountinfo   //查询挂载信息umount /proc/PID   //取消挂载</code></pre><h5 id="ps和top看不到恶意进程"><a href="#ps和top看不到恶意进程" class="headerlink" title="ps和top看不到恶意进程"></a>ps和top看不到恶意进程</h5><ol><li>挂载被隐藏（看上一个的操作）</li><li>命令被替换（使用busybox进行检修）</li><li>LD_PRELOAD等方法共享库劫持（使用busybox进行检修）</li></ol><h5 id="快速查找文件"><a href="#快速查找文件" class="headerlink" title="快速查找文件"></a>快速查找文件</h5><p>【which】<br>从环境变量查找系统命令的具体文件位置<br>【whereis】<br>从/usr目录快速查找文件<br>【locate】<br>从locatedb数据库查找文件路径<br>【find】<br>强大的搜索命令<br><code>find &lt;检索路径&gt; &lt;选项&gt; &lt;搜索内容&gt;</code><br><a href="https://cloud.tencent.com/developer/article/1348438">具体使用方法</a></p><h5 id="确定系统信息"><a href="#确定系统信息" class="headerlink" title="确定系统信息"></a>确定系统信息</h5><pre><code>cat /etc/issue   //系统版本uname -mgetconf LONG_BIT   //查看系统位数cat /proc/version   //查看内核版本uname -a</code></pre><h5 id="系统完整性检测"><a href="#系统完整性检测" class="headerlink" title="系统完整性检测"></a>系统完整性检测</h5><pre><code>rpm -Va   //Centosapt install debsums   //Ubuntu、Debiandebsums --all --changed</code></pre><h5 id="系统文件监控工具"><a href="#系统文件监控工具" class="headerlink" title="系统文件监控工具"></a>系统文件监控工具</h5><pre><code>AIDE\inotify\tripwire</code></pre><h5 id="查看glibc版本"><a href="#查看glibc版本" class="headerlink" title="查看glibc版本"></a>查看glibc版本</h5><pre><code>ldd --version</code></pre><h5 id="误删文件恢复"><a href="#误删文件恢复" class="headerlink" title="误删文件恢复"></a>误删文件恢复</h5><pre><code>如果正在进行读写操作：lsof   //查找进程文件恢复即可mount   //查看所有挂载点umount   //删除挂载点lsblk -f   //查看所有设备的挂载情况df -T 路径   //可查看该路径的所属挂载点、所在分区、所在分区的文件系统类型cat /proc/filesystems   //查看文件系统的类型常用恢复工具有：Extundelete、Debugfs、R-Linux、Ext3grep、Ext4magic</code></pre><h5 id="批量检索文件并打印信息"><a href="#批量检索文件并打印信息" class="headerlink" title="批量检索文件并打印信息"></a>批量检索文件并打印信息</h5><pre><code>find / -name &quot;内容&quot; | while read line; do if [ -f $line ]; then ls -al $line; elif [ -d $line ]; then ls -al ../ | grep $line; fi; done</code></pre><h5 id="拷贝取证"><a href="#拷贝取证" class="headerlink" title="拷贝取证"></a>拷贝取证</h5><ol><li>使用虚拟化平台存储快照</li><li>打包整个系统</li><li>全盘拷贝（推荐 clonezilla）</li><li>进程拷贝（推荐 CRIU）</li><li>组合运用（冻结进程 + 全盘拷贝 + 恢复进程）</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h5 id=&quot;文件无法删除&quot;&gt;&lt;a href=&quot;#文件无法删除&quot; class=&quot;headerlink&quot; title=&quot;文件无法删除&quot;&gt;&lt;/a&gt;文件无法删除&lt;/h5&gt;&lt;p&gt;&lt;strong&gt;被进程占用：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;lsof xxxx.xx
+&lt;/</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>暴力破解排查</title>
-    <link href="https://liu1272.github.io/2023/08/17/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%8E%92%E6%9F%A5/"/>
-    <id>https://liu1272.github.io/2023/08/17/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%8E%92%E6%9F%A5/</id>
-    <published>2023-08-17T07:40:00.000Z</published>
-    <updated>2023-08-18T07:53:19.444Z</updated>
+    <link href="https://liu1272.github.io/2023/08/16/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%8E%92%E6%9F%A5/"/>
+    <id>https://liu1272.github.io/2023/08/16/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%8E%92%E6%9F%A5/</id>
+    <published>2023-08-16T07:40:00.000Z</published>
+    <updated>2023-08-19T09:16:10.557Z</updated>
     
     <content type="html"><![CDATA[<h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><p>暴力破解一般针对<br>ssh、mysql、ftp、redis、mongodb、smtp</p><h5 id="SSH暴力破解"><a href="#SSH暴力破解" class="headerlink" title="SSH暴力破解"></a>SSH暴力破解</h5><ol><li><p>使用<code>netstat -pantu</code>查看网络状态，重点是PID（当被破解时会有大量的ESTABLISHED）</p></li><li><p>使用<code>awk -F: &#39;&#123;if($3==0) print $1&#125;&#39; /etc/passwd</code>查找特殊权限账号（默认root）</p></li><li><p>查找可以使用ssh登录的账号</p><pre><code>s=$( sudo cat /etc/shadow | grep &#39;^[^:]*:[^\*!]&#39; | awk -F: &#39;&#123;print $1&#125;&#39;);for i in $s;do cat/etc/passwd | grep -v &quot;/bin/false\|/nologin&quot;| grep $i;done | sort | uniq |awk -F: &#39;&#123;print$1&#125;&#39;</code></pre></li><li><p>查看正在连接的ssh-session</p><pre><code>who -awlast -p nowsudo netstat -tnpa | grep &#39;ESTABLISHED.*sshd&#39;pgrep -af sshdecho $SSH_CONNECTIONss | grep ssh</code></pre></li><li><p>查看所有的账号信息</p><pre><code>/var/log/auth.log（Ubuntu）/var/log/secure（centOS）列出当前账户         who am i  </code></pre></li><li><p>查看登录日志</p><pre><code># 查看日志cd /var/log# 成功登录cat /var/log/auth.log | grep &quot;Accept&quot;# 正常退出cat /var/log/auth.log | grep &quot;pam_unix(sshd:session): session closed&quot;# 密码错误cat /var/log/auth.log | grep &quot;authentication failure&quot;# 连续错误cat /var/log/auth.log | grep &quot;message repeated 2 times&quot;</code></pre></li><li><p>统计数据</p><pre><code># 登录失败的用户名及其次数grep &quot;Failed password&quot; /var/log/auth.log|perl -e &#39;while($_=&lt;&gt;)&#123; /for(.*?)from/; print&quot;$1\n&quot;;&#125;&#39;|sort|uniq -c|sort -nr# 登录失败的IP及其次数cat /var/log/auth.log | grep &quot;Failed password for&quot; | grep &quot;root&quot; | grep -Po &#39;(1\d&#123;2&#125;|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])(\.(1\d&#123;2&#125;|2[0-4]\d|25[0-5]|[1-9]\d|\d))&#123;3&#125;&#39; |sort|uniq -c|sort -nr</code></pre></li><li><p>加固防护<br>升级SSH版本至少为 7.7版本以上，7.7及以下版本存在SSH用户名枚举<br>加强口令复杂程度<br>禁止root用户登录，可以通过其他用户su到root<br>安装 <a href="https://github.com/fail2ban/fail2ban"><code>fail2ban</code></a> 来进行防御</p></li></ol><h5 id="Mysql暴力破解"><a href="#Mysql暴力破解" class="headerlink" title="Mysql暴力破解"></a>Mysql暴力破解</h5><p>Mysql 默认安装会保留登录日志，在 Ubuntu 上默认位置为 <code>/var/og/mysql/error.log</code></p><ol><li><p>查看登录失败的用户名</p><pre><code>cat /var/log/mysql/error.log | grep &quot;Access denied for user&quot; | grep &quot;using password: YES&quot; | awk -F &quot;&#39;&quot; &#39;&#123;print $2&#125;&#39; | sort | uniq -c | sort -nr</code></pre></li><li><p>查看登录失败的IP及次数</p><pre><code>cat /var/log/mysql/error.log | grep &quot;Access denied for user&quot; | grep &quot;using password: YES&quot; | awk -F &quot;&#39;&quot; &#39;&#123;print $2&#125;&#39; | sort| uniq | while read line;do echo $line;cat /var/log/mysql/error.log | grep &quot;Access denied for user&quot; | grep &quot;using password&quot; | awk -F &quot;&#39;&quot; &#39;&#123;print $4&#125;&#39; | sort | uniq -c | sort -nr; done</code></pre></li></ol><h5 id="FTP暴力破解"><a href="#FTP暴力破解" class="headerlink" title="FTP暴力破解"></a>FTP暴力破解</h5><ol><li>查看网络连接（如果有爆破会有大量的ESTABLISHED状态和TIME WAIT状态的网络连接）<pre><code>netstat -pantu</code></pre></li><li>查看最近的一个ftp会话（也可以用ftpwho查找）<pre><code>last -w -t</code></pre></li><li>查找日志<pre><code>cat /var/log/vsftpd.log   具体的位置可能不太一样，需要自己查找</code></pre></li><li>查找登录失败的账号<pre><code>cat /var/log/vsftpd.log | grep FAIL | cut -d &quot;[&quot; -f 3 | cut -d &quot;]&quot; -f 1 | sort | uniq -c | sort -nr</code></pre></li><li>查找登录失败的IP<pre><code>cat /var/log/vsftpd.log | grep FAIL | cut -d &quot;[&quot; -f 3 | cut -d &quot;]&quot; -f 1 | sort | uniq | while read line;do echo $line;cat /var/log/vsftpd.log | grep $line | cut -d &quot;:&quot; -f 7 | cut -d &#39;&quot;&#39; -f 1 | sort | uniq -c | sort -nr; done</code></pre></li><li>FTP服务加固<br>禁用 anonymous 和 ftp 两个账号<br>使用 SSL 加密 FTP<br>安装 fail2ban 来进行防御</li></ol><h5 id="Redis未授权暴力破解"><a href="#Redis未授权暴力破解" class="headerlink" title="Redis未授权暴力破解"></a>Redis未授权暴力破解</h5><p>将redis.conf 中的 requirepass 前的注释打开，并且设置一个复杂密码<br>缩减开放端口，建议仅在本机127.0.0.1使用<br>配置完成后需要重启来生效</p><ul><li>只有手动设置logfile才能保存日志，默认不设置默认的日志级别notice是不会记录登录、执行指令、退出的。</li><li>loglevel设置为 verbose或者debug才会记录登录主机</li><li>执行的指令<code>info，set</code>等即使 loglevel是 debug 级别也不会记录，但是会记录我们设置了多少个key， 具体key名称以及内容不会记录</li></ul><p><strong>虽然如此，但是失败成功的登录日志都是一样的……</strong><br><strong>没办法区分是不是攻击行为，只能问有没有人那个时候登过了</strong></p><h5 id="MongoDB暴力破解"><a href="#MongoDB暴力破解" class="headerlink" title="MongoDB暴力破解"></a>MongoDB暴力破解</h5><p>默认配置文件位置为 /etc/mongodb.conf<br>默认的的日志位置为 /var/og/mongodb/mongodb.log<br>打开verbose后能看到大量的failed事件<br>在/var/log/mongodb/mongodb.log查看</p><ol><li>登录失败的账户<pre><code>cat /var/log/mongodb/mongodb.log | grep -v &quot;UserNotFound&quot;|grep failed | awk -F &quot; &quot; &#39;&#123;print $9&#125;&#39; | sort|uniq -c|sort -nr</code></pre></li><li>登录所有账户失败的IP及次数<pre><code>cat /var/log/mongodb/mongodb.log | grep -v &quot;UserNotFound&quot;|grep failed | awk -F &quot; &quot; &#39;&#123;print $9&#125;&#39; |sort | uniq | while read line;do echo $line;cat /var/log/mongodb/mongodb.log |grep -v &quot;UserNotFound&quot; | grep failed | grep $line | awk -F &quot; &quot; &#39;&#123;print $14&#125;&#39; | cut -d &quot;:&quot; -f 1 | sort | uniq -c | sort -nr; done</code></pre></li><li>不存在账户的爆破事件<pre><code>cat /var/log/mongodb/mongodb.log | grep &quot;UserNotFound&quot;|grep failed | awk -F &quot; &quot; &#39;&#123;print $9&#125;&#39; |sort | uniq | while read line;do echo $line;cat /var/log/mongodb/mongodb.log |grep &quot;UserNotFound&quot; | grep failed | grep $line | awk -F &quot; &quot; &#39;&#123;print $14&#125;&#39; | cut -d &quot;:&quot; -f 1 | sort | uniq -c | sort -nr; done</code></pre></li></ol><h5 id="SMTP暴力破解"><a href="#SMTP暴力破解" class="headerlink" title="SMTP暴力破解"></a>SMTP暴力破解</h5><p>SMTP负责发，POP3、IMAP负责收，POP3协议客户端收到邮件，服务器端就会将其删除，除非有特殊的配置。<br>IMAP则弥补了这一缺陷，客户端该收收，服务端还给你保存着，同时你在客户端的各种配置操作都会在服务器上进行同步</p><pre><code>验证失败的账户IPcat /var/log/mail.log | grep &quot;authentication failed&quot; | grep -Po &#39;(1\d&#123;2&#125;|2[0-4]\d|25[0-5]|[1-9]\d|[1-9])(\.(1\d&#123;2&#125;|2[0-4]\d|25[0-5]|[1-9]\d|\d))&#123;3&#125;&#39; |sort|uniq -c|sort -nr</code></pre>]]></content>
     
@@ -43,10 +95,10 @@
   
   <entry>
     <title>勒索病毒排查</title>
-    <link href="https://liu1272.github.io/2023/08/17/%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92%E6%8E%92%E6%9F%A5/"/>
-    <id>https://liu1272.github.io/2023/08/17/%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92%E6%8E%92%E6%9F%A5/</id>
-    <published>2023-08-17T07:37:00.000Z</published>
-    <updated>2023-08-17T07:40:12.131Z</updated>
+    <link href="https://liu1272.github.io/2023/08/15/%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92%E6%8E%92%E6%9F%A5/"/>
+    <id>https://liu1272.github.io/2023/08/15/%E5%8B%92%E7%B4%A2%E7%97%85%E6%AF%92%E6%8E%92%E6%9F%A5/</id>
+    <published>2023-08-15T07:37:00.000Z</published>
+    <updated>2023-08-19T09:16:04.607Z</updated>
     
     <content type="html"><![CDATA[<h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>正常情况下遇到勒索病毒就两种方法，要么找办法解开要么给钱。</p><h5 id="处置方法"><a href="#处置方法" class="headerlink" title="处置方法"></a>处置方法</h5><ol><li>查找勒索病毒特征，收集相关信息</li><li>深信服千里目实验室公众号直接回复病毒关键字</li><li>安全响应及EDR知识赋能平台</li><li>Freebuf</li><li>淘宝、闲鱼</li></ol><h5 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h5><p><strong>有解密工具就用解密工具<br>无解密工具就交钱</strong></p>]]></content>
     
@@ -68,10 +120,10 @@
   
   <entry>
     <title>远控后门排查</title>
-    <link href="https://liu1272.github.io/2023/08/17/%E8%BF%9C%E6%8E%A7%E5%90%8E%E9%97%A8%E6%8E%92%E6%9F%A5/"/>
-    <id>https://liu1272.github.io/2023/08/17/%E8%BF%9C%E6%8E%A7%E5%90%8E%E9%97%A8%E6%8E%92%E6%9F%A5/</id>
-    <published>2023-08-17T03:10:00.000Z</published>
-    <updated>2023-08-17T07:17:14.413Z</updated>
+    <link href="https://liu1272.github.io/2023/08/14/%E8%BF%9C%E6%8E%A7%E5%90%8E%E9%97%A8%E6%8E%92%E6%9F%A5/"/>
+    <id>https://liu1272.github.io/2023/08/14/%E8%BF%9C%E6%8E%A7%E5%90%8E%E9%97%A8%E6%8E%92%E6%9F%A5/</id>
+    <published>2023-08-14T03:10:00.000Z</published>
+    <updated>2023-08-19T09:15:58.132Z</updated>
     
     <content type="html"><![CDATA[<h5 id="获取事件告警信息"><a href="#获取事件告警信息" class="headerlink" title="获取事件告警信息"></a>获取事件告警信息</h5><p>监控EDR、态势感知、防火墙等平台查看威胁告警以及日志。</p><h5 id="定位后门文件"><a href="#定位后门文件" class="headerlink" title="定位后门文件"></a>定位后门文件</h5><pre><code>根据告警信息定位后门文件位置，查找进程pidlsof | grep xxxx.xxlsof /root/xxxx.xxfuser /root/xxxx.xx</code></pre><h5 id="查看外连事件详情"><a href="#查看外连事件详情" class="headerlink" title="查看外连事件详情"></a>查看外连事件详情</h5><pre><code>根据五元组来查找通信的端口ip对应的pidnetstat -pantu | grep 114.114.114.114netstat -pantu | grep 65533lsof -i:65533netstat -pantu | grep 65533lsof -i:65533</code></pre><h5 id="查找进程信息"><a href="#查找进程信息" class="headerlink" title="查找进程信息"></a>查找进程信息</h5><pre><code>查找进程相关文件lsof -p 1234   （需要root权限）pwdx获取pid程序详细信息lsof -p pidpwdx pidsystemctl status pidcat /proc/pid/mapsls -al /proc/pid/exe</code></pre><h5 id="根据pid查看对应线程"><a href="#根据pid查看对应线程" class="headerlink" title="根据pid查看对应线程"></a>根据pid查看对应线程</h5><pre><code>ps H -T -p pidps -aLf pidpstree -agplU（推荐使用）</code></pre><h5 id="确定进程运行时间"><a href="#确定进程运行时间" class="headerlink" title="确定进程运行时间"></a>确定进程运行时间</h5><pre><code>ps -eo pid,lstart,etime,cmd | grep &lt;pid&gt;</code></pre><h5 id="比对恶意文件的创建时间"><a href="#比对恶意文件的创建时间" class="headerlink" title="比对恶意文件的创建时间"></a>比对恶意文件的创建时间</h5><pre><code>stat xxx.xxls -al xxx.xx</code></pre><h5 id="样本采集分析"><a href="#样本采集分析" class="headerlink" title="样本采集分析"></a>样本采集分析</h5><pre><code>使用SCP/Xshell等将样本移出主机，计算哈希值后到威胁情报平台中去搜索certutil -hashfile 文件 MD5</code></pre><h5 id="进程查杀"><a href="#进程查杀" class="headerlink" title="进程查杀"></a>进程查杀</h5><pre><code>【查找子进程】ps ajfxsystemctl status【杀死进程】kill -9 pid   （这样子是杀不死子进程的！！！）kill -9 -pid   （杀掉进程组）</code></pre><h5 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h5><pre><code># 查看文件占用，解除占用后删除lsof xxxx.xx# 移除 i, a 属性chattr -ia file.sh# 查看是否移除成功lsattr file.sh# 移除文件rm -rf file.sh# 奇怪文件名无法删除，先查inode再删除ls -li xxxx.xxfind ./* -inum 12327526 -deletefind ./ -inum 12327526 -exec rm &#123;&#125; \;find ./* -inum 12327526 -exec rm -i &#123;&#125; \;find ./* -inum 12327526 -exec rm -f &#123;&#125; \;find ./* -inum 12327526 |xargs rm -frm `find ./* -inum 12327526`# 目录挂载无法删除（Device or resource busy）sudo lsblk -asudo umount /dev/sdb1rm -rf xxxx.xx</code></pre><h5 id="补充：守护进程"><a href="#补充：守护进程" class="headerlink" title="补充：守护进程"></a>补充：守护进程</h5><pre><code># 守护进程是什么？其他进程都是在用户登录或运行程序时创建，在运行结束或用户注销时终止，但系统服务进程（守护进程）不受用户登录注销的影响，它们一直在运行着。# 守护进程的本质是什么？（1）守护进程的本职就是孤儿进程，该进程自成会话，自成进程组，一般守护进程与终端无关；（即：pid=sid=gid）（2）后台进程受用户登录注销的影响，而守护进程不受用户登录和注销的影响。但是它们都受关机的影响。# 守护进程有什么特点？1. 没有控制终端，终端名设置为？号2. 父进程不是用户创建的进程，一般由init进程或者systemd（pid=1）的进程为父进程3. 进程名字通常以字母 d 结束4. 工作目录为/（根），主要是为了防止占用磁盘导致无法卸载磁盘5. 以kthreadd内核进程创建的守护进程以kthreadd为父进程# 守护进程如何设置？1. 执行一个fork()，之后父进程退出，子进程继续执行。2. 子进程调用setsid()开启一个新回话并释放它与控制终端之间的所有关联关系。3. 在setsid()调用之后执行第二个fork()，让父进程退出并让孙进程继续执行。确保了子进程不会成为会话组长。（根据System V中获取终端的规则，进程永远不会重新请求一个控制终端。多一个fork()调用不会带来任何坏处。）4. 使用  umask(0);  清除进程的umask以确保当daemon创建文件和目录时拥有所需的权限。5. 修改进程的当前工作目录，通常会改为根目录（/）。6. 关闭daemon从其父进程继承而来的所有打开着的文件描述符。# 守护进程如何删除？1. 首先ps axj | grep 守护进程名字，找到相应的守护进程，然后使用kill -9 守护进程名杀掉；2. 利用ps -ef命令查找相应的守护进程，再用kill -9命令将其杀死；3. 创建shell脚本对进程的启动、关闭、重启进行自动管理。注：kill -9 -pid   （杀掉进程组）</code></pre><h5 id="补充：screen的原理"><a href="#补充：screen的原理" class="headerlink" title="补充：screen的原理"></a>补充：screen的原理</h5><ul><li>当用户启动Screen时，它会创建一个守护进程作为后台进程，并与用户终端会话（称为控制终端）分离。</li><li>控制终端不再直接处理用户输入和输出，而是由Screen守护进程负责接收和处理。</li><li>守护进程通过与Unix域套接字进行通信，与控制终端保持连接。</li><li>用户在控制终端中输入的命令会被发送到守护进程，并由守护进程解析和执行。</li><li>守护进程还负责从虚拟终端读取输出内容，并将其发送回控制终端进行显示。</li></ul><p>通过这种方式，Screen实现了在控制终端与守护进程之间的交互，并通过守护进程来管理多个虚拟终端、处理窗口切换、保存会话状态等功能。<br>需要注意的是，虽然Screen的守护进程在后台运行，但用户仍然可以通过重新连接到控制终端来恢复与之前会话的交互，即使之前的SSH连接断开或终端关闭。这是Screen的一个重要特性，允许用户在断开连接后恢复他们的工作环境。</p><h5 id="补充：恢复守护进程会话的交互"><a href="#补充：恢复守护进程会话的交互" class="headerlink" title="补充：恢复守护进程会话的交互"></a>补充：恢复守护进程会话的交互</h5><p>可以使用<code>nohup</code>命令启动一个守护进程，并将输出重定向到文件中，例如：</p><pre class="line-numbers language-shell"><code class="language-shell">nohup ./your_daemon &<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre><p>通过这种方式启动的守护进程不会因为用户退出终端而停止运行。</p><p>当用户重新连接到控制终端时，可以使用<code>jobs</code>命令查看守护进程的状态，并使用<code>fg</code>命令将其调至前台，恢复与之前会话的交互。例如：</p><pre class="line-numbers language-shell"><code class="language-shell">jobsfg %job_id<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>其中，<code>job_id</code>是守护进程的作业号，可以在<code>jobs</code>命令的输出中找到。</p>]]></content>
     
@@ -93,10 +145,10 @@
   
   <entry>
     <title>挖矿事件排查</title>
-    <link href="https://liu1272.github.io/2023/08/16/%E6%8C%96%E7%9F%BF%E4%BA%8B%E4%BB%B6%E6%8E%92%E6%9F%A5/"/>
-    <id>https://liu1272.github.io/2023/08/16/%E6%8C%96%E7%9F%BF%E4%BA%8B%E4%BB%B6%E6%8E%92%E6%9F%A5/</id>
-    <published>2023-08-16T08:51:00.000Z</published>
-    <updated>2023-08-16T12:49:26.734Z</updated>
+    <link href="https://liu1272.github.io/2023/08/13/%E6%8C%96%E7%9F%BF%E4%BA%8B%E4%BB%B6%E6%8E%92%E6%9F%A5/"/>
+    <id>https://liu1272.github.io/2023/08/13/%E6%8C%96%E7%9F%BF%E4%BA%8B%E4%BB%B6%E6%8E%92%E6%9F%A5/</id>
+    <published>2023-08-13T08:51:00.000Z</published>
+    <updated>2023-08-19T09:15:50.374Z</updated>
     
     <content type="html"><![CDATA[<h5 id="第一步：获取信息"><a href="#第一步：获取信息" class="headerlink" title="第一步：获取信息"></a>第一步：获取信息</h5><ul><li>下线服务器之后从DNS服务器、防火墙、态势感知平台等地方获取到攻击事件详细信息</li><li>根据上传来源的IP/域名，在威胁情报平台查询确定木马类型</li><li>获取异常进程的pid</li></ul><pre><code>CPU占用：top -c -o %CPUps -eo pid,ppid,%mem,%cpu,cmd --sort=-%cpu | head -n 5内存占用：top -c -o %MEMps -eo pid,ppid,%mem,%cpu,cmd --sort=-%mem | head -n 5网络占用：安装后使用nethogs或者jnettop进行查询根据进程名或字符串查询：pidof &quot;name&quot;ps -aux | grep &quot;name&quot;ps -ef | grep &quot;name&quot; | grep -v grep | awk &#39;&#123;print $2&#125;&#39;pgrep -f &quot;name&quot;</code></pre><ul><li>根据pid查询详细信息（当查询不到时有可能是/proc/pid隐藏了）</li></ul><pre><code>lsof -p pidpwdx pidsystemctl status pidcat /proc/pid/mapsls -al /proc/pid/exe</code></pre><ul><li>根据pid查看对应线程</li></ul><pre><code>ps H -T -p pidps -aLf pidpstree -agplU（推荐使用）</code></pre><ul><li>确定进程运行时间</li></ul><pre><code>ps -eo pid,lstart,etime,cmd | grep &lt;pid&gt;</code></pre><ul><li>比对恶意文件的创建时间</li></ul><pre><code>stat xxx.xxls -al xxx.xx</code></pre><ul><li>样本采集分析</li></ul><pre><code>使用SCP/Xshell等将样本移出主机，计算哈希值后到威胁情报平台中去搜索certutil -hashfile 文件 MD5</code></pre><ul><li>进程查杀</li></ul><pre><code>【查找子进程】ps ajfxsystemctl status【杀死进程】kill -9 pid   （这样子是杀不死子进程的！！！）kill -9 -pid   （杀掉进程组）</code></pre><ul><li>删除文件</li></ul><pre><code># 查看文件占用，解除占用后删除lsof xxxx.xx# 移除 i, a 属性chattr -ia file.sh# 查看是否移除成功lsattr file.sh# 移除文件rm -rf file.sh# 奇怪文件名无法删除，先查inode再删除ls -li xxxx.xxfind ./* -inum 12327526 -deletefind ./ -inum 12327526 -exec rm &#123;&#125; \;find ./* -inum 12327526 -exec rm -i &#123;&#125; \;find ./* -inum 12327526 -exec rm -f &#123;&#125; \;find ./* -inum 12327526 |xargs rm -frm `find ./* -inum 12327526`# 目录挂载无法删除（Device or resource busy）sudo lsblk -asudo umount /dev/sdb1rm -rf xxxx.xx</code></pre><ul><li>网页挖矿排查</li></ul><pre><code># 浏览器查看历史记录，定位到该事件点访问的页面# 进入虚拟机进行访问，并限制进程只允许占用一个cpu# 查看该网页的源码和网络链接调用# 将浏览器缓存文件进行检测（大多数是JS）# 清除浏览数据&gt;清除缓存文件# 解密恶意文件查看矿池地址以及连接条件# 上区块链网站溯源</code></pre>]]></content>
     
@@ -455,56 +507,6 @@ c:/windows/php.ini /</summary>
     
     
     <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSRF跨站点请求伪造</title>
-    <link href="https://liu1272.github.io/2023/07/07/CSRF%E8%B7%A8%E7%AB%99%E7%82%B9%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/"/>
-    <id>https://liu1272.github.io/2023/07/07/CSRF%E8%B7%A8%E7%AB%99%E7%82%B9%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/</id>
-    <published>2023-07-07T06:29:00.000Z</published>
-    <updated>2023-07-19T07:17:14.957Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>是社工的一种，不大流行，但如果被成功利用，危害很大。</p><h4 id="XSS与CSRF区别"><a href="#XSS与CSRF区别" class="headerlink" title="XSS与CSRF区别"></a>XSS与CSRF区别</h4><p>XSS通过<code>盗取</code>网站内的已有的用户的身份，然后再执行相关操作<br>CSRF通过<code>伪装</code>用户身份，通过服务器身份认证后，然后发送恶意请求<br>虽然两者有一些区别，但是通常结合使用</p><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>在浏览器中cookie在一段时间内是不会过期（不关闭或者退出浏览器）<br>如果在cookie存在期间，通过构造csrf脚本或包含csrf脚本的链接发送给用户<br>得到信息后，再伪造成用户身份，执行相关操作<br>攻击者盗用了受害者的身份，以受害者的名义发送恶意请求<br>对服务器来说这个请求是完全合法的，但是却完成了攻击者所期望的一个操作</p><h4 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h4><p>比如发消息、盗号、转账等没有没有需要再次验证身份的基本操作<br>再要验证身份的话，那就再社工搭建一个一模一样的网站</p><h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p><strong>站外攻击：</strong><br>用户在攻击者构造的网站中触发伪造请求时，强制用户客户端就会发起请求<br><strong>站内攻击：</strong><br>如果开发人员滥用 <code>$_REQUEST</code> 类变量，以Post提交的数据表单，也支持Get传参。<br>攻击者把预测的请求参数上传到站内贴子或留言的图片链接里<br>当用户浏览了含有请求参数的页面就强制发出这些请求。</p><h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><ol><li>对网站管理员进行攻击</li><li>修改受害网站上的用户账户和数据</li><li>账户劫持</li><li>传播CSRF蠕虫进行大规模攻击</li><li>利用csrf进行拖库</li><li>利用其他漏洞进行组合拳攻击</li><li>针对路由器的csrf攻击</li></ol><h4 id="防护"><a href="#防护" class="headerlink" title="防护"></a>防护</h4><ol><li>尽量使用POST，限制GET；</li><li>浏览器Cookie策略（时间生存周期管理和签名校验管理）；</li><li>加验证码；</li><li>Referer Check；</li><li>Anti CSRF Token；</li></ol><h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><ol><li>更改数据包POST/GET</li><li>修改Referer</li><li>利用XSS漏洞或其他方法将代码注入目标服务器，诱使受害者触发</li><li>使用Burp右键tool里生成一个PoC</li></ol><p>好像就这么多，CSRF没啥好讲的了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;是社工的一种，不大流行，但如果被成功利用，危害很大。&lt;/p&gt;
-&lt;h4 id=&quot;XSS与CSRF区别&quot;&gt;&lt;a href=&quot;#XSS与CSRF区</summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>过去两个月干了啥？</title>
-    <link href="https://liu1272.github.io/2023/07/07/%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E5%B9%B2%E4%BA%86%E5%95%A5%EF%BC%9F/"/>
-    <id>https://liu1272.github.io/2023/07/07/%E8%BF%87%E5%8E%BB%E4%B8%A4%E4%B8%AA%E6%9C%88%E5%B9%B2%E4%BA%86%E5%95%A5%EF%BC%9F/</id>
-    <published>2023-07-07T05:36:00.000Z</published>
-    <updated>2023-07-07T06:18:50.516Z</updated>
-    
-    <content type="html"><![CDATA[<p>也没干啥正事，天天打CTF有点倦了，休息一下。</p><p>首先吐槽一下web方向的一部分题目<br>经常能遇到各种各样的脑瘫题目完全脱离现实<br>有的知识点并不实用就罢了，出题人为了出点新题还会把题目设置得脑洞要特别大才能做出来<br>你们说 <code>Misc</code> 安全杂项本来就是这样那就算了， <code>Web</code> 安全也这样真的合适吗？<br>不过幸好现在 CTF 大赛都已经往实战的方向走了。<br>然后就是区块链，上次陕西省赛的区块链给个纸条猜地址是什么鬼……</p><p>除了CTF以外，自己也挖了几个洞，差不多总结了一套渗透的方案</p><p>7月前后到处发简历，想参加一下护网、实习之类的攒攒经验<br>在面试了两三个之后，感觉身为大一还是太菜了，根本抢不过高年级的<br>我总结了一下常见的问题（可能是常见的吧）：</p><ol><li>正常的询问年龄学历，对岗位的了解</li><li><code>OWASP top10</code> 原理、预防、实践（深度看具体情况）</li><li>SQLmap之类渗透工具的使用</li><li>实战中不同情况下的处理情况（只能多实践了）</li><li>ip，同源策略，DNS等等网络相关的问题<br>如果把市面上流传的面筋背个滚瓜烂熟大概初级的岗位面试是没太大问题</li></ol><p>后面几天先把之前的笔记修补更正一下<br>回家之后再学习红蓝相关的技术吧<br>有空再学学区块链合约审计之类的</p><p>行吧，不知道说啥就这样吧<br>下次见</p><p><a href="https://smms.app/image/J5wCygPKH4mBueN" target="_blank"><img src="https://s2.loli.net/2023/07/07/J5wCygPKH4mBueN.gif" width="300" /></a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;也没干啥正事，天天打CTF有点倦了，休息一下。&lt;/p&gt;
-&lt;p&gt;首先吐槽一下web方向的一部分题目&lt;br&gt;经常能遇到各种各样的脑瘫题目完全脱离现实&lt;br&gt;有的知识点并不实用就罢了，出题人为了出点新题还会把题目设置得脑洞要特别大才能做出来&lt;br&gt;你们说 &lt;code&gt;Misc&lt;/</summary>
-      
-    
-    
-    
-    <category term="随笔" scheme="https://liu1272.github.io/categories/%E9%9A%8F%E7%AC%94/"/>
-    
-    
-    <category term="随笔" scheme="https://liu1272.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
