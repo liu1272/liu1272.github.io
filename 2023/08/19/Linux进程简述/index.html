@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="元字符表, Robin">
-    <meta name="description" content="字符     描述
-\        将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，’n’ 匹配字符 “n”。’\n’ 匹配一个换行符。序列 ‘\\’ 匹配 “\” 而 “\(” 则匹配 “(”">
+    <meta name="keywords" content="Linux进程简述, Robin">
+    <meta name="description" content="父进程自已创建一个或者多个进程
+子进程fork创建的。这个函数被调用一次但是返回两次，子进程返回0，父进程返回子进程id。
+fork之后，操作系统会赋值一个与父进程完全相同的子进程，虽然是父子关系，但是更像是兄弟关系。这两个进程共享代码，但">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>元字符表 | Robin</title>
+    <title>Linux进程简述 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -344,12 +345,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">元字符表</h1>
+                    <h1 class="description center-align post-title">Linux进程简述</h1>
                 </div>
             </div>
         </div>
@@ -371,8 +372,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="../../../../tags/%E9%99%84%E5%BD%95/">
-                                <span class="chip bg-color">附录</span>
+                            <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                <span class="chip bg-color">日报</span>
                             </a>
                         
                     </div>
@@ -383,8 +384,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="../../../../categories/%E9%99%84%E5%BD%95/" class="post-category">
-                                附录
+                            <a href="../../../../categories/%E6%97%A5%E6%8A%A5/" class="post-category">
+                                日报
                             </a>
                         
                     </div>
@@ -396,21 +397,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-11-15
+                    2023-08-19
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-16
+                    2023-09-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    2k
                 </div>
                 
 
@@ -437,51 +438,57 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre><code>字符     描述
-\        将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，’n’ 匹配字符 “n”。’\n’ 匹配一个换行符。序列 ‘\\’ 匹配 “\” 而 “\(” 则匹配 “(”。
-^        匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 ‘\n’ 或 ‘\r’ 之后的位置。
-$        匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 ‘\n’ 或 ‘\r’ 之前的位置。
-*        匹配前面的子表达式零次或多次。例如，zo* 能匹配 “z” 以及 “zoo”。* 等价于&#123;0,&#125;。
-+        匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 &#123;1,&#125;。
-?        匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 或 “does” 中的”do” 。? 等价于 &#123;0,1&#125;。
-&#123;n&#125;       n是一个非负整数。匹配确定的 n 次。例如，’o&#123;2&#125;’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。
-&#123;n,&#125;      n是一个非负整数。至少匹配n 次。例如，’o&#123;2,&#125;’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o&#123;1,&#125;’ 等价于 ‘o+’。’o&#123;0,&#125;’ 则等价于 ‘o*’。
-&#123;n,m&#125;     m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o&#123;1,3&#125;” 将匹配 “fooooood” 中的前三个 o。’o&#123;0,1&#125;’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。
-?         当该字符紧跟在任何一个其他限制符 (*, +, ?, &#123;n&#125;, &#123;n,&#125;, &#123;n,m&#125;) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 “oooo”，’o+?’ 将匹配单个 “o”，而 ‘o+’ 将匹配所有 ‘o’。
-.         匹配除 “\n” 之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符，请使用象 ‘[.\n]’ 的模式。
-(pattern)    匹配 pattern 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 SubMatches 集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 ‘′或‘’。
-(?:pattern)    匹 配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (|) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y|ies) 就是一个比 ‘industry|industries’ 更简略的表达式。
-(?=pattern)    正 向预查，在任何匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，’Windows (?=95|98|NT|2000)’ 能匹配 “Windows 2000″ 中的 “Windows” ，但不能匹配 “Windows 3.1″ 中的 “Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
-(?!pattern)    负 向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如’Windows (?!95|98|NT|2000)’ 能匹配 “Windows 3.1″ 中的 “Windows”，但不能匹配 “Windows 2000″ 中的 “Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始
-x|y    匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”。’(z|f)ood’ 则匹配 “zood” 或 “food”。
-[xyz]    字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’。
-[^xyz]    负值字符集合。匹配未包含的任意字符。例如， ‘[^abc]’ 可以匹配 “plain” 中的’p&#39;。
-[a-z]    字符范围。匹配指定范围内的任意字符。例如，’[a-z]’ 可以匹配 ‘a’ 到 ‘z’ 范围内的任意小写字母字符。
-[^a-z]    负值字符范围。匹配任何不在指定范围内的任意字符。例如，’[^a-z]’ 可以匹配任何不在 ‘a’ 到 ‘z’ 范围内的任意字符。
-\b    匹配一个单词边界，也就是指单词和空格间的位置。例如， ‘er\b’ 可以匹配”never” 中的 ‘er’，但不能匹配 “verb” 中的 ‘er’。
-\B    匹配非单词边界。’er\B’ 能匹配 “verb” 中的 ‘er’，但不能匹配 “never” 中的 ‘er’。
-\cx    匹配由 x 指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。
-\d    匹配一个数字字符。等价于 [0-9]。
-\D    匹配一个非数字字符。等价于 [^0-9]。
-\f    匹配一个换页符。等价于 \x0c 和 \cL。
-\n    匹配一个换行符。等价于 \x0a 和 \cJ。
-\r    匹配一个回车符。等价于 \x0d 和 \cM。
-\s    匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。
-\S    匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。
-\t    匹配一个制表符。等价于 \x09 和 \cI。
-\v    匹配一个垂直制表符。等价于 \x0b 和 \cK。
-\w    匹配包括下划线的任何单词字符。等价于’[A-Za-z0-9_]’。
-\W    匹配任何非单词字符包括下划线。等价于 ‘[^A-Za-z0-9_]’。
-\xn    匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，’\x41′ 匹配 “A”。’\x041′ 则等价于 ‘\x04′ &amp; “1″。正则表达式中可以使用 ASCII 编码。.
-\num    匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，’(.)\1′ 匹配两个连续的相同字符。
-\n    标识一个八进制转义值或一个向后引用。如果 \n 之前至少 n 个获取的子表达式，则 n 为向后引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个八进制转义值。
-\nm    标 识一个八进制转义值或一个向后引用。如果 \nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \nm 将匹配八进制转义值 nm。
-\nml    如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。
-\un    匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \u00A9 匹配版权符号 (?)。
-
-例子 匹配32位md5
-/^[a-z0-9]&#123;32&#125;$/
+                <h5 id="父进程"><a href="#父进程" class="headerlink" title="父进程"></a>父进程</h5><p>自已创建一个或者多个进程</p>
+<h4 id="子进程"><a href="#子进程" class="headerlink" title="子进程"></a>子进程</h4><p>fork创建的。这个函数被调用一次但是返回两次，子进程返回0，父进程返回子进程id。</p>
+<pre><code>fork之后，操作系统会赋值一个与父进程完全相同的子进程，虽然是父子关系，但是更像是兄弟关系。这两个进程共享代码，但是数据空间是互相独立的，数据空间、指令、指针完全相同，子进程拥有当前父进程运行到的位置（PC相同）。
 </code></pre>
+<h4 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h4><p>多个进程的集合，其中有一个组长，PID等于进程组的PGID，只要这个组里面有一个进程存在那么这个组就存在，与组长进程是否终止无关</p>
+<h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4><p>shell分前后台来控制的不是进程而是作业或者进程组。<br>一个前台作业由多个进程组成，一个后台也由多个进程组成。<br>shell可以运行一个前台作业和任意多个后台作业。这就是作业控制。</p>
+<pre><code>为什么只能运行一个前台作业？
+前台作业是指当前终端窗口中运行的作业，而一个后台作业则是在后台运行的作业，不会占用当前终端窗口。
+一个终端窗口只能有一个前台作业，是因为终端窗口只能和一个进程交互，用户在终端窗口输入命令，终端窗口会将命令传递给前台作业，如果有多个作业同时处于前台，那么输入的命令将被发送给哪个作业时不确定的，这会导致混乱和错误。
+</code></pre>
+<h4 id="作业与进程组的区别"><a href="#作业与进程组的区别" class="headerlink" title="作业与进程组的区别"></a>作业与进程组的区别</h4><p>如果作业中有某个进程创建了子进程，则这个子进程是不属于该作业的，一旦作业运行结束，shell就把自己提到前台（子进程还在，但是子进程不属于作业）。如果原来的前台进程还存在（这个子进程还没有终止），他将自动变为后台进程组。</p>
+<pre><code>当我们在前台新起了一个作业，shell就被提到了后台，因此shell就没有办法再继续接受我们的指令并且解析运行了。 但是如果前台进程退出了，shell就会有被提到前台来，就可以继续接受我们的命令并且解析运行。
+</code></pre>
+<h4 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h4><p>是一个躲着多个进程组的集合。一个会话有一个控制终端，在xshell或者winscp中打开一个窗口就是新建一个会话。</p>
+<h4 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h4><p>如果父进程退出，子进程还没有退出，那些子进程将成为孤儿进程。<br>孤儿进程被1号进程init进程收养。那么子进程的父进程将变成init进程。由init进程对他们完成状态收集工作。</p>
+<h4 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h4><p>在操作系统中，当一个进程终止时，它的状态信息仍然被保留在系统中，直到其父进程调用wait或waitpid等系统调用来获取其终止状态信息。<br>如果父进程没有及时调用这些系统调用来获取终止状态信息，那么这个已经终止的子进程就会成为一个僵尸进程。<br>僵尸进程占用了系统资源，因为它们仍然占用了进程ID、进程表项和一些其他资源，而这些资源可能需要被其他进程使用。</p>
+<pre><code>Linux中，使用ps aux查看信息，发现僵尸进程状态为“Z”
+</code></pre>
+<p>当一个进程终止时，如果它的子进程仍然处于僵尸状态，那么这些子进程的父进程ID将被重置为1，也就是init进程。此时，init进程会调用wait或waitpid等系统调用来获取这些子进程的终止状态信息，并清除它们的僵尸状态，从而释放系统资源。</p>
+<h4 id="进程终止的几种方式"><a href="#进程终止的几种方式" class="headerlink" title="进程终止的几种方式"></a>进程终止的几种方式</h4><pre><code>main函数自然返回
+exit，属于C函数库
+_exit，属于系统调用
+调用abort函数，异常程序终止，同时发送SIGABRT信号给调用进程
+接收能导致进程终止的信号 ctrl+c，SIGINT
+</code></pre>
+<h4 id="如何让进程后台运行"><a href="#如何让进程后台运行" class="headerlink" title="如何让进程后台运行"></a>如何让进程后台运行</h4><pre><code>命令后面加上&amp;，这样是将命令放入到一个作业队列中
+ctrl+z挂起进程，使用jobs查看序号，再使用bg%序号后台运行进程
+nohup+&amp;，将标准输出和标准错误缺省会被重定向到nohup文件中，忽略所有SIGHUP挂断信号
+运行指令前面加上 setsid，使其父进程编程init进程，不受HUP信号影响
+将命令+&amp;放在（）括号中，也可以是进程不受HUP信号影响
+</code></pre>
+<h4 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h4><p>指在后台运行的，没有控制终端与之相连的进程。<br>它独立于控制终端，周期性的执行某种任务。<br>Linux大多数服务器就是用守护进程的方式实现的，比如WEB服务器。<br>通过ps –x -j以查看作业控制信息，其中TPGID一栏为-1就是守护进程<br>特点：</p>
+<ol>
+<li>随系统启动而启动</li>
+<li>父进程是init，也就是ppid为1</li>
+<li>在后台运行</li>
+<li>进程名字通常以字母 d 结束</li>
+<li>ps显示中终端名设置为问号(?)，终端前台进程组ID设置为-1</li>
+<li>工作目录为 \ (根)</li>
+</ol>
+<h4 id="创建守护进程"><a href="#创建守护进程" class="headerlink" title="创建守护进程"></a>创建守护进程</h4><ul>
+<li>让程序在后台执行：调用fork()产生一个子进程，然后使父进程退出</li>
+<li>调用setsid（）创建一个新对话期。控制终端、登录会话和进程组通常是从父进程进程下来的，守护进程要摆脱他们，不受他们的影响，方法是调用setsid()使进程成为一个会话组长。</li>
+<li>禁止进程重新申请打开控制终端。通过使进程不再是会话组长来实现。再一次通过fork创建新的子进程，使调用fork的进程退出。</li>
+<li>关闭不再需要的文件描述符。首先获得最高文件描述符值，然后用一个循环程序，关闭0到最高文件描述符值的所有文件描述符。</li>
+<li>将当前目录更改为根目录</li>
+<li>子进程从父进程继承的文件创建屏蔽字可能会拒绝某些许可权。为防止这一点，使用unmask(0)将屏蔽字清零。</li>
+<li>将SIGCHLD信号的操作设置为SIG_IGN，子进程结束的时候就不会产生僵尸进程。</li>
+</ul>
+<h4 id="守护进程与后台进程"><a href="#守护进程与后台进程" class="headerlink" title="守护进程与后台进程"></a>守护进程与后台进程</h4><p>后台进程的文件描述符是继承于父进程，例如shell，所以它也可以在当前终端下显示输出数据。<br>但是deemon进程自己变成了进程组长，其文件描述符号和控制终端没有关联，是控制台无关的。<br>基本上任何一个程序都可以后台运行，但守护进程是具有特殊要求的程序，比如要脱离自己的父进程，成为自己的会话组长等，这些要在代码中显式地写出来<br>所以<code>守护进程是后台进程的一种</code>。<br>前台任务会随着session的退出而退出是因为它收到了SIGHUP信号。<br>后台任务是否会受到SIGNUP信号，取决于shell的<code> huponexit </code>参数。可以通过<code> $ shopt | grep huponexit </code>查看该参数的值。</p>
+<h4 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h4><p>一般讨论的都是shell session，我们打开一个新的终端就会创建一个session<br>每个session都是由一个或者多个进程组组成的，每个进程组称为 job，这里job不是任务，而叫作业。<br>调用 setsid() 函数可以生成新的session,那么这些命令可以通过session进行统一管理<br>session中的第一个进程 (一般是bash) 的PID就是session的SID</p>
 
                 
             </div>
@@ -496,8 +503,8 @@ x|y    匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”�
                     
                         <div class="article-tag">
                             
-                                <a href="../../../../tags/%E9%99%84%E5%BD%95/">
-                                    <span class="chip bg-color">附录</span>
+                                <a href="../../../../tags/%E6%97%A5%E6%8A%A5/">
+                                    <span class="chip bg-color">日报</span>
                                 </a>
                             
                         </div>
@@ -576,17 +583,18 @@ x|y    匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”�
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../20221115/">
+                <a href="">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/3.jpg" class="responsive-img" alt="正则表达式">
+                        <img src="../../../../medias/featureimages/20.jpg" class="responsive-img" alt="Linux进程简述">
                         
-                        <span class="card-title">正则表达式</span>
+                        <span class="card-title">Linux进程简述</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -596,9 +604,9 @@ x|y    匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”�
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -611,6 +619,7 @@ x|y    匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”�
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -629,13 +638,13 @@ x|y    匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../../14/20221114/">
+                <a href="../../18/%E5%96%84%E5%90%8E%E5%A4%84%E7%90%86/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/5.jpg" class="responsive-img" alt="PHP的面向对象">
+                        <img src="../../../../medias/featureimages/20.jpg" class="responsive-img" alt="善后处理">
                         
-                        <span class="card-title">PHP的面向对象</span>
+                        <span class="card-title">善后处理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -646,7 +655,7 @@ x|y    匹配 x 或 y。例如，’z|food’ 能匹配 “z” 或 “food”�
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-18
                             </span>
                         <span class="publish-author">
                             
