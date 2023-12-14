@@ -5,11 +5,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Java网络编程, Robin">
-    <meta name="description" content="这篇文章我觉得我对于网络基础部分就不用再说更多了，直接一张图就够。剩下的用代码和注释来说明，看懂就是学会。
-TCP通信服务端我在正文开头定义了一个：
-
+    <meta name="description" content="前言这篇文章我觉得我对于网络基础部分就不用再说更多了，直接一张图就够。剩下的用代码和注释来说明，看懂就是学会。
+单播通信TCP通信服务端
 public class Sever &amp;#123;
-    public static ">
+    public static void ma">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -417,14 +416,14 @@ public class Sever &amp;#123;
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    519
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    10 分
                 </div>
                 
 
@@ -444,9 +443,8 @@ public class Sever &amp;#123;
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>这篇文章我觉得我对于网络基础部分就不用再说更多了，直接一张图就够。剩下的用代码和注释来说明，看懂就是学会。</strong><br><a href="https://smms.app/image/Yv5mfec4P3sdFHt" target="_blank"><img src="https://s2.loli.net/2023/12/14/Yv5mfec4P3sdFHt.png" ></a></p>
-<h4 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h4><h5 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h5><p>我在正文开头定义了一个：<a name="divtop"></a></p>
-<pre class="line-numbers language-Java"><code class="language-Java">
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><strong>这篇文章我觉得我对于网络基础部分就不用再说更多了，直接一张图就够。剩下的用代码和注释来说明，看懂就是学会。</strong><br><a href="https://smms.app/image/Yv5mfec4P3sdFHt" target="_blank"><img src="https://s2.loli.net/2023/12/14/Yv5mfec4P3sdFHt.png" ></a></p>
+<h2 id="单播通信"><a href="#单播通信" class="headerlink" title="单播通信"></a>单播通信</h2><h3 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h3><h4 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h4><pre class="line-numbers language-Java"><code class="language-Java">
 public class Sever &#123;
     public static void main(String[] args) &#123;
         ServerSocket serverSocket = null;   //初始化定义为空保证安全
@@ -473,7 +471,8 @@ public class Sever &#123;
 
             //循环读取客户端发送的数据，将数据存储到字节数组输出流中
             while((len = is.read(buffer))!=-1)&#123;
-                baos.write(buffer,0,len);
+                //要写入的字节数组，从第一个元素开始写入，写入的字节数量
+                baos.write(buffer,0,len);  
             &#125;
 
             //将字节数组输出流中的数据转换为字符串并输出到控制台
@@ -491,15 +490,17 @@ public class Sever &#123;
         &#125;
     &#125;
 &#125;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h5 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h5><pre class="line-numbers language-Java"><code class="language-Java">
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><pre class="line-numbers language-Java"><code class="language-Java">
 public class Cilent &#123;
     public static void main(String[] args) &#123;
         Socket socket = null;   // 用于建立客户端与服务器之间的套接字连接
         OutputStream os = null; // 用于向服务器发送数据的输出流
 
         try &#123;
-            InetAddress serverIP = InetAddress.getByName("127.0.0.1"); // 通过IP地址获取服务器的InetAddress实例
+            
+            // 通过IP地址获取服务器的InetAddress实例
+            InetAddress serverIP = InetAddress.getByName("127.0.0.1"); 
             int port = 9999; // 连接服务器的端口号
 
             // 创建套接字连接至服务器
@@ -508,8 +509,9 @@ public class Cilent &#123;
             // 通过套接字获取输出流，用于向服务器发送数据
             os = socket.getOutputStream();
 
-            // 向服务器发送数据
-            os.write("Hello, world!".getBytes());
+            // 向服务器发送数据，需要
+            os.write("Hello, world!".getBytes());  
+            //getBytes()方法编码为 byte 序列，并将结果存储到一个新的 byte 数组中
 
         &#125; catch (IOException e) &#123;
             e.printStackTrace();
@@ -524,8 +526,380 @@ public class Cilent &#123;
         &#125;
     &#125;
 &#125;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>我们跳转过去：<a href="#divtop">跳转指定位置</a></p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="UDP通信"><a href="#UDP通信" class="headerlink" title="UDP通信"></a>UDP通信</h3><h4 id="服务端-1"><a href="#服务端-1" class="headerlink" title="服务端"></a>服务端</h4><pre class="line-numbers language-Java"><code class="language-Java">
+public class Sever &#123;
+    public static void main(String[] args) throws Exception &#123;
+    
+        //创建DatagramSocket对象，监听6666端口
+        DatagramSocket socket = new DatagramSocket(6666);
+        
+        //一直循环接收信息
+        while (true) &#123;
+            byte[] container = new byte[1024];
+            
+            //创建DatagramPacket对象，用于接收客户端发送的数据（合成一个包）
+            DatagramPacket packet = new DatagramPacket(container,0,container.length);
+            //要发送或接收的数据的字节数组，从头开始读取或写入，读取或写入的字节数
+            
+            //接收客户端发送的数据
+            socket.receive(packet);
+            byte[] data = packet.getData();
+            //获取接收到的数据，返回一个字节数组
+            
+            //将接收到的字节数组（包）转换为字符串
+            String receiveDatas = new String(data,0,packet.getLength());
+            System.out.println(receiveDatas);
+            
+            //判断是否输入了“bye”，如果是则退出循环
+            if (receiveDatas.trim().equals("bye")) &#123;
+                break;
+            &#125;
+        &#125;
+        
+        //关闭DatagramSocket对象
+        socket.close();
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="客户端-1"><a href="#客户端-1" class="headerlink" title="客户端"></a>客户端</h4><pre class="line-numbers language-Java"><code class="language-Java">
+public class Cilent &#123;
+    public static void main(String[] args) throws Exception &#123;
+        try &#123;
+        
+            //创建DatagramSocket对象，监听8888端口
+            DatagramSocket socket = new DatagramSocket(8888);
+            
+            //创建BufferedReader对象，用于从控制台读取数据
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                    
+            //一直循环接收信息
+            while (true) &#123;
+            
+                //从控制台读取数据
+                String data = reader.readLine();
+                
+                //将读取到的字符串转换为字节数组
+                byte[] datas = data.getBytes();
+                
+                //创建DatagramPacket对象，打包好数据，指定发送的目标地址和端口号
+                DatagramPacket packet = new DatagramPacket(datas,0,datas.length,new InetSocketAddress("127.0.0.1",6666));
+                
+                //发送数据
+                socket.send(packet);
+                
+                //判断是否输入了“bye”，如果是则退出循环
+                if (data.equals("bye")) &#123;
+                    break;
+                &#125;
+            &#125;
+            
+            //关闭DatagramSocket对象
+            socket.close();
+        &#125; catch (SocketException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="多线程通信"><a href="#多线程通信" class="headerlink" title="多线程通信"></a>多线程通信</h3><h4 id="服务端-2"><a href="#服务端-2" class="headerlink" title="服务端"></a>服务端</h4><pre class="line-numbers language-Java"><code class="language-Java">
+//继承Runnable接口
+public class Sever implements Runnable &#123;   
+    DatagramSocket socket = new DatagramSocket(6666);
+    private int port;
+    private String msgfrom;
+    public Sever(int port,String msgfrom) throws IOException &#123;
+        this.port = port;
+        this.msgfrom = msgfrom;
+        socket = new DatagramSocket(6666);
+    &#125;
+    
+    //重写run()方法
+    public void run() &#123;   
+        try &#123;
+            while (true) &#123;
+                byte[] container = new byte[1024];
+
+                //创建DatagramPacket对象，用于接收客户端发送的数据
+                DatagramPacket packet = new DatagramPacket(container,0,container.length);
+
+                //接收客户端发送的数据
+                socket.receive(packet);
+                byte[] data = packet.getData();
+
+                //将接收到的字节数组转换为字符串
+                String receiveDatas = new String(data,0,data.length);
+                System.out.println(msgfrom + ":" + receiveDatas);
+
+                //判断是否输入了“bye”，如果是则退出循环
+                //trim()去除首尾空格，equals()比较对象，被比较的放前面
+                if (receiveDatas.trim().equals("bye")) &#123;
+                    break;
+                &#125;
+            &#125;
+
+            //关闭DatagramSocket对象
+            socket.close();
+        &#125; catch (IOException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="客户端-2"><a href="#客户端-2" class="headerlink" title="客户端"></a>客户端</h4><pre class="line-numbers language-Java"><code class="language-Java">
+public class Cilent implements Runnable &#123;
+    DatagramSocket socket = null;
+    BufferedReader reader = null;
+    private String toIP;
+    private int fromport;
+    private int toport;
+    public Cilent(int fromIP,String toIP,int toport) throws SocketException &#123;
+        this.fromport = fromport;
+        this.toport = toport;
+        this.toIP = toIP;
+
+        //创建DatagramSocket对象，监听指定端口
+        socket = new DatagramSocket(fromport);
+
+        //创建BufferedReader对象，用于从控制台读取数据
+        reader = new BufferedReader(new InputStreamReader(System.in));
+    &#125;
+    public void run() &#123;
+        try &#123;
+            while (true) &#123;
+
+                //从控制台读取数据
+                String data = reader.readLine();
+
+                //将读取到的字符串转换为字节数组
+                byte[] datas = data.getBytes();
+
+                //创建DatagramPacket对象，指定发送的目标地址和端口号
+                DatagramPacket packet = new DatagramPacket(datas,0,datas.length,new InetSocketAddress(this.toIP,this.toport));
+
+                //发送数据
+                socket.send(packet);
+
+                //判断是否输入了“bye”，如果是则退出循环
+                if (data.equals("bye")) &#123;
+                    break;
+                &#125;
+            &#125;
+
+            //关闭DatagramSocket对象
+            socket.close();
+        &#125; catch (IOException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="广播通信"><a href="#广播通信" class="headerlink" title="广播通信"></a>广播通信</h2><h3 id="服务端-3"><a href="#服务端-3" class="headerlink" title="服务端"></a>服务端</h3><pre class="line-numbers language-Java"><code class="language-Java">
+public class Sever &#123;
+    public static void main(String args[]) &#123;
+        int port = 5858;
+        InetAddress group = null;
+        MulticastSocket socket = null;
+        try &#123;
+
+            //创建InetAddress对象，指定广播地址
+            group = InetAddress.getByName("127.0.0.1");
+
+            //创建MulticastSocket对象，监听指定端口
+            socket = new MulticastSocket(port);
+
+            //创建InetSocketAddress对象，指定广播地址和端口
+            InetSocketAddress socketAddress = new InetSocketAddress(group,port);
+
+            //获取指定网卡的NetworkInterface对象
+            NetworkInterface networkInterface = NetworkInterface.getByInetAddress(group);
+
+            //加入广播组
+            socket.joinGroup(socketAddress,networkInterface);
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+        while (true) &#123;
+            byte data[] = new byte[8192];
+            DatagramPacket packet = null;
+
+            //创建DatagramPacket对象，用于接收广播内容
+            packet = new DatagramPacket(data,data.length,group,port);
+            try &#123;
+                socket.receive(packet);
+
+                //将接收到的字节数组转换为字符串
+                String message = new String(packet.getData(),0,packet.getLength());
+                System.out.println("接收的内容：" + message);
+            &#125; catch (Exception e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="客户端-3"><a href="#客户端-3" class="headerlink" title="客户端"></a>客户端</h3><pre class="line-numbers language-Java"><code class="language-Java">
+public class Cilent &#123;
+    // Broadcast
+    String s = "abcd";
+    int port = 8989;
+    InetAddress group = null;
+    MulticastSocket socket = null;
+    Cilent() &#123;
+        try &#123;
+
+            //创建InetAddress对象，指定广播地址（路由器指定的）
+            group = InetAddress.getByName("255.255.255.255");
+
+            //创建MulticastSocket对象，监听指定端口
+            //  (注意，从这里开始DatagramSocket已经变成了MulticastSocket)
+            socket = new MulticastSocket(port);
+
+            //设置TTL值为1，表示只在本地网络中广播，TTL值是该字段指定IP包被路由器丢弃之前允许通过的最大网段数量，1代表只能通过一个网段
+            socket.setTimeToLive(1);
+
+            //创建InetSocketAddress对象，指定广播地址和端口
+            InetSocketAddress socketAddress = new InetSocketAddress(group,port);
+
+            //获取指定网卡的NetworkInterface对象
+            NetworkInterface networkInterface = NetworkInterface.getByInetAddress(group);
+
+            //加入广播组
+            socket.joinGroup(socketAddress,networkInterface);
+        &#125; catch (IOException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+    public void play() &#123;
+        while (true) &#123;
+            try &#123;
+                DatagramPacket packet = null;
+                byte data[] = s.getBytes();
+
+                //创建DatagramPacket对象，指定发送的目标地址和端口号
+                packet = new DatagramPacket(data,data.length,group,port);
+                System.out.println(new String(data));
+
+                //发送数据
+                socket.send(packet);
+                Thread.sleep(2000);
+            &#125; catch (Exception e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+    public static void main(String args[]) &#123;
+        new Cilent().play();
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="多播通信"><a href="#多播通信" class="headerlink" title="多播通信"></a>多播通信</h2><h3 id="服务器接收端程序"><a href="#服务器接收端程序" class="headerlink" title="服务器接收端程序"></a>服务器接收端程序</h3><pre class="line-numbers language-Java"><code class="language-Java">
+public class TestMain &#123;
+    private static MulticastSocket ds;   //多播套接字对象
+    static String multicastHost="239.0.0.255";   //多播组地址
+    static InetAddress receiveAddress;   //接收地址对象
+
+    public static void main(String[] args) throws IOException &#123;
+    
+        // 创建多播套接字，绑定到本地的8899端口
+        ds = new MulticastSocket(8899);  
+        
+        // 获取多播组地址
+        receiveAddress=InetAddress.getByName(multicastHost); 
+        
+        // 将套接字加入多播组
+        ds.joinGroup(receiveAddress);
+        
+        // 开启一个新线程，并将多播套接字对象传递给udpRunnable对象
+        new Thread(new udpRunnable(ds)).start();  
+    &#125;
+&#125;
+
+class udpRunnable implements Runnable &#123;
+    MulticastSocket ds;
+
+    public udpRunnable(MulticastSocket ds) &#123;
+        this.ds=ds;
+    &#125;
+
+    public void run() &#123;
+    
+        // 创建一个用于接收数据的缓冲区
+        byte buf[] = new byte[1024];  
+        DatagramPacket dp = new DatagramPacket(buf, 1024);  
+        while (true) &#123;  
+            try &#123;  
+            
+                // 从多播套接字中接收数据，并将数据存储到数据包对象中
+                ds.receive(dp);  
+                
+                // 打印接收到的客户端消息
+                System.out.println("receive client message : "+new String(buf, 0, dp.getLength()));  
+            &#125; catch (Exception e) &#123;  
+                e.printStackTrace();  
+            &#125;  
+        &#125;  
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="客户发送端"><a href="#客户发送端" class="headerlink" title="客户发送端"></a>客户发送端</h3><pre class="line-numbers language-Java"><code class="language-Java">
+public class SendUdp &#123;
+    public static void main(String[] args) throws IOException &#123;
+        MulticastSocket ms=null; 
+        DatagramPacket dataPacket = null; 
+        ms = new MulticastSocket();
+        
+        // 设置多播数据包的生存时间为32
+        ms.setTimeToLive(32);  
+        
+        // 将字符串 "组播 测试" 转换为字节数组 data
+        byte[] data = "组播 测试".getBytes();   
+        
+        // 获取多播组地址 address 对象
+        InetAddress address = InetAddress.getByName("239.0.0.255");  
+        
+        // 创建数据包 dataPacket，指定数据、数据长度、目标地址和端口
+        dataPacket = new DatagramPacket(data, data.length, address,8899); 
+        
+        // 发送数据包
+        ms.send(dataPacket);  
+        
+        // 关闭套接字
+        ms.close();   
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="IP地址分级"><a href="#IP地址分级" class="headerlink" title="IP地址分级"></a>IP地址分级</h2><p>之前比赛写过这个还不是很了解，这里记一下</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>0.0.0.0-127.255.255.255</td>
+</tr>
+<tr>
+<td>B</td>
+<td>128.0.0.0-191.255.255.255</td>
+</tr>
+<tr>
+<td>C</td>
+<td>192.0.0.0-223.255.255.255</td>
+</tr>
+<tr>
+<td>D</td>
+<td>224.0.0.0-239.255.255.255</td>
+</tr>
+<tr>
+<td>E</td>
+<td>240.0.0.0-255.255.255.255</td>
+</tr>
+</tbody></table>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>发现一个网站，大家可以<a href="https://decomytree.com/home?hashedId=3L5dBvOjX-Kd">进来玩玩</a></p>
+<p><a href="https://smms.app/image/73ArcZKfJHBeW8o" target="_blank"><img src="https://s2.loli.net/2023/12/14/73ArcZKfJHBeW8o.jpg" width="550"></a></p>
 
                 
             </div>
@@ -1179,7 +1553,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">130.3k</span>
+                        class="white-color">132k</span>
             
             
             
