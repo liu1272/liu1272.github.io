@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Java网络编程</title>
+      <link href="/2023/12/14/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+      <url>/2023/12/14/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<p><strong>这篇文章我觉得我对于网络基础部分就不用再说更多了，直接一张图就够。剩下的用代码和注释来说明，看懂就是学会。</strong><br><a href="https://smms.app/image/Yv5mfec4P3sdFHt" target="_blank"><img src="https://s2.loli.net/2023/12/14/Yv5mfec4P3sdFHt.png" ></a></p><h4 id="TCP通信"><a href="#TCP通信" class="headerlink" title="TCP通信"></a>TCP通信</h4><h5 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h5><p>我在正文开头定义了一个：<a name="divtop"></a></p><pre class="line-numbers language-Java"><code class="language-Java">public class Sever &#123;    public static void main(String[] args) &#123;        ServerSocket serverSocket = null;   //初始化定义为空保证安全        Socket socket = null;        InputStream is = null;        ByteArrayOutputStream baos = null;        try &#123;            //创建ServerSocket对象，监听9999端口            serverSocket = new ServerSocket(9999);            //等待客户端的连接请求，返回一个Socket对象，程序阻塞在此处直到有客户端连接            socket = serverSocket.accept();            //获取输入流，用于读取客户端发送的数据            is = socket.getInputStream();            //创建字节数组输出流，用于存储读取到的数据            baos = new ByteArrayOutputStream();            //预定义缓冲区数组大小，方便存储数据            byte[] buffer = new byte[1024];            int len;            //循环读取客户端发送的数据，将数据存储到字节数组输出流中            while((len = is.read(buffer))!=-1)&#123;                baos.write(buffer,0,len);            &#125;            //将字节数组输出流中的数据转换为字符串并输出到控制台            System.out.println(baos.toString());            //关闭字节数组输出流和输入流            baos.close();            is.close();            //关闭Socket对象和ServerSocket对象            socket.close();            serverSocket.close();        &#125; catch (IOException e)&#123;            e.printStackTrace(); //打印异常信息        &#125;    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h5 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h5><pre class="line-numbers language-Java"><code class="language-Java">public class Cilent &#123;    public static void main(String[] args) &#123;        Socket socket = null;   // 用于建立客户端与服务器之间的套接字连接        OutputStream os = null; // 用于向服务器发送数据的输出流        try &#123;            InetAddress serverIP = InetAddress.getByName("127.0.0.1"); // 通过IP地址获取服务器的InetAddress实例            int port = 9999; // 连接服务器的端口号            // 创建套接字连接至服务器            socket = new Socket(serverIP, port);            // 通过套接字获取输出流，用于向服务器发送数据            os = socket.getOutputStream();            // 向服务器发送数据            os.write("Hello, world!".getBytes());        &#125; catch (IOException e) &#123;            e.printStackTrace();        &#125; finally &#123;            if (socket != null) &#123;                try &#123;                    socket.close(); // 关闭套接字连接                &#125; catch (IOException e) &#123;                    e.printStackTrace();                &#125;            &#125;        &#125;    &#125;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>我们跳转过去：<a href="#divtop">跳转指定位置</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Java多线程</title>
       <link href="/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
       <url>/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
