@@ -417,7 +417,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-12-14
+                    2023-12-21
                 </div>
                 
 
@@ -531,9 +531,9 @@ public class java01 &#123;
 
 new Thread(integerFutureTask).start();
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>推荐使用实现Runnable接口的方法来创建线程，可以避免Java单继承的局限性，同时操作同个对象</strong><br><strong>但是正因为同时操作了同个对象，导致了线程安全问题</strong></p>
-<h2 id="Java三种代理模式"><a href="#Java三种代理模式" class="headerlink" title="Java三种代理模式"></a>Java三种代理模式</h2><p>代理模式是一种设计模式，提供了对目标对象额外的访问方式，即通过代理对象访问目标对象，这样可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</p>
-<p>简言之，代理模式就是设置一个中间代理来控制访问原目标对象，以达到增强原对象的功能和简化访问方式。</p>
+<p>  <strong>推荐使用实现Runnable接口的方法来创建线程，可以避免Java单继承的局限性，同时操作同个对象</strong><br>  <strong>但是正因为同时操作了同个对象，导致了线程安全问题</strong></p>
+<h2 id="Java三种代理模式"><a href="#Java三种代理模式" class="headerlink" title="Java三种代理模式"></a>Java三种代理模式</h2><p>  代理模式是一种设计模式，提供了对目标对象额外的访问方式，即通过代理对象访问目标对象，这样可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</p>
+<p>  简言之，代理模式就是设置一个中间代理来控制访问原目标对象，以达到增强原对象的功能和简化访问方式。</p>
 <h3 id="【静态代理】"><a href="#【静态代理】" class="headerlink" title="【静态代理】"></a><strong>【静态代理】</strong></h3><p>这种代理方式需要<strong>代理对象和目标对象实现一样的接口</strong>。<br>优点：可以在不修改目标对象的前提下扩展目标对象的功能。<br>缺点：</p>
 <pre><code>冗余。由于代理对象要实现与目标对象一致的接口，会产生过多的代理类。
 不易维护。一旦接口增加方法，目标对象与代理对象都要进行修改。
@@ -581,12 +581,12 @@ public class StaticUserProxy &#123;  // 测试类：TestProxy
   保存数据
   提交事务
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="【动态代理】"><a href="#【动态代理】" class="headerlink" title="【动态代理】"></a><strong>【动态代理】</strong></h3><p>动态代理利用了JDK API，动态地在内存中构建代理对象，从而实现对目标对象的代理功能。动态代理又被称为JDK代理或接口代理。</p>
+<h3 id="【动态代理】"><a href="#【动态代理】" class="headerlink" title="【动态代理】"></a><strong>【动态代理】</strong></h3><p>  动态代理利用了JDK API，动态地在内存中构建代理对象，从而实现对目标对象的代理功能。动态代理又被称为JDK代理或接口代理。</p>
 <p>静态代理与动态代理的区别主要在：</p>
 <pre><code>静态代理在编译时就已经实现，编译完成后代理类是一个实际的class文件
 动态代理是在运行时动态生成的，即编译完成后没有实际的class文件，而是在运行时动态生成类字节码，并加载到JVM中
 </code></pre>
-<p>特点：<br>动态代理对象不需要实现接口，但是要求<strong>目标对象必须实现接口</strong>，否则不能使用动态代理。</p>
+<p>特点：<br>  动态代理对象不需要实现接口，但是要求<strong>目标对象必须实现接口</strong>，否则不能使用动态代理。</p>
 <pre class="line-numbers language-Java"><code class="language-Java">
 public interface IUserDao &#123;  // 接口类： IUserDao
     public void save();  // 定义接口方法
@@ -643,7 +643,7 @@ public class TestProxy &#123;
   保存数据
   提交事务
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="【cglib代理】"><a href="#【cglib代理】" class="headerlink" title="【cglib代理】"></a><strong>【cglib代理】</strong></h3><p>cglib 是一个第三方代码生成类库，运行时在内存中动态生成一个子类对象从而实现对目标对象功能的扩展。</p>
+<h3 id="【cglib代理】"><a href="#【cglib代理】" class="headerlink" title="【cglib代理】"></a><strong>【cglib代理】</strong></h3><p>  cglib 是一个第三方代码生成类库，运行时在内存中动态生成一个子类对象从而实现对目标对象功能的扩展。</p>
 <p>cglib特点：<strong>无需实现接口</strong></p>
 <pre><code>JDK的动态代理有一个限制，就是使用动态代理的对象必须实现一个或多个接口。
 如果想代理没有实现接口的类，就可以使用CGLIB实现。
@@ -744,26 +744,26 @@ Arrays.sort(array, (s1, s2) -> s1.compareTo(s2));
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="线程五大状态"><a href="#线程五大状态" class="headerlink" title="线程五大状态"></a>线程五大状态</h2><p><a href="https://smms.app/image/ahJjMVtcqdRIEPf" target="_blank"><img src="https://s2.loli.net/2023/12/14/ahJjMVtcqdRIEPf.jpg" ></a><br><a href="https://smms.app/image/c8B1KWYHNpOdmb2" target="_blank"><img src="https://s2.loli.net/2023/12/14/c8B1KWYHNpOdmb2.jpg" ></a></p>
 <h3 id="线程停止"><a href="#线程停止" class="headerlink" title="线程停止"></a>线程停止</h3><p>不推荐使用JDK提供的 stop()、destroy()方法。<br>推荐线程自己停止下来，使用一个标志位进行终止变量（当flag=false终止线程运行）</p>
-<h3 id="线程休眠"><a href="#线程休眠" class="headerlink" title="线程休眠"></a>线程休眠</h3><p>sleep(时间)指定当前线程阻塞的毫秒数<br>sleep存在异常InterruptedException;<br>sleep时间达到后线程进入就绪状态<br>sleep可以模拟网络延时，倒计时等<br>每一个对象都有一个锁，sleep不会释放锁</p>
-<h3 id="线程礼让"><a href="#线程礼让" class="headerlink" title="线程礼让"></a>线程礼让</h3><p>礼让线程，让当前正在执行的线程暂停，但不阻塞<br>将线程从运行状态转为就绪状态<br>让cpu重新调度，礼让不一定成功!看CPU心情</p>
-<h3 id="线程强制执行"><a href="#线程强制执行" class="headerlink" title="线程强制执行"></a>线程强制执行</h3><p>Join合并线程，待此线程执行完成后，再执行其他线程，其他线程阻塞</p>
-<h3 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h3><p>Java提供一个线程调度器来监控程序中启动后进入就绪状态的所有线程，线程调度器按照优先级决定应该调度哪个线程来执行线程的优先级用数字表示，范围从1~10.<br><code>Thread.MIN PRIORITY = 1;</code><br>使用以下方式改变或获取优先级</p>
+<h3 id="线程休眠"><a href="#线程休眠" class="headerlink" title="线程休眠"></a>线程休眠</h3><p>  sleep(时间)指定当前线程阻塞的毫秒数<br>  sleep存在异常InterruptedException;<br>  sleep时间达到后线程进入就绪状态<br>  sleep可以模拟网络延时，倒计时等<br>  每一个对象都有一个锁，sleep不会释放锁</p>
+<h3 id="线程礼让"><a href="#线程礼让" class="headerlink" title="线程礼让"></a>线程礼让</h3><p>  礼让线程，让当前正在执行的线程暂停，但不阻塞<br>  将线程从运行状态转为就绪状态<br>  让cpu重新调度，礼让不一定成功!看CPU心情</p>
+<h3 id="线程强制执行"><a href="#线程强制执行" class="headerlink" title="线程强制执行"></a>线程强制执行</h3><p>  Join合并线程，待此线程执行完成后，再执行其他线程，其他线程阻塞</p>
+<h3 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h3><p>  Java提供一个线程调度器来监控程序中启动后进入就绪状态的所有线程，线程调度器按照优先级决定应该调度哪个线程来执行线程的优先级用数字表示，范围从1~10.<br><code>Thread.MIN PRIORITY = 1;</code><br>使用以下方式改变或获取优先级</p>
 <pre><code>getPriority() . setPriority(int xxx)
 </code></pre>
-<h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><p>线程分为用户线程和守护线程<br>虚拟机必须确保<strong>用户线程</strong>执行完毕<br>虚拟机不用等待<strong>守护线程</strong>执行完毕</p>
+<h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><p>  线程分为用户线程和守护线程<br>  虚拟机必须确保<strong>用户线程</strong>执行完毕<br>  虚拟机不用等待<strong>守护线程</strong>执行完毕</p>
 <pre><code>thread.setDaemon(true); //默认是false表示是用户线程 ，正常的线程都是用户线程
 </code></pre>
 <h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><p>实现要求：队列+锁<br>由于同一进程的多个线程共享同一块存储空间，导致访问冲突问题<br>为了保证数据在方法中被访问时的正确性，在访问时加入锁机制<code>synchronized</code><br>加锁释放锁会导致比较多的上下文切换和调度延时起性能问题<br>但是一个优先级高的线程等待一个优先级低的线程释放锁会导致优先级倒置，引起性能问题</p>
-<h3 id="同步方法和同步块"><a href="#同步方法和同步块" class="headerlink" title="同步方法和同步块"></a>同步方法和同步块</h3><p>同步方法:<br><code>public synchronized void method(int args) &#123;&#125;</code><br>每个对象对应一把锁每个synchronized方法都必须获得调用该方法的对象的锁才能执行<br>缺陷:若将一个大的方法申明为synchronized 将会影响效率</p>
-<p>同步块:<br><code>synchronized (obj) &#123;&#125;</code><br>obj 可以是任何对象，但是推荐使用共享资源作为同步监视器（obj）<br>同步方法中无需指定同步监视器（obj），因为同步方法的同步监视器就是this，就是这个对象本身</p>
+<h3 id="同步方法和同步块"><a href="#同步方法和同步块" class="headerlink" title="同步方法和同步块"></a>同步方法和同步块</h3><p>同步方法:<br><code>public synchronized void method(int args) &#123;&#125;</code><br>  每个对象对应一把锁每个synchronized方法都必须获得调用该方法的对象的锁才能执行<br>  缺陷:若将一个大的方法申明为synchronized 将会影响效率</p>
+<p>同步块:<br><code>synchronized (obj) &#123;&#125;</code><br>  obj 可以是任何对象，但是推荐使用共享资源作为同步监视器（obj）<br>  同步方法中无需指定同步监视器（obj），因为同步方法的同步监视器就是this，就是这个对象本身</p>
 <ol>
 <li>第一个线程访问，锁定同步监视器，执行其中代码</li>
 <li>第二个线程访问，发现同步监视器被锁定，无法访问</li>
 <li>第一个线程访问完毕，解锁同步监视器</li>
 <li>第二个线程访问，发现同步监视器没有锁，然后锁定并访问</li>
 </ol>
-<p>对于普通同步方法，锁是当前实例对象。如果有多个实例,那么锁对象必然不同无法实现同步。<br>对于静态同步方法，锁是当前类的Class对象。有多个实例但是锁对象是相同的,可以完成同步。<br>对于同步方法块，锁是Synchonized括号里配置的对象。如当前类的class只有一个,锁对象相同 也能实现同步。</p>
-<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>多个线程各自占有一些共享资源，并且互相等待其他线程占有的资源才能运行<br>而某一个同步块同时拥有“两个以上对象的锁”导致两个或者多个线程都在等待对方释放资源，都停止执行的情形时，就可能会发生“死锁”的问题</p>
+<p>  对于普通同步方法，锁是当前实例对象。如果有多个实例,那么锁对象必然不同无法实现同步。<br>  对于静态同步方法，锁是当前类的Class对象。有多个实例但是锁对象是相同的,可以完成同步。<br>  对于同步方法块，锁是Synchonized括号里配置的对象。如当前类的class只有一个,锁对象相同 也能实现同步。</p>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>  多个线程各自占有一些共享资源，并且互相等待其他线程占有的资源才能运行<br>  而某一个同步块同时拥有“两个以上对象的锁”导致两个或者多个线程都在等待对方释放资源，都停止执行的情形时，就可能会发生“死锁”的问题</p>
 <p>产生死锁的四个必要条件：</p>
 <ol>
 <li>互斥条件:一个资源每次只能被一个进程使用。</li>
@@ -771,8 +771,8 @@ Arrays.sort(array, (s1, s2) -> s1.compareTo(s2));
 <li>不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺</li>
 <li>循环等待条件:若千进程之间形成一种头尾相接的循环等待资源关系</li>
 </ol>
-<p>只要打破以上的任意一个条件就能解除死锁。</p>
-<h3 id="Lock锁"><a href="#Lock锁" class="headerlink" title="Lock锁"></a>Lock锁</h3><p>从JDK5.0开始Java提供了更强大的线程同步机制-通过显式定义同步锁对象来实现同步。同步锁使用Lock对象实现。<br>锁提供了对共享资源的独占访问，每次只能有一个线程对Lock对象加锁，线程开始访问共享资源之前应先获得Lock对象<br>ReentrantLock（可重入锁）拥有与synchronized 相同的并发性和内存语义，在实现线程安全的控制中较常用，可以显式加锁、释放锁。</p>
+<p>  只要打破以上的任意一个条件就能解除死锁。</p>
+<h3 id="Lock锁"><a href="#Lock锁" class="headerlink" title="Lock锁"></a>Lock锁</h3><p>  从JDK5.0开始Java提供了更强大的线程同步机制-通过显式定义同步锁对象来实现同步。同步锁使用Lock对象实现。<br>  锁提供了对共享资源的独占访问，每次只能有一个线程对Lock对象加锁，线程开始访问共享资源之前应先获得Lock对象<br>  ReentrantLock（可重入锁）拥有与synchronized 相同的并发性和内存语义，在实现线程安全的控制中较常用，可以显式加锁、释放锁。</p>
 <p>使用示例：</p>
 <pre class="line-numbers language-Java"><code class="language-Java">
 public void testMethod() &#123;
@@ -790,7 +790,7 @@ public void testMethod() &#123;
 <li><strong>优先使用顺序:</strong></li>
 <li>Lock &gt;同步代码块 (已经进入了方法体，分配了相应资源)&gt;同步方法 (在方法体之外)</li>
 </ul>
-<h2 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h2><h3 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h3><p>生产者和消费者共享同一个资源，并且生产者和消费者之间相互依赖，互为条件<br><strong>对于生产者：</strong>没有生产产品之前，要通知消费者等待而生产了产品之后，又需要马上通知消费者消费<br><strong>对于消费者：</strong>在消费之后，要通知生产者已经结束消费，需要生产新的产品以供消费</p>
+<h2 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h2><h3 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h3><p>  生产者和消费者共享同一个资源，并且生产者和消费者之间相互依赖，互为条件<br>  <strong>对于生产者：</strong>没有生产产品之前，要通知消费者等待而生产了产品之后，又需要马上通知消费者消费<br>  <strong>对于消费者：</strong>在消费之后，要通知生产者已经结束消费，需要生产新的产品以供消费</p>
 <ul>
 <li>synchronized 可阻止并发更新同一个共享资源，实现了同步</li>
 <li>synchronized 不能用来实现不同线程之间的消息传递(通信)</li>
@@ -820,14 +820,14 @@ public void testMethod() &#123;
 <td>唤醒同一个对象上所有调用wait()方法的线程，优先级别高的线程优先调度</td>
 </tr>
 </tbody></table>
-<h3 id="管程法"><a href="#管程法" class="headerlink" title="管程法"></a>管程法</h3><p>使用wait()和notify()方法的实现</p>
+<h3 id="管程法"><a href="#管程法" class="headerlink" title="管程法"></a>管程法</h3><p>  使用wait()和notify()方法的实现</p>
 <p><strong>生产者:</strong> 负责生产数据的模块(可能是方法，对象，线程，进程)<br><strong>消费者:</strong> 负责处理数据的模块(可能是方法，对象，线程，进程)<br><strong>缓冲区:</strong> 生产者将生产好的数据放入缓冲区，消费者从缓冲区拿出数据</p>
-<p>缓冲区满或者空时都调用wait()方法等待，当生产者生产了一个产品或者消费者消费了一个产品之后会唤醒所有线程。</p>
-<h3 id="可重入锁ReentrantLock的实现"><a href="#可重入锁ReentrantLock的实现" class="headerlink" title="可重入锁ReentrantLock的实现"></a>可重入锁ReentrantLock的实现</h3><p>可重入锁，也叫做递归锁，指的是同一线程 外层函数获得锁之后，内层递归函数仍然有获取该锁的代码，但不受影响。<br>锁维护一个与获取锁相关的计数器，如果拥有锁的某个线程再次得到锁，那么获取计数器就加1，函数调用结束计数器就减1。<br>锁需要被释放两次才能获得真正释放，已经获取锁的线程进入其他需要相同锁的同步代码块不会被阻塞。</p>
-<h3 id="阻塞队列BlockingQueue的实现"><a href="#阻塞队列BlockingQueue的实现" class="headerlink" title="阻塞队列BlockingQueue的实现"></a>阻塞队列BlockingQueue的实现</h3><p>BlockinoQueue是一个已经在内部实现了同步的队列，实现方式采用的是await()/signal()方法。它可以在生成对象时指定容量大小，用于阻塞操作的是put()和take()方法。<br>put()方法: 类似于我们上面的生产者线程，容量达到最大时，自动阻塞。<br>take(方法: 类似于我们上面的消费者线程，容量为0时，自动阻寒。<br>当一个线程对已经满了的阻塞队列进行入队操作时会阻塞，除非有另外一个线程进行了出队操作，当一个线程对一个空的阻塞队列进行出队操作时也会阻塞，除非有另外一个线程进行了入队操作。<br>从上可知，阻塞队列是线程安全的。</p>
-<h3 id="信号量-Semaphore-的实现"><a href="#信号量-Semaphore-的实现" class="headerlink" title="信号量 Semaphore 的实现"></a>信号量 Semaphore 的实现</h3><p>Semaphore是一种基于计数的信号量，它可以设定一个阀值。<br>当多个线程竞争获取许可信号，做完自己的申请后归还，超过闻值后，线程申请许可信号将会被阻塞。<br>Semaphore可以用来构建一些对象池，资源池之类的，比如数据库连接池，我们也可以创建计数为的Semaphore，将其作为一种类似互斥锁的机制，这也叫二元信号量，表示两种互斥状态。<br>计数为0的Semaphore是可以release的，然后就可以acquire (即一开始使线程阻塞从而完成其他执行)。</p>
-<h3 id="管道输入输出流实现"><a href="#管道输入输出流实现" class="headerlink" title="管道输入输出流实现"></a>管道输入输出流实现</h3><p>先创建一个管道输入流和管道输出流，然后将输入流和输出流进行连接<br>用生产者线程往管道输出流中写入数据，消费者在管道输入流中读取数据，这样就可以实现了不同线程间的相互通讯<br>但是这种方式在生产者和生产者、消费者和消费者之间不能保证同步，也就是说在一个生产者和一个消费者的情况下是可以生产者和消费者之间交替运行的，多个生成者和多个消费者者之间则不行</p>
-<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p><strong>背景:</strong> 经常创建和销毁、使用量特别大的资源，比如并发情况下的线程，对性能影响很大。<br><strong>思路:</strong> 提前创建好多个线程，放入线程池中，使用时直接获取，使用完放回池中可以避免频繁创建销毁、实现重复利用。<br><strong>好处:</strong></p>
+<p>  缓冲区满或者空时都调用wait()方法等待，当生产者生产了一个产品或者消费者消费了一个产品之后会唤醒所有线程。</p>
+<h3 id="可重入锁ReentrantLock的实现"><a href="#可重入锁ReentrantLock的实现" class="headerlink" title="可重入锁ReentrantLock的实现"></a>可重入锁ReentrantLock的实现</h3><p>  可重入锁，也叫做递归锁，指的是同一线程 外层函数获得锁之后，内层递归函数仍然有获取该锁的代码，但不受影响。<br>  锁维护一个与获取锁相关的计数器，如果拥有锁的某个线程再次得到锁，那么获取计数器就加1，函数调用结束计数器就减1。<br>  锁需要被释放两次才能获得真正释放，已经获取锁的线程进入其他需要相同锁的同步代码块不会被阻塞。</p>
+<h3 id="阻塞队列BlockingQueue的实现"><a href="#阻塞队列BlockingQueue的实现" class="headerlink" title="阻塞队列BlockingQueue的实现"></a>阻塞队列BlockingQueue的实现</h3><p>  BlockinoQueue是一个已经在内部实现了同步的队列，实现方式采用的是await()/signal()方法。它可以在生成对象时指定容量大小，用于阻塞操作的是put()和take()方法。<br>put()方法: 类似于我们上面的生产者线程，容量达到最大时，自动阻塞。<br>take(方法: 类似于我们上面的消费者线程，容量为0时，自动阻寒。<br>  当一个线程对已经满了的阻塞队列进行入队操作时会阻塞，除非有另外一个线程进行了出队操作，当一个线程对一个空的阻塞队列进行出队操作时也会阻塞，除非有另外一个线程进行了入队操作。<br>从上可知，阻塞队列是线程安全的。</p>
+<h3 id="信号量-Semaphore-的实现"><a href="#信号量-Semaphore-的实现" class="headerlink" title="信号量 Semaphore 的实现"></a>信号量 Semaphore 的实现</h3><p>  Semaphore是一种基于计数的信号量，它可以设定一个阀值。<br>  当多个线程竞争获取许可信号，做完自己的申请后归还，超过闻值后，线程申请许可信号将会被阻塞。<br>  Semaphore可以用来构建一些对象池，资源池之类的，比如数据库连接池，我们也可以创建计数为的Semaphore，将其作为一种类似互斥锁的机制，这也叫二元信号量，表示两种互斥状态。<br>  计数为0的Semaphore是可以release的，然后就可以acquire (即一开始使线程阻塞从而完成其他执行)。</p>
+<h3 id="管道输入输出流实现"><a href="#管道输入输出流实现" class="headerlink" title="管道输入输出流实现"></a>管道输入输出流实现</h3><p>  先创建一个管道输入流和管道输出流，然后将输入流和输出流进行连接<br>  用生产者线程往管道输出流中写入数据，消费者在管道输入流中读取数据，这样就可以实现了不同线程间的相互通讯<br>  但是这种方式在生产者和生产者、消费者和消费者之间不能保证同步，也就是说在一个生产者和一个消费者的情况下是可以生产者和消费者之间交替运行的，多个生成者和多个消费者者之间则不行</p>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>  <strong>背景:</strong> 经常创建和销毁、使用量特别大的资源，比如并发情况下的线程，对性能影响很大。<br>  <strong>思路:</strong> 提前创建好多个线程，放入线程池中，使用时直接获取，使用完放回池中可以避免频繁创建销毁、实现重复利用。<br><strong>好处:</strong></p>
 <ol>
 <li>提高响应速度(减少了创建新线程的时间)</li>
 <li>降低资源消耗(重复利用线程池中线程，不需要每次都创建)</li>
@@ -851,8 +851,8 @@ private static void createCachedThreadPool() &#123;
         &#125;
 &#125;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>应该使用ThreadPoolExecutor类来创建线程池，根据自己需要的场景来创建一个合适的线程池。</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>很尴尬这是这个学期的第一篇博客文章，有一种一个学期没学啥东西的感觉<br><strong>orz</strong>能鸽这么久确实是没想到<br>接下来可能会整一些java的东西，然后有计划写算法或者安全开发这些东西。</p>
+<p>  应该使用ThreadPoolExecutor类来创建线程池，根据自己需要的场景来创建一个合适的线程池。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>  很尴尬这是这个学期的第一篇博客文章，有一种一个学期没学啥东西的感觉<br><strong>orz</strong>能鸽这么久确实是没想到<br>  接下来可能会整一些java的东西，然后有计划写算法或者安全开发这些东西。</p>
 <p><a href="https://smms.app/image/hDei8vSbxJVIqto" target="_blank"><img src="https://s2.loli.net/2023/12/14/hDei8vSbxJVIqto.jpg" width = "500" ></a></p>
 
                 
@@ -1505,7 +1505,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">140.3k</span>
+                        class="white-color">146.1k</span>
             
             
             
