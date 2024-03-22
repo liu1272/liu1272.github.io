@@ -406,21 +406,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-20
+                    2024-03-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    3.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    12 分
                 </div>
                 
 
@@ -465,6 +465,7 @@ select * from  %2579%257a
 也就是说：%df\’ = %df%5c%27=縗’，有了单引号就好注入了
 注：select防止用户自定义的名称和mysql保留字冲突。
 </code></pre>
+<p>**修复：<br>  使用统一字符集<br>  使用 mysql_real_escape_string 进行转义<br>  PHP编写的代码，使用magic_quotes_gpc（魔术引号）<br>  使用addslashes对参数进行转义<br>  使用PDO预处理（php_pdo_mysql.dll）<br>**</p>
 <h2 id="文件上传检测方式以及绕过原理"><a href="#文件上传检测方式以及绕过原理" class="headerlink" title="文件上传检测方式以及绕过原理"></a>文件上传检测方式以及绕过原理</h2><h4 id="监测方法：JS、黑白名单、mine（基于上传自带类型艰检测）"><a href="#监测方法：JS、黑白名单、mine（基于上传自带类型艰检测）" class="headerlink" title="监测方法：JS、黑白名单、mine（基于上传自带类型艰检测）"></a>监测方法：JS、黑白名单、mine（基于上传自带类型艰检测）</h4><h4 id="绕过方法："><a href="#绕过方法：" class="headerlink" title="绕过方法："></a>绕过方法：</h4><h5 id="1-00绕过（-php终止符-jpg）"><a href="#1-00绕过（-php终止符-jpg）" class="headerlink" title="1. %00绕过（.php终止符.jpg）"></a>1. %00绕过（.php终止符.jpg）</h5><pre><code>        白名单过滤肯定是从后往前读取后缀，所以读取到.jpg在白名单里就放通了。
         但是在调用文件的时候读取文件名是从前往后读，所以看到.php后面的终止符的时候就停止读取了，最终读取的文件名的后缀就是.php
         这个%00是什么意思呢？看到有%，那么首先就应该想到的是URL编码。然而%00只针对GET传参，所以POST传参不能识别URL编码
@@ -1303,7 +1304,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">151.9k</span>
+                        class="white-color">153.4k</span>
             
             
             
