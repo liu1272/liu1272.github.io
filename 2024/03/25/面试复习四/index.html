@@ -4,9 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="SSRF服务器端请求伪造, Robin">
-    <meta name="description" content="概述SSRF是一种由攻击者构造形成由服务端发起请求的一个安全漏洞SSRF攻击的目标一般是作为跳板机访问从外网无法访问的内部系统（正是因为它是由服务端发起的，所以它能够请求到内网）
-原理大都是由于服务端提供了从其他服务器应用获取数据的功能且没">
+    <meta name="keywords" content="面试复习四, Robin">
+    <meta name="description" content="如何查看系统内存 shell如何判断是否存在Shiro漏洞未登陆的情况下，请求包的 cookie 中没有 rememberMe 字段，返回包 set-Cookie 里也没有 deleteMe 字段登陆失败的话 ， 不管勾选 Remember">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>SSRF服务器端请求伪造 | Robin</title>
+    <title>面试复习四 | Robin</title>
     <link rel="icon" type="image/png" href="../../../../favicon.png">
     
     <style>
@@ -346,12 +345,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('../../../../medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">SSRF服务器端请求伪造</h1>
+                    <h1 class="description center-align post-title">面试复习四</h1>
                 </div>
             </div>
         </div>
@@ -400,21 +399,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-07-07
+                    2024-03-25
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-19
+                    2024-03-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    1.2k
                 </div>
                 
 
@@ -441,65 +440,63 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>SSRF是一种由攻击者构造形成由服务端发起请求的一个安全漏洞<br>SSRF攻击的目标一般是作为跳板机访问从外网无法访问的内部系统<br>（正是因为它是由服务端发起的，所以它能够请求到内网）<br><a href="https://smms.app/image/daoBFcPQqzvXkpy" target="_blank"><img src="https://s2.loli.net/2023/07/07/daoBFcPQqzvXkpy.png" width="500" /></a></p>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制<br>因此可以从指定URL地址获取网页完本内容、加载指定地址的图片、下载等。</p>
-<h4 id="利用价值"><a href="#利用价值" class="headerlink" title="利用价值"></a>利用价值</h4><p>利用一个可以发起网络请求的服务当作跳板来攻击内部其他服务</p>
-<h4 id="危害"><a href="#危害" class="headerlink" title="危害"></a>危害</h4><ol>
-<li>探测内网信息,用协议探<code>ftp%26ip=&#123;ip&#125;%26port=&#123;port&#125;</code>（dict协议）</li>
-<li>攻击内网或本地其他服务（比如溢出）</li>
-<li>穿透防火墙</li>
-<li>对内网web应用进行指纹识别，通过访问应用存在的默认文件实现</li>
-<li>利用file协议读取本地文件</li>
-<li>利用Redis未授权访问，HTTP CRLF注入</li>
-<li>DOS攻击（请求大文件，始终保持连接keep alive always）等等</li>
-<li>ophergopher协议/gopher协议访问，反弹shell</li>
-</ol>
-<h4 id="漏洞出现点"><a href="#漏洞出现点" class="headerlink" title="漏洞出现点"></a>漏洞出现点</h4><ol>
-<li>能够对外发起网络请求的地方</li>
-<li>请求远程服务器资源的地方</li>
-<li>数据库内置功能</li>
-<li>邮件系统</li>
-<li>文件处理</li>
-<li>在线处理工具</li>
-</ol>
-<p><strong>举几个例子：</strong></p>
+                <h2 id="如何查看系统内存-shell"><a href="#如何查看系统内存-shell" class="headerlink" title="如何查看系统内存 shell"></a>如何查看系统内存 shell</h2><h2 id="如何判断是否存在Shiro漏洞"><a href="#如何判断是否存在Shiro漏洞" class="headerlink" title="如何判断是否存在Shiro漏洞"></a>如何判断是否存在Shiro漏洞</h2><p><strong>未登陆的情况下</strong>，请求包的 cookie 中没有 <code>rememberMe</code> 字段，返回包 set-Cookie 里也没有 <code>deleteMe</code> 字段<br><strong>登陆失败</strong>的话 ， 不管勾选 RememberMe 字段没有 ， 返回包都会有<code>rememberMe=deleteMe</code> 字段<br>不勾选 RememberMe 字段 ， 登陆成功的话 ， 返回包 set-Cookie 会有<code>rememberMe=deleteMe</code> 字段。但是之后的所有请求中 Cookie 都不会有 rememberMe字段<br>勾选 RememberMe 字 段 ， 登陆成功的话 ， 返回包 set-Cookie 会有<code>rememberMe=deleteMe</code> 字段，还会有 rememberMe 字段，之后的所有请求中 Cookie都会有 rememberMe 字段</p>
+<h2 id="后渗透建立隧道"><a href="#后渗透建立隧道" class="headerlink" title="后渗透建立隧道"></a>后渗透建立隧道</h2><h3 id="常规出网隧道搭建"><a href="#常规出网隧道搭建" class="headerlink" title="常规出网隧道搭建"></a>常规出网隧道搭建</h3><p><strong>使用frp/ligolo等基于golang的内网穿透工具。</strong></p>
 <ol>
-<li>在线识图，在线文档翻译，分享，订阅等</li>
-<li>根据远程URL上传，静态资源图片等</li>
-<li>数据库的比如mongodb的copyDatabase函数</li>
-<li>邮件系统就是接收邮件服务器地址这些地方。</li>
-<li>文件就找ImageMagick，xml这些。</li>
-<li>从URL关键字（source,share,link,src,imageurl,target等）</li>
+<li>使用MSF获取Session后建立端口转发/socks4a/socks5代理。</li>
+<li>使用regeorg/Tunna/ABPTTS等基于webshell的内网代理。<br>其中基于frp/ligolo等内网穿透工具是出网环境最好的选择，因为此类工具中都集成TLS加密/TCP连接复用/socks5代理功能，有极高的传输效率及稳定性。</li>
 </ol>
-<h4 id="SSRF漏洞相关函数和类"><a href="#SSRF漏洞相关函数和类" class="headerlink" title="SSRF漏洞相关函数和类"></a>SSRF漏洞相关函数和类</h4><p>file_get_contents()将整个文件或一个url所指向的文件读入一个字符串中。<br>readfile()输出一个文件的内容。<br>fsockopen()打开一个网络连接或者一个Unix 套接字连接。<br>curl_exec()初始化一个新的会话，返回一个cURL句柄，供curl_setopt()，curl_exec()和curl_close() 函数使用。<br>fopen()打开一个文件文件或者 URL。</p>
-<h4 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h4><ol>
-<li>http协议访问<code>url=http://127.0.0.1/1.txt</code></li>
-<li><a href="https://www.cnblogs.com/endust/p/11804767.html">PHP伪协议访问</a><a href="https://smms.app/image/IHa9JMnTCySpNWO" target="_blank"><img src="https://s2.loli.net/2023/07/07/IHa9JMnTCySpNWO.png" width="600" /></a></li>
-<li>Gopher协议</li>
-<li>FastCGI协议</li>
-<li>Redis协议<br>```<h1 id="利用file协议查看文件"><a href="#利用file协议查看文件" class="headerlink" title="利用file协议查看文件"></a>利用file协议查看文件</h1>curl -v ‘<a href="http://sec.com/ssrf.php?url=file:///etc/passwd&#39;">http://sec.com/ssrf.php?url=file:///etc/passwd&#39;</a></li>
-</ol>
-<h1 id="利用dict探测端口"><a href="#利用dict探测端口" class="headerlink" title="利用dict探测端口"></a>利用dict探测端口</h1><p>curl -v ‘<a href="http://sec.com/ssrf.php?url=dict://127.0.0.1:6379&#39;">http://sec.com/ssrf.php?url=dict://127.0.0.1:6379&#39;</a></p>
-<h1 id="利用gopher协议反弹shell"><a href="#利用gopher协议反弹shell" class="headerlink" title="利用gopher协议反弹shell"></a>利用gopher协议反弹shell</h1><p>curl -v ‘<a href="http://sec.com/ssrf.php?url=gopher://127.0.0.1:6379/_....&#39;">http://sec.com/ssrf.php?url=gopher%3A%2F%2F127.0.0.1%3A6379/_....&#39;</a></p>
-<pre><code>
-#### 绕过姿势
-1. 利用HTTP基本身份认证的方式绕过`http://example.com@127.0.0.1`
-2. 利用IP地址的省略写法绕过,`http://123.254.34.254&gt;&gt;http://[::123.254.34.254]`
-3. DNS解析 `http://127.0.0.1.xip.io/` 可以指向任意ip的域名：`xip.io`
-4. 利用八进制IP地址绕过,利用十六进制IP地址,绕过利用十进制的IP地址[**绕过**](https://tool.520101.com/wangluo/jinzhizhuanhuan/)
-5. `http://127.1/a.txt` 或者 `http://0/a.txt`
-6. file_get_contents()函数遇到了不认识的伪协议头 `httpsssss://` ，就会将他当做文件夹，然后再配合目录穿越即可读取文件
-
-#### 其他各种指向127.0.0.1的地址
-</code></pre>
-<p><a href="http://localhost/">http://localhost/</a>         # localhost就是代指127.0.0.1<br><a href="http://0.0.0.0/">http://0/</a>                 # 0在window下代表0.0.0.0，而在liunx下代表127.0.0.1<br>http://[0:0:0:0:0:ffff:127.0.0.1]/    # 在liunx下可用，window测试了下不行<br>http://[::]:80/           # 在liunx下可用，window测试了下不行<br><a href="http://127.0.0.1/">http://127。0。0。1/</a>       # 用中文句号绕过<br>http://①②⑦.⓪.⓪.①<br><a href="http://127.0.0.1/">http://127.1/</a><br><a href="http://127.0.0.1/">http://127.00000.00000.001/</a> # 0的数量多一点少一点都没影响，最后还是会指向127.0.0.1</p>
-<p>```</p>
-<h4 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h4><p>1.地址做白名单处理<br>2.域名识别IP 过滤内部IP<br>3.校验返回的内容对比是否与假定的一致</p>
-<h4 id="CSRF、SSRF和重放攻击有什么区别？"><a href="#CSRF、SSRF和重放攻击有什么区别？" class="headerlink" title="CSRF、SSRF和重放攻击有什么区别？"></a>CSRF、SSRF和重放攻击有什么区别？</h4><ul>
-<li>CSRF是跨站请求伪造攻击，由客户端发起</li>
-<li>SSRF是服务器端请求伪造，由服务器发起</li>
-<li>重放攻击是将截获的数据包进行重放，达到身份认证等目的</li>
+<h3 id="漏洞-机子不出网情况下怎么办？"><a href="#漏洞-机子不出网情况下怎么办？" class="headerlink" title="漏洞/机子不出网情况下怎么办？"></a>漏洞/机子不出网情况下怎么办？</h3><h4 id="正向Socks代理"><a href="#正向Socks代理" class="headerlink" title="正向Socks代理"></a>正向Socks代理</h4><ul>
+<li>client运行在互联网的vps上，开启端口监听处理proxychains转发的tcp连接。</li>
+<li>clinet从tcp连接中读取数据，将数据存储在post请求中发送到webshell。</li>
+<li>webshell将http请求转发到本地的server服务器。</li>
+<li>server为运行在不出网主机中，取出http请求中的数据，根据socks协议规则解析目的地址及端口。</li>
+<li>server将于目的地址及端口建立tcp连接,发送数据。</li>
 </ul>
+<p><strong>大部分建立连接及处理数据的工作由不出网主机中运行的server端实现，webshell只进行http请求的转发操作。</strong><br><a href="https://smms.app/image/UWL2R7pIsbrZYAM" target="_blank"><img src="https://s2.loli.net/2024/03/25/UWL2R7pIsbrZYAM.webp" ></a></p>
+<h4 id="反向端口映射"><a href="#反向端口映射" class="headerlink" title="反向端口映射"></a>反向端口映射</h4><p><strong>server端：</strong></p>
+<ul>
+<li>beacon将http请求(假设数据为AAAAAA)发送到server。</li>
+<li>server将(AAAAAA)存储到缓存，并保持与beacon的http连接。</li>
+</ul>
+<p><strong>client端：</strong></p>
+<ul>
+<li>请求webshell。</li>
+<li>webshell转发请求到server。</li>
+<li>server将缓存的(AAAAA)填充到http应答中。</li>
+<li>webshell将server的应答转发给client。</li>
+<li>client从应答中获取数据(AAAAA)。</li>
+<li>client与cobaltstike的listener建立tcp连接。</li>
+<li>client发送(AAAAA)到cobaltstrike的listener。</li>
+<li>conbaltstrike发送应答数据(BBBBBB)。</li>
+<li>client将数据(BBBBB)封装到http请求中,通过webshell转发到server。</li>
+<li>server通过之前保持的http连接将(BBBBBB)发送到beacon。<br><a href="https://smms.app/image/nKy2ecQ54PXYCZu" target="_blank"><img src="https://s2.loli.net/2024/03/25/nKy2ecQ54PXYCZu.webp" ></a><br>可以看到我们可以通过新的方法直接使用reverse_https类型的beacon上线。上图中只是不出网的当前主机上线,如果我们需要内网其他主机上线也可以,原理图稍有变更。<br>只要将server的监听从127.0.0.1改为0.0.0.0即可，这样的话内网其他主机就可以通过不出网主机上线了。<br><a href="https://smms.app/image/ShWNvgHBD1GEdRl" target="_blank"><img src="https://s2.loli.net/2024/03/25/ShWNvgHBD1GEdRl.webp" ></a></li>
+</ul>
+<h4 id="使用smb-beacon"><a href="#使用smb-beacon" class="headerlink" title="使用smb beacon"></a>使用smb beacon</h4><p>SMB Beacon使用命名管道通过父级Beacon进行通讯，当两个Beacons链接后，子Beacon从父Beacon获取到任务并发送。<br>因为链接的Beacons使用Windows命名管道进行通信，此流量封装在SMB协议中，所以SMB beacon相对隐蔽。<br>SMB beacon不能直接生成可用载荷, 只能使用 PsExec 或 Stageless Payload 上线。</p>
+<h5 id="连接步骤"><a href="#连接步骤" class="headerlink" title="连接步骤"></a>连接步骤</h5><ol>
+<li>首先得到内网中一台主机的beacon，抓取密码后进行smb喷洒</li>
+<li>得到另一台开放445端口的机器上的administrator账户密码</li>
+<li>用Smb beacon使目标主机上线<h5 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h5></li>
+</ol>
+<ul>
+<li>具有 SMB Beacon 的主机必须接受 445 端口上的连接。</li>
+<li>只能链接由同一个 Cobalt Strike 实例管理的 Beacon。</li>
+<li>利用这种beacon横移必须有目标主机的管理员权限或者说是拥有具有管理员权限的凭据。</li>
+</ul>
+<h4 id="配置listener通过HTTP代理上线"><a href="#配置listener通过HTTP代理上线" class="headerlink" title="配置listener通过HTTP代理上线"></a>配置listener通过HTTP代理上线</h4><ol>
+<li>使用<a href="https://github.com/snail007/goproxy">goproxy</a>项目做代理</li>
+<li>上传proxy.exe到web服务器(边缘主机)，在8080端口开启http代理</li>
+<li>用netsh命令将访问内网ip的822端口(必须为未使用的端口，否则会失败)的流量重定向到外网ip的8080端口</li>
+</ol>
+<h4 id="使用pystinger搭建socks4代理"><a href="#使用pystinger搭建socks4代理" class="headerlink" title="使用pystinger搭建socks4代理"></a>使用<a href="https://github.com/FunnyWolf/pystinger">pystinger</a>搭建socks4代理</h4><p>服务端由webshell和stinger_server.exe构成，webshell只负责进行流量转发，大部分建立连接及处理数据的工作由stinger_server.exe实现，本质就是搭建了一个SOCK4代理转发流量</p>
+<h5 id="连接步骤-1"><a href="#连接步骤-1" class="headerlink" title="连接步骤"></a>连接步骤</h5><ol>
+<li>上传proxy.php到网站目录，正常访问返回UTF-8</li>
+<li>上传stinger_server.exe，执行<code>start stinger_server.exe 0.0.0.0</code></li>
+<li>Kali上执行<code>./stinger_client -w http://xxxxxxxxx:81/proxy.php -l 127.0.0.1 -p 60000</code></li>
+<li>cs中新建listener，xxxxxxxxx为web服务器内网ip，60020为转发端口</li>
+<li>使用psexec横向移动，选择listener为stinger，成功上线</li>
+</ol>
+<h2 id="域内攻击方法"><a href="#域内攻击方法" class="headerlink" title="域内攻击方法"></a>域内攻击方法</h2><p>MS14-068、 Roasting 攻击离线爆破密码、委派攻击，非约束性委派、基于资源的约束委派、 ntlm relay</p>
 
                 
             </div>
@@ -861,17 +858,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="../../08/%E5%8D%8F%E8%AE%AE%E6%8B%93%E5%B1%95/">
+                <a href="">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/1.jpg" class="responsive-img" alt="协议拓展">
+                        <img src="../../../../medias/featureimages/3.jpg" class="responsive-img" alt="面试复习四">
                         
-                        <span class="card-title">协议拓展</span>
+                        <span class="card-title">面试复习四</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -881,9 +879,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-07-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -896,6 +894,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -914,13 +913,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="../%E7%B3%BB%E7%BB%9F%E6%95%8F%E6%84%9F%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E6%B1%87%E6%80%BB/">
+                <a href="../../22/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E4%B8%89/">
                     <div class="card-image">
                         
                         
-                        <img src="../../../../medias/featureimages/4.jpg" class="responsive-img" alt="系统敏感文件路径汇总">
+                        <img src="../../../../medias/featureimages/5.jpg" class="responsive-img" alt="面试复习三">
                         
-                        <span class="card-title">系统敏感文件路径汇总</span>
+                        <span class="card-title">面试复习三</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -931,7 +930,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-22
                             </span>
                         <span class="publish-author">
                             
