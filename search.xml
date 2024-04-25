@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>面试复习五</title>
+      <link href="/2024/04/01/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E4%BA%94/"/>
+      <url>/2024/04/01/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E4%BA%94/</url>
+      
+        <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>因为这段时间面试了几次，也看了很多别人的面试总结，所以抽个时间总结一下自己面试的内容。</p><h2 id="sql注入常见函数"><a href="#sql注入常见函数" class="headerlink" title="sql注入常见函数"></a>sql注入常见函数</h2><h2 id="禁用和过滤语句"><a href="#禁用和过滤语句" class="headerlink" title="禁用和过滤语句"></a>禁用和过滤语句</h2><h2 id="sqlmap常见参数"><a href="#sqlmap常见参数" class="headerlink" title="sqlmap常见参数"></a>sqlmap常见参数</h2><h2 id="sqlmapOSShell"><a href="#sqlmapOSShell" class="headerlink" title="sqlmapOSShell"></a>sqlmapOSShell</h2><h2 id="mysql写shell前置条件"><a href="#mysql写shell前置条件" class="headerlink" title="mysql写shell前置条件"></a>mysql写shell前置条件</h2><h2 id="XSS常用payload、标签"><a href="#XSS常用payload、标签" class="headerlink" title="XSS常用payload、标签"></a>XSS常用payload、标签</h2><h2 id="XSS分类"><a href="#XSS分类" class="headerlink" title="XSS分类"></a>XSS分类</h2><h2 id="SSRF和CSRF"><a href="#SSRF和CSRF" class="headerlink" title="SSRF和CSRF"></a>SSRF和CSRF</h2><h2 id="文件上传黑名单绕过"><a href="#文件上传黑名单绕过" class="headerlink" title="文件上传黑名单绕过"></a>文件上传黑名单绕过</h2><h2 id="Redis未授权绕过"><a href="#Redis未授权绕过" class="headerlink" title="Redis未授权绕过"></a>Redis未授权绕过</h2><h2 id="shiro反序列化漏洞原理、cookie加密流程"><a href="#shiro反序列化漏洞原理、cookie加密流程" class="headerlink" title="shiro反序列化漏洞原理、cookie加密流程"></a>shiro反序列化漏洞原理、cookie加密流程</h2><h2 id="url后缀名-do-action是什么框架"><a href="#url后缀名-do-action是什么框架" class="headerlink" title="url后缀名.do.action是什么框架"></a>url后缀名.do.action是什么框架</h2><h2 id="weblogic漏洞"><a href="#weblogic漏洞" class="headerlink" title="weblogic漏洞"></a>weblogic漏洞</h2><h2 id="sql盲注告警判断成功"><a href="#sql盲注告警判断成功" class="headerlink" title="sql盲注告警判断成功"></a>sql盲注告警判断成功</h2><h2 id="从请求返回包判断文件上传告警分析上传成功"><a href="#从请求返回包判断文件上传告警分析上传成功" class="headerlink" title="从请求返回包判断文件上传告警分析上传成功"></a>从请求返回包判断文件上传告警分析上传成功</h2><h2 id="定位恶意ip怎么处理"><a href="#定位恶意ip怎么处理" class="headerlink" title="定位恶意ip怎么处理"></a>定位恶意ip怎么处理</h2><h2 id="windows查看计划任务"><a href="#windows查看计划任务" class="headerlink" title="windows查看计划任务"></a>windows查看计划任务</h2><h2 id="linux查看计划任务"><a href="#linux查看计划任务" class="headerlink" title="linux查看计划任务"></a>linux查看计划任务</h2><h2 id="渗透测试流程"><a href="#渗透测试流程" class="headerlink" title="渗透测试流程"></a>渗透测试流程</h2><h2 id="fastjson漏洞原理"><a href="#fastjson漏洞原理" class="headerlink" title="fastjson漏洞原理"></a>fastjson漏洞原理</h2><h2 id="shiro密钥会变的情况"><a href="#shiro密钥会变的情况" class="headerlink" title="shiro密钥会变的情况"></a>shiro密钥会变的情况</h2><h2 id="后门分析流程"><a href="#后门分析流程" class="headerlink" title="后门分析流程"></a>后门分析流程</h2><h2 id="java、C-、python工具"><a href="#java、C-、python工具" class="headerlink" title="java、C++、python工具"></a>java、C++、python工具</h2><h2 id="鉴权漏洞接口"><a href="#鉴权漏洞接口" class="headerlink" title="鉴权漏洞接口"></a>鉴权漏洞接口</h2><h2 id="栈溢出、格式化字符串"><a href="#栈溢出、格式化字符串" class="headerlink" title="栈溢出、格式化字符串"></a>栈溢出、格式化字符串</h2><h2 id="网站访问重定向"><a href="#网站访问重定向" class="headerlink" title="网站访问重定向"></a>网站访问重定向</h2><h2 id="DNS劫持了怎么办"><a href="#DNS劫持了怎么办" class="headerlink" title="DNS劫持了怎么办"></a>DNS劫持了怎么办</h2><h2 id="防火墙和WAF"><a href="#防火墙和WAF" class="headerlink" title="防火墙和WAF"></a>防火墙和WAF</h2><h2 id="网络基础排障"><a href="#网络基础排障" class="headerlink" title="网络基础排障"></a>网络基础排障</h2><h2 id="无网排障"><a href="#无网排障" class="headerlink" title="无网排障"></a>无网排障</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>一面问的时候大多会问技术细节，这时候照着面筋回答就好了。<br>二面三面问的是项目上的工作细节，不会详细问你一个点，而是问得很广泛，例如：渗透测试的流程、应急响应做过吗、java框架漏洞了解哪些、你以前的工作有什么成果。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>面试复习四</title>
       <link href="/2024/03/25/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E5%9B%9B/"/>
       <url>/2024/03/25/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E5%9B%9B/</url>
