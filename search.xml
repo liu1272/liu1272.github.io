@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>博客迁移</title>
+      <link href="/2025/02/26/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/"/>
+      <url>/2025/02/26/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</url>
+      
+        <content type="html"><![CDATA[<h5 id="博客迁移记录"><a href="#博客迁移记录" class="headerlink" title="博客迁移记录"></a>博客迁移记录</h5><ol><li>迁移原本的整个blog文件夹</li><li>在新电脑的bolg目录安装git、node.js、npm、hexo环境</li><li>在windows终端生成密钥</li></ol><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"你的用户名"</span><span class="token function">git</span> config --global user.email <span class="token string">"你的邮箱@qq.com"</span>ssh-keygen -t rsa -C <span class="token string">"你的邮箱@qq.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ol start="4"><li>github个人主页设置的 SSH and GPG keys 中新建 SSH key</li><li>在blog目录中打开git bash执行下面命令</li></ol><pre><code>npm install hexo-cli -gnpm install hexo-deployer-git --save</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日报 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 日报 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ISCC_2024</title>
       <link href="/2024/05/25/ISCC-2024/"/>
       <url>/2024/05/25/ISCC-2024/</url>
