@@ -33,32 +33,7 @@
       <link href="/2024/05/25/ISCC-2024/"/>
       <url>/2024/05/25/ISCC-2024/</url>
       
-        <content type="html"><![CDATA[<h2 id="ISCC-2024题解及思路"><a href="#ISCC-2024题解及思路" class="headerlink" title="ISCC_2024题解及思路"></a>ISCC_2024题解及思路</h2><div class="row">    <embed src="ISCC2024.pdf" width="100%" height="550" type="application/pdf"></div>]]></content>
-      
-      
-      <categories>
-          
-          <category> 比赛 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 比赛 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>ISCC2024</title>
-      <link href="/2024/05/25/ISCC2024/"/>
-      <url>/2024/05/25/ISCC2024/</url>
-      
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h2 id="ISCC-2024题解及思路"><a href="#ISCC-2024题解及思路" class="headerlink" title="ISCC_2024题解及思路"></a>ISCC_2024题解及思路</h2><div class="pdf-container" data-target="ISCC2024.pdf" data-height="500px"></div>]]></content>
       
       
       <categories>
@@ -1173,75 +1148,11 @@
     
     
     <entry>
-      <title>说点啥好呢？</title>
-      <link href="/2023/03/21/%E7%8A%B9%E8%B1%AB/"/>
-      <url>/2023/03/21/%E7%8A%B9%E8%B1%AB/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>信息收集概述</title>
       <link href="/2023/03/20/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%A6%82%E8%BF%B0/"/>
       <url>/2023/03/20/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%A6%82%E8%BF%B0/</url>
       
         <content type="html"><![CDATA[<h4 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h4><p>旁站：是和目标网站在同一台服务器上的其它的网站。<br>C段：是和目标服务器ip处在同一个C段的其它服务器。<br>ARL资产侦查灯塔：快速发现并整理企业外网资产并为资产构建基础数据库的工具（想要的自己找）</p><h4 id="收集操作"><a href="#收集操作" class="headerlink" title="收集操作"></a>收集操作</h4><p>Whois操作<br>Kali系统中，Whois己经默认安装，只需输入要查询的域名即可</p><pre><code>whois  +  域名（一般域名不包含主机名，如·baidu.com）</code></pre><p>网站查询及反查<br><a href="https://whois.chinaz.com/">站长之家</a><br><a href="https://site.ip138.com/">IP查询网</a><br><a href="https://whois.aliyun.com/">阿里云查询</a></p><p>备案查询<br><a href="https://www.beianx.cn/">ICP备案查询网</a><br><a href="http://www.tianyancha.como/">天眼查</a></p><p>收集子域名信息<br><a href="https://searchdns.netcraft.com/">网站查询</a><br><a href="https://dnsdumpster.com/">DNSdumpster网站查询</a></p><p>通过查看网站的证书</p><p>利用域传送漏洞</p><pre><code>原理:一台备用服务器使用来自主服务器的数据刷新系的域（zone）数据库     但许多DNS服务器却被错误地配置成只要有client发出请求     就会向对方提供一个zone数据库的详细信息（没有身份认证）利用:（1）Kali的dig工具             dig axfr @DNS服务器 要查询的域名     （2）nslookup工具     （3）nmap工具</code></pre><p>子域名检测</p><pre><code>（1）Layer子域名挖掘机（2）K8（3）wydomain（4）Sublist3r dnsmaper（5）subDomainsBrute（6）Maltego CE（7）dnsrecon(kali自带)重点推荐Layer子域名挖掘机、Sublist3r和subDomainsBrute</code></pre><p>证书透明度公开曰志枚举</p><pre><code>（1）首推好用网站：https://crt.sh（2）次推好用网站：https://censys.io/（3）其他网站：https://phpinfo.me/domain</code></pre><p>通过DNS解析找到IP地址</p><pre><code>（1）ping（2）nslookup（3）dig工具（4）dnsenum工具（5）站长之家</code></pre><p>谷歌搜索（其实百度也还行）</p><pre><code>关键字            说明site            指定域名inurl           URL 中存在关键字的网页intext          网页正文中的关键字filetype        指定文件类型intitie         网页标题中的关键字link            link:baidu.com 即表示返回所有和 baidu.com 做了链接的URLinfo            查找指定站点的一些基本信息cache           搜索Google 里关于某些内容的缓存关键字尽量用“”引起来    </code></pre><p>网络空间搜索引擎（AMAZING MIGHTYYYY!!!!）<br><a href="https://www.zoomeye.org/">钟馗之眼zoomeye</a><br><a href="https://www.shodan.io/">傻蛋Shodan</a><br><a href="https://fofa.info/">佛法FOFA</a></p><p>CMS及Web指纹识别</p><pre><code>御剑Web 指纹识别、WebRobo 、椰树、轻量WEB指纹识别建议WhatWeb（Kali自带）</code></pre><p><a href="http://whatweb.bugscaner.com/look/">BugScaner</a><br><a href="http://www.yunsee.cn/finger.html">云悉指纹</a><br><a href="https://whatweb.net/">WhatWeb</a></p><p>收集网站目录及隐藏的敏感文件</p><pre><code>（1）DirBuster（2）御剑后台扫描珍藏版（3）wwwscan（4）Spinder.py（5）Sensitivefilescan（6）Weakfilescan</code></pre><h5 id="社会工程学"><a href="#社会工程学" class="headerlink" title="社会工程学"></a>社会工程学</h5><p>自己想办法。</p><h4 id="PDF总结文件"><a href="#PDF总结文件" class="headerlink" title="PDF总结文件"></a>PDF总结文件</h4><p><a href="https://file.notion.so/f/s/45a2de32-2395-447a-8048-84af1c2afea7/%E8%B5%84%E4%BA%A7%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86.pdf?id=9616b249-1acc-41e2-b6bc-cda21d12e7c4&table=block&spaceId=62bfa233-9aa4-4dc0-b934-b6b37b358f41&expirationTimestamp=1689840000000&signature=fJvscjic-yAIr5i9NttS-lJXFz5pmeuYifjI4sLStaw&downloadName=%E8%B5%84%E4%BA%A7%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86.pdf">文件在这里</a></p><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><p><strong>无论人生上了哪一层台阶 ，阶下有人在仰望你，阶上亦有人在俯视你；</strong><br><strong>你抬头自卑，低头自得，唯有平视，才能看到真实的自已。</strong></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 日报 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 日报 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Python</title>
-      <link href="/2023/03/19/Python/"/>
-      <url>/2023/03/19/Python/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Python装饰器&amp;流处理技术</title>
-      <link href="/2023/03/19/Python%E8%A3%85%E9%A5%B0%E5%99%A8-%E6%B5%81%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/"/>
-      <url>/2023/03/19/Python%E8%A3%85%E9%A5%B0%E5%99%A8-%E6%B5%81%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF/</url>
-      
-        <content type="html"><![CDATA[<p>当在装饰器中使用全局变量时，需要注意以下几点：</p><ol><li>在装饰器中声明全局变量需要使用<code>global</code>关键字。</li><li>在装饰器中使用全局变量，需要确保该变量已经被定义和初始化，否则会引发<code>NameError</code>异常。</li><li>全局变量可能会被多个线程或进程访问，因此需要考虑并发安全问题。</li><li>在装饰器中使用全局变量可能会导致代码的可读性和可维护性降低，因此应尽可能避免使用全局变量。<br>以下是一个简单的例子，演示如何在装饰器中使用全局变量：<pre class="line-numbers language-python"><code class="language-python">count <span class="token operator">=</span> <span class="token number">0</span><span class="token keyword">def</span> <span class="token function">counter</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">def</span> <span class="token function">wrapper</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>     <span class="token keyword">global</span> count     count <span class="token operator">+=</span> <span class="token number">1</span>     <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Function &amp;#123;func.__name__&amp;#125; was called &amp;#123;count&amp;#125; times."</span><span class="token punctuation">)</span>     <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span> <span class="token keyword">return</span> wrapper@counter<span class="token keyword">def</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello, world!"</span><span class="token punctuation">)</span>foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># Function foo was called 1 times.</span>foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true"># Function foo was called 2 times.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>在上面的例子中，我们定义了一个全局变量<code>count</code>，并在装饰器<code>counter</code>中使用了它。装饰器<code>counter</code>用于统计函数被调用的次数，每次调用时<code>count</code>加1，并输出调用次数。函数<code>foo</code>被装饰后，每次调用都会输出调用次数。</li></ol><p>是的，Python装饰器里可以使用 <code>global</code> 关键字。 </p><p>装饰器本质上是一个函数，因此它可以访问任何全局变量。如果您希望在装饰器内部更改全局变量的值，则需要在函数内部将变量声明为全局变量。在 Python 中，您可以使用 <code>global</code> 关键字来实现这一点。</p><p>以下是一个示例装饰器，它使用全局变量来记录函数调用次数：</p><pre class="line-numbers language-python"><code class="language-python">count <span class="token operator">=</span> <span class="token number">0</span><span class="token keyword">def</span> <span class="token function">count_calls</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">def</span> <span class="token function">wrapper</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token keyword">global</span> count        count <span class="token operator">+=</span> <span class="token number">1</span>        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Function &amp;#123;func.__name__&amp;#125; has been called &amp;#123;count&amp;#125; times"</span><span class="token punctuation">)</span>        <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>    <span class="token keyword">return</span> wrapper@count_calls<span class="token keyword">def</span> <span class="token function">my_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span>my_function<span class="token punctuation">(</span><span class="token punctuation">)</span>my_function<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，我们使用 <code>global</code> 关键字声明了 <code>count</code> 变量，并在 <code>count_calls</code> 装饰器函数的 <code>wrapper</code> 函数内部对其进行了修改。每次调用 <code>my_function</code> 函数时，装饰器都会增加 <code>count</code> 的值，并打印出调用次数。除了在装饰器函数内部使用 <code>global</code> 关键字，还可以在装饰器函数外部使用 <code>global</code> 关键字来声明全局变量，并在装饰器内部访问和修改该变量的值。下面是一个示例：</p><pre class="line-numbers language-python"><code class="language-python">count <span class="token operator">=</span> <span class="token number">0</span><span class="token keyword">def</span> <span class="token function">count_calls</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">def</span> <span class="token function">wrapper</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token keyword">global</span> count        count <span class="token operator">+=</span> <span class="token number">1</span>        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Function &amp;#123;func.__name__&amp;#125; has been called &amp;#123;count&amp;#125; times"</span><span class="token punctuation">)</span>        <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>    <span class="token keyword">return</span> wrapper@count_calls<span class="token keyword">def</span> <span class="token function">my_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">global</span> count    <span class="token keyword">if</span> count <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span>    <span class="token keyword">else</span><span class="token punctuation">:</span>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hi there!"</span><span class="token punctuation">)</span>my_function<span class="token punctuation">(</span><span class="token punctuation">)</span>my_function<span class="token punctuation">(</span><span class="token punctuation">)</span>my_function<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，我们声明了全局变量 <code>count</code>，并在装饰器内部和外部使用了 <code>global</code> 关键字。在 <code>my_function</code> 函数内部，我们检查 <code>count</code> 的值是否为偶数，并打印不同的消息。由于装饰器在每次调用 <code>my_function</code> 函数时都会增加 <code>count</code> 的值，因此 <code>my_function</code> 函数每次都会打印不同的消息。</p><p>需要注意的是，在使用全局变量时要小心，因为全局变量可能会在代码中的任何地方进行修改，这可能会导致出现意外的行为。因此，最好将全局变量用于只读目的，或者在使用时采用适当的同步机制来避免竞争条件。当然，除了 <code>global</code> 关键字之外，还可以使用其他的方式来在装饰器中引用外部变量。以下是一些常用的方法：</p><ol><li>使用闭包：在装饰器函数内部定义一个内部函数，并在内部函数中引用外部变量。由于内部函数可以访问外部函数的变量，因此可以通过闭包的方式在装饰器内部使用外部变量。例如：</li></ol><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">count_calls</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    count <span class="token operator">=</span> <span class="token number">0</span>    <span class="token keyword">def</span> <span class="token function">decorator</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token keyword">def</span> <span class="token function">wrapper</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>            nonlocal count            count <span class="token operator">+=</span> <span class="token number">1</span>            <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Function &amp;#123;func.__name__&amp;#125; has been called &amp;#123;count&amp;#125; times"</span><span class="token punctuation">)</span>            <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>        <span class="token keyword">return</span> wrapper    <span class="token keyword">return</span> decorator@count_calls<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token keyword">def</span> <span class="token function">my_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，我们在装饰器函数 <code>count_calls</code> 内部定义了一个内部函数 <code>decorator</code>，并在该函数中定义了变量 <code>count</code>。在 <code>wrapper</code> 函数内部，我们使用 <code>nonlocal</code> 关键字来引用 <code>count</code> 变量，并在每次调用被装饰的函数时增加其值。</p><ol start="2"><li>使用类：将装饰器实现为一个类，并在类中引用外部变量。由于类实例可以存储变量状态，因此可以通过类的方式在装饰器内部使用外部变量。例如：</li></ol><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">CountCalls</span><span class="token punctuation">:</span>    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> func<span class="token punctuation">)</span><span class="token punctuation">:</span>        self<span class="token punctuation">.</span>func <span class="token operator">=</span> func        self<span class="token punctuation">.</span>count <span class="token operator">=</span> <span class="token number">0</span>            <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>        self<span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span>        <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Function &amp;#123;self.func.__name__&amp;#125; has been called &amp;#123;self.count&amp;#125; times"</span><span class="token punctuation">)</span>        <span class="token keyword">return</span> self<span class="token punctuation">.</span>func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>@CountCalls<span class="token keyword">def</span> <span class="token function">my_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，我们定义了一个类 <code>CountCalls</code>，并在类的构造函数中定义了变量 <code>count</code>。在 <code>__call__</code> 方法中，我们使用 <code>self.count</code> 来引用 <code>count</code> 变量，并在每次调用被装饰的函数时增加其值。</p><p>无论是使用 <code>global</code> 关键字、闭包还是类，都可以在装饰器中引用外部变量。选择哪种方法取决于具体的需求和个人偏好。除了在装饰器中使用 <code>global</code> 关键字或闭包或类等方式引用外部变量，还可以将变量作为参数传递给装饰器。这种方式通常适用于装饰器函数需要访问某些变量，但不希望将这些变量声明为全局变量的情况。以下是一个示例：</p><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">count_calls</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">def</span> <span class="token function">decorator</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token keyword">def</span> <span class="token function">wrapper</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>            nonlocal count            count <span class="token operator">+=</span> <span class="token number">1</span>            <span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Function &amp;#123;func.__name__&amp;#125; has been called &amp;#123;count&amp;#125; times"</span><span class="token punctuation">)</span>            <span class="token keyword">return</span> func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>        <span class="token keyword">return</span> wrapper    <span class="token keyword">return</span> decorator@count_calls<span class="token punctuation">(</span>count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token keyword">def</span> <span class="token function">my_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个例子中，我们将变量 <code>count</code> 作为参数传递给 <code>count_calls</code> 装饰器，并在装饰器函数 <code>decorator</code> 内部使用 <code>nonlocal</code> 关键字引用该变量。在每次调用被装饰的函数时，我们都会增加 <code>count</code> 的值，并打印出该函数被调用的次数。</p><p>需要注意的是，通过将变量作为参数传递给装饰器，我们可以更灵活地控制装饰器的行为，但同时也会增加代码的复杂度。因此，在选择使用这种方式时，需要权衡利弊，并根据具体的情况选择最适合的实现方式。除了在装饰器中使用 <code>global</code> 关键字、闭包、类或参数等方式引用外部变量之外，还可以使用 <code>functools</code> 模块中的 <code>wraps</code> 装饰器来保留被装饰函数的元信息。具体来说，<code>wraps</code> 装饰器可以用来保留被装饰函数的名称、文档字符串、参数签名等元信息，从而使得被装饰函数更加易于调试和理解。</p><p>以下是一个使用 <code>wraps</code> 装饰器的示例：</p><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> functools <span class="token keyword">import</span> wraps<span class="token keyword">def</span> <span class="token function">my_decorator</span><span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">:</span>    @wraps<span class="token punctuation">(</span>func<span class="token punctuation">)</span>    <span class="token keyword">def</span> <span class="token function">wrapper</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>        <span class="token triple-quoted-string string">"""This is a wrapper function."""</span>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Before the function is called."</span><span class="token punctuation">)</span>        result <span class="token operator">=</span> func<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"After the function is called."</span><span class="token punctuation">)</span>        <span class="token keyword">return</span> result    <span class="token keyword">return</span> wrapper@my_decorator<span class="token keyword">def</span> <span class="token function">my_function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token triple-quoted-string string">"""This is a function."""</span>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>在这个示例中，我们使用 <code>wraps</code> 装饰器来保留被装饰函数 <code>my_function</code> 的元信息，包括其名称、文档字符串等。这使得被装饰函数的调试和理解更加容易。需要注意的是，在使用 <code>wraps</code> 装饰器时，需要将其放在装饰器函数的内部，而不是外部。</p><p>总之，通过在装饰器中使用 <code>wraps</code> 装饰器，我们可以保留被装饰函数的元信息，从而提高代码的可读性和可维护性。</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Python装饰器&amp;流处理技术</title>
-      <link href="/2023/03/19/Python%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
-      <url>/2023/03/19/Python%E8%A3%85%E9%A5%B0%E5%99%A8/</url>
-      
-        <content type="html"><![CDATA[]]></content>
       
       
       <categories>
@@ -1856,32 +1767,6 @@
             <tag> 日报 </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>20221202</title>
-      <link href="/2022/12/02/20221202/"/>
-      <url>/2022/12/02/20221202/</url>
-      
-        <content type="html"><![CDATA[<h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h4>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>20221202</title>
-      <link href="/2022/12/02/20221202/"/>
-      <url>/2022/12/02/20221202/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
       
     </entry>
     
