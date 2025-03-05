@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="多线程概念  程序是指令和数据的集合 进程是执行程序的一次过程 线程是CPU调度执行的单位，无法人为干预 一个进程包括多个线程 分为真实多线程和模拟多线程  创建线程三种方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java多线程">
+<meta property="og:url" content="https://liu1272.github.io/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="多线程概念  程序是指令和数据的集合 进程是执行程序的一次过程 线程是CPU调度执行的单位，无法人为干预 一个进程包括多个线程 分为真实多线程和模拟多线程  创建线程三种方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/12/14/OWJiKn1hyEl3F9P.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/14/1QwXFzdknWJygA3.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/12/14/ahJjMVtcqdRIEPf.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/12/14/c8B1KWYHNpOdmb2.jpg">
+<meta property="og:image" content="https://s2.loli.net/2023/12/14/hDei8vSbxJVIqto.jpg">
+<meta property="article:published_time" content="2023-12-13T07:44:00.000Z">
+<meta property="article:modified_time" content="2023-12-20T18:26:12.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/12/14/OWJiKn1hyEl3F9P.png">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/","path":"2023/12/13/Java多线程/","title":"Java多线程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java多线程 | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">多线程概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">创建线程三种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%80%E3%80%91%E7%BB%A7%E6%89%BFThread%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">【一】继承Thread类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%BA%8C%E3%80%91%E5%AE%9E%E7%8E%B0Runnable%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.2.</span> <span class="nav-text">【二】实现Runnable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E4%B8%89%E3%80%91%E9%80%9A%E8%BF%87-Callable-%E5%92%8C-Future-%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.3.</span> <span class="nav-text">【三】通过 Callable 和 Future 创建线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E4%B8%89%E7%A7%8D%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">Java三种代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E3%80%91"><span class="nav-number">3.1.</span> <span class="nav-text">【静态代理】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E3%80%91"><span class="nav-number">3.2.</span> <span class="nav-text">【动态代理】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E3%80%90cglib%E4%BB%A3%E7%90%86%E3%80%91"><span class="nav-number">3.3.</span> <span class="nav-text">【cglib代理】</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">Lambda表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%BA%94%E5%A4%A7%E7%8A%B6%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">线程五大状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%81%9C%E6%AD%A2"><span class="nav-number">5.1.</span> <span class="nav-text">线程停止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%BC%91%E7%9C%A0"><span class="nav-number">5.2.</span> <span class="nav-text">线程休眠</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%A4%BC%E8%AE%A9"><span class="nav-number">5.3.</span> <span class="nav-text">线程礼让</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%BC%BA%E5%88%B6%E6%89%A7%E8%A1%8C"><span class="nav-number">5.4.</span> <span class="nav-text">线程强制执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-number">5.5.</span> <span class="nav-text">线程优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B"><span class="nav-number">5.6.</span> <span class="nav-text">守护线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="nav-number">6.</span> <span class="nav-text">线程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%96%B9%E6%B3%95%E5%92%8C%E5%90%8C%E6%AD%A5%E5%9D%97"><span class="nav-number">6.1.</span> <span class="nav-text">同步方法和同步块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81"><span class="nav-number">7.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%BB%E9%94%81"><span class="nav-number">7.1.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock%E9%94%81"><span class="nav-number">7.2.</span> <span class="nav-text">Lock锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock%E4%B8%8ESynchronized%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">7.3.</span> <span class="nav-text">Lock与Synchronized的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">生产者消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%A6%82%E8%BF%B0"><span class="nav-number">8.1.</span> <span class="nav-text">问题概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E7%A8%8B%E6%B3%95"><span class="nav-number">8.2.</span> <span class="nav-text">管程法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81ReentrantLock%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">8.3.</span> <span class="nav-text">可重入锁ReentrantLock的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97BlockingQueue%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">8.4.</span> <span class="nav-text">阻塞队列BlockingQueue的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E5%8F%B7%E9%87%8F-Semaphore-%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">8.5.</span> <span class="nav-text">信号量 Semaphore 的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">8.6.</span> <span class="nav-text">管道输入输出流实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="nav-number">9.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">10.</span> <span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java多线程 | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java多线程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-12-13 15:44:00" itemprop="dateCreated datePublished" datetime="2023-12-13T15:44:00+08:00">2023-12-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-12-21 02:26:12" itemprop="dateModified" datetime="2023-12-21T02:26:12+08:00">2023-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="Java多线程" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>19 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><a href="https://smms.app/image/OWJiKn1hyEl3F9P" target="_blank"><img src="https://s2.loli.net/2023/12/14/OWJiKn1hyEl3F9P.png" ></a></p>
+<h2 id="多线程概念"><a href="#多线程概念" class="headerlink" title="多线程概念"></a>多线程概念</h2><p><a href="https://smms.app/image/1QwXFzdknWJygA3" target="_blank"><img src="https://s2.loli.net/2023/12/14/1QwXFzdknWJygA3.jpg" ></a></p>
+<ul>
+<li>程序是指令和数据的集合</li>
+<li>进程是执行程序的一次过程</li>
+<li>线程是CPU调度执行的单位，无法人为干预</li>
+<li>一个进程包括多个线程</li>
+<li>分为真实多线程和模拟多线程</li>
+</ul>
+<h2 id="创建线程三种方式"><a href="#创建线程三种方式" class="headerlink" title="创建线程三种方式"></a>创建线程三种方式</h2><h3 id="【一】继承Thread类"><a href="#【一】继承Thread类" class="headerlink" title="【一】继承Thread类"></a>【一】继承Thread类</h3><ol>
+<li>自定义线程类继承Thread类</li>
+<li>重写run()方法，编写线程执行体</li>
+<li>创建线程对象，调用start()方法启动线程</li>
+</ol>
+<pre class="line-numbers language-Java"><code class="language-Java">public class Main &#123;
+    public static void main(String[] args) &#123;
+        Thread t = new MyThread();   // 创建线程对象
+        t.start();  // 调用start()方法启动线程
+    &#125;
+&#125;
+
+class MyThread extends Thread &#123;    // 自定义线程类继承Thread类
+    @Override
+    public void run() &#123;    // 重写run()方法，编写线程执行体
+        System.out.println("start new thread!");
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="【二】实现Runnable接口"><a href="#【二】实现Runnable接口" class="headerlink" title="【二】实现Runnable接口"></a>【二】实现Runnable接口</h3><ol>
+<li>定义MyRunnable类实现Runnable接口</li>
+<li>实现run()方法，编写线程执行体</li>
+<li>创建线程对象，调用start()方法启动线程</li>
+<li>推荐使用Runnable对象，因为Java单继承的局限性</li>
+</ol>
+<pre class="line-numbers language-Java"><code class="language-Java">public class Main &#123;
+    public static void main(String[] args) &#123;
+        Thread t = new Thread(new MyRunnable());   // 创建线程对象
+        t.start(); // 调用start()方法启动线程
+    &#125;
+&#125;
+
+class MyRunnable implements Runnable &#123;   // 定义MyRunnable类实现Runnable接口
+    @Override
+    public void run() &#123;   // 实现run()方法，编写线程执行体
+        System.out.println("start new thread!");
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="【三】通过-Callable-和-Future-创建线程"><a href="#【三】通过-Callable-和-Future-创建线程" class="headerlink" title="【三】通过 Callable 和 Future 创建线程"></a>【三】通过 Callable 和 Future 创建线程</h3><ol>
+<li>实现Callable接口，需要返回值类型</li>
+<li>重写call方法，需要抛出异常</li>
+<li>创建目标对象</li>
+<li>创建执行服务:ExecutorService ser = Executors.newFixedThreadPool(1);</li>
+<li>提交执行: Future&lt; Boolean &gt; result1 = ser.submit(t1);</li>
+<li>获取结果: boolean r1 = result1.get()</li>
+<li>关闭服务: ser.shutdownNow();</li>
+<li>上两个方法在执行完任务之后无法获取执行结果，执行失败也不会抛出异常（得要通过共享变量或者使用线程通信的方式才能实现）</li>
+<li>Callable接口代表一段可以调用并返回结果的代码;Future接口表示异步任务，是还没有完成的任务给出的未来结果。所以说Callable用于产生结果，Future用于获取结果</li>
+</ol>
+<pre class="line-numbers language-Java"><code class="language-Java">import java.util.concurrent.*;
+
+public class java01 &#123;
+    ExecutorService executorService = Executors.newCachedThreadPool();
+    Future<Integer> submit = executorService.submit(new Callable<Integer>() &#123;
+        @Override
+        public Integer call() throws Exception &#123;
+            return null;
+        &#125;
+    &#125;);
+    Callable<Integer> callable = new Callable<Integer>() &#123;
+        @Override
+        public Integer call() throws Exception &#123;
+            return null;
+        &#125;
+    &#125;;
+    FutureTask<Integer> integerFutureTask = new FutureTask<>(callable);
+&#125;
+
+new Thread(integerFutureTask).start();
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  <strong>推荐使用实现Runnable接口的方法来创建线程，可以避免Java单继承的局限性，同时操作同个对象</strong><br>  <strong>但是正因为同时操作了同个对象，导致了线程安全问题</strong></p>
+<h2 id="Java三种代理模式"><a href="#Java三种代理模式" class="headerlink" title="Java三种代理模式"></a>Java三种代理模式</h2><p>  代理模式是一种设计模式，提供了对目标对象额外的访问方式，即通过代理对象访问目标对象，这样可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</p>
+<p>  简言之，代理模式就是设置一个中间代理来控制访问原目标对象，以达到增强原对象的功能和简化访问方式。</p>
+<h3 id="【静态代理】"><a href="#【静态代理】" class="headerlink" title="【静态代理】"></a><strong>【静态代理】</strong></h3><p>这种代理方式需要<strong>代理对象和目标对象实现一样的接口</strong>。<br>优点：可以在不修改目标对象的前提下扩展目标对象的功能。<br>缺点：</p>
+<pre><code>冗余。由于代理对象要实现与目标对象一致的接口，会产生过多的代理类。
+不易维护。一旦接口增加方法，目标对象与代理对象都要进行修改。
+</code></pre>
+<pre class="line-numbers language-Java"><code class="language-Java">
+public interface IUserDao &#123;  // 接口类： IUserDao
+    public void save();  // 定义接口方法
+&#125;
+
+public class UserDao implements IUserDao&#123;  // 目标对象：UserDao
+
+    @Override
+    public void save() &#123;  // 实现目标对象的接口方法
+        System.out.println("保存数据");
+    &#125;
+&#125;
+ 
+public class UserDaoProxy implements IUserDao&#123; // 静态代理对象：UserDapProxy 需要实现IUserDao接口！
+    private IUserDao target;
+    public UserDaoProxy(IUserDao target) &#123;
+        this.target = target;
+    &#125;
+    
+    @Override
+    public void save() &#123;  // 实现代理对象的接口方法
+        System.out.println("开启事务");  //扩展了额外功能
+        target.save();
+        System.out.println("提交事务");
+    &#125;
+&#125;
+
+public class StaticUserProxy &#123;  // 测试类：TestProxy
+    @Test
+    public void testStaticProxy()&#123;
+        //目标对象
+        IUserDao target = new UserDao();
+        //代理对象
+        UserDaoProxy proxy = new UserDaoProxy(target);
+        proxy.save();  // 调用代理对象的方法
+    &#125;
+&#125;
+
+输出结果:
+  开启事务
+  保存数据
+  提交事务
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="【动态代理】"><a href="#【动态代理】" class="headerlink" title="【动态代理】"></a><strong>【动态代理】</strong></h3><p>  动态代理利用了JDK API，动态地在内存中构建代理对象，从而实现对目标对象的代理功能。动态代理又被称为JDK代理或接口代理。</p>
+<p>静态代理与动态代理的区别主要在：</p>
+<pre><code>静态代理在编译时就已经实现，编译完成后代理类是一个实际的class文件
+动态代理是在运行时动态生成的，即编译完成后没有实际的class文件，而是在运行时动态生成类字节码，并加载到JVM中
+</code></pre>
+<p>特点：<br>  动态代理对象不需要实现接口，但是要求<strong>目标对象必须实现接口</strong>，否则不能使用动态代理。</p>
+<pre class="line-numbers language-Java"><code class="language-Java">
+public interface IUserDao &#123;  // 接口类： IUserDao
+    public void save();  // 定义接口方法
+&#125;
+
+public class UserDao implements IUserDao&#123;  // 目标对象：UserDao
+
+    @Override
+    public void save() &#123;  // 实现目标对象的接口方法
+        System.out.println("保存数据");
+    &#125;
+&#125;
+
+public class ProxyFactory &#123;
+
+    private Object target;// 维护一个目标对象
+
+    public ProxyFactory(Object target) &#123;
+        this.target = target;
+    &#125;
+
+    // 为目标对象生成代理对象
+    public Object getProxyInstance() &#123;
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(),
+                new InvocationHandler() &#123;
+
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
+                        System.out.println("开启事务");
+
+                        // 执行目标对象方法
+                        Object returnValue = method.invoke(target, args);
+
+                        System.out.println("提交事务");
+                        return null;
+                    &#125;
+                &#125;);
+    &#125;
+&#125;
+
+public class TestProxy &#123;
+    @Test
+    public void testDynamicProxy ()&#123;
+        IUserDao target = new UserDao();
+        System.out.println(target.getClass());  //输出目标对象信息
+        IUserDao proxy = (IUserDao) new ProxyFactory(target).getProxyInstance();
+        System.out.println(proxy.getClass());  //输出代理对象信息
+        proxy.save();  //执行代理方法
+    &#125;
+&#125;
+
+输出结果:
+  开启事务
+  保存数据
+  提交事务
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="【cglib代理】"><a href="#【cglib代理】" class="headerlink" title="【cglib代理】"></a><strong>【cglib代理】</strong></h3><p>  cglib 是一个第三方代码生成类库，运行时在内存中动态生成一个子类对象从而实现对目标对象功能的扩展。</p>
+<p>cglib特点：<strong>无需实现接口</strong></p>
+<pre><code>JDK的动态代理有一个限制，就是使用动态代理的对象必须实现一个或多个接口。
+如果想代理没有实现接口的类，就可以使用CGLIB实现。
+CGLIB是一个强大的高性能的代码生成包，它可以在运行期扩展Java类与实现Java接口。
+它广泛的被许多AOP的框架使用，例如Spring AOP和dynaop，为他们提供方法的interception（拦截）。
+CGLIB包的底层是通过使用一个小而快的字节码处理框架ASM，来转换字节码并生成新的类。
+不鼓励直接使用ASM，因为它需要你对JVM内部结构包括class文件的格式和指令集都很熟悉。
+</code></pre>
+<p>cglib与动态代理最大的区别就是</p>
+<pre><code>使用动态代理的对象必须实现一个或多个接口
+使用cglib代理的对象则无需实现接口，达到代理类无侵入。
+</code></pre>
+<pre class="line-numbers language-Java"><code class="language-Java">
+public class UserDao&#123;
+
+    public void save() &#123;
+        System.out.println("保存数据");
+    &#125;
+&#125;
+
+public class ProxyFactory implements MethodInterceptor&#123;
+
+    private Object target;//维护一个目标对象
+    public ProxyFactory(Object target) &#123;
+        this.target = target;
+    &#125;
+    
+    //为目标对象生成代理对象
+    public Object getProxyInstance() &#123;
+        //工具类
+        Enhancer en = new Enhancer();
+        //设置父类
+        en.setSuperclass(target.getClass());
+        //设置回调函数
+        en.setCallback(this);
+        //创建子类对象代理
+        return en.create();
+    &#125;
+
+    @Override
+    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable &#123;
+        System.out.println("开启事务");
+        // 执行目标对象的方法
+        Object returnValue = method.invoke(target, args);
+        System.out.println("关闭事务");
+        return null;
+    &#125;
+&#125;
+
+public class TestProxy &#123;
+
+    @Test
+    public void testCglibProxy()&#123;
+        //目标对象
+        UserDao target = new UserDao();
+        System.out.println(target.getClass());
+        //代理对象
+        UserDao proxy = (UserDao) new ProxyFactory(target).getProxyInstance();
+        System.out.println(proxy.getClass());
+        //执行代理对象方法
+        proxy.save();
+    &#125;
+&#125;
+
+输出结果:
+  开启事务
+  保存数据
+  关闭事务
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>静态代理实现较简单，只要代理对象对目标对象进行包装，即可实现增强功能，但静态代理只能为一个目标对象服务，如果目标对象过多，则会产生很多代理类。</li>
+<li>JDK动态代理需要目标对象实现业务接口，代理类只需实现InvocationHandler接口。</li>
+<li>静态代理在编译时产生class字节码文件，可以直接使用，效率高。</li>
+<li>动态代理必须实现InvocationHandler接口，通过反射代理方法，比较消耗系统性能，但可以减少代理类的数量，使用更灵活。</li>
+<li>cglib代理无需实现接口，通过生成类字节码实现代理，比反射稍快，不存在性能问题，但cglib会继承目标对象，需要重写方法，所以目标对象不能为final类。</li>
+</ol>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p>使用Lambda表达式替换单方法接口：</p>
+<pre class="line-numbers language-Java"><code class="language-Java">
+Arrays.sort(array, new Comparator<String>() &#123;
+    public int compare(String s1, String s2) &#123;
+        return s1.compareTo(s2);
+    &#125;
+&#125;);
+
+上面的可变为下面的形式
+
+Arrays.sort(array, (s1, s2) -> &#123;
+    return s1.compareTo(s2);
+&#125;);
+
+参数是(s1, s2)，参数类型可以省略，因为编译器可以自动推断出String类型。-> &#123; ... &#125;表示方法体，所有代码写在内部即可。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果只有一行return xxx的代码，完全可以用更简单的写法：</p>
+<pre class="line-numbers language-Java"><code class="language-Java">
+Arrays.sort(array, (s1, s2) -> s1.compareTo(s2));
+
+返回值的类型也是由编译器自动推断的，这里推断出的返回值是int，因此，只要返回int，编译器就不会报错。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="线程五大状态"><a href="#线程五大状态" class="headerlink" title="线程五大状态"></a>线程五大状态</h2><p><a href="https://smms.app/image/ahJjMVtcqdRIEPf" target="_blank"><img src="https://s2.loli.net/2023/12/14/ahJjMVtcqdRIEPf.jpg" ></a><br><a href="https://smms.app/image/c8B1KWYHNpOdmb2" target="_blank"><img src="https://s2.loli.net/2023/12/14/c8B1KWYHNpOdmb2.jpg" ></a></p>
+<h3 id="线程停止"><a href="#线程停止" class="headerlink" title="线程停止"></a>线程停止</h3><p>不推荐使用JDK提供的 stop()、destroy()方法。<br>推荐线程自己停止下来，使用一个标志位进行终止变量（当flag=false终止线程运行）</p>
+<h3 id="线程休眠"><a href="#线程休眠" class="headerlink" title="线程休眠"></a>线程休眠</h3><p>  sleep(时间)指定当前线程阻塞的毫秒数<br>  sleep存在异常InterruptedException;<br>  sleep时间达到后线程进入就绪状态<br>  sleep可以模拟网络延时，倒计时等<br>  每一个对象都有一个锁，sleep不会释放锁</p>
+<h3 id="线程礼让"><a href="#线程礼让" class="headerlink" title="线程礼让"></a>线程礼让</h3><p>  礼让线程，让当前正在执行的线程暂停，但不阻塞<br>  将线程从运行状态转为就绪状态<br>  让cpu重新调度，礼让不一定成功!看CPU心情</p>
+<h3 id="线程强制执行"><a href="#线程强制执行" class="headerlink" title="线程强制执行"></a>线程强制执行</h3><p>  Join合并线程，待此线程执行完成后，再执行其他线程，其他线程阻塞</p>
+<h3 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h3><p>  Java提供一个线程调度器来监控程序中启动后进入就绪状态的所有线程，线程调度器按照优先级决定应该调度哪个线程来执行线程的优先级用数字表示，范围从1~10.<br><code>Thread.MIN PRIORITY = 1;</code><br>使用以下方式改变或获取优先级</p>
+<pre><code>getPriority() . setPriority(int xxx)
+</code></pre>
+<h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><p>  线程分为用户线程和守护线程<br>  虚拟机必须确保<strong>用户线程</strong>执行完毕<br>  虚拟机不用等待<strong>守护线程</strong>执行完毕</p>
+<pre><code>thread.setDaemon(true); //默认是false表示是用户线程 ，正常的线程都是用户线程
+</code></pre>
+<h2 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h2><p>实现要求：队列+锁<br>由于同一进程的多个线程共享同一块存储空间，导致访问冲突问题<br>为了保证数据在方法中被访问时的正确性，在访问时加入锁机制<code>synchronized</code><br>加锁释放锁会导致比较多的上下文切换和调度延时起性能问题<br>但是一个优先级高的线程等待一个优先级低的线程释放锁会导致优先级倒置，引起性能问题</p>
+<h3 id="同步方法和同步块"><a href="#同步方法和同步块" class="headerlink" title="同步方法和同步块"></a>同步方法和同步块</h3><p>同步方法:<br><code>public synchronized void method(int args) &#123;&#125;</code><br>  每个对象对应一把锁每个synchronized方法都必须获得调用该方法的对象的锁才能执行<br>  缺陷:若将一个大的方法申明为synchronized 将会影响效率</p>
+<p>同步块:<br><code>synchronized (obj) &#123;&#125;</code><br>  obj 可以是任何对象，但是推荐使用共享资源作为同步监视器（obj）<br>  同步方法中无需指定同步监视器（obj），因为同步方法的同步监视器就是this，就是这个对象本身</p>
+<ol>
+<li>第一个线程访问，锁定同步监视器，执行其中代码</li>
+<li>第二个线程访问，发现同步监视器被锁定，无法访问</li>
+<li>第一个线程访问完毕，解锁同步监视器</li>
+<li>第二个线程访问，发现同步监视器没有锁，然后锁定并访问</li>
+</ol>
+<p>  对于普通同步方法，锁是当前实例对象。如果有多个实例,那么锁对象必然不同无法实现同步。<br>  对于静态同步方法，锁是当前类的Class对象。有多个实例但是锁对象是相同的,可以完成同步。<br>  对于同步方法块，锁是Synchonized括号里配置的对象。如当前类的class只有一个,锁对象相同 也能实现同步。</p>
+<h2 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h2><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><p>  多个线程各自占有一些共享资源，并且互相等待其他线程占有的资源才能运行<br>  而某一个同步块同时拥有“两个以上对象的锁”导致两个或者多个线程都在等待对方释放资源，都停止执行的情形时，就可能会发生“死锁”的问题</p>
+<p>产生死锁的四个必要条件：</p>
+<ol>
+<li>互斥条件:一个资源每次只能被一个进程使用。</li>
+<li>请求与保持条件:一个进程因请求资源而阻塞时，对已获得的资源保持不放</li>
+<li>不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺</li>
+<li>循环等待条件:若千进程之间形成一种头尾相接的循环等待资源关系</li>
+</ol>
+<p>  只要打破以上的任意一个条件就能解除死锁。</p>
+<h3 id="Lock锁"><a href="#Lock锁" class="headerlink" title="Lock锁"></a>Lock锁</h3><p>  从JDK5.0开始Java提供了更强大的线程同步机制-通过显式定义同步锁对象来实现同步。同步锁使用Lock对象实现。<br>  锁提供了对共享资源的独占访问，每次只能有一个线程对Lock对象加锁，线程开始访问共享资源之前应先获得Lock对象<br>  ReentrantLock（可重入锁）拥有与synchronized 相同的并发性和内存语义，在实现线程安全的控制中较常用，可以显式加锁、释放锁。</p>
+<p>使用示例：</p>
+<pre class="line-numbers language-Java"><code class="language-Java">
+public void testMethod() &#123;
+    lock.lock();
+    try &#123;
+        System.out.println("xxxxxxxxxxxxxxxxx");
+    &#125; finally &#123;
+        lock.unlock();
+    &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Lock与Synchronized的比较"><a href="#Lock与Synchronized的比较" class="headerlink" title="Lock与Synchronized的比较"></a>Lock与Synchronized的比较</h3><ul>
+<li>Lock是显式锁(手动开启和关闭锁，别忘记关闭锁)synchronized是隐式锁，出了作用域自动释放</li>
+<li>Lock只有代码块锁，synchronized有代码块锁和方法锁使用Lock锁，JVM将花费较少的时间来调度线程，性能更好。并且具有更好的扩展性(提供更多的子类)</li>
+<li><strong>优先使用顺序:</strong></li>
+<li>Lock &gt;同步代码块 (已经进入了方法体，分配了相应资源)&gt;同步方法 (在方法体之外)</li>
+</ul>
+<h2 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h2><h3 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h3><p>  生产者和消费者共享同一个资源，并且生产者和消费者之间相互依赖，互为条件<br>  <strong>对于生产者：</strong>没有生产产品之前，要通知消费者等待而生产了产品之后，又需要马上通知消费者消费<br>  <strong>对于消费者：</strong>在消费之后，要通知生产者已经结束消费，需要生产新的产品以供消费</p>
+<ul>
+<li>synchronized 可阻止并发更新同一个共享资源，实现了同步</li>
+<li>synchronized 不能用来实现不同线程之间的消息传递(通信)</li>
+</ul>
+<p>解决通信问题的方法，都是Obj类方法，只能在同步方法或者同步方法块内。</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>wait()</td>
+<td>表示线程一直等待，直到其他线程通知，与sleep不同会释放锁</td>
+</tr>
+<tr>
+<td>wait(long timeout)</td>
+<td>指定等待的毫秒数</td>
+</tr>
+<tr>
+<td>notify()</td>
+<td>唤醒一个处于等待状态的线程</td>
+</tr>
+<tr>
+<td>notifyAll()</td>
+<td>唤醒同一个对象上所有调用wait()方法的线程，优先级别高的线程优先调度</td>
+</tr>
+</tbody></table>
+<h3 id="管程法"><a href="#管程法" class="headerlink" title="管程法"></a>管程法</h3><p>  使用wait()和notify()方法的实现</p>
+<p><strong>生产者:</strong> 负责生产数据的模块(可能是方法，对象，线程，进程)<br><strong>消费者:</strong> 负责处理数据的模块(可能是方法，对象，线程，进程)<br><strong>缓冲区:</strong> 生产者将生产好的数据放入缓冲区，消费者从缓冲区拿出数据</p>
+<p>  缓冲区满或者空时都调用wait()方法等待，当生产者生产了一个产品或者消费者消费了一个产品之后会唤醒所有线程。</p>
+<h3 id="可重入锁ReentrantLock的实现"><a href="#可重入锁ReentrantLock的实现" class="headerlink" title="可重入锁ReentrantLock的实现"></a>可重入锁ReentrantLock的实现</h3><p>  可重入锁，也叫做递归锁，指的是同一线程 外层函数获得锁之后，内层递归函数仍然有获取该锁的代码，但不受影响。<br>  锁维护一个与获取锁相关的计数器，如果拥有锁的某个线程再次得到锁，那么获取计数器就加1，函数调用结束计数器就减1。<br>  锁需要被释放两次才能获得真正释放，已经获取锁的线程进入其他需要相同锁的同步代码块不会被阻塞。</p>
+<h3 id="阻塞队列BlockingQueue的实现"><a href="#阻塞队列BlockingQueue的实现" class="headerlink" title="阻塞队列BlockingQueue的实现"></a>阻塞队列BlockingQueue的实现</h3><p>  BlockinoQueue是一个已经在内部实现了同步的队列，实现方式采用的是await()/signal()方法。它可以在生成对象时指定容量大小，用于阻塞操作的是put()和take()方法。<br>put()方法: 类似于我们上面的生产者线程，容量达到最大时，自动阻塞。<br>take(方法: 类似于我们上面的消费者线程，容量为0时，自动阻寒。<br>  当一个线程对已经满了的阻塞队列进行入队操作时会阻塞，除非有另外一个线程进行了出队操作，当一个线程对一个空的阻塞队列进行出队操作时也会阻塞，除非有另外一个线程进行了入队操作。<br>从上可知，阻塞队列是线程安全的。</p>
+<h3 id="信号量-Semaphore-的实现"><a href="#信号量-Semaphore-的实现" class="headerlink" title="信号量 Semaphore 的实现"></a>信号量 Semaphore 的实现</h3><p>  Semaphore是一种基于计数的信号量，它可以设定一个阀值。<br>  当多个线程竞争获取许可信号，做完自己的申请后归还，超过闻值后，线程申请许可信号将会被阻塞。<br>  Semaphore可以用来构建一些对象池，资源池之类的，比如数据库连接池，我们也可以创建计数为的Semaphore，将其作为一种类似互斥锁的机制，这也叫二元信号量，表示两种互斥状态。<br>  计数为0的Semaphore是可以release的，然后就可以acquire (即一开始使线程阻塞从而完成其他执行)。</p>
+<h3 id="管道输入输出流实现"><a href="#管道输入输出流实现" class="headerlink" title="管道输入输出流实现"></a>管道输入输出流实现</h3><p>  先创建一个管道输入流和管道输出流，然后将输入流和输出流进行连接<br>  用生产者线程往管道输出流中写入数据，消费者在管道输入流中读取数据，这样就可以实现了不同线程间的相互通讯<br>  但是这种方式在生产者和生产者、消费者和消费者之间不能保证同步，也就是说在一个生产者和一个消费者的情况下是可以生产者和消费者之间交替运行的，多个生成者和多个消费者者之间则不行</p>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>  <strong>背景:</strong> 经常创建和销毁、使用量特别大的资源，比如并发情况下的线程，对性能影响很大。<br>  <strong>思路:</strong> 提前创建好多个线程，放入线程池中，使用时直接获取，使用完放回池中可以避免频繁创建销毁、实现重复利用。<br><strong>好处:</strong></p>
+<ol>
+<li>提高响应速度(减少了创建新线程的时间)</li>
+<li>降低资源消耗(重复利用线程池中线程，不需要每次都创建)</li>
+<li>便于线程管理<br><code>corePoolSize</code>: 核心池的大小<br><code>maximumPoolSize</code>: 最大线程数<br><code>keepAliveTime</code>: 线程没有任务时最多保持多长时间后会终止</li>
+</ol>
+<pre class="line-numbers language-Java"><code class="language-Java">
+private static void createCachedThreadPool() &#123;
+        ExecutorService executorService = Executors.newCachedThreadPool();  // 可缓存的线程池，若线程数超过处理所需，缓存一段时间后会回收，若线程数不够，则新建线程。
+        ExecutorService executorService = Executors.newFixedThreadPool(3);  // 固定大小的线程池，可控制并发的线程数，超出的线程会在队列中等待。
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);  // 周期性的线程池，支持定时及周期性执行任务。
+        ExecutorService executorService = Executors.newSingleThreadExecutor();  // 单线程的线程池，可保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+        //   使用ThreadPoolExecutor自行定义线程池
+        for (int i = 0; i < 10; i++) &#123;
+            final int index = i;
+            executorService.execute(() -> &#123;
+                // 获取线程名称,默认格式:pool-1-thread-1
+                System.out.println(DateUtil.now() + " " + Thread.currentThread().getName() + " " + index);
+                // 等待2秒
+                sleep(2000);
+            &#125;);
+        &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  应该使用ThreadPoolExecutor类来创建线程池，根据自己需要的场景来创建一个合适的线程池。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>  很尴尬这是这个学期的第一篇博客文章，有一种一个学期没学啥东西的感觉<br><strong>orz</strong>能鸽这么久确实是没想到<br>  接下来可能会整一些java的东西，然后有计划写算法或者安全开发这些东西。</p>
+<p><a href="https://smms.app/image/hDei8vSbxJVIqto" target="_blank"><img src="https://s2.loli.net/2023/12/14/hDei8vSbxJVIqto.jpg" width = "500" ></a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/19/Linux%E8%BF%9B%E7%A8%8B%E7%AE%80%E8%BF%B0/" rel="prev" title="Linux进程简述">
+                  <i class="fa fa-angle-left"></i> Linux进程简述
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/14/Java%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="next" title="Java网络编程">
+                  Java网络编程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

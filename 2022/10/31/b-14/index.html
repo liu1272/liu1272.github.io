@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="每日一记复选框&lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;1&quot; id&#x3D;&quot;man&quot;&gt; &lt;label for&#x3D;&quot;man&quot;&gt;男&lt;&#x2F;label&gt; 这里做一个补充:id是为了点击文字也可以选中，不然就只能点击那个圈来选了  回归正轨 1. type&#x3D;&quot;checkbox&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML&amp;CSS拓展（6）">
+<meta property="og:url" content="https://liu1272.github.io/2022/10/31/b-14/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="每日一记复选框&lt;input type&#x3D;&quot;radio&quot; name&#x3D;&quot;1&quot; id&#x3D;&quot;man&quot;&gt; &lt;label for&#x3D;&quot;man&quot;&gt;男&lt;&#x2F;label&gt; 这里做一个补充:id是为了点击文字也可以选中，不然就只能点击那个圈来选了  回归正轨 1. type&#x3D;&quot;checkbox&amp;quo">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-31T15:32:04.000Z">
+<meta property="article:modified_time" content="2023-03-03T11:44:12.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2022/10/31/b-14/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2022/10/31/b-14/","path":"2022/10/31/b-14/","title":"HTML&CSS拓展（6）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>HTML&CSS拓展（6） | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">每日一记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E9%80%89%E6%A1%86"><span class="nav-number">1.0.1.</span> <span class="nav-text">复选框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E6%8B%89%E8%8F%9C%E5%8D%95"><span class="nav-number">1.0.2.</span> <span class="nav-text">下拉菜单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%9F%9F-%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%E6%A1%86"><span class="nav-number">1.0.3.</span> <span class="nav-text">文本域(多行文本输入框)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E9%9B%86"><span class="nav-number">1.0.4.</span> <span class="nav-text">字段集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML5"><span class="nav-number">1.1.</span> <span class="nav-text">HTML5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E5%8D%95%E5%A2%9E%E5%BC%BA-%E4%BB%A5%E4%B8%8A%E4%BC%A0%E5%90%8E%E7%AB%AF%E4%B8%BA%E4%BE%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">表单增强(以上传后端为例)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS3"><span class="nav-number">1.2.</span> <span class="nav-text">CSS3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%99%A8%E5%9B%9E%E9%A1%BE-%E6%9B%B4%E6%96%B0"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">选择器回顾+更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B4%E5%BD%B1"><span class="nav-number">1.2.1.</span> <span class="nav-text">阴影</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%86%E8%A7%92%E8%BE%B9%E6%A1%86-%E6%94%BE%E5%9C%A8style%E9%87%8C"><span class="nav-number">1.2.2.</span> <span class="nav-text">圆角边框(放在style里)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%BD%93%E5%BC%95%E5%85%A5"><span class="nav-number">1.2.3.</span> <span class="nav-text">字体引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.4.</span> <span class="nav-text">盒模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%AA%E5%BC%82%E7%9B%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">怪异盒模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E6%A8%A1%E5%9E%8B-%E8%83%BD%E5%A4%9F%E9%80%82%E5%BA%94%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">弹性盒模型(能够适应页面)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%98%E8%A1%8C%E4%B8%8E%E8%A1%8C%E9%97%B4%E8%B7%9D"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">折行与行间距</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%B3%E6%AD%A4%EF%BC%8CHTML%E4%B8%8ECSS%E7%BB%93%E6%9D%9F%EF%BC%81"><span class="nav-number">1.3.</span> <span class="nav-text">至此，HTML与CSS结束！</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E5%8F%A5"><span class="nav-number">1.3.0.0.1.</span> <span class="nav-text">每日一句:</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2022/10/31/b-14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="HTML&CSS拓展（6） | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTML&CSS拓展（6）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-31 23:32:04" itemprop="dateCreated datePublished" datetime="2022-10-31T23:32:04+08:00">2022-10-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-03 19:44:12" itemprop="dateModified" datetime="2023-03-03T19:44:12+08:00">2023-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2022/10/31/b-14/" class="post-meta-item leancloud_visitors" data-flag-title="HTML&CSS拓展（6）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h1><h3 id="复选框"><a href="#复选框" class="headerlink" title="复选框"></a>复选框</h3><pre><code>&lt;input type=&quot;radio&quot; name=&quot;1&quot; id=&quot;man&quot;&gt;
+&lt;label for=&quot;man&quot;&gt;男&lt;/label&gt;
+这里做一个补充:id是为了点击文字也可以选中，不然就只能点击那个圈来选了
+
+回归正轨
+1.
+type=&quot;checkbox&quot;可以多选
+2.
+type=&quot;checkbox&quot; checked=&quot;checked&quot;就能变成默认选中
+3.
+disabled=&quot;disabled&quot;或者disabled可以禁用该模块
+4.
+readonly是只读不能改
+</code></pre>
+<h3 id="下拉菜单"><a href="#下拉菜单" class="headerlink" title="下拉菜单"></a>下拉菜单</h3><pre><code>&lt;body&gt;
+    &lt;select size=&quot;3&quot; multiple&gt;                              #size是一面可显示的选项  multiple是可多选
+        &lt;option value=&quot;a&quot;&gt;&lt;/option&gt;
+        &lt;option value=&quot;b&quot;&gt;&lt;/option&gt;                         #value是提供给后端使用的value值
+        &lt;option value=&quot;c&quot;&gt;&lt;/option&gt;
+        &lt;option value=&quot;d&quot; selected&gt;&lt;/option&gt;                #selected默认选中
+    &lt;/select&gt;
+&lt;/body&gt;
+</code></pre>
+<h3 id="文本域-多行文本输入框"><a href="#文本域-多行文本输入框" class="headerlink" title="文本域(多行文本输入框)"></a>文本域(多行文本输入框)</h3><pre><code>&lt;div&gt;
+    &lt;textarea name=&quot;&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;10&quot; placeholder=&quot;&quot;&gt;内容&lt;/textarea&gt;
+&lt;/div&gt;
+cols是列   
+rows是行
+placeholder是预置文本，输入就会消失
+&lt;style&gt;
+    textarea&#123;
+        width:100px;
+        height:100px;
+        resize:vertical;
+    &#125;
+&lt;/style&gt;
+horizontal水平可调节both都可以none不能更改
+
+注意:placeholder的默认value是两个标识符之间的，换行也会跟着换行
+</code></pre>
+<h3 id="字段集"><a href="#字段集" class="headerlink" title="字段集"></a>字段集</h3><pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;内容1&lt;/legend&gt;
+    &lt;input type=&quot;radio&quot; name=&quot;aaa&quot;&gt;选项1
+    &lt;input type=&quot;radio&quot; name=&quot;aaa&quot;&gt;选项2
+    &lt;legend&gt;内容2&lt;/legend&gt;
+&lt;/fieldset&gt;
+</code></pre>
+<h2 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h2><p>1.指定UTF-8<br>2.增加语义化标签(便于爬虫)<br>&nbsp;&nbsp; section,article,aside,header,footer,nav,figure,main<br>3.可以省略结束标签(最好不要)<br>4.在标签中可以使用单引号<br>5.音视频标签</p>
+<pre><code>&lt;body&gt;
+    &lt;audio src=&quot;路径&quot; cintrols&gt;&lt;/audio&gt;
+    &lt;video src=&quot;路径&quot; poster=&quot;路径&quot;&gt;&lt;/video&gt;
+&lt;/body&gt;
+
+controls 可控制
+loop 循环
+autoplay 自动播放
+muted 静音播放
+poster 海报
+注意:设置宽高要适应视频画面大小
+</code></pre>
+<h3 id="表单增强-以上传后端为例"><a href="#表单增强-以上传后端为例" class="headerlink" title="表单增强(以上传后端为例)"></a>表单增强(以上传后端为例)</h3><pre><code>一，颜色选择
+&lt;form action=&quot;action&quot;&gt;
+    &lt;input type=&quot;color&quot; name=&quot;aaa&quot; autofocus&gt;            #选择颜色，autofocus光标默认在这里
+    &lt;input type=&quot;email&quot; name=&quot;mymail&quot; required&gt;          #选择邮箱，required必填项
+    &lt;input type=&quot;url&quot; name=&quot;bbb&quot; multiple&gt;               #选择地址，multiple可选择多个地址，用逗号隔开
+    &lt;input type=&quot;tel&quot; name=&quot;ccc&quot;&gt;                        #tel只在手机端有用，显示输入页面
+    &lt;input type=&quot;range&quot; name=&quot;ddd&quot; min=&quot;100&quot; max=&quot;1000&quot; value=&quot;100&quot; step=&quot;10&quot;&gt;    #range滑块效果
+    &lt;input type=&quot;number&quot; name=&quot;eee&quot; min=&quot;0&quot; max=&quot;10&quot; value=&quot;4&quot; step=&quot;2&quot;&gt;          #选择数字，value是初始数据
+    &lt;input type=&quot;search&quot; name=&quot;fff&quot;&gt;                     #搜索框
+    &lt;input type=&quot;date&quot; name=&quot;ggg&quot;&gt;                       #选择日期，type改成month是精确到月份
+    &lt;input type=&quot;datetime-local&quot; name=&quot;hhh&quot;&gt;             #精确到秒
+&lt;/form&gt;
+注意！！！
+没有name就不能传到后端，提交了会在url上显示
+
+二，数据列表
+&lt;body&gt;
+    &lt;input type=&quot;text&quot; list=&quot;mylist&quot;&gt;              这里的list
+    &lt;datalist id=&quot;mylist&quot;&gt;                         和这里的id关联
+        &lt;option value=&quot;111111&quot;&gt;&lt;/option&gt;
+        &lt;option value=&quot;2433445&quot;&gt;&lt;/option&gt;
+        &lt;option value=&quot;333436653&quot;&gt;&lt;/option&gt;        上面输入就可以在下面显示有关的内容
+        &lt;option value=&quot;4、3、78&quot;&gt;&lt;/option&gt;
+    &lt;/datalist&gt;
+&lt;/body&gt;
+
+三，正则表达式
+在input中加入 pattern=&quot;[0-9][A-Z]&#123;3&#125;&quot;
+代表第一个要是0-9的，后面接着三个要是A-Z的
+</code></pre>
+<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><h4 id="选择器回顾-更新"><a href="#选择器回顾-更新" class="headerlink" title="选择器回顾+更新"></a>选择器回顾+更新</h4><pre><code>一，层级选择器+属性选择器
+&lt;style&gt;
+    .child+li&#123;                       #这个child后面的第一个同级的li标签改变
+        background:red;        
+    &#125;
+    .child~li&#123;                       #这个后面所有同级的li标签都改变
+        background:red;
+    &#125;
+    div[class]&#123;                      #所有div而且有class的都改变
+        background:red;
+    &#125;
+    div [class]&#123;                     #加了空格，div后代有class的都改变
+        background:red;
+    &#125;
+    div[class=box1]&#123;                 #是div而且属性是box1的才改变
+        background:red;
+    &#125;
+&lt;/style&gt;
+拓展————模糊匹配:
+class^&quot;b&quot;   以b开头的
+class$&quot;b&quot;   以b结尾的
+class*&quot;b&quot;   包含b的
+
+二，结构伪类选择器
+&lt;style&gt;
+    ul li:first-child&#123;       #选择第一个
+        color:red;
+    &#125;
+    ul li:last-child&#123;        #最后一个
+        color:red;
+    &#125;
+    li:nth-child(odd)&#123;       #选定第几个，odd/2n+1/2n-1是奇数，2n/even是偶数
+        color:red;
+    &#125;
+    li:nth-onlychild&#123;        #匹配div下而且只有一个p的
+        color:red;
+    &#125;
+    div:empty&#123;               #匹配根元素(HTML)
+        color:red;
+    &#125;
+    :root,body&#123;              #匹配没有任何元素的，包括空格
+        color:red;
+    &#125;
+&lt;/style&gt;
+
+三，目标伪类选择器
+div.&#123;                        #先让全部使用一个style
+    display:none;
+&#125;
+div.:target&#123;                 #再让点到的目标换成指定的style
+    display:block;
+&#125;
+
+四，UI状态伪类选择器
+input:checked&#123;               #匹配选择的
+    background:red;  
+&#125;
+        input:focus&#123;         #匹配手动focus的
+    background:red;
+&#125;
+
+四，否定伪类选择器
+li:not(:nth-child(2n+1))&#123;    #匹配所有不匹配的
+    color:red;
+&#125;
+其它:
+X:link  链接伪类选择器，超链接未被访问过的
+X:visited  链接伪类选择器，超链接被访问过的
+X:active  用户行为选择器，被激活的(常用于链接)
+X:hover  用户行为选择器，停留在上方的
+</code></pre>
+<h3 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h3><pre><code>文本阴影
+div&#123;
+    text-shadow:10px -10px 1px red;     #水平方向，垂直方向，模糊程度，阴影颜色
+&#125;
+如果要多个阴影，在颜色后面加逗号之后再加上另一个的参数，分号不要漏!!!
+
+盒子阴影
+div&#123;
+    width:100px;
+    ...
+    box-shadow: 10px(水平) 10px(垂直) 1px(模糊程度) 10px(阴影大小) red inside(内阴影);
+&#125;
+</code></pre>
+<h3 id="圆角边框-放在style里"><a href="#圆角边框-放在style里" class="headerlink" title="圆角边框(放在style里)"></a>圆角边框(放在style里)</h3><p>同时设置四个角:<br>border-radius:10px;<br>1.从四个角往内截10px(可以使用百分比)<br>2.设置一个值，四个角一样<br>3.设置两个值，左上右下——&gt;左下右上<br>4.设置三个值，左上——&gt;左下右上——&gt;右下<br>5.设置四个值，左上开始顺时针</p>
+<p>设置单个角:<br>boder-top-left-radius:10px;<br>boder-top-right-radius:10px;<br>boder-bottom-left-radius:10px;<br>boder-bottom-right-radius:10px;</p>
+<p>border-radius:10px/20px;<br>水平/垂直切割，只支持boder-radius</p>
+<h3 id="字体引入"><a href="#字体引入" class="headerlink" title="字体引入"></a>字体引入</h3><pre><code>&lt;style&gt;
+    @font-family:kerwin;                   #字体名字
+    src:url(font/STHUPO.TTF);              #字体文件路径
+    div&#123;
+        font-family:kerwin;                #字体名字
+        font-size:50px;       
+        color:red;
+        text-shadow:5px 0px 0px green;
+    &#125;
+&lt;/style&gt;
+</code></pre>
+<h3 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h3><h4 id="怪异盒模型"><a href="#怪异盒模型" class="headerlink" title="怪异盒模型"></a>怪异盒模型</h4><p>box-sizing: content-box;      #普通盒模型，增加padding时会扩张box<br>box-sizing: border-box;       #怪异盒模型，增加时不会撑大</p>
+<h4 id="弹性盒模型-能够适应页面"><a href="#弹性盒模型-能够适应页面" class="headerlink" title="弹性盒模型(能够适应页面)"></a>弹性盒模型(能够适应页面)</h4><p>display:flex;<br>1.默认横向排列，不是浮动。<br>2.行内元素变为块级元素。<br>3.margin:auto;自动居中<br>4.flex-direction: column;<br>5.column主轴列向排列，row纵向排列;column-reverse；纵向倒序排列，row-reverse横向倒序排列<br>6.justify-content:flex-end;主轴位置<br>align-items:center;侧轴位置<br>7.flex-start靠左对齐;flex-end靠右对齐;center靠中对齐;space-around环绕;space-between两端对齐</p>
+<h4 id="折行与行间距"><a href="#折行与行间距" class="headerlink" title="折行与行间距"></a>折行与行间距</h4><p>flex-wrap:wrap;                #打开折行<br>align-content:flex-start;      #折行之后的行间距<br>flex-start,flex-end,center,space-around,space-between同上</p>
+<h2 id="至此，HTML与CSS结束！"><a href="#至此，HTML与CSS结束！" class="headerlink" title="至此，HTML与CSS结束！"></a>至此，HTML与CSS结束！</h2><h5 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句:"></a>每日一句:</h5><p>&nbsp;&nbsp;每一个问题都想给出回答，也有一些想说的，想劝的，想帮的，但想到自己的生活也是一地鸡毛。<br>「我们每个人都把自己活得一团糟，却总以为可以指导别人过得更好。」<br>&nbsp;&nbsp;但说回来还是一句用烦了的话，提升自己是解决一切问题的方式，亲情爱情友情都是，在现在这个世界里，经济独立财富自由能解决百分之九十的烦恼，很现实也很真实，我文化不高总觉得词不达意，慢慢来捱过去总会越来越好的，到达谷底的人怎么走都是向上的</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/31/b-13/" rel="prev" title="恍然大悟的一天">
+                  <i class="fa fa-angle-left"></i> 恍然大悟的一天
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/01/b-15/" rel="next" title="JavaScript基础（1）">
+                  JavaScript基础（1） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2022/10/31/b-14/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

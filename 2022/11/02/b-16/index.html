@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="每日一记条件分支一，if括号里的条件表达式计算结果是 true，就会执行对应的代码块如果有多个语句要执行，我们必须将要执行的代码块封装在大括号内 二，布尔转换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript基础（2）">
+<meta property="og:url" content="https://liu1272.github.io/2022/11/02/b-16/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="每日一记条件分支一，if括号里的条件表达式计算结果是 true，就会执行对应的代码块如果有多个语句要执行，我们必须将要执行的代码块封装在大括号内 二，布尔转换">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-02T15:32:04.000Z">
+<meta property="article:modified_time" content="2023-03-03T11:44:42.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2022/11/02/b-16/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2022/11/02/b-16/","path":"2022/11/02/b-16/","title":"JavaScript基础（2）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaScript基础（2） | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">每日一记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%86%E6%94%AF"><span class="nav-number">1.1.</span> <span class="nav-text">条件分支</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%EF%BC%8Cif"><span class="nav-number">1.1.1.</span> <span class="nav-text">一，if</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%EF%BC%8C%E5%B8%83%E5%B0%94%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.1.2.</span> <span class="nav-text">二，布尔转换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89%EF%BC%8Celse"><span class="nav-number">1.1.3.</span> <span class="nav-text">三，else</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%9B%EF%BC%8C%E5%A4%9A%E4%B8%AA%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.1.4.</span> <span class="nav-text">四，多个条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%94%EF%BC%8C%E6%9D%A1%E4%BB%B6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.1.5.</span> <span class="nav-text">五，条件运算符?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%85%AD%EF%BC%8C%E5%A4%9A%E4%B8%AA"><span class="nav-number">1.1.6.</span> <span class="nav-text">六，多个?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%83%EF%BC%8C-%E7%9A%84%E9%9D%9E%E5%B8%B8%E8%A7%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.7.</span> <span class="nav-text">七，?的非常规使用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.2.</span> <span class="nav-text">逻辑运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%88%E6%88%96%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">||（或）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#amp-amp-%EF%BC%88%E4%B8%8E%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">&amp;&amp;（与）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%88%E9%9D%9E%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">!（非）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%EF%BC%88%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">??（空值合并运算符）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E7%94%A8%E6%B3%95"><span class="nav-number">1.2.5.</span> <span class="nav-text">拓展用法:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E5%8A%A0%E4%B8%8A%E6%8B%AC%E5%8F%B7%EF%BC%81%EF%BC%81%EF%BC%81"><span class="nav-number">1.3.</span> <span class="nav-text">请加上括号！！！</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83-%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">训练(登录校验)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">每日一句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%BA%E7%9A%84%E4%B8%80%E7%94%9F%E4%B8%AD%E6%80%BB%E4%BC%9A%E6%9C%89%E6%9F%90%E4%B8%AA%E6%97%B6%E5%88%BB%EF%BC%8C%E9%9C%80%E8%A6%81%E5%9D%9A%E5%AE%88%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%B3%E5%AE%9A%E3%80%82%E4%B8%80%E4%B8%AA%E8%AF%B4%E2%80%9C%E8%BF%99%E5%B0%B1%E6%98%AF%E6%88%91%EF%BC%8C%E8%BF%99%E5%B0%B1%E6%98%AF%E6%88%91%E7%9A%84%E9%80%89%E6%8B%A9%E2%80%9D%E7%9A%84%E6%97%B6%E5%88%BB%E3%80%82"><span class="nav-number">3.0.1.</span> <span class="nav-text">人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2022/11/02/b-16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaScript基础（2） | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript基础（2）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-02 23:32:04" itemprop="dateCreated datePublished" datetime="2022-11-02T23:32:04+08:00">2022-11-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-03 19:44:42" itemprop="dateModified" datetime="2023-03-03T19:44:42+08:00">2023-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2022/11/02/b-16/" class="post-meta-item leancloud_visitors" data-flag-title="JavaScript基础（2）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>981</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="条件分支"><a href="#条件分支" class="headerlink" title="条件分支"></a>条件分支</h4><h5 id="一，if"><a href="#一，if" class="headerlink" title="一，if"></a>一，if</h5><p>括号里的条件表达式计算结果是 true，就会执行对应的代码块<br>如果有多个语句要执行，我们必须将要执行的代码块封装在大括号内</p>
+<h5 id="二，布尔转换"><a href="#二，布尔转换" class="headerlink" title="二，布尔转换"></a>二，布尔转换</h5><p>if语句会计算圆括号内的表达式，并将计算结果转换为布尔型<br>数字0、空字符串””、null、undefined和NaN都会被转换成false。因为它们被称为“假值（falsy）”。<br>其他值被转换为 true，所以它们被称为“真值（truthy）”。</p>
+<h5 id="三，else"><a href="#三，else" class="headerlink" title="三，else"></a>三，else</h5><p>if 语句判断条件不成立，就会执行它内部的代码</p>
+<h5 id="四，多个条件"><a href="#四，多个条件" class="headerlink" title="四，多个条件"></a>四，多个条件</h5><pre><code>let year = prompt(&#39;提示语&#39;, &#39;&#39;);            #设置变量并赋值
+                                            #prompt相当于input
+if (year &lt; 2015) &#123;                          #判断条件
+  alert( &#39;Too early...&#39; );                  #成立就执行alert，相当于print
+&#125; else if (year &gt; 2015) &#123;                   #另一个条件判断
+  alert( &#39;Too late&#39; );
+&#125; else &#123;                                    #若上面的条件都不满足
+  alert( &#39;Exactly!&#39; );
+&#125;                                           #大括号要把整个if语句的执行部分都包含起来
+</code></pre>
+<h5 id="五，条件运算符"><a href="#五，条件运算符" class="headerlink" title="五，条件运算符?"></a>五，条件运算符?</h5><p>(有时被称为三元运算符,因为该运算符中有三个操作数,它是 JavaScript 中唯一一个有这么多操作数的运算符)<br>根据一个条件去赋值一个变量</p>
+<pre><code>let result = condition ? value1 : value2;
+计算条件结果，如果结果为真，则返回 value1，否则返回 value2。
+condition(条件判断)尽量用括号包起来
+注意空格
+</code></pre>
+<h5 id="六，多个"><a href="#六，多个" class="headerlink" title="六，多个?"></a>六，多个?</h5><pre><code>let age = prompt(&#39;age?&#39;, 18);
+let message = (age &lt; 3) ? &#39;Hi, baby!&#39; :
+  (age &lt; 18) ? &#39;Hello!&#39; :
+  (age &lt; 100) ? &#39;Greetings!&#39; :
+  &#39;What an unusual age!&#39;;
+alert( message );
+
+相当于
+
+if (age &lt; 3) &#123;
+  message = &#39;Hi, baby!&#39;;
+&#125; else if (age &lt; 18) &#123;
+  message = &#39;Hello!&#39;;
+&#125; else if (age &lt; 100) &#123;
+  message = &#39;Greetings!&#39;;
+&#125; else &#123;
+  message = &#39;What an unusual age!&#39;;
+&#125;
+</code></pre>
+<h5 id="七，-的非常规使用"><a href="#七，-的非常规使用" class="headerlink" title="七，?的非常规使用"></a>七，?的非常规使用</h5><pre><code>有时可以使用问号 ? 来代替 if 语句：
+let company = prompt(&#39;Which company created JavaScript?&#39;, &#39;&#39;);
+(company == &#39;Netscape&#39;) ?
+   alert(&#39;Right!&#39;) : alert(&#39;Wrong.&#39;);
+注意缩进
+</code></pre>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><h5 id="（或）"><a href="#（或）" class="headerlink" title="||（或）"></a>||（或）</h5><p>任意一个参数为 true，返回的结果就为 true，否则返回 false<br>如果操作数不是布尔值，那么它将会被转化为布尔值来参与运算<br>例如 1 被作为 true 处理， 0 则被作为 false</p>
+<h5 id="amp-amp-（与）"><a href="#amp-amp-（与）" class="headerlink" title="&amp;&amp;（与）"></a>&amp;&amp;（与）</h5><p>两个操作数都是真值时，与运算返回 true，否则返回 false<br>函数 alert 返回了 undefined,所以会运算并输出alert然后停止</p>
+<h5 id="（非）"><a href="#（非）" class="headerlink" title="!（非）"></a>!（非）</h5><p>将操作数转化为布尔类型：true/false<br>返回相反的值<br>!! 有时候用来将某个值转化为布尔类型<br>(第一个非运算将该值转化为布尔类型并取反，第二个非运算再次取反。就得到了布尔值的转化)</p>
+<h5 id="（空值合并运算符）"><a href="#（空值合并运算符）" class="headerlink" title="??（空值合并运算符）"></a>??（空值合并运算符）</h5><p>a ?? b 的结果是：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第一个参数不是 null/undefined，则返回第一个参数，否则返回第二个参数</p>
+<h5 id="拓展用法"><a href="#拓展用法" class="headerlink" title="拓展用法:"></a>拓展用法:</h5><p>||寻找第一个真值,&amp;&amp;寻找第一个假值</p>
+<p>原理:一个或运算 || 的链，将返回第一个真值，如果不存在真值，就返回该链的最后一个值<br>运用:(a)获取变量列表或者表达式中的第一个真值<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(b)短路求值<br>注意:  &amp;&amp; 的优先级比或 || 要高<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不要用 || 或 &amp;&amp; 来取代 if<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;非运算符 ! 的优先级在所有逻辑运算符里面最高<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?? 运算符的优先级与 || 相同<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;??返回第一个已定义的值</p>
+<h4 id="请加上括号！！！"><a href="#请加上括号！！！" class="headerlink" title="请加上括号！！！"></a>请加上括号！！！</h4><h3 id="训练-登录校验"><a href="#训练-登录校验" class="headerlink" title="训练(登录校验)"></a>训练(登录校验)</h3><pre><code>let firstName = null;
+let lastName = null;
+let nickName = &quot;Supercoder&quot;;
+
+// 显示第一个已定义的值：
+alert(firstName ?? lastName ?? nickName ?? &quot;匿名&quot;);
+
+let userName = prompt(&quot;Who&#39;s there?&quot;, &#39;&#39;);
+
+if (userName === &#39;Admin&#39;) &#123;
+
+  let pass = prompt(&#39;Password?&#39;, &#39;&#39;);
+
+  if (pass === &#39;TheMaster&#39;) &#123;
+    alert( &#39;Welcome!&#39; );
+  &#125; else if (pass === &#39;&#39; || pass === null) &#123;
+    alert( &#39;Canceled&#39; );
+  &#125; else &#123;
+    alert( &#39;Wrong password&#39; );
+  &#125;
+
+&#125; else if (userName === &#39;&#39; || userName === null) &#123;
+  alert( &#39;Canceled&#39; );
+&#125; else &#123;
+  alert( &quot;I don&#39;t know you&quot; );
+&#125;
+</code></pre>
+<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。"><a href="#人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。" class="headerlink" title="人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。"></a>人的一生中总会有某个时刻，需要坚守自己的决定。一个说“这就是我，这就是我的选择”的时刻。</h5>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/01/b-15/" rel="prev" title="JavaScript基础（1）">
+                  <i class="fa fa-angle-left"></i> JavaScript基础（1）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/03/20221103/" rel="next" title="JavaScript基础（3）">
+                  JavaScript基础（3） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2022/11/02/b-16/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="每日一记Python爬虫思路1.发送请求获取网站html代码2.过滤有效信息3.解析数据4.处理数据 爬取过程1.找到网站发起请求2.分析url并提取3.分析url并解释网络内容4.存储数据并获取新url5.判断是否满足停止条件0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬虫一篇就够了">
+<meta property="og:url" content="https://liu1272.github.io/2022/11/17/20221117/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="每日一记Python爬虫思路1.发送请求获取网站html代码2.过滤有效信息3.解析数据4.处理数据 爬取过程1.找到网站发起请求2.分析url并提取3.分析url并解释网络内容4.存储数据并获取新url5.判断是否满足停止条件0">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-17T04:02:00.000Z">
+<meta property="article:modified_time" content="2023-03-03T11:37:58.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2022/11/17/20221117/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2022/11/17/20221117/","path":"2022/11/17/20221117/","title":"Python爬虫一篇就够了"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python爬虫一篇就够了 | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">每日一记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python%E7%88%AC%E8%99%AB%E6%80%9D%E8%B7%AF"><span class="nav-number">1.1.</span> <span class="nav-text">Python爬虫思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%AC%E5%8F%96%E8%BF%87%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">爬取过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#robots%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.3.</span> <span class="nav-text">robots协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http%E4%B8%8Ehttps"><span class="nav-number">1.4.</span> <span class="nav-text">http与https</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL%E4%B8%8EURI"><span class="nav-number">1.5.</span> <span class="nav-text">URL与URI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="nav-number">1.6.</span> <span class="nav-text">请求方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4%E5%8F%82%E6%95%B0"><span class="nav-number">1.7.</span> <span class="nav-text">请求头参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%93%8D%E5%BA%94%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">1.8.</span> <span class="nav-text">常见响应状态码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B"><span class="nav-number">1.9.</span> <span class="nav-text">请求交互过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7"><span class="nav-number">1.10.</span> <span class="nav-text">开发者工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session%E4%B8%8ECookie%E5%8E%9F%E7%90%86"><span class="nav-number">1.11.</span> <span class="nav-text">Session与Cookie原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSON-%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2%E8%AF%AD%E8%A8%80"><span class="nav-number">1.12.</span> <span class="nav-text">JSON(数据交换语言)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ajax-Web%E6%95%B0%E6%8D%AE%E4%BA%A4%E4%BA%92%E6%96%B9%E5%BC%8F"><span class="nav-number">1.13.</span> <span class="nav-text">Ajax(Web数据交互方式)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#urllib"><span class="nav-number">1.14.</span> <span class="nav-text">urllib</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IP%E4%BB%A3%E7%90%86"><span class="nav-number">1.15.</span> <span class="nav-text">IP代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Cookie"><span class="nav-number">1.16.</span> <span class="nav-text">使用Cookie</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#requests%E5%BA%93-%E5%8C%85%E6%8B%AC%E4%B8%8A%E9%9D%A2%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">1.17.</span> <span class="nav-text">requests库(包括上面的功能)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XPath%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE-lxml%E5%BA%93"><span class="nav-number">1.18.</span> <span class="nav-text">XPath解析数据(lxml库)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BeautifulSoup%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE-bs4%E5%BA%93"><span class="nav-number">1.19.</span> <span class="nav-text">BeautifulSoup解析数据(bs4库)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F-re%E5%BA%93"><span class="nav-number">1.20.</span> <span class="nav-text">正则表达式(re库)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%AC%E5%8F%96%E5%B9%B6%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.21.</span> <span class="nav-text">爬取并下载视频示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pyquery%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE-pyquery%E5%BA%93"><span class="nav-number">1.22.</span> <span class="nav-text">pyquery解析数据(pyquery库)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.23.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2023-3-3%E8%A1%A5%E6%A1%A3"><span class="nav-number">1.24.</span> <span class="nav-text">2023.3.3补档</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E5%8F%A5"><span class="nav-number">2.</span> <span class="nav-text">每日一句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%83%B3%E4%B8%8D%E6%B8%85%E6%A5%9A%E4%B8%80%E4%BB%B6%E4%BA%8B%EF%BC%8C%E5%BE%80%E5%BE%80%E5%9B%A0%E4%B8%BA%E8%BF%99%E4%BB%B6%E4%BA%8B%E9%87%8C%E6%9C%89%E4%BD%A0%E6%83%B3%E9%80%83%E9%81%BF%E7%9A%84%E4%B8%9C%E8%A5%BF%E3%80%82"><span class="nav-number">2.0.1.</span> <span class="nav-text">想不清楚一件事，往往因为这件事里有你想逃避的东西。</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2022/11/17/20221117/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python爬虫一篇就够了 | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python爬虫一篇就够了
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-17 12:02:00" itemprop="dateCreated datePublished" datetime="2022-11-17T12:02:00+08:00">2022-11-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-03 19:37:58" itemprop="dateModified" datetime="2023-03-03T19:37:58+08:00">2023-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2022/11/17/20221117/" class="post-meta-item leancloud_visitors" data-flag-title="Python爬虫一篇就够了" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>13 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="Python爬虫思路"><a href="#Python爬虫思路" class="headerlink" title="Python爬虫思路"></a>Python爬虫思路</h4><p>1.发送请求获取网站html代码<br>2.过滤有效信息<br>3.解析数据<br>4.处理数据</p>
+<h4 id="爬取过程"><a href="#爬取过程" class="headerlink" title="爬取过程"></a>爬取过程</h4><p>1.找到网站发起请求<br>2.分析url并提取<br>3.分析url并解释网络内容<br>4.存储数据并获取新url<br>5.判断是否满足停止条件0</p>
+<h4 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h4><p>决定可以访问的user(允许爬取的user)</p>
+<h4 id="http与https"><a href="#http与https" class="headerlink" title="http与https"></a>http与https</h4><p>http端口是8080<br>https加密,SSL层,端口是443</p>
+<h4 id="URL与URI"><a href="#URL与URI" class="headerlink" title="URL与URI"></a>URL与URI</h4><p>url包括协议类型，主机名/域名，端口号，查找路径，查找参数，锚点<br>uri是utl请求之前部分</p>
+<h4 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h4><p>get不影响资源/post影响资源</p>
+<h4 id="请求头参数"><a href="#请求头参数" class="headerlink" title="请求头参数"></a>请求头参数</h4><p>user-agent:浏览器名称<br>referer:请求源头<br>cookie:用于判断用户身份</p>
+<h4 id="常见响应状态码"><a href="#常见响应状态码" class="headerlink" title="常见响应状态码"></a>常见响应状态码</h4><p>200:正常返回<br>301:永久重定向<br>404:url错误<br>418:反爬虫，解决响应<br>500:服务器错误，bug</p>
+<h4 id="请求交互过程"><a href="#请求交互过程" class="headerlink" title="请求交互过程"></a>请求交互过程</h4><p>1.客户端浏览器向服务器发送请求<br>2.网站接收请求处理后返回响应数据<br>3.浏览器解析源码</p>
+<h4 id="开发者工具"><a href="#开发者工具" class="headerlink" title="开发者工具"></a>开发者工具</h4><p>element:分析网页结构，获取数据<br>console:打印输出网站信息<br>network:查看网络请求<br>source:所有的源文件(只能查看静态数据)</p>
+<h4 id="Session与Cookie原理"><a href="#Session与Cookie原理" class="headerlink" title="Session与Cookie原理"></a>Session与Cookie原理</h4><p>【Session】<br>特点:可长时间保存会话<br>过程:<br>1.客户端第一次发送请求时服务器端创建Session对象(生成sessionID)<br>2.将sessionID存入cookie传回<br>3.下次发送请求时包含sessionID<br>【Cookie】<br>特点:从服务器发送给浏览器后一直保存到关闭浏览器<br>过程:<br>1.创建cookie<br>2.设置存储cookie<br>3.发送cookie<br>4.读取cookie</p>
+<h4 id="JSON-数据交换语言"><a href="#JSON-数据交换语言" class="headerlink" title="JSON(数据交换语言)"></a>JSON(数据交换语言)</h4><p>JavaScript ObjectNotation，JS对象标记<br>数据格式:<br>1.对象表示为键值对<br>2.数据用逗号分隔<br>3.花括号保存对象<br>4.方括号保存数组<br>整体上与python的字典相似<br>例:</p>
+<pre><code>json_yuju=&#123;&#39;name&#39;:&#39;python&#39;,&#39;address&#39;:&#123;&#39;province&#39;:&#39;guangdong&#39;,&#39;city&#39;:[&#39;guangzhou&#39;,&#39;huizhou&#39;]&#125;&#125;
+print(json_yuju[&#39;address&#39;][&#39;city&#39;][2])               //输出huizhou
+</code></pre>
+<h4 id="Ajax-Web数据交互方式"><a href="#Ajax-Web数据交互方式" class="headerlink" title="Ajax(Web数据交互方式)"></a>Ajax(Web数据交互方式)</h4><p>Ajax在服务器与浏览器之间使用异步数据传输(可以只请求少量信息)<br>Ajax技术独立于浏览器与平台<br>Ajax一般返回JSON(对Ajax地址进行post或get就可以返回JSON数据)<br>Ajax渲染到html的叫做动态数据<br>服务器后台生成的是静态数据<br>html中的在source中没有找到那就是ajax<br>注意:Ajax需要用户允许JavaScript在浏览器上执行</p>
+<h4 id="urllib"><a href="#urllib" class="headerlink" title="urllib"></a>urllib</h4><p>py自带的网络请求库<br>模块:<br>urllib.request打开并读取url</p>
+<pre><code>模拟浏览器发送请求并获取响应结果
+data默认为None即Get请求，post请求时要将data以字典形式存储，由字典类型转换成字节类型
+转换成的数据类型看网页源代码
+
+【GET】
+import urllib.request
+url=&#39;https......&#39;                           //传入url
+response=urllib.request.urlopen(url)        //发送get请求
+html=response.read().decode(&#39;gbk&#39;)          //读取响应并将数据类型转为str
+print(html)
+
+【POST】
+import urllib.request
+url=&#39;https......&#39;                           //传入url
+data=&#123;&#39;a&#39;:&#39;A&#39;,&#39;b&#39;:&#39;B&#39;,&#39;action&#39;:&#39;login&#39;&#125;     //从Form Data处查看
+response=urllib.request.urlopen(url,data=bytes(urllib.prase.urlencode(data),encoding=&#39;utf-8&#39;))
+html=response.read().decode(&#39;gbk&#39;)          //读取响应并将数据类型转为str
+print(html)
+
+【通过伪造请求头绕过418】
+import urllib.request
+url=&#39;https......&#39;                           //传入url
+header=&#123;&#39;User-Agent&#39;:&#39;浏览器信息&#39;&#125;
+request=urllib.request.Request(url,headers=header)
+response=urllib.request.urlopen(request)
+html=response.read().decode(&#39;utf-8&#39;)        //读取响应并将数据类型转为str
+print(html)
+</code></pre>
+<p>urllib.error包含提出的异常urllib.request</p>
+<pre><code>import urllib.request
+import urllib.error
+url=&#39;目标地址&#39;
+try:
+    response=urllib.request.urlopen(url)    //尝试链接
+expect urllib.error.URLError as e:          //捕获返回信息
+    print(e.reason)
+</code></pre>
+<p>urllib.parse解析url</p>
+<pre><code>import urllib.parse
+a=&#123;&#39;A&#39;:&#39;内容&#39;&#125;                              //创建键值对
+result1=urllib.parse.urlencode(a)           //url编码
+result2=urllib.prase.unquote(result1)       //url解码
+
+属性:
+code:请求返回的状态码
+reason:返回错误的原因
+headers:请求返回的响应头信息
+</code></pre>
+<p>urllib.robotparase解析robots.txt文件</p>
+<h4 id="IP代理"><a href="#IP代理" class="headerlink" title="IP代理"></a>IP代理</h4><p>网站会拒绝同一IP多次访问<br>命令行中输入ipconfig的IPv4是本地IP<br>分类:<br>1.透明代理，知道使用了且知道源IP<br>2.匿名代理，知道使用了但是不知道源IP<br>3.高匿代理，都不知道<br><a href="https://www.xicidaili.com/nn/">免费网站</a><br>语法:</p>
+<pre><code>from urllib.request import build_opener
+from urllib.request import ProxyHandler
+proxy=ProxyHandler(&#123;&#39;协议类型http/https&#39;:&#39;IP地址:端口&#39;&#125;)
+opener=build_opener(proxy)
+url=&#39;目标地址&#39;
+response=opener.open(url)
+print(response.read().decode(&#39;utf-8&#39;))
+</code></pre>
+<h4 id="使用Cookie"><a href="#使用Cookie" class="headerlink" title="使用Cookie"></a>使用Cookie</h4><p>使用步骤:<br>1.实例化MozillaCookieJar(保存cookie)<br>2.创建handler对象(cookie的处理器)<br>3.创建opener对象<br>4.打开网页发送请求获取响应<br>5.保存cookie文件<br>语法:</p>
+<pre><code>import urllib.request
+from http import cookiejar
+filename=&#39;cookie.txt&#39;
+def get_cookie():                                         //定义获取cookie函数
+    cookie=cookiejar.MozillaCookieJar(filename)           //实例化MCJ
+    handler=urllib.request.HTTPCookieProcessor(cookie)    //创建handler对象
+    opener=urllib.request.build_opener(handler)           //创建opener对象
+    url=&#39;目标地址&#39;
+    response=opener.open(url)                             //发送请求并获取响应
+    cookie.save()                                         //保存cookie文件
+
+def use_cookie():                                         //定义获取cookie函数
+    cookie=cookiejar.MozillaCookieJar()                   //实例化MCJ
+    cookie.load(filename)                                 //加载cookie文件
+    print(cookie)
+
+if __name__ = &#39;__main__&#39;:
+    use_cookie()                                          //读取cookie
+</code></pre>
+<h4 id="requests库-包括上面的功能"><a href="#requests库-包括上面的功能" class="headerlink" title="requests库(包括上面的功能)"></a>requests库(包括上面的功能)</h4><pre><code>常用方法:requests
+requests.request(url)            //构造请求
+requests.get(url,params=None)    //Get请求。params可省略,params是请求的参数
+requests.post(url,data=None,json=None)
+requests.head()                  //获取html头部信息
+requests.put()                   //发送Put请求
+requests.patch()                 //提交局部修改的请求
+requests.delete()                //提交删除请求
+params是请求参数
+
+常用属性:
+response.status_code             //响应状态码
+response.content                 //response对象转为二进制数据
+response.text                    //response对象转为字符串数据
+response.encoding                //定义response对象编码
+response.cookies()               //获取请求后的cookie
+response.session()               //获取请求后的session
+response.url                     //获取请求网址
+response.json()                  //内置JSON解码器
+Response.headers                 //以字典对象存储服务器响应头，字典不分大小写
+
+获取二进制数据实例:
+import requests
+url=&#39;目标文件的地址&#39;
+response=requests.get(url)
+with open(&#39;文件名,模式&#39;,&#39;wb&#39;) as file:              //读写文件的操作
+    file.write(response.content)
+    
+常用参数:
+r:   以只读方式打开文件。文件的指针将会放在文件的开头。这是**默认模式**。
+r+:  打开一个文件用于读写。文件指针将会放在文件的开头。
+w:   打开一个文件只用于写入。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。
+w+:  打开一个文件用于读写。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。
+a:   打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。
+a+:  打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。
+
+rb:  以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。
+rb+: 以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。
+wb:  以二进制格式打开一个文件只用于写入。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。
+wb+: 以二进制格式打开一个文件用于读写。如果该文件已存在则将其覆盖。如果该文件不存在，创建新文件。
+ab:  以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。
+ab+: 以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。
+
+file.read([size])        将文件数据作为字符串返回，可选参数size控制读取的字节数
+file.readlines([size])   返回文件中行内容的列表，size参数可选
+file.write(str)          将字符串写入文件
+file.writelines(strings) 将字符串序列写入文件
+file.close()             关闭文件
+file.closed              表示文件已经被关闭，否则为False
+file.mode                Access文件打开时使用的访问模式
+file.encoding            文件所使用的编码
+file.name                文件名
+file.newlines            未读取到行分隔符时为None，只有一种行分隔符时为一个字符串，当文件有多种类型的行结束符时，则为一个包含所有当前所遇到的行结束的列表
+file.softspace           为0表示在输出一数据后，要加上一个空格符，1表示不加。这个属性一般程序员用不着，由程序内部使用
+</code></pre>
+<h4 id="XPath解析数据-lxml库"><a href="#XPath解析数据-lxml库" class="headerlink" title="XPath解析数据(lxml库)"></a>XPath解析数据(lxml库)</h4><p>概述:<br>小型查询语言，在XML文档中查找信息的语言<br>优点:<br>可在XPath中查找信息<br>支持HTML查找<br>可通过元素和属性进行导航<br>XML树形结构和语句与HTML相类似<br>XPath语法点击<a href="https://blog.csdn.net/Victor2code/article/details/108298390?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166877297016782395359090%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=166877297016782395359090&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-108298390-null-null.142%5Ev65%5Eopensearch_v2,201%5Ev3%5Econtrol,213%5Ev2%5Et3_esquery_v2&utm_term=xpath%E8%AF%AD%E6%B3%95&spm=1018.2226.3001.4187">此处</a><br>代码实现:</p>
+<pre><code>import requests
+from lxml import etree
+url=&#39;目标地址&#39;
+headers=&#123;请求头信息，以键值对形式存储&#125;
+response=requests.get(url,headers)
+etree=rtree.HTML(response.text)                       //将响应的str类型转换为etree类型
+A=etree.xpath(&#39;谷歌浏览器中XPath的语句&#39;)              //获取内容
+B=etree.path(&#39;另一个语句&#39;)
+for A中定位的元素,B中定位的元素 in zip(A,B)           //遍历打包
+    print(A中定位的元素, &#39;:&#39; ,B中定位的元素)          //输出
+</code></pre>
+<h4 id="BeautifulSoup解析数据-bs4库"><a href="#BeautifulSoup解析数据-bs4库" class="headerlink" title="BeautifulSoup解析数据(bs4库)"></a>BeautifulSoup解析数据(bs4库)</h4><p>概述:<br>能从HTML和XML文件中提取数据的库<br>语法:</p>
+<pre><code>                        【Tag对象】
+print(bs.标签)                       //获取标签
+print(bs.标签.attrs)                 //获取标签的全部属性
+print(bs.标签[&#39;属性名&#39;])             //获取属性值
+print(bs.标签.text)                  //获取标签的文本内容(不包括注释内的)
+print(bs.标签.string)                //获取标签的文本内容(包括注释内的)
+                        【CSS选择器】
+print(bs.select(&#39;ID&#39;))               //ID查找
+print(bs.select(&#39;classa&#39;))           //classa查找
+print(bs.select(标签,属性))          //属性查找
+                        【其他功能】
+print(bs.find(标签,属性))            //提取首个满足条件的
+print(bs.find_all(标签,属性))        //提取所有满足条件的
+</code></pre>
+<p>代码实现:</p>
+<pre><code>import requests
+from bs4 import BeautifulSoup
+url=&#39;目标地址&#39;
+headers=&#123;头文件键值对&#125;
+response=requests.get(url,headers)
+bs=BeautifulSoup(response.text,&#39;html.parser&#39;)               //bs=BeautifulSoup(response.text,&#39;lxml&#39;)二选一使用即可
+a_list=bs.find_all(&#39;标签&#39;)
+for a in a_list:
+    url=a.get(&#39;属性&#39;)
+    if url==None                                              //以None开头的url无用
+        continue
+    if url.startswich(&#39;http&#39;) or url.startswich(&#39;https&#39;)      //保留以http或https开头的url
+        print(url)
+</code></pre>
+<h4 id="正则表达式-re库"><a href="#正则表达式-re库" class="headerlink" title="正则表达式(re库)"></a>正则表达式(re库)</h4><p>概述:<br>特殊的字符序列，检查字符串是否与某种模式相匹配<br>正则语法:</p>
+<pre><code>.           //匹配任意字符
+^           //匹配字符串开头
+$           //匹配字符串末尾
+*           //匹配前一个元字符0到多次
++           //匹配前一个元字符1到多次
+?           //匹配前一个元字符0到1次
+&#123;m&#125;         //匹配前一个元字符m次
+&#123;m,n&#125;       //匹配前一个元字符m到n次
+&#123;m,n&#125;?      //匹配前一个元字符m到n次，并去尽可能少的情况
+\\          //对特殊字符转义
+[]          //字符集合，匹配其中任意一个字符
+|           //或
+(...)       //作为一个元组，findall在有组情况下只显示组的内容
+</code></pre>
+<p>特殊序列:</p>
+<pre><code>\A          //只在字符串开头匹配
+\b          //匹配开头或结尾的空字符串
+\B          //匹配不位于开头或结尾的空字符串
+\d          //匹配十进制数，[0-9]
+\D          //匹配非字符数字字符，[^0-9]
+s           //匹配空白字符，[\t\n\r\f\v]
+\S          //匹配非空白字符，[^\t\n\r\f\v]
+\w          //匹配数字字母下划线，[a-z A-Z 0-9]
+\W          //匹配非数字字母下划线，[^a-z A-Z 0-9]
+\Z          //只在字符串末尾进行匹配
+[\u4e00-\u9fa5]         //中文
+</code></pre>
+<p>正则处理函数:</p>
+<pre><code>re.match(pattern,string,flags=0)                  //从字符串开头匹配模式，成功则返回成功的对象，否则返回None
+re.search(pattern,string,flags=0)                 //扫描整个字符串返回第一个成功匹配的对象，失败则返回None
+re.findall(pattern,string,flags=0)                //获取列表的所有匹配的字符串，以列表形式返回
+re.sub(pattern,repl,string,count=0,flags=0)       //用于替换字符串的匹配项，没有匹配项则返回没有匹配的字符串
+re.compile(pattern,[,flag])                       //编译正则表达式，生成正则表达式对象，供match和search函数使用
+</code></pre>
+<h4 id="爬取并下载视频示例"><a href="#爬取并下载视频示例" class="headerlink" title="爬取并下载视频示例"></a>爬取并下载视频示例</h4><pre><code>import requests
+import re
+url=&#39;目标地址&#39;
+headers=&#123;请求头&#125;
+response=requests.get(url,headers=headers)                            //发送请求
+info=re.findall(&#39;标签，配合使用正则表达式&#39;,response.text)             //正则查找所有符合要求的对象
+lst=[]
+for item in info:
+    lst.append(&#39;https:&#39;+item)                                         //将符合条件的对象放入列表中并补全绝对路径
+count=0
+for item in lst:
+    count+=1
+    response=requests.get(item.headers=headers)                       //将补全的路径再次请求
+    with open(&#39;存储路径&#39;+str(count)+&#39;后缀&#39;) as file                   //设置下载路径和文件名
+        file.write(response.content)                                  //将文件存为二进制
+print(下载完毕)
+</code></pre>
+<h4 id="pyquery解析数据-pyquery库"><a href="#pyquery解析数据-pyquery库" class="headerlink" title="pyquery解析数据(pyquery库)"></a>pyquery解析数据(pyquery库)</h4><p>概述:<br>是jQuery的Python实现，可以jQuery语法操作解析HTML文档，易用性和解析速度很好<br>初始化方式:</p>
+<pre><code>字符串方式
+from pyquery import PyQuery as py
+html=&#39;html代码&#39;
+doc=py(html)      //创建PyQuery对象，将str类型转换为PyQuery类型
+
+url方式
+from pyquery import PyQuery
+doc=PyQuery(url=&#39;地址&#39;,encoding=&#39;utf-8&#39;)
+
+文件
+from pyquery import PyQuery
+doc=PyQuery(filename=&#39;存有html文件的地址&#39;)
+</code></pre>
+<p>使用方式:</p>
+<pre><code>doc(&#39;#main&#39;)                             //获取当前节点
+doc(&#39;#main&#39;).children()                  //获取子节点
+doc(&#39;#main&#39;).parent()                    //获取父节点
+doc(&#39;#main&#39;).sinlings()                  //获取兄弟节点
+doc(&#39;标签&#39;)attr(&#39;属性&#39;)                  //获取属性值
+doc(&#39;#main&#39;).html()                      //获取内容，以html代码形式显示
+doc(&#39;#main&#39;).text()                      //获取内容，以文本显示显示
+</code></pre>
+<p>代码实现:</p>
+<pre><code>import requests
+from pyquery import PyQuery as py
+url=&#39;&#39;
+headers=&#123;&#125;
+response=resquests.get(url,headers=headers)   //发送请求
+doc=py(response.text)                         //初始化PyQuery对象
+A=[x.text for x in doc(h4 a)]                 //从doc中提取h4中的a标签的内容传给x，再显示x的文本部分
+</code></pre>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>requests用于发送和接收请求<br>四种解析方式是数据的提取<br>对于爬虫更重要的是提取了数据之后对数据的操作</p>
+<h4 id="2023-3-3补档"><a href="#2023-3-3补档" class="headerlink" title="2023.3.3补档"></a>2023.3.3补档</h4><p>今日发现一个好用的库叫做URLParser，可以去尝试一下</p>
+<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="想不清楚一件事，往往因为这件事里有你想逃避的东西。"><a href="#想不清楚一件事，往往因为这件事里有你想逃避的东西。" class="headerlink" title="想不清楚一件事，往往因为这件事里有你想逃避的东西。"></a>想不清楚一件事，往往因为这件事里有你想逃避的东西。</h5>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/16/20221116/" rel="prev" title="Mysql">
+                  <i class="fa fa-angle-left"></i> Mysql
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/18/20221118/" rel="next" title="面向对象">
+                  面向对象 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2022/11/17/20221117/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

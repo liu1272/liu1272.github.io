@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="每日一记php7之前是mysql链接(硬链接)php7之后是mysqli链接(i链接&#x2F;improved链接) PHP连接数据库(MySQLi - 面向对象)&lt;?php $servername &#x3D; &quot;localhost&quot;; $username &#x3D; &quot;username&quot;; $password &#x3D; &quot;password&quot;;  &#x2F;&#x2F; 创建连接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql">
+<meta property="og:url" content="https://liu1272.github.io/2022/11/16/20221116/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="每日一记php7之前是mysql链接(硬链接)php7之后是mysqli链接(i链接&#x2F;improved链接) PHP连接数据库(MySQLi - 面向对象)&lt;?php $servername &#x3D; &quot;localhost&quot;; $username &#x3D; &quot;username&quot;; $password &#x3D; &quot;password&quot;;  &#x2F;&#x2F; 创建连接">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-16T05:45:00.000Z">
+<meta property="article:modified_time" content="2023-03-03T11:35:38.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2022/11/16/20221116/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2022/11/16/20221116/","path":"2022/11/16/20221116/","title":"Mysql"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Mysql | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">每日一记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93-MySQLi-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">PHP连接数据库(MySQLi - 面向对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E8%BF%9E%E6%8E%A5-MySQLi-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.2.</span> <span class="nav-text">关闭连接(MySQLi - 面向对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93-MySQLi-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.3.</span> <span class="nav-text">创建数据库(MySQLi - 面向对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8-MySQLi-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.4.</span> <span class="nav-text">创建表(MySQLi - 面向对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE-MySQLi-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.5.</span> <span class="nav-text">插入数据(MySQLi - 面向对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%A4%9A%E6%9D%A1%E6%95%B0%E6%8D%AE-MySQLi-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.6.</span> <span class="nav-text">插入多条数据(MySQLi - 面向对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQLi%E4%BD%BF%E7%94%A8%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5-%E5%8C%85%E6%8B%AC%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B"><span class="nav-number">1.7.</span> <span class="nav-text">MySQLi使用预处理语句(包括面向对象和面向过程)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE-MySQLi-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.8.</span> <span class="nav-text">读取数据(MySQLi - 面向对象)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE"><span class="nav-number">1.9.</span> <span class="nav-text">处理数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">1.10.</span> <span class="nav-text">更新数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">1.11.</span> <span class="nav-text">删除数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP%E4%B8%AD%E6%9C%89%E5%85%B3MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%86%85%E5%AE%B9%E6%9A%82%E6%97%B6%E5%91%8A%E4%B8%80%E6%AE%B5%E8%90%BD%EF%BC%8C%E8%8B%A5%E6%83%B3%E4%BA%86%E8%A7%A3MySQLi-%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E5%92%8CPDO%E8%AF%B7%E5%89%8D%E5%BE%80%E6%AD%A4%E5%A4%84"><span class="nav-number">1.12.</span> <span class="nav-text">PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi - 面向过程和PDO请前往此处</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E5%8F%A5"><span class="nav-number">2.</span> <span class="nav-text">每日一句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%88%91%E4%BB%AC%E7%94%9F%E8%80%8C%E7%A0%B4%E7%A2%8E%EF%BC%8C%E7%94%A8%E6%B4%BB%E7%9D%80%E6%9D%A5%E4%BF%AE%E4%BF%AE%E8%A1%A5%E8%A1%A5%E3%80%82"><span class="nav-number">2.0.1.</span> <span class="nav-text">我们生而破碎，用活着来修修补补。</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2022/11/16/20221116/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Mysql | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mysql
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-16 13:45:00" itemprop="dateCreated datePublished" datetime="2022-11-16T13:45:00+08:00">2022-11-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-03 19:35:38" itemprop="dateModified" datetime="2023-03-03T19:35:38+08:00">2023-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2022/11/16/20221116/" class="post-meta-item leancloud_visitors" data-flag-title="Mysql" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><p>php7之前是mysql链接(硬链接)<br>php7之后是mysqli链接(i链接/improved链接)</p>
+<h4 id="PHP连接数据库-MySQLi-面向对象"><a href="#PHP连接数据库-MySQLi-面向对象" class="headerlink" title="PHP连接数据库(MySQLi - 面向对象)"></a>PHP连接数据库(MySQLi - 面向对象)</h4><pre><code>&lt;?php
+$servername = &quot;localhost&quot;;
+$username = &quot;username&quot;;
+$password = &quot;password&quot;;
+
+// 创建连接
+$conn = new mysqli($servername, $username, $password);
+
+// 检测连接
+if ($conn-&gt;connect_error) &#123;
+    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
+&#125;
+echo &quot;Connected successfully&quot;;
+?&gt;
+</code></pre>
+<h4 id="关闭连接-MySQLi-面向对象"><a href="#关闭连接-MySQLi-面向对象" class="headerlink" title="关闭连接(MySQLi - 面向对象)"></a>关闭连接(MySQLi - 面向对象)</h4><p>连接在脚本执行完后会自动关闭,也可以手动关闭<br>$conn-&gt;close();</p>
+<h4 id="创建数据库-MySQLi-面向对象"><a href="#创建数据库-MySQLi-面向对象" class="headerlink" title="创建数据库(MySQLi - 面向对象)"></a>创建数据库(MySQLi - 面向对象)</h4><p>需要 CREATE 权限来创建或删除 MySQL 数据库。</p>
+<pre><code>&lt;?php
+$servername = &quot;localhost&quot;;
+$username = &quot;username&quot;;
+$password = &quot;password&quot;;
+
+// 创建连接
+$conn = new mysqli($servername, $username, $password);
+// 检测连接
+if ($conn-&gt;connect_error) &#123;
+    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
+&#125;
+
+// Create database
+$sql = &quot;CREATE DATABASE myDB&quot;;                     //库名叫做myDB
+if ($conn-&gt;query($sql) === TRUE) &#123;
+    echo &quot;Database created successfully&quot;;
+&#125; else &#123;
+    echo &quot;Error creating database: &quot; . $conn-&gt;error;
+&#125;
+
+$conn-&gt;close();
+?&gt;
+</code></pre>
+<h4 id="创建表-MySQLi-面向对象"><a href="#创建表-MySQLi-面向对象" class="headerlink" title="创建表(MySQLi - 面向对象)"></a>创建表(MySQLi - 面向对象)</h4><p>在 PHP 中创建完数据库之后，我们需要在数据库中创建一个或者多个的数据表。<br>一个数据表有一个唯一名称，并有行和列组成。<br>创建表前，我们需要使用use myDB;来选择要操作的数据库</p>
+<pre><code>&lt;?php
+$servername = &quot;localhost&quot;;
+$username = &quot;username&quot;;
+$password = &quot;password&quot;;
+$dbname = &quot;myDB&quot;;
+
+// 创建连接
+$conn = new mysqli($servername, $username, $password, $dbname);
+// 检测连接
+if ($conn-&gt;connect_error) &#123;
+    die(&quot;Connection failed: &quot; . $conn-&gt;connect_error);
+&#125;
+
+// sql to create table
+$sql = &quot;CREATE TABLE MyGuests (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+firstname VARCHAR(30) NOT NULL,
+lastname VARCHAR(30) NOT NULL,
+email VARCHAR(50),
+reg_date TIMESTAMP
+)&quot;;
+
+if ($conn-&gt;query($sql) === TRUE) &#123;
+    echo &quot;Table MyGuests created successfully&quot;;
+&#125; else &#123;
+    echo &quot;Error creating table: &quot; . $conn-&gt;error;
+&#125;
+
+$conn-&gt;close();
+?&gt;
+</code></pre>
+<p>其中表内数据类型有<a href="https://www.w3cschool.cn/mysql/sql-datatypes.html">规定</a></p>
+<p>同时可以为每个列指定其他选项的属性:<br>NOT NULL - 每一行都必须含有值（不能为空），null 值是不允许的。<br>DEFAULT value - 设置默认值<br>UNSIGNED - 使用无符号数值类型，0 及正数<br>AUTO INCREMENT - 设置 MySQL 字段的值在新增记录时每次自动增长 1<br>PRIMARY KEY - 设置数据表中每条记录的唯一标识。 通常列的 PRIMARY KEY 设置为 ID 数值，与AUTO_INCREMENT 一起使用。</p>
+<p>每个表都应该有一个主键(本列为 “id” 列)，主键必须包含唯一的值。</p>
+<h4 id="插入数据-MySQLi-面向对象"><a href="#插入数据-MySQLi-面向对象" class="headerlink" title="插入数据(MySQLi - 面向对象)"></a>插入数据(MySQLi - 面向对象)</h4><p>语法规则:<br>1.PHP 中 SQL 查询语句必须使用引号<br>2.在 SQL 查询语句中的字符串值必须加引号<br>3.数值的值不需要引号<br>4.NULL 值不需要引号<br>向 MySQL 表添加新的记录:<br>INSERT INTO table_name (column1, column2, column3,…)<br>VALUES (value1, value2, value3,…)</p>
+<pre><code>在连接检测和关闭数据库中间加入
+$sql = &quot;INSERT INTO MyGuests (firstname, lastname, email)
+VALUES (&#39;John&#39;, &#39;Doe&#39;, &#39;john@example.com&#39;)&quot;;                    //向 &quot;MyGuests&quot; 表添加新的记录
+
+if ($conn-&gt;query($sql) === TRUE) &#123;
+    echo &quot;New record created successfully&quot;;
+&#125; else &#123;
+    echo &quot;Error: &quot; . $sql . &quot;&lt;br&gt;&quot; . $conn-&gt;error;
+&#125;
+</code></pre>
+<h4 id="插入多条数据-MySQLi-面向对象"><a href="#插入多条数据-MySQLi-面向对象" class="headerlink" title="插入多条数据(MySQLi - 面向对象)"></a>插入多条数据(MySQLi - 面向对象)</h4><p>【方法一:使用函数】<br>mysqli_multi_query() 函数可用来执行多条SQL语句。</p>
+<pre><code>$sql = &quot;INSERT INTO
+MyGuests (firstname, lastname, email)
+
+VALUES (&#39;John&#39;, &#39;Doe&#39;, &#39;john@example.com&#39;);&quot;;
+
+$sql .= &quot;INSERT INTO
+MyGuests (firstname, lastname, email)
+
+VALUES (&#39;Mary&#39;, &#39;Moe&#39;, &#39;mary@example.com&#39;);&quot;;
+
+$sql .= &quot;INSERT INTO
+MyGuests (firstname, lastname, email)
+
+VALUES (&#39;Julie&#39;, &#39;Dooley&#39;, &#39;julie@example.com&#39;)&quot;;
+
+
+if ($conn-&gt;multi_query($sql) === TRUE) &#123;
+echo &quot;New
+records created successfully&quot;;
+&#125; else &#123;
+echo
+&quot;Error: &quot; . $sql . &quot;
+&quot; . $conn-&gt;error;
+&#125;
+</code></pre>
+<p>注意:每个SQL语句必须用分号隔开。</p>
+<p>【方法二:MySQLi 使用预处理语句】</p>
+<pre><code>// 为 mysqli_stmt_prepare() 初始化
+statement 对象
+$stmt =
+mysqli_stmt_init($conn);
+
+//预处理语句
+if (mysqli_stmt_prepare($stmt, $sql)) &#123;
+
+// 绑定参数
+mysqli_stmt_bind_param($stmt, &#39;sss&#39;, $firstname, $lastname, $email);
+
+
+// 设置参数并执行
+$firstname = &#39;John&#39;;
+$lastname
+= &#39;Doe&#39;;
+$email =
+&#39;john@example.com&#39;;
+
+mysqli_stmt_execute($stmt);
+
+
+$firstname = &#39;Mary&#39;;
+$lastname
+= &#39;Moe&#39;;
+$email =
+&#39;mary@example.com&#39;;
+
+mysqli_stmt_execute($stmt);
+
+
+$firstname = &#39;Julie&#39;;
+
+$lastname = &#39;Dooley&#39;;
+$email =
+&#39;julie@example.com&#39;;
+
+mysqli_stmt_execute($stmt);
+&#125;
+</code></pre>
+<p>每个参数必须指定类型，来保证数据的安全性。通过类型的判断可以减少SQL注入漏洞带来的风险。<br>参数类型:<br>i - integer<br>d - double<br>s - string<br>b - BLOB</p>
+<h4 id="MySQLi使用预处理语句-包括面向对象和面向过程"><a href="#MySQLi使用预处理语句-包括面向对象和面向过程" class="headerlink" title="MySQLi使用预处理语句(包括面向对象和面向过程)"></a>MySQLi使用预处理语句(包括面向对象和面向过程)</h4><p>流程:<br>1.预处理:创建 SQL 语句模板并发送到数据库。预留的值使用参数 “?” 标记<br>2.数据库解析并编译(内部处理):对SQL语句模板执行查询优化，并存储结果(不输出)<br>3.执行:将应用绑定的值传递给参数（?标记），数据库执行语句。(如果参数的值不一样,可以多次执行语句)</p>
+<p>优点:<br>1.减少了分析时间，只做了一次查询（虽然语句多次执行）<br>2.绑定参数减少了服务器带宽，你只需要发送查询的参数，而不是整个语句<br>3.预处理语句针对SQL注入是非常有用的，因为参数值发送后使用不同的协议，保证了数据的合法性。</p>
+<pre><code>// 步骤一，prepare and bind
+$stmt = $conn-&gt;prepare(&quot;INSERT INTO MyGuests (firstname, lastname, email) VALUES(?, ?, ?)&quot;);
+$stmt-&gt;bind_param(&quot;sss&quot;, $firstname, $lastname, $email);
+
+// 步骤三，设置参数并执行
+$firstname = &quot;John&quot;;
+$lastname = &quot;Doe&quot;;
+$email = &quot;john@example.com&quot;;
+$stmt-&gt;execute();
+
+$firstname = &quot;Mary&quot;;
+$lastname = &quot;Moe&quot;;
+$email = &quot;mary@example.com&quot;;
+$stmt-&gt;execute();             
+
+$firstname = &quot;Julie&quot;;
+$lastname = &quot;Dooley&quot;;
+$email = &quot;julie@example.com&quot;;
+$stmt-&gt;execute();
+
+echo &quot;New records created successfully&quot;;
+
+$stmt-&gt;close();
+</code></pre>
+<p>语句中如果有?就转换为其他类型的数据</p>
+<h4 id="读取数据-MySQLi-面向对象"><a href="#读取数据-MySQLi-面向对象" class="headerlink" title="读取数据(MySQLi - 面向对象)"></a>读取数据(MySQLi - 面向对象)</h4><pre><code>SELECT 语句用于从数据表中读取数据:
+SELECT column_name(s) FROM table_name
+我们可以使用 * 号来读取所有数据表中的字段:
+SELECT * FROM table_name
+用 WHERE 命令来筛选出满足条件的结果:
+SELECT column_name(s)
+  FROM table_name
+  WHERE column_name operator value
+——————————————————————————————————————————————————————————————————————————————
+                           【SELECT】
+$sql = &quot;SELECT id, firstname, lastname FROM MyGuests&quot;;
+$result = $conn-&gt;query($sql);
+
+if ($result-&gt;num_rows &gt; 0) &#123;
+    // 输出每行数据
+    while($row = $result-&gt;fetch_assoc()) &#123;
+        echo &quot;id: &quot;. $row[&quot;id&quot;]. &quot; - Name: &quot;. $row[&quot;firstname&quot;]. &quot; &quot; . $row[&quot;lastname&quot;]. &quot;&lt;br&gt;&quot;;
+    &#125;
+&#125; else &#123;
+    echo &quot;0 results&quot;;
+&#125;
+——————————————————————————————————————————————————————————————————————————————
+                           【WHERE】
+$result = mysqli_query($con,&quot;SELECT * FROM Persons
+WHERE FirstName=&#39;Peter&#39;&quot;);
+
+while($row = mysqli_fetch_array($result))
+&#123;
+echo $row[&#39;FirstName&#39;] . &quot; &quot; . $row[&#39;LastName&#39;];
+echo &quot;&lt;br&gt;&quot;;
+&#125;
+</code></pre>
+<h4 id="处理数据"><a href="#处理数据" class="headerlink" title="处理数据"></a>处理数据</h4><pre><code>ORDER BY 关键词用于对记录集中的数据进行排序。
+SELECT column_name(s)
+FROM table_name
+ORDER BY column1, column2... ASC|DESC    默认是升序ASC，DESC改为降序
+
+$result = mysqli_query($con,&quot;SELECT * FROM Persons ORDER BY age&quot;);
+while($row = mysqli_fetch_array($result))
+&#123;
+echo $row[&#39;FirstName&#39;];
+echo &quot; &quot; . $row[&#39;LastName&#39;];
+echo &quot; &quot; . $row[&#39;Age&#39;];
+echo &quot;&lt;br&gt;&quot;;
+&#125;
+可以根据多个列进行排序(第一列的值相同时才使用第二列)
+</code></pre>
+<h4 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h4><p>UPDATE 语句用于更新数据库表中已存在的记录。<br>WHERE 子句规定了哪些记录需要更新。<br>如果您想省去 WHERE 子句，所有的记录都会被更新！<br>PHP执行该语句，必须使用mysqli_query()函数(该函数用于向 MySQL 连接发送查询或命令)</p>
+<pre><code>语法:
+UPDATE table_name
+ SET column1=value, column2=value2,...
+ WHERE some_column=some_value
+ 
+操作:
+mysqli_query($con,&quot;UPDATE Persons SET Age=36
+WHERE FirstName=&#39;Peter&#39; AND LastName=&#39;Griffin&#39;&quot;);
+</code></pre>
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><p>DELETE FROM 语句用于从数据库表中删除记录。<br>WHERE 子句规定了哪些记录需要更新。<br>如果您想省去 WHERE 子句，所有的记录都会被更新！<br>PHP执行该语句，必须使用mysqli_query()函数(该函数用于向 MySQL 连接发送查询或命令)</p>
+<pre><code>语法:
+DELETE FROM table_name
+ WHERE some_column = some_value
+
+操作:
+mysqli_query($con,&quot;DELETE FROM Persons WHERE LastName=&#39;Griffin&#39;&quot;);
+</code></pre>
+<h4 id="PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi-面向过程和PDO请前往此处"><a href="#PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi-面向过程和PDO请前往此处" class="headerlink" title="PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi - 面向过程和PDO请前往此处"></a>PHP中有关MySQL数据库的内容暂时告一段落，若想了解MySQLi - 面向过程和PDO请前往<a href="https://www.w3cschool.cn/php/php-mysql-connect.html">此处</a></h4><h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="我们生而破碎，用活着来修修补补。"><a href="#我们生而破碎，用活着来修修补补。" class="headerlink" title="我们生而破碎，用活着来修修补补。"></a>我们生而破碎，用活着来修修补补。</h5>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/15/20221115/" rel="prev" title="正则表达式">
+                  <i class="fa fa-angle-left"></i> 正则表达式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/17/20221117/" rel="next" title="Python爬虫一篇就够了">
+                  Python爬虫一篇就够了 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2022/11/16/20221116/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

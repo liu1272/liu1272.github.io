@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="父进程自已创建一个或者多个进程 子进程fork创建的。这个函数被调用一次但是返回两次，子进程返回0，父进程返回子进程id。 fork之后，操作系统会赋值一个与父进程完全相同的子进程，虽然是父子关系，但是更像是兄弟关系。这两个进程共享代码，但是数据空间是互相独立的，数据空间、指令、指针完全相同，子进程拥有当前父进程运行到的位置（PC相同）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux进程简述">
+<meta property="og:url" content="https://liu1272.github.io/2023/08/19/Linux%E8%BF%9B%E7%A8%8B%E7%AE%80%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="父进程自已创建一个或者多个进程 子进程fork创建的。这个函数被调用一次但是返回两次，子进程返回0，父进程返回子进程id。 fork之后，操作系统会赋值一个与父进程完全相同的子进程，虽然是父子关系，但是更像是兄弟关系。这两个进程共享代码，但是数据空间是互相独立的，数据空间、指令、指针完全相同，子进程拥有当前父进程运行到的位置（PC相同）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-19T12:39:00.000Z">
+<meta property="article:modified_time" content="2023-09-28T12:21:14.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2023/08/19/Linux%E8%BF%9B%E7%A8%8B%E7%AE%80%E8%BF%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2023/08/19/Linux%E8%BF%9B%E7%A8%8B%E7%AE%80%E8%BF%B0/","path":"2023/08/19/Linux进程简述/","title":"Linux进程简述"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux进程简述 | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%88%B6%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">父进程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E8%BF%9B%E7%A8%8B"><span class="nav-number"></span> <span class="nav-text">子进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%BB%84"><span class="nav-number"></span> <span class="nav-text">进程组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A"><span class="nav-number"></span> <span class="nav-text">作业</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%9C%E4%B8%9A%E4%B8%8E%E8%BF%9B%E7%A8%8B%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number"></span> <span class="nav-text">作业与进程组的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D"><span class="nav-number"></span> <span class="nav-text">会话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%A4%E5%84%BF%E8%BF%9B%E7%A8%8B"><span class="nav-number"></span> <span class="nav-text">孤儿进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B"><span class="nav-number"></span> <span class="nav-text">僵尸进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%BB%88%E6%AD%A2%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="nav-number"></span> <span class="nav-text">进程终止的几种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A9%E8%BF%9B%E7%A8%8B%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="nav-number"></span> <span class="nav-text">如何让进程后台运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="nav-number"></span> <span class="nav-text">守护进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="nav-number"></span> <span class="nav-text">创建守护进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E4%B8%8E%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B"><span class="nav-number"></span> <span class="nav-text">守护进程与后台进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Session"><span class="nav-number"></span> <span class="nav-text">Session</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2023/08/19/Linux%E8%BF%9B%E7%A8%8B%E7%AE%80%E8%BF%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Linux进程简述 | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux进程简述
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-19 20:39:00" itemprop="dateCreated datePublished" datetime="2023-08-19T20:39:00+08:00">2023-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-28 20:21:14" itemprop="dateModified" datetime="2023-09-28T20:21:14+08:00">2023-09-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2023/08/19/Linux%E8%BF%9B%E7%A8%8B%E7%AE%80%E8%BF%B0/" class="post-meta-item leancloud_visitors" data-flag-title="Linux进程简述" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h5 id="父进程"><a href="#父进程" class="headerlink" title="父进程"></a>父进程</h5><p>自已创建一个或者多个进程</p>
+<h4 id="子进程"><a href="#子进程" class="headerlink" title="子进程"></a>子进程</h4><p>fork创建的。这个函数被调用一次但是返回两次，子进程返回0，父进程返回子进程id。</p>
+<pre><code>fork之后，操作系统会赋值一个与父进程完全相同的子进程，虽然是父子关系，但是更像是兄弟关系。这两个进程共享代码，但是数据空间是互相独立的，数据空间、指令、指针完全相同，子进程拥有当前父进程运行到的位置（PC相同）。
+</code></pre>
+<h4 id="进程组"><a href="#进程组" class="headerlink" title="进程组"></a>进程组</h4><p>多个进程的集合，其中有一个组长，PID等于进程组的PGID，只要这个组里面有一个进程存在那么这个组就存在，与组长进程是否终止无关</p>
+<h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4><p>shell分前后台来控制的不是进程而是作业或者进程组。<br>一个前台作业由多个进程组成，一个后台也由多个进程组成。<br>shell可以运行一个前台作业和任意多个后台作业。这就是作业控制。</p>
+<pre><code>为什么只能运行一个前台作业？
+前台作业是指当前终端窗口中运行的作业，而一个后台作业则是在后台运行的作业，不会占用当前终端窗口。
+一个终端窗口只能有一个前台作业，是因为终端窗口只能和一个进程交互，用户在终端窗口输入命令，终端窗口会将命令传递给前台作业，如果有多个作业同时处于前台，那么输入的命令将被发送给哪个作业时不确定的，这会导致混乱和错误。
+</code></pre>
+<h4 id="作业与进程组的区别"><a href="#作业与进程组的区别" class="headerlink" title="作业与进程组的区别"></a>作业与进程组的区别</h4><p>如果作业中有某个进程创建了子进程，则这个子进程是不属于该作业的，一旦作业运行结束，shell就把自己提到前台（子进程还在，但是子进程不属于作业）。如果原来的前台进程还存在（这个子进程还没有终止），他将自动变为后台进程组。</p>
+<pre><code>当我们在前台新起了一个作业，shell就被提到了后台，因此shell就没有办法再继续接受我们的指令并且解析运行了。 但是如果前台进程退出了，shell就会有被提到前台来，就可以继续接受我们的命令并且解析运行。
+</code></pre>
+<h4 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h4><p>是一个躲着多个进程组的集合。一个会话有一个控制终端，在xshell或者winscp中打开一个窗口就是新建一个会话。</p>
+<h4 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h4><p>如果父进程退出，子进程还没有退出，那些子进程将成为孤儿进程。<br>孤儿进程被1号进程init进程收养。那么子进程的父进程将变成init进程。由init进程对他们完成状态收集工作。</p>
+<h4 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h4><p>在操作系统中，当一个进程终止时，它的状态信息仍然被保留在系统中，直到其父进程调用wait或waitpid等系统调用来获取其终止状态信息。<br>如果父进程没有及时调用这些系统调用来获取终止状态信息，那么这个已经终止的子进程就会成为一个僵尸进程。<br>僵尸进程占用了系统资源，因为它们仍然占用了进程ID、进程表项和一些其他资源，而这些资源可能需要被其他进程使用。</p>
+<pre><code>Linux中，使用ps aux查看信息，发现僵尸进程状态为“Z”
+</code></pre>
+<p>当一个进程终止时，如果它的子进程仍然处于僵尸状态，那么这些子进程的父进程ID将被重置为1，也就是init进程。此时，init进程会调用wait或waitpid等系统调用来获取这些子进程的终止状态信息，并清除它们的僵尸状态，从而释放系统资源。</p>
+<h4 id="进程终止的几种方式"><a href="#进程终止的几种方式" class="headerlink" title="进程终止的几种方式"></a>进程终止的几种方式</h4><pre><code>main函数自然返回
+exit，属于C函数库
+_exit，属于系统调用
+调用abort函数，异常程序终止，同时发送SIGABRT信号给调用进程
+接收能导致进程终止的信号 ctrl+c，SIGINT
+</code></pre>
+<h4 id="如何让进程后台运行"><a href="#如何让进程后台运行" class="headerlink" title="如何让进程后台运行"></a>如何让进程后台运行</h4><pre><code>命令后面加上&amp;，这样是将命令放入到一个作业队列中
+ctrl+z挂起进程，使用jobs查看序号，再使用bg%序号后台运行进程
+nohup+&amp;，将标准输出和标准错误缺省会被重定向到nohup文件中，忽略所有SIGHUP挂断信号
+运行指令前面加上 setsid，使其父进程编程init进程，不受HUP信号影响
+将命令+&amp;放在（）括号中，也可以是进程不受HUP信号影响
+</code></pre>
+<h4 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h4><p>指在后台运行的，没有控制终端与之相连的进程。<br>它独立于控制终端，周期性的执行某种任务。<br>Linux大多数服务器就是用守护进程的方式实现的，比如WEB服务器。<br>通过ps –x -j以查看作业控制信息，其中TPGID一栏为-1就是守护进程<br>特点：</p>
+<ol>
+<li>随系统启动而启动</li>
+<li>父进程是init，也就是ppid为1</li>
+<li>在后台运行</li>
+<li>进程名字通常以字母 d 结束</li>
+<li>ps显示中终端名设置为问号(?)，终端前台进程组ID设置为-1</li>
+<li>工作目录为 \ (根)</li>
+</ol>
+<h4 id="创建守护进程"><a href="#创建守护进程" class="headerlink" title="创建守护进程"></a>创建守护进程</h4><ul>
+<li>让程序在后台执行：调用fork()产生一个子进程，然后使父进程退出</li>
+<li>调用setsid（）创建一个新对话期。控制终端、登录会话和进程组通常是从父进程进程下来的，守护进程要摆脱他们，不受他们的影响，方法是调用setsid()使进程成为一个会话组长。</li>
+<li>禁止进程重新申请打开控制终端。通过使进程不再是会话组长来实现。再一次通过fork创建新的子进程，使调用fork的进程退出。</li>
+<li>关闭不再需要的文件描述符。首先获得最高文件描述符值，然后用一个循环程序，关闭0到最高文件描述符值的所有文件描述符。</li>
+<li>将当前目录更改为根目录</li>
+<li>子进程从父进程继承的文件创建屏蔽字可能会拒绝某些许可权。为防止这一点，使用unmask(0)将屏蔽字清零。</li>
+<li>将SIGCHLD信号的操作设置为SIG_IGN，子进程结束的时候就不会产生僵尸进程。</li>
+</ul>
+<h4 id="守护进程与后台进程"><a href="#守护进程与后台进程" class="headerlink" title="守护进程与后台进程"></a>守护进程与后台进程</h4><p>后台进程的文件描述符是继承于父进程，例如shell，所以它也可以在当前终端下显示输出数据。<br>但是deemon进程自己变成了进程组长，其文件描述符号和控制终端没有关联，是控制台无关的。<br>基本上任何一个程序都可以后台运行，但守护进程是具有特殊要求的程序，比如要脱离自己的父进程，成为自己的会话组长等，这些要在代码中显式地写出来<br>所以<code>守护进程是后台进程的一种</code>。<br>前台任务会随着session的退出而退出是因为它收到了SIGHUP信号。<br>后台任务是否会受到SIGNUP信号，取决于shell的<code> huponexit </code>参数。可以通过<code> $ shopt | grep huponexit </code>查看该参数的值。</p>
+<h4 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h4><p>一般讨论的都是shell session，我们打开一个新的终端就会创建一个session<br>每个session都是由一个或者多个进程组组成的，每个进程组称为 job，这里job不是任务，而叫作业。<br>调用 setsid() 函数可以生成新的session,那么这些命令可以通过session进行统一管理<br>session中的第一个进程 (一般是bash) 的PID就是session的SID</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/18/%E5%96%84%E5%90%8E%E5%A4%84%E7%90%86/" rel="prev" title="善后处理">
+                  <i class="fa fa-angle-left"></i> 善后处理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/13/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="next" title="Java多线程">
+                  Java多线程 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2023/08/19/Linux%E8%BF%9B%E7%A8%8B%E7%AE%80%E8%BF%B0/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

