@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="Nmap常用命令nmap hostname&#x2F;ip或者多个ip或者子网192.168.123.* -iL ip.txt 扫描ip.txt的所有ip -A 包含了-sV，-O，探测操作系统信息和路由跟踪（激烈扫描，一般不用） -O 探测操作系统信息 -sV 查找主机服务版本号 -sA 探测该主机是否使用了包过滤器或防火墙（建议使用wafw00f） -sS 半开扫描，一般不会记入日志，不过需要root权">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安全工具">
+<meta property="og:url" content="https://liu1272.github.io/2023/08/12/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="Nmap常用命令nmap hostname&#x2F;ip或者多个ip或者子网192.168.123.* -iL ip.txt 扫描ip.txt的所有ip -A 包含了-sV，-O，探测操作系统信息和路由跟踪（激烈扫描，一般不用） -O 探测操作系统信息 -sV 查找主机服务版本号 -sA 探测该主机是否使用了包过滤器或防火墙（建议使用wafw00f） -sS 半开扫描，一般不会记入日志，不过需要root权">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-08-12T02:51:00.000Z">
+<meta property="article:modified_time" content="2023-08-12T04:38:50.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2023/08/12/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2023/08/12/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/","path":"2023/08/12/安全工具/","title":"安全工具"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>安全工具 | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Nmap%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">Nmap常用命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SQLmap"><span class="nav-number">2.</span> <span class="nav-text">SQLmap</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8F%9C%E5%88%80%E3%80%81%E8%9A%81%E5%89%91%E3%80%81%E5%86%B0%E8%9D%8E%E3%80%81CS%E3%80%81%E5%93%A5%E6%96%AF%E6%8B%89"><span class="nav-number">3.</span> <span class="nav-text">菜刀、蚁剑、冰蝎、CS、哥斯拉</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#wireshark"><span class="nav-number">4.</span> <span class="nav-text">wireshark</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MSF"><span class="nav-number">5.</span> <span class="nav-text">MSF</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%85%8D%E6%9D%80%E7%9A%84%E4%BA%86%E8%A7%A3"><span class="nav-number"></span> <span class="nav-text">一些免杀的了解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%A0%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%9C%A8%E9%A9%AC%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">无文件执行木马的方式有哪些？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E5%81%9Ashellcode%E5%85%8D%E6%9D%80%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">怎么做shellcode免杀？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E7%A6%BB%E5%85%8D%E6%9D%80%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">分离免杀怎么做？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#powershell%E6%80%8E%E4%B9%88%E8%BF%9C%E7%A8%8B%E5%8A%A0%E8%BD%BD%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">powershell怎么远程加载？</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2023/08/12/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="安全工具 | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          安全工具
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-08-12 10:51:00 / 修改时间：12:38:50" itemprop="dateCreated datePublished" datetime="2023-08-12T10:51:00+08:00">2023-08-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2023/08/12/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="安全工具" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h5 id="Nmap常用命令"><a href="#Nmap常用命令" class="headerlink" title="Nmap常用命令"></a>Nmap常用命令</h5><pre><code>nmap hostname/ip或者多个ip或者子网192.168.123.*
+-iL ip.txt 扫描ip.txt的所有ip
+-A 包含了-sV，-O，探测操作系统信息和路由跟踪（激烈扫描，一般不用）
+-O 探测操作系统信息
+-sV 查找主机服务版本号
+-sA 探测该主机是否使用了包过滤器或防火墙（建议使用wafw00f）
+-sS 半开扫描，一般不会记入日志，不过需要root权限。
+-sT TCP connect扫描，这种方式会在目标主机的日志中记录大批的链接请求以及错误信息。
+-sP ping扫描，一般最好不加，因为有的主机会禁止ping，却实际存在。
+-Pn 扫描之前不使用ping，适用于防火墙禁止ping，比较有用。
+-sN TCP空扫描
+-F 快速扫描
+-p 指定端口/端口范围
+-oN 将报告写入文件
+-v 详细信息
+-T&lt;0-5&gt; 设定速度
+使用脚本：
+--script all 使用所有脚本
+--script=sql.injection.nse sql注入
+--script=&quot;smb*&quot; 扫smb系列
+
+一、4 大功能：分别为主机发现（参数-sn）、端口扫描(-sS -sU)、版本侦测(–sV)、OS侦测(-O)
+
+二、扫描方式有：tcp connect()、TCP SYN scanning、TCP FIN scanning、Nullscan等
+
+三、绕过 ping 扫描参数为：nmap -Pn XXX.XXX.XXX.XXX
+
+四、漏洞检测可直接 nmap 目标 --script=auth,vuln
+</code></pre>
+<h5 id="SQLmap"><a href="#SQLmap" class="headerlink" title="SQLmap"></a>SQLmap</h5><pre><code>
+-u 单个URL 
+-m xx.txt 多个URL
+-d &quot;mysql://user:password@10.10.10.137:3306/dvwa&quot; 作为服务器客户端，连接数据库
+--data post/get都适用
+-p 指定扫描的参数
+-r 读取文件
+-f 指纹信息
+--tamper 混淆脚本，用于应用层过滤
+--cookie --user-agent --host 对http头的修改
+--threads 并发线程，默认为1
+--dbms MySQL&lt;5.0&gt; 指定数据库或版本
+–level=LEVEL 执行测试的等级（1-5，默认为 1）
+–risk=RISK 执行测试的风险（0-3，默认为 1） Risk升高可造成数据被篡改等风险
+–current-db 获取当前数据库名称
+–dbs 枚举数据库管理系统数据库
+–tables 枚举 DBMS 数据库中的表
+–columns 枚举 DBMS 数据库表列
+-D DB 要进行枚举的数据库名
+-T TBL 要进行枚举的数据库表
+-C COL 要进行枚举的数据库列
+-U USER 用来进行枚举的数据库用户
+常用的tamper：
+base64encode.py 转为b64编码
+charencode.py url编码
+chardoubleencode.py 双URL编码
+unmagicquotes.py 宽字节
+randomcomments.py 用`/**/`分割SQL关键字
+space2plus.py space2comment.py space2xxxx.py 替换空格为xx
+
+Post注入：
+sqlmap -r &quot;数据包地址&quot; -p &quot;参数&quot; -dbms 数据类型
+Get注入：
+sqlmap -u &quot;注入点地址&quot; --dbms 参数
+
+sqlmap进行交互式写shell：
+1-前提条件：最高权限、知道web网站绝对路径、能获取到cookie
+2-sqlmap.py -u &quot;注入点地址&quot; --cookie=&quot;cookie值&quot; --os-shell
+-echo “一句话木马”&gt;网站的绝对路径
+3-输入web网站的绝对路径
+4-传木马
+</code></pre>
+<h5 id="菜刀、蚁剑、冰蝎、CS、哥斯拉"><a href="#菜刀、蚁剑、冰蝎、CS、哥斯拉" class="headerlink" title="菜刀、蚁剑、冰蝎、CS、哥斯拉"></a>菜刀、蚁剑、冰蝎、CS、哥斯拉</h5><p><strong>菜刀特征</strong><br>使用了base64的方式加密了发送给“菜刀马”的指令，其中的两个关键payload <code>z1</code>和<code>z2</code>，这个名字是可变的</p>
+<p><strong>蚁剑特征</strong><br>默认的USER-agent请求头是<code>antsword xxx</code>，但是可以修改<code>/modules/request.js</code>文件<br>其中流量最中明显的特征为<code>@ini_set(&quot;display_errors&quot;,&quot;0&quot;);</code>这段代码基本是所有WebShell客户端链接PHP类WebShell都有的一种代码<br>蚁剑混淆加密后还有一个比较明显的特征,即为参数名大多以<code>“_0x......=”</code>这种形式（下划线可替换），所以以_0x开头的参数名也很可能就是恶意流量</p>
+<p><strong>冰蝎</strong><br>看包没有发现什么特征，但是可以发现它是POST请求的</p>
+<ol>
+<li>Accept头有<code>application/xhtml+xmlapplication/xmlapplication/signed-exchange</code>属于弱特征（UA头的浏览器版本很老）</li>
+<li>特征分析<code>Content-Type: application/octet-stream</code>这是一个强特征，查阅资料可知octet-stream的意思是，只能提交二进制，而且只能提交一个二进制，如果提交文件的话，只能提交一个文件,后台接收参数只能有一个，而且只能是流（或者字节数组），所以很少使用</li>
+</ol>
+<p><strong>冰蝎2特征</strong><br>默认Accept字段的值很特殊,而且每个阶段都一样冰蝎内置了十余种UserAgent，每次连接shell会随机选择一个进行使用，但是可以在burp中修改ua头。<br><code>Content-Length: 16</code>, 16就是冰蝎2连接的特征</p>
+<p><strong>冰蝎3特征</strong><br>目前很多waf等设备都做了冰蝎2的流量特征分析，所以3取消了动态密钥获取；抓包没有发现什么特征，但它是POST请求的</p>
+<ol>
+<li>Accept头<code>application/xhtml+xmlapplication/xmlapplication/signed-exchange</code>属于弱特征</li>
+<li>ua头该特征属于弱特征，通过burp可以修改。冰蝎3.0内置的默认16个userAgent都比较老，也可以作为waf规则特征</li>
+</ol>
+<p><strong>哥斯拉特征</strong><br>【PHP连接特征】</p>
+<ol>
+<li>使用了php_XOR_BASE64</li>
+<li>请求都含有”pass=”<br>【jsp连接特征】</li>
+<li>使用了java_AES_BASE64</li>
+<li>是用了java_AES_RAW</li>
+<li>与php请求一样都含有<code>&quot;pass=&quot;</code>而且发起连接时服务器返回的Content-Length是0</li>
+</ol>
+<h5 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h5><p>过滤 ip:<br>过滤源 ip 地址:ip.src==1.1.1.1;,目的 ip 地址:ip.dst==1.1.1.1;<br>过滤端口:<br>过滤 80 端口:tcp.port==80,源端口:tcp.srcport==80,目的端<br>口:tcp.dstport==80<br>协议过滤:<br>直接输入协议名即可,如 http 协议 http<br>http 模式过滤:<br>过滤 get/post 包 http.request.mothod==”GET/POST”</p>
+<h5 id="MSF"><a href="#MSF" class="headerlink" title="MSF"></a>MSF</h5><pre><code>
+常用命令：
+background  让meterpreter处于后台模式
+sessions -i number  与会话进行交互，number表示第n个session
+quit  退出会话
+shell  获得命令行
+cat  c:\\boot.ini 查看文件内容
+getwd  查看当前工作目录
+work directory upload /root/Desktop/netcat.exe c:\\   上传文件到目标机上
+download 0xfa.txt /root/Desktop/   下载文件到本机上
+edit c:\\boot.ini   编辑文件
+search -d d:\\www -f web.config  查找文件
+ps  查看当前活跃进程
+migrate pid  将Meterpreter会话移植到进 程数位pid的进程中
+execute -H -i -f cmd.exe  创建新进程
+getpid  获取当前进程的
+pid kill pid  杀死进程
+getuid  查看权限
+sysinfo  查看目标机系统信息，如机器名，操作系统等
+getsystem  提权操作
+timestompc:/a.doc -c &quot;10/27/2015 14:22:11&quot;  修改文件的创建时间
+
+迁移进程：
+- meterpreter &gt; ps
+- 自行选择PID
+- meterpreter &gt; migrate pid
+</code></pre>
+<h4 id="一些免杀的了解"><a href="#一些免杀的了解" class="headerlink" title="一些免杀的了解"></a>一些免杀的了解</h4><p><strong>做免杀的原理：</strong><br>就是fuzz定位出被查杀的语句，然后对被查杀那部分进行加密、编码、动态执行、拆分拼接、特定条件执行等等。</p>
+<p><strong>免杀分类：</strong><br>为静态免杀（单纯看hash值）、流量免杀（有通信流量就杀）、内存免杀（看内存运行特征）、动态免杀（行为感知）</p>
+<p><strong>免杀语言分类：</strong></p>
+<ol>
+<li>编译型语言，编译器一次性将所有源代码编译为一个不可跨平台执行的可执行程序，一次编译可以重复执行（C、C++、Golang、汇编等）</li>
+<li>解释型语言，使用解释器一边执行一边转换，不会生成可执行程序。（JavaScript、Python、PHP、Shell等）</li>
+</ol>
+<p><strong>免杀方法：</strong></p>
+<ol>
+<li>修改特征码，猜测杀软对哪几个字节进行查杀，再对应修改（几乎没用了）</li>
+<li>shellcode加载器，改变加载到内存的方式和加密方式（主流）</li>
+<li>反射dll加载，把dll加密，远程下载到内存中再解密执行（高级）</li>
+</ol>
+<h5 id="无文件执行木马的方式有哪些？"><a href="#无文件执行木马的方式有哪些？" class="headerlink" title="无文件执行木马的方式有哪些？"></a>无文件执行木马的方式有哪些？</h5><p>powershell（脚本解析器） 》》》powershell.exe（应用程序）<br>VB.script（脚本解析器） 》》》cscript.exe（应用程序）<br>bat处理 （脚本解析器） 》》》cmd.exe（应用程序）<br>javaSrtipt（脚本解析器） 》》》mshta.exe（应用程序）</p>
+<h5 id="怎么做shellcode免杀？"><a href="#怎么做shellcode免杀？" class="headerlink" title="怎么做shellcode免杀？"></a>怎么做shellcode免杀？</h5><ol>
+<li>编码</li>
+<li>加壳</li>
+<li>混淆</li>
+<li>分离免杀</li>
+<li>特征码修改</li>
+<li>添加无用逻辑语句</li>
+<li>重写api</li>
+</ol>
+<h5 id="分离免杀怎么做？"><a href="#分离免杀怎么做？" class="headerlink" title="分离免杀怎么做？"></a>分离免杀怎么做？</h5><p>分为加载器和shellcode两部分，一般将shellcode存储在网页或者图片中，然后加载器远程加载存在shellcode的网页或者图片之类的</p>
+<h5 id="powershell怎么远程加载？"><a href="#powershell怎么远程加载？" class="headerlink" title="powershell怎么远程加载？"></a>powershell怎么远程加载？</h5><p>可以远程加载mimikazt，远控文件，exe可执行文件实现无文件落地。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/06/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="prev" title="内网渗透">
+                  <i class="fa fa-angle-left"></i> 内网渗透
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/13/%E6%8C%96%E7%9F%BF%E4%BA%8B%E4%BB%B6%E6%8E%92%E6%9F%A5/" rel="next" title="挖矿事件排查">
+                  挖矿事件排查 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2023/08/12/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="每日一记注:本章节较难，请选择性阅读对象使用{…}来创建对象。一个属性就是一个键值对（“key: value”），其中键是一个字符串（也叫做属性名），值可以是任何值。 构造对象方法: let user &#x3D; new Object();     &#x2F;&#x2F; “构造函数” 的语法 let user &#x3D; &amp;#123;&amp;#125;;               &#x2F;&#x2F; “字面量” 的语法  读取文件的属性: ale">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript拓展（1）">
+<meta property="og:url" content="https://liu1272.github.io/2022/11/05/20221105/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="每日一记注:本章节较难，请选择性阅读对象使用{…}来创建对象。一个属性就是一个键值对（“key: value”），其中键是一个字符串（也叫做属性名），值可以是任何值。 构造对象方法: let user &#x3D; new Object();     &#x2F;&#x2F; “构造函数” 的语法 let user &#x3D; &amp;#123;&amp;#125;;               &#x2F;&#x2F; “字面量” 的语法  读取文件的属性: ale">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-05T05:18:00.000Z">
+<meta property="article:modified_time" content="2023-03-03T11:46:06.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2022/11/05/20221105/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2022/11/05/20221105/","path":"2022/11/05/20221105/","title":"JavaScript拓展（1）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JavaScript拓展（1） | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">每日一记</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8-%E6%9C%AC%E7%AB%A0%E8%8A%82%E8%BE%83%E9%9A%BE%EF%BC%8C%E8%AF%B7%E9%80%89%E6%8B%A9%E6%80%A7%E9%98%85%E8%AF%BB"><span class="nav-number">1.0.1.</span> <span class="nav-text">注:本章节较难，请选择性阅读</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.</span> <span class="nav-text">对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#for-in-%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.2.</span> <span class="nav-text">for..in 循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8%E5%92%8C%E5%A4%8D%E5%88%B6"><span class="nav-number">1.3.</span> <span class="nav-text">对象引用和复制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BC%95%E7%94%A8"><span class="nav-number">1.3.1.</span> <span class="nav-text">对象的引用:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%A4%8D%E5%88%B6"><span class="nav-number">1.3.2.</span> <span class="nav-text">对象的复制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%B1%E5%B1%82%E5%85%8B%E9%9A%86"><span class="nav-number">1.3.3.</span> <span class="nav-text">深层克隆</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">1.4.</span> <span class="nav-text">垃圾回收</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">对象方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#this"><span class="nav-number">1.5.1.</span> <span class="nav-text">this</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E7%82%B9%E8%AF%AF%E5%8C%BA%EF%BC%8C%E5%BF%85%E9%A1%BB%E8%AE%B0%E4%BD%8F"><span class="nav-number">1.6.</span> <span class="nav-text">重点误区，必须记住</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8%E5%92%8C%E6%93%8D%E4%BD%9C%E7%AC%A6-%E2%80%9Cnew%E2%80%9D"><span class="nav-number">1.7.</span> <span class="nav-text">构造器和操作符 “new”</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">1.7.1.</span> <span class="nav-text">构造函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#new-function-%E2%80%A6"><span class="nav-number">1.8.</span> <span class="nav-text">new function() { … }</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8%E6%A8%A1%E5%BC%8F%E6%B5%8B%E8%AF%95-%E6%97%A0%E9%9C%80%E9%87%8D%E8%A7%86"><span class="nav-number">1.9.</span> <span class="nav-text">构造器模式测试,无需重视</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E9%93%BE"><span class="nav-number">1.10.</span> <span class="nav-text">可选链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#symbol-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.11.</span> <span class="nav-text">symbol 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1-%E2%80%94%E2%80%94-%E5%8E%9F%E5%A7%8B%E5%80%BC%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.12.</span> <span class="nav-text">对象 —— 原始值转换</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99"><span class="nav-number">1.12.1.</span> <span class="nav-text">转换规则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#hint"><span class="nav-number">1.12.2.</span> <span class="nav-text">hint</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbol-toPrimitive"><span class="nav-number">1.13.</span> <span class="nav-text">Symbol.toPrimitive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#toString-valueOf"><span class="nav-number">1.14.</span> <span class="nav-text">toString&#x2F;valueOf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%8F%AF%E4%BB%A5%E8%BF%94%E5%9B%9E%E4%BB%BB%E4%BD%95%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.15.</span> <span class="nav-text">转换可以返回任何原始类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.16.</span> <span class="nav-text">进一步的转换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">总结:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E5%8F%A5"><span class="nav-number">3.</span> <span class="nav-text">每日一句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%81%87%E4%BA%8B%E4%B8%8D%E5%86%B3%E5%8F%AF%E9%97%AE%E6%98%A5%E9%A3%8E%EF%BC%8C%E6%98%A5%E9%A3%8E%E4%B8%8D%E8%AF%AD%E5%8D%B3%E9%9A%8F%E6%9C%AC%E5%BF%83%E3%80%82"><span class="nav-number">3.0.1.</span> <span class="nav-text">遇事不决可问春风，春风不语即随本心。</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2022/11/05/20221105/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JavaScript拓展（1） | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript拓展（1）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-05 13:18:00" itemprop="dateCreated datePublished" datetime="2022-11-05T13:18:00+08:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-03 19:46:06" itemprop="dateModified" datetime="2023-03-03T19:46:06+08:00">2023-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2022/11/05/20221105/" class="post-meta-item leancloud_visitors" data-flag-title="JavaScript拓展（1）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>8 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h5 id="注-本章节较难，请选择性阅读"><a href="#注-本章节较难，请选择性阅读" class="headerlink" title="注:本章节较难，请选择性阅读"></a>注:本章节较难，请选择性阅读</h5><h4 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h4><p>使用{…}来创建对象。一个属性就是一个键值对（“key: value”），其中键是一个字符串（也叫做属性名），值可以是任何值。</p>
+<pre><code>构造对象方法:
+let user = new Object();     // “构造函数” 的语法
+let user = &#123;&#125;;               // “字面量” 的语法
+
+读取文件的属性:
+alert( user.name );          // John
+alert( user.age );           // 30
+
+移除属性:
+delete user.age;             // 移除age这个key
+
+方括号:
+let user = &#123;&#125;;
+// 设置
+user[&quot;likes birds&quot;] = true;  // 单引号或双引号都可以
+// 读取
+alert(user[&quot;likes birds&quot;]);  // true
+// 删除
+delete user[&quot;likes birds&quot;];
+
+属性值简写:
+name, 与 name: name 相同
+
+属性名称限制:
+类型会被自动地转换为字符串
+但__proto__属性。不能将它设置为一个非对象的值
+
+属性存在性测试:
+alert( user.noSuchProperty === undefined );       // true 意思是没有这个属性
+alert( &quot;age&quot; in user );                           // true 存在
+</code></pre>
+<h4 id="for-in-循环"><a href="#for-in-循环" class="headerlink" title="for..in 循环"></a>for..in 循环</h4><pre><code>for (key in object) &#123;
+  // 对此对象属性中的每个键执行的代码
+&#125;
+遍历一个对象时，整数属性会被进行从小到大排序
+但是 “+49” 和 “1.2” 不行，那它们就按照创建时的顺序来排序
+</code></pre>
+<h4 id="对象引用和复制"><a href="#对象引用和复制" class="headerlink" title="对象引用和复制"></a>对象引用和复制</h4><p>赋值了对象的变量存储的不是对象本身，而是该对象“在内存中的地址”。</p>
+<h5 id="对象的引用"><a href="#对象的引用" class="headerlink" title="对象的引用:"></a>对象的引用:</h5><pre><code>let user = &#123; name: &#39;John&#39; &#125;;
+let admin = user;
+admin.name = &#39;Pete&#39;;               // 通过 &quot;admin&quot; 引用来修改
+alert(user.name);                  // &#39;Pete&#39;，修改能通过 &quot;user&quot; 引用看到
+</code></pre>
+<p>仅当两个对象为同一对象时，两者才相等。<br>两个独立的对象则并不相等，即使它们看起来很像（都为空）。</p>
+<h5 id="对象的复制"><a href="#对象的复制" class="headerlink" title="对象的复制"></a>对象的复制</h5><p>通过遍历已有对象的属性，并在原始类型值的层面复制它们，以实现对已有对象结构的复制。</p>
+<pre><code>let user = &#123;
+  name: &quot;John&quot;,
+&#125;;
+let clone = &#123;&#125;;                       // 新的空对象
+for (let key in user) &#123;               // 将 user 中所有的属性拷贝到其中
+  clone[key] = user[key];             // 现在 clone 是带有相同内容的完全独立的对象
+&#125;
+clone.name = &quot;Pete&quot;;                  // 改变了其中的数据
+alert( user.name );                   // 原来的对象中的 name 属性依然是 John
+
+【也可以使用 Object.assign 方法】
+
+Object.assign(dest, [src1, src2, src3...])
+1.dest 是指目标对象
+2.src1, ..., srcN是源对象（需传递的参数）
+3.将所有源对象的属性拷贝到目标对象 dest 中
+4.调用结果返回 dest
+5.如果被拷贝的属性的属性名已经存在，那么它会被覆盖
+</code></pre>
+<h5 id="深层克隆"><a href="#深层克隆" class="headerlink" title="深层克隆"></a>深层克隆</h5><pre><code>let 克隆生成的对象 = Object.assign(&#123;&#125;, 克隆的对象);
+或者使用“深拷贝”函数，例如 _.cloneDeep(obj)
+</code></pre>
+<h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><p>1.可达性<br>&emsp;&emsp;如果一个值可以通过引用链从根访问任何其他值，则认为该值是可达的<br>&emsp;&emsp;垃圾回收器会删除掉那些已经不可达的(没有外部对其的引用)<br>2.内部算法(mark-and-sweep):<br>&emsp;&emsp;垃圾收集器遍历所有的根，并“标记”（记住）它们和他们的引用。<br>&emsp;&emsp;没有被标记的对象都会被删除。<br>3.优化建议:<br>&emsp;&emsp;分代收集/增量收集/闲时收集<br>&emsp;&emsp;<a href="https://zh.javascript.info/garbage-collection#zong-jie">进阶了解</a></p>
+<h4 id="对象方法"><a href="#对象方法" class="headerlink" title="对象方法"></a>对象方法</h4><p>存储在对象属性中的函数被称为“方法”<br>使用函数表达式创建一个函数，并将其指定给对象的属性，随后调用它。就叫做得到了 user 对象的 sayHi 方法。</p>
+<h5 id="this"><a href="#this" class="headerlink" title="this"></a>this</h5><p>访问对象中存储的信息<br>this可以用于任何函数,它取决于代码上下文<br>严格模式下没有对象的情况下调用:this==undefined但尝试访问this.name将会报错<br>this的值是在调用时计算出来的，它的值取决于在“点符号前”的是什么对象。<br>箭头函数没有自己的this。若在箭头函数中引用this，则this值取决于外部“正常的”函数。</p>
+<pre><code>let user = &#123; name: &quot;John&quot; &#125;;
+let admin = &#123; name: &quot;Admin&quot; &#125;;
+
+function sayHi() &#123;
+  alert( this.name );
+&#125;
+
+// 在两个对象中使用相同的函数
+user.f = sayHi;
+admin.f = sayHi;
+
+// 这两个调用有不同的 this 值
+// 函数内部的 &quot;this&quot; 是“点符号前面”的那个对象
+user.f(); // John（this == user）
+admin.f(); // Admin（this == admin）
+
+admin[&#39;f&#39;](); // Admin（使用点符号或方括号语法来访问这个方法，都没有关系。）
+</code></pre>
+<h4 id="重点误区，必须记住"><a href="#重点误区，必须记住" class="headerlink" title="重点误区，必须记住"></a><a href="https://zh.javascript.info/object-methods#zai-dui-xiang-zi-mian-liang-zhong-shi-yong-this">重点误区，必须记住</a></h4><h4 id="构造器和操作符-“new”"><a href="#构造器和操作符-“new”" class="headerlink" title="构造器和操作符 “new”"></a>构造器和操作符 “new”</h4><h5 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h5><p>命名以大写字母开头。<br>只能由 “new” 操作符来执行</p>
+<pre><code>function User(name) &#123;                1.一个新的空对象被创建并分配给 this。
+  this.name = name;                  2.函数体执行。通常它会修改 this，为其添加新的属性。
+  this.isAdmin = false;              3.返回 this 的值。
+&#125;
+</code></pre>
+<p>任何函数（除了箭头函数，它没有自己的 this）都可以用作构造器</p>
+<h4 id="new-function-…"><a href="#new-function-…" class="headerlink" title="new function() { … }"></a>new function() { … }</h4><p>如果有许多行用于创建单个复杂对象的代码，可以将它们封装在一个立即调用的构造函数中</p>
+<pre><code>// 创建一个函数并立即使用 new 调用它
+let user = new function() &#123;
+  this.name = &quot;John&quot;;
+  this.isAdmin = false;
+  // ……用于用户创建的其他代码
+  // 也许是复杂的逻辑和语句
+  // 局部变量等
+&#125;;
+</code></pre>
+<p>这个构造函数不能被再次调用，因为它不保存在任何地方，只是被创建和调用。<br>因此，这个技巧旨在封装构建单个对象的代码，而无需将来重用。</p>
+<h4 id="构造器模式测试-无需重视"><a href="#构造器模式测试-无需重视" class="headerlink" title="构造器模式测试,无需重视"></a><a href="https://zh.javascript.info/constructor-new#gou-zao-qi-mo-shi-ce-shi-newtarget">构造器模式测试,无需重视</a></h4><h4 id="可选链"><a href="#可选链" class="headerlink" title="可选链"></a>可选链</h4><pre><code>语法有三种形式：
+obj?.prop —— 如果 obj 存在则返回 obj.prop，否则返回 undefined。
+obj?.[prop] —— 如果 obj 存在则返回 obj[prop]，否则返回 undefined。
+obj.method?.() —— 如果 obj.method 存在则调用 obj.method()，否则返回 undefined。
+总结?. 检查左边部分是否为 null/undefined，如果不是则继续运算。
+</code></pre>
+<h4 id="symbol-类型"><a href="#symbol-类型" class="headerlink" title="symbol 类型"></a>symbol 类型</h4><p>“symbol” 值表示唯一的标识符。<br>使用 Symbol() 来创建这种类型的值<br>可以给 symbol 一个描述（也称为 symbol 名）          //let id = Symbol(“id”);<br>symbol 保证是唯一的。即使我们创建了许多具有相同描述的 symbol，它们的值也是不同。symbol 不会被自动转换为字符串<br>真的想显示一个 symbol，我们需要</p>
+<pre><code>在它上面调用 .toString()
+    let id = Symbol(&quot;id&quot;);
+    alert(id.toString());        //Symbol(id)
+或者获取 symbol.description 属性，只显示描述
+    let id = Symbol(&quot;id&quot;);
+    alert(id.description);       // id
+</code></pre>
+<p>主要的使用场景：<br>1.“隐藏” 对象属性。<br>    如果我们想要向“属于”另一个脚本或者库的对象添加一个属性，我们可以创建一个 symbol 并使用它作为属性的键。<br>2.JavaScript 使用了许多系统 symbol，这些 symbol 可以作为 Symbol.* 访问。我们可以使用它们来改变一些内建行为。<br>3.symbol 在 for…in 中会被跳过<br>4.Object.keys(user) 也会忽略它们<br>5.相反，Object.assign 会同时复制字符串和 symbol 属性</p>
+<h4 id="对象-——-原始值转换"><a href="#对象-——-原始值转换" class="headerlink" title="对象 —— 原始值转换"></a>对象 —— 原始值转换</h4><p>JavaScript 不允许自定义运算符对对象的处理方式<br>此类运算的情况下，对象会被自动转换为原始值，然后对这些原始值进行运算，并得到运算结果（也是一个原始值）</p>
+<h5 id="转换规则"><a href="#转换规则" class="headerlink" title="转换规则"></a>转换规则</h5><p>1.没有转换为布尔值,所有的对象在布尔上下文（context）中均为 true<br>2.数字转换发生在对象相减或应用数学函数时<br>3.字符串转换通常发生在像 alert(obj) 这样输出一个对象和类似的上下文中</p>
+<h5 id="hint"><a href="#hint" class="headerlink" title="hint"></a>hint</h5><p>“string”（对于 alert 和其他需要字符串的操作）<br>“number”（对于数学运算）<br>“default”（少数运算符，通常对象以和 “number” 相同的方式实现 “default” 转换）</p>
+<h4 id="Symbol-toPrimitive"><a href="#Symbol-toPrimitive" class="headerlink" title="Symbol.toPrimitive"></a>Symbol.toPrimitive</h4><p>用来给转换方法命名</p>
+<h4 id="toString-valueOf"><a href="#toString-valueOf" class="headerlink" title="toString/valueOf"></a>toString/valueOf</h4><p>对于 “string” hint：调用 toString 方法，如果它不存在，则调用 valueOf 方法（因此，对于字符串转换，优先调用 toString）。<br>对于其他 hint：调用 valueOf 方法，如果它不存在，则调用 toString 方法（因此，对于数学运算，优先调用 valueOf 方法）。</p>
+<h4 id="转换可以返回任何原始类型"><a href="#转换可以返回任何原始类型" class="headerlink" title="转换可以返回任何原始类型"></a>转换可以返回任何原始类型</h4><p>它们不一定会返回 “hint” 的原始值<br>唯一强制性的事情是：这些方法必须返回一个原始值，而不是对象。</p>
+<h4 id="进一步的转换"><a href="#进一步的转换" class="headerlink" title="进一步的转换"></a>进一步的转换</h4><p>如果我们将对象作为参数传递，则会出现两个运算阶段：<br>1.对象被转换为原始值（通过前面我们描述的规则）。<br>2.如果还需要进一步计算，则生成的原始值会被进一步转换。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><pre><code>首先调用 obj[Symbol.toPrimitive](hint) 如果这个方法存在，
+否则，如果 hint 是 &quot;string&quot;
+        尝试调用 obj.toString() 或 obj.valueOf()，无论哪个存在。
+否则，如果 hint 是 &quot;number&quot; 或者 &quot;default&quot;
+        尝试调用 obj.valueOf() 或 obj.toString()，无论哪个存在。
+
+在实际使用中，通常只实现 obj.toString() 作为字符串转换的“全能”方法就足够了，该方法应该返回对象的“人类可读”表示，用于日志记录或调试。
+</code></pre>
+<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="遇事不决可问春风，春风不语即随本心。"><a href="#遇事不决可问春风，春风不语即随本心。" class="headerlink" title="遇事不决可问春风，春风不语即随本心。"></a>遇事不决可问春风，春风不语即随本心。</h5>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/04/20221104/" rel="prev" title="JavaScript基础（4）">
+                  <i class="fa fa-angle-left"></i> JavaScript基础（4）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/06/20221106CTF%E6%80%BB%E7%BB%93/" rel="next" title="信安CTF总结">
+                  信安CTF总结 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2022/11/05/20221105/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

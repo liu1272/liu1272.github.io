@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="每日一记文件包含文件1 function add() &amp;#123;     echo &#39;执行&#39;; &amp;#125; add增加，del删除，update更改，select查询 文件2 include (&#39;文件1.php&#39;);          &#x2F;&#x2F;调用文件 add();                         &#x2F;&#x2F;调用函数  include与require区别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP基础（2）">
+<meta property="og:url" content="https://liu1272.github.io/2022/11/11/20221111/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="每日一记文件包含文件1 function add() &amp;#123;     echo &#39;执行&#39;; &amp;#125; add增加，del删除，update更改，select查询 文件2 include (&#39;文件1.php&#39;);          &#x2F;&#x2F;调用文件 add();                         &#x2F;&#x2F;调用函数  include与require区别">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-11T08:28:00.000Z">
+<meta property="article:modified_time" content="2023-03-03T11:39:36.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2022/11/11/20221111/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2022/11/11/20221111/","path":"2022/11/11/20221111/","title":"PHP基础（2）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PHP基础（2） | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AE%B0"><span class="nav-number">1.</span> <span class="nav-text">每日一记</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="nav-number">1.1.</span> <span class="nav-text">文件包含</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.2.</span> <span class="nav-text">操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B6%85%E5%85%A8%E5%B1%80%E6%95%B0%E7%BB%84"><span class="nav-number">1.3.</span> <span class="nav-text">超全局数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.</span> <span class="nav-text">日期函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%80%E4%BB%8B-dos%E6%93%8D%E4%BD%9C"><span class="nav-number">1.6.</span> <span class="nav-text">数据库简介(dos操作)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.7.</span> <span class="nav-text">mysql数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8A%E5%86%85%E5%AE%B9%E7%9A%86%E5%8F%AF%E4%BD%BF%E7%94%A8phpMyAdmin%E5%92%8CNavicatPremium%E6%9B%B4%E6%94%B9"><span class="nav-number">1.7.1.</span> <span class="nav-text">以上内容皆可使用phpMyAdmin和NavicatPremium更改</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.8.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">1.9.</span> <span class="nav-text">查询数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.10.</span> <span class="nav-text">查询数据库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E6%97%A5%E4%B8%80%E5%8F%A5"><span class="nav-number">2.</span> <span class="nav-text">每日一句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%8C%E5%8D%81%E4%B8%80%E8%A2%AB%E5%AD%A6%E6%A0%A1%E5%85%B3%E5%9C%A8%E5%AE%BF%E8%88%8D%E9%A5%B2%E5%85%BB-%E4%B8%8D%E7%94%A8%E8%B5%B0%E5%88%B0%E5%93%AA%E9%83%BD%E5%90%83%E7%8B%97%E7%B2%AE%E7%9C%9F%E6%98%AF%E5%A4%AA%E5%BC%80%E5%BF%83%E4%BA%86-dog"><span class="nav-number">2.0.1.</span> <span class="nav-text">双十一被学校关在宿舍饲养,不用走到哪都吃狗粮真是太开心了(dog)</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2022/11/11/20221111/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PHP基础（2） | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP基础（2）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-11 16:28:00" itemprop="dateCreated datePublished" datetime="2022-11-11T16:28:00+08:00">2022-11-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-03 19:39:36" itemprop="dateModified" datetime="2023-03-03T19:39:36+08:00">2023-03-03</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2022/11/11/20221111/" class="post-meta-item leancloud_visitors" data-flag-title="PHP基础（2）" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.6k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="每日一记"><a href="#每日一记" class="headerlink" title="每日一记"></a>每日一记</h3><h4 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h4><pre><code>文件1
+function add()
+&#123;
+    echo &#39;执行&#39;;
+&#125;
+add增加，del删除，update更改，select查询
+文件2
+include (&#39;文件1.php&#39;);          //调用文件
+add();                         //调用函数
+
+include与require区别
+include在没有这个文件时报错并执行，但是require报错但是不执行
+include_once与require_once区别
+可以重复调用文件，区别同上
+</code></pre>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><pre><code>索引数组:
+$arr=[1,2,3,4,5];
+var_dump($arr);
+或
+$arr=array(1,2,3,4,5);
+var_dump($arr);
+
+关联数组:
+$arr=[
+    &#39;A&#39;=&gt;&#39;a&#39;,
+    &#39;B&#39;=&gt;&#39;b&#39;;
+];
+var_dump($arr);
+
+二维(多维)数组:
+$arr=[
+    &#39;A&#39;=&gt;[
+        &#39;a&#39;,
+        &#39;b&#39;,
+        &#39;c&#39;,
+    ]
+];
+var_dump($arr);
+</code></pre>
+<h5 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h5><p>增加:直接声明$arr[位置]=’内容’;<br>删除:unset($arr[位置]);<br>修改:重新定义<br>对于多维数组要var_dump($arr[第一层位置][第二层位置]…….);<br>获取循环次数:echo count($arr);</p>
+<pre><code>遍历
+foreach ($arr as $key =&gt; $value) &#123;
+    echo $key.&#39;&lt;br/&gt;&#39;;
+&#125;
+
+list($a , $b , $c , $d , $e) = $arr;
+echo $a,$b,$c,$d;
+一一赋值，多出来的跳过，只对有索引的有效
+
+while (list($key , $val) = each($arr)) &#123;
+    echo $key.&#39;--&#39;.$val.&#39;&lt;br/&gt;&#39;;
+&#125;
+
+排序
+sort() - 对数组进行升序排列
+rsort() - 对数组进行降序排列
+asort() - 根据关联数组的值，对数组进行升序排列
+ksort() - 根据关联数组的键，对数组进行升序排列
+arsort() - 根据关联数组的值，对数组进行降序排列
+krsort() - 根据关联数组的键，对数组进行降序排列
+
+数组的合拼
+$array1 =array(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;);
+$array2 = array(&#39;a1&#39;=&gt;&#39;php&#39;,&#39;a2&#39;=&gt;&#39;python&#39;,&#39;a3&#39;=&gt;&#39;java&#39;);
+$array3 = array_merge($array1,$array2);
+
+添加到指定位置
+array_splice(数组，位置，删除几个，增加元素）
+</code></pre>
+<h4 id="超全局数组"><a href="#超全局数组" class="headerlink" title="超全局数组"></a>超全局数组</h4><p>配合html前端页面method=’get/post’<br>var_dump($_GET);获取GET的参(显示内容在URL)<br>var_dump($_POST);获取POST的参(不显示)<br>var_dump($_REQUEST);都可以获取<br>前端name所设置的会把参数传到后端<br>name=’username’<br>$username=$_GET[‘username’];</p>
+<h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><pre><code>notice注意                   //后续代码会继续执行
+warning警告                  //后续代码会继续执行
+fatal error致命错误          //后续代码不会继续执行
+@可以消除警报(除了fatal error)
+在ini配置文件里display_errors:On可以取消报错(所有)
+在ini配置文件里error_log找错误日志
+</code></pre>
+<h4 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h4><p>时间戳:时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的秒数，不考虑闰秒。<br>配置文件可改时区，不详细讲</p>
+<h4 id="数据库简介-dos操作"><a href="#数据库简介-dos操作" class="headerlink" title="数据库简介(dos操作)"></a>数据库简介(dos操作)</h4><pre><code>对数据库的解释:
+数据库相当于文件夹，表相当于文件，字段就是内容。
+注释符:
+#    &quot;--  &quot;    /* */
+&lt;不是内部命令就更改环境变量&gt;
+
+【库操作】
+连接数据库:
+mysql -uroot -p
+查库:
+show databases;
+建库
+creat database 库名;
+删库
+drop database 库名;
+退出
+mysql &gt; exit;
+mysql &gt; quit;
+mysql &gt; \q;
+重命名数据库
+RENAME database olddbname TO newdbname
+
+【表操作】
+进库:
+use 库名;
+建表:
+creat table 表名(id int,字段名 数据类型(长度) , 字段名 数据类型(位数));
+建表命令:
+show creat table 表名;
+改表名:
+alter table 原表名 rename 新名字
+查表:
+show tables;
+select * from table_name
+删表:
+drop table 表名;
+查表结构:
+desc 表名;                      //字段类型，主键，是否为空等属性，但不显示外键
+
+【字段操作】
+建表字段:
+alter table 表名 add 字段名 (字段类型)
+改表字段:
+alter table 表名 change 原来的字段名 现在的字段名 数据类型(位数);
+改表字段值:
+alter table 表名 modify 字段名 修改后的值
+删表字段:
+alter table 表名 drop 字段名
+更改表的存储引擎:
+alter table 表名 engine=存储引擎名;
+给所有字段增加数据:
+insert into users (字段名1,字段名2,字段名3)values(值1,值2,值3);
+
+【插入顺序】
+first
+    alter table 表名 add 字段(字段类型) first
+after
+    alter table 表名 add 字段名(字段类型) after (在谁后面)
+
+【其它命令】
+显示系统特定资源的信息
+show status;                   //例如，正在运行的线程数量。
+</code></pre>
+<h4 id="mysql数据类型"><a href="#mysql数据类型" class="headerlink" title="mysql数据类型"></a>mysql数据类型</h4><p>整形:<br>int4字节，bigint8字节<br>浮点型:<br>float(m,d)<br>double(m,d)<br>decimal(m,d)<br>字符型:<br>char定长字符串(常用于32位md5密码)<br>varchar变长字符串(常用于用户名)<br>时间型:<br>4字节，年月日格式<br>auto_increment:<br>自动增加，只用于整形，priimary&emsp;key设置起始值(默认为1)<br><a href="https://www.cnblogs.com/-xlp/p/8617760.html">总结内容</a></p>
+<h5 id="以上内容皆可使用phpMyAdmin和NavicatPremium更改"><a href="#以上内容皆可使用phpMyAdmin和NavicatPremium更改" class="headerlink" title="以上内容皆可使用phpMyAdmin和NavicatPremium更改"></a>以上内容皆可使用phpMyAdmin和NavicatPremium更改</h5><h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><pre><code>普通索引:
+alter table 表名 add index(字段);
+唯一索引:
+alter table 表名 add unique(字段);
+主键索引:
+alter table 表名 add primary key(字段);
+全文索引:
+alter table 表名 add fulltext(字段);
+显示索引:
+show index from 字段名
+</code></pre>
+<p><a href="https://blog.csdn.net/qq_35190492/article/details/109257302?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166808686716782428672275%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=166808686716782428672275&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-2-109257302-null-null.142%5Ev63%5Ejs_top,201%5Ev3%5Econtrol,213%5Ev2%5Et3_esquery_v2&utm_term=mysql%E7%B4%A2%E5%BC%95&spm=1018.2226.3001.4187">使用及区别</a></p>
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><pre><code>select选择时如果要限制条件就在后面加上where和条件
+where age&lt;&gt;50; == where age!50                     //取非
+age in(18,16,17);                                  //固定查询的值
+address like &#39;Ax&#39;;                                 //模糊查询A开头的
+address like &#39;xAx&#39;;                                //模糊查询含A的
+select * from 表名 order by 列名 desc;             //降序显示，默认为升序(asc)
+select * from 表名 limit 5,5;                      //从第五个值开始往下取5个值
+select * from 表名 group by 列名;                  //分组(只保留一个，去重)
+select count(*) from 表名;                         //显示该列有几个数据
+select 列名 as 别名 from 表名;                     //给该列起别名
+
+注意:
+and优先级高于or，因此先计算and表达式再运算or表达式
+
+聚合查询:
+count()返回行数
+sum()返回某列值的和
+avg()返回某列平均值
+max()返回某列最大值
+min()返回某列最小值
+
+分组查询:
+select * from 表名 group by 字段名;
+select * from 表名 limit 开始行数,结束行数;
+select * from 表名 as 重命名;
+
+mysql子查询:
+类似于嵌套循环，将内层的结果传递到外层进行下一步操作
+大致有:where,from,exists三个
+
+联合查询(两个表的查询):
+原理——————取得两个结果集的并集
+union默认选取不同的值。如果允许重复的值，请使用union all(不会去掉结果中的重复行)
+union all 查询全部而且不会消除重复的行
+</code></pre>
+<h4 id="查询数据库"><a href="#查询数据库" class="headerlink" title="查询数据库"></a>查询数据库</h4><pre><code>内联查询:
+select 列名1 from 表名1 inner join 表名2 on 条件;
+左连接查询(以左边为基准):
+select 列名1 from 表名1 left join 表名2 on 条件;
+右链接查询(左边没有的不会显示):
+select 列名1 from 表名1 right join 表名2 on 条件;
+嵌套查询:
+不建议，太慢
+</code></pre>
+<h3 id="每日一句"><a href="#每日一句" class="headerlink" title="每日一句"></a>每日一句</h3><h5 id="双十一被学校关在宿舍饲养-不用走到哪都吃狗粮真是太开心了-dog"><a href="#双十一被学校关在宿舍饲养-不用走到哪都吃狗粮真是太开心了-dog" class="headerlink" title="双十一被学校关在宿舍饲养,不用走到哪都吃狗粮真是太开心了(dog)"></a>双十一被学校关在宿舍饲养,不用走到哪都吃狗粮真是太开心了(dog)</h5>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/10/20221110/" rel="prev" title="PHP基础（1）">
+                  <i class="fa fa-angle-left"></i> PHP基础（1）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/12/20221112/" rel="next" title="PHP基础（3）">
+                  PHP基础（3） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2022/11/11/20221111/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>

