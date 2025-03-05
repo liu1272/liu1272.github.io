@@ -6,7 +6,7 @@
   <link href="https://liu1272.github.io/atom.xml" rel="self"/>
   
   <link href="https://liu1272.github.io/"/>
-  <updated>2025-02-26T02:35:52.154Z</updated>
+  <updated>2025-03-05T07:59:32.055Z</updated>
   <id>https://liu1272.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://liu1272.github.io/2025/02/26/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/"/>
     <id>https://liu1272.github.io/2025/02/26/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</id>
     <published>2025-02-26T02:31:00.000Z</published>
-    <updated>2025-02-26T02:35:52.154Z</updated>
+    <updated>2025-03-05T07:59:32.055Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="博客迁移记录"><a href="#博客迁移记录" class="headerlink" title="博客迁移记录"></a>博客迁移记录</h5><ol><li>迁移原本的整个blog文件夹</li><li>在新电脑的bolg目录安装git、node.js、npm、hexo环境</li><li>在windows终端生成密钥</li></ol><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"你的用户名"</span><span class="token function">git</span> config --global user.email <span class="token string">"你的邮箱@qq.com"</span>ssh-keygen -t rsa -C <span class="token string">"你的邮箱@qq.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ol start="4"><li>github个人主页设置的 SSH and GPG keys 中新建 SSH key</li><li>在blog目录中打开git bash执行下面命令</li></ol><pre><code>npm install hexo-cli -gnpm install hexo-deployer-git --save</code></pre>]]></content>
+    <content type="html"><![CDATA[<h5 id="博客迁移记录"><a href="#博客迁移记录" class="headerlink" title="博客迁移记录"></a>博客迁移记录</h5><ol><li>迁移原本的整个blog文件夹</li><li>在新电脑的bolg目录安装git、node.js、npm、hexo环境</li><li>在windows终端生成密钥</li></ol><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"你的用户名"</span><span class="token function">git</span> config --global user.email <span class="token string">"你的邮箱@qq.com"</span>ssh-keygen -t rsa -C <span class="token string">"你的邮箱@qq.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><ol start="4"><li>github个人主页设置的 SSH and GPG keys 中新建 SSH key</li><li>在blog目录中打开git bash执行下面命令</li></ol><pre><code>npm install hexo-cli -gnpm install hexo-deployer-git --save</code></pre><h5 id="二编"><a href="#二编" class="headerlink" title="二编"></a>二编</h5><p>  我已经尝试过用vercel部署的Qexo后台了，虽然图形化好看了一点点，但是很多设置非常反人类，甚至连仓库连接设置的bug都没有修复。其他的也基本上看了一圈，要么不好用，要么没人维护（虽然现在用这的这个hexo-admin也很久没维护了）。<br>  最终得出结论：还是用回hexo-admin吧…</p>]]></content>
     
     
     <summary type="html">&lt;h5 id=&quot;博客迁移记录&quot;&gt;&lt;a href=&quot;#博客迁移记录&quot; class=&quot;headerlink&quot; title=&quot;博客迁移记录&quot;&gt;&lt;/a&gt;博客迁移记录&lt;/h5&gt;&lt;ol&gt;
